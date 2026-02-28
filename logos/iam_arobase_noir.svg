@@ -1,13 +1,1 @@
-<svg width="200" height="200" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-  <rect width="160" height="160" fill="#111111"/>
-  <line x1="38" y1="52" x2="38" y2="100" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="32" y1="100" x2="44" y2="100" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="52" y1="100" x2="64" y2="52" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="64" y1="52" x2="76" y2="100" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="56" y1="80" x2="72" y2="80" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-  <line x1="82" y1="52" x2="84" y2="62" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-  <path d="M 88 100 L 88 70 C 88 64, 96 64, 96 70 L 96 100 M 96 70 C 96 64, 104 64, 104 70"
-    fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M 104 70 C 104 60, 110 54, 116 56 C 128 60, 132 74, 130 88 C 128 104, 118 116, 104 120 C 88 124, 68 118, 54 106 C 40 94, 36 74, 42 62 C 46 54, 52 50, 58 50 C 64 50, 70 54, 72 58"
-    fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
-</svg>
+
