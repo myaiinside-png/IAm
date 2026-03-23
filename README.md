@@ -15,13 +15,13 @@ It does not certify a machine — it asserts human presence.*
 
 ---
 
-## 🌐 Site web / Website
+# Site web / Website
 
-👉 [myaiinside-png.github.io/IAm](https://myaiinside-png.github.io/IAm)
+ [myaiinside-png.github.io/IAm](https://myaiinside-png.github.io/IAm)
 
 ---
 
-## 📦 Ce dépôt contient / This repository contains
+# Ce dépôt contient / This repository contains
 
 - `index.html` — Page web officielle / Official web page
 - `logos/` — Logo SVG et PNG / SVG and PNG logo
@@ -46,7 +46,7 @@ Any commercial use requires written agreement.*
 ## 📬 Contact
 
 Lionel Le Berre — my.ai.inside@gmail.com  
-Plogoff, Bretagne
+Bretagne
 
 ---
 
