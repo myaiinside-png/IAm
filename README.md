@@ -22,6 +22,7 @@ Certificat de co-création / Co-creation certificate
 Contact
 Lionel LE BERRE — my.ai.inside@gmail.com
 Marque INPI n° 5212301 
+"Les documents sont sous CC BY 4.0. La marque IA'm est déposée à l'INPI n° 5212301 — tout usage commercial nécessite un accord."
 
 ---
 
