@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tribune · IA'm — L'affichage IA dans la publicité, le cinéma et les médias numériques</title>
+  <meta name="description" content="Pourquoi tout contenu numérique co-créé ou généré par IA doit être déclaré. Tribune sur la transparence dans la publicité, le film et les médias. Label IA'm." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0a0a0f;
+      --off-white: #f2efe8;
+      --red: #c0392b;
+      --red-dim: #c0392b33;
+      --gold: #c9a84c;
+      --violet: #3d2e6e;
+      --mid: #888;
+      --rule: rgba(201,168,76,0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--off-white);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 3rem;
+      background: #06060a;
+      border-bottom: 1px solid #1a1a2a;
+    }
+    .site-nav .brand {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+    .site-nav .back {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: #555;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .site-nav .back:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 7rem 3rem 5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 60%, #c0392b18 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 30%, #3d2e6e22 0%, transparent 60%),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 79px,
+          rgba(255,255,255,0.015) 79px,
+          rgba(255,255,255,0.015) 80px
+        );
+    }
+
+    /* Scan lines effect */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.15) 2px,
+        rgba(0,0,0,0.15) 4px
+      );
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s ease forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .hero-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      line-height: 1.05;
+      color: var(--off-white);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s ease forwards;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--gold);
+      position: relative;
+    }
+
+    .hero-sub {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: #999;
+      max-width: 640px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s ease forwards;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s ease forwards;
+    }
+
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid #333;
+      color: #777;
+      border-radius: 1px;
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-line {
+      height: 2px;
+      background: linear-gradient(90deg, var(--red), var(--gold), var(--violet));
+      animation: load 1.5s 1s ease forwards;
+      transform-origin: left;
+      transform: scaleX(0);
+    }
+    @keyframes load { to { transform: scaleX(1); } }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 6rem 3rem 8rem;
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 0 5rem;
+      align-items: start;
+    }
+
+    /* ── ARTICLE ── */
+    .intro-block {
+      border-left: 3px solid var(--red);
+      padding: 1rem 0 1rem 2rem;
+      margin-bottom: 4rem;
+      font-size: 1.15rem;
+      color: #bbb;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.3s ease forwards;
+    }
+
+    .section {
+      margin-bottom: 4rem;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .section.visible { opacity: 1; transform: translateY(0); }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: var(--off-white);
+      line-height: 1.25;
+      margin-bottom: 1.4rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 1px solid #1e1e2e;
+    }
+
+    .section p {
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      color: #ccc;
+      line-height: 1.85;
+    }
+
+    .section p strong {
+      color: var(--off-white);
+      font-weight: 600;
+    }
+
+    .section p em {
+      font-style: italic;
+      color: #aaa;
+    }
+
+    /* ── ALERT BOX ── */
+    .alert-box {
+      background: #120a0a;
+      border: 1px solid var(--red);
+      border-left: 4px solid var(--red);
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+      border-radius: 1px;
+    }
+
+    .alert-box .label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .alert-box p {
+      font-size: 0.95rem !important;
+      color: #ccc !important;
+      margin: 0 !important;
+      line-height: 1.7 !important;
+    }
+
+    /* ── DARK PULL QUOTE ── */
+    .pull-quote {
+      margin: 2.5rem -1rem;
+      padding: 2.5rem 3rem;
+      background: #0d0d18;
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+      position: relative;
+    }
+
+    .pull-quote::before {
+      content: '\201C';
+      font-family: 'Syne', sans-serif;
+      font-size: 6rem;
+      color: var(--gold);
+      opacity: 0.15;
+      position: absolute;
+      top: -1rem;
+      left: 1.5rem;
+      line-height: 1;
+    }
+
+    .pull-quote p {
+      font-family: 'Source Serif 4', serif;
+      font-size: 1.2rem !important;
+      font-style: italic;
+      color: var(--off-white) !important;
+      line-height: 1.65 !important;
+      position: relative;
+      z-index: 1;
+      margin: 0 !important;
+    }
+
+    /* ── LAW BOX ── */
+    .law-box {
+      background: #0c0c18;
+      border: 1px solid #2a2a4a;
+      border-left: 4px solid var(--violet);
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .law-box .label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      color: #7b68ee;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .law-box p {
+      font-size: 0.93rem !important;
+      color: #bbb !important;
+      margin-bottom: 0.6rem !important;
+      line-height: 1.7 !important;
+    }
+
+    .law-box p:last-child { margin-bottom: 0 !important; }
+
+    /* ── CASES GRID ── */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #1a1a2a;
+      margin: 2.5rem 0;
+      border: 1px solid #1a1a2a;
+    }
+
+    .case-item {
+      background: #0d0d16;
+      padding: 1.2rem 1.5rem;
+    }
+
+    .case-item .case-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .case-item p {
+      font-size: 0.88rem !important;
+      color: #999 !important;
+      margin: 0 !important;
+      line-height: 1.6 !important;
+    }
+
+    /* ── IAM CONCLUSION ── */
+    .iam-conclusion {
+      border: 1px solid var(--gold);
+      background: #0a0806;
+      padding: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .iam-conclusion .label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .iam-conclusion p {
+      font-size: 1rem;
+      color: #bbb;
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .iam-conclusion p:last-child { margin: 0; }
+
+    .iam-conclusion p strong {
+      color: var(--gold) !important;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      grid-column: 2;
+      position: sticky;
+      top: 6rem;
+    }
+
+    .sidebar-block {
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid #1a1a2a;
+    }
+    .sidebar-block:last-child { border-bottom: none; }
+
+    .sidebar-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+      display: block;
+    }
+
+    .sidebar-toc a {
+      display: block;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.85rem;
+      color: #555;
+      text-decoration: none;
+      padding: 0.3rem 0 0.3rem 0.8rem;
+      border-left: 2px solid transparent;
+      transition: all 0.2s;
+      line-height: 1.4;
+    }
+    .sidebar-toc a:hover, .sidebar-toc a.active {
+      color: var(--off-white);
+      border-left-color: var(--gold);
+    }
+
+    .sidebar-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.67rem;
+      color: #555;
+      line-height: 1.9;
+    }
+
+    .sidebar-text strong {
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .ref-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 0.6rem;
+    }
+
+    .ref-item em { color: #666; font-style: italic; }
+
+    .tag {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.57rem;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.5rem;
+      background: #14141e;
+      color: #7b68ee;
+      border: 1px solid #2a2a4a;
+      border-radius: 1px;
+      margin: 0.15rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #06060a;
+      color: #333;
+      text-align: center;
+      padding: 3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      border-top: 1px solid #111;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; padding: 3rem 1.5rem 6rem; }
+      .sidebar { display: none; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .pull-quote { margin: 2rem -1rem; }
+      .site-nav { padding: 0.9rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <a href="index.html" class="brand">IA'm ®</a>
+    <a href="index.html" class="back">← Retour à l'accueil</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Tribune · Médias &amp; Société · Droit numérique</p>
+      <h1 class="hero-title">
+        Ce que vous voyez<br />
+        n'existe <em>peut-être pas</em>
+      </h1>
+      <p class="hero-sub">Publicité, cinéma, information, politique — pourquoi tout contenu numérique co-créé ou généré par IA doit désormais le déclarer. Et pourquoi ça presse.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Publicité</span>
+        <span class="hero-tag">Cinéma &amp; audiovisuel</span>
+        <span class="hero-tag">Information numérique</span>
+        <span class="hero-tag">Contenu politique</span>
+        <span class="hero-tag">AI Act européen</span>
+        <span class="hero-tag">Droits des citoyens</span>
+      </div>
+    </div>
+  </header>
+  <div class="scroll-line"></div>
+
+  <main class="page-wrap">
+
+    <article>
+
+      <div class="intro-block">
+        <p>On a longtemps pensé que la question de l'IA dans les médias était une question technique, réservée aux industries créatives. Elle est désormais une question démocratique. Dès lors qu'une image peut être entièrement fabriquée, qu'un visage peut être synthétisé, qu'une émotion peut être algorithmiquement optimisée pour déclencher un achat ou un vote — <strong>le droit à l'information sur l'origine d'un contenu devient un droit fondamental.</strong></p>
+      </div>
+
+      <!-- 1 -->
+      <div class="section" id="s1">
+        <span class="section-num">01 · Consentement</span>
+        <h2 class="section-title">La publicité IA : une manipulation silencieuse du désir</h2>
+        <p>La publicité a toujours idéalisé. On le sait, on l'accepte tacitement. Mais il existait une limite implicite : derrière le produit sublimé, il y avait un objet réel. Derrière le modèle retouché, une personne en chair.</p>
+        <p>L'IA générative abolit cette limite. <strong>Un produit peut être mis en scène dans un environnement qui n'a jamais existé.</strong> Un visage parfait peut n'appartenir à personne. Une sensation de texture, de matière, de lumière peut être entièrement construite pour déclencher un acte d'achat. Le mensonge n'est plus un détail retouché — il est l'image entière.</p>
+        <p>Or le droit de la consommation repose sur un principe fondateur : <em>le consommateur doit pouvoir former son consentement sur la base d'informations véridiques</em>. Si ce qu'il voit n'a jamais existé, son consentement est vicié à la source. Nulle jurisprudence actuelle n'a encore rattrapé ce fait.</p>
+
+        <div class="alert-box">
+          <span class="label">Ce qui change avec l'IA</span>
+          <p>La retouche altérait le réel. L'IA le remplace. Ce n'est pas une différence de degré — c'est une différence de nature. Un cadre légal fondé sur la retouche ne peut pas encadrer la génération.</p>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="section" id="s2">
+        <span class="section-num">02 · Cinéma &amp; culture</span>
+        <h2 class="section-title">Le cinéma et l'audiovisuel : l'authenticité comme valeur en danger</h2>
+        <p>Le cinéma a construit sa puissance sur un pacte avec le réel : un acteur a vécu quelque chose devant une caméra. Cette présence — physique, temporelle, irréductible — est au fondement de l'émotion cinématographique. La performance de Brando ou de Huppert est indissociable du fait qu'une personne humaine l'a traversée.</p>
+        <p>L'IA introduit une rupture dans ce pacte sans que le spectateur en soit informé. <strong>Des acteurs décédés sont ressuscités numériquement</strong> dans des productions commerciales. Des corps sont synthétisés. Des voix sont clonées. Le spectateur croit voir un humain — il voit un calcul.</p>
+
+        <div class="pull-quote">
+          <p>Ce n'est pas une question esthétique. C'est une question d'honnêteté avec celui qui regarde. L'art peut mentir sur tout — à condition que le spectateur sache qu'il entre dans un espace de fiction. Lui dissimuler l'origine de ce qu'il voit, c'est lui retirer le droit de choisir son rapport à l'œuvre.</p>
+        </div>
+
+        <p>Les industries audiovisuelles sont encore en train de négocier ces limites (les grèves de la SAG-AFTRA aux États-Unis l'ont montré avec éclat). Mais les contrats entre studios et acteurs ne suffisent pas. <strong>C'est le spectateur qui doit être informé.</strong></p>
+      </div>
+
+      <!-- 3 -->
+      <div class="section" id="s3">
+        <span class="section-num">03 · Information</span>
+        <h2 class="section-title">L'information et le deepfake : quand le faux devient indiscernable</h2>
+        <p>Le danger le plus immédiat n'est pas dans la fiction. Il est dans l'information. Les <em>deepfakes</em> — vidéos, audios ou images synthétisés pour faire dire ou faire faire à une personne réelle ce qu'elle n'a pas dit ou fait — sont désormais produisibles en quelques minutes par n'importe qui disposant d'un ordinateur standard.</p>
+        <p>La désinformation a toujours existé. Mais elle supposait un effort, un coût, un risque. L'IA rend la fabrication du faux aussi accessible que la prise de vue réelle — et souvent plus convaincante. <strong>À partir du moment où le vrai et le fabriqué deviennent indiscernables à l'œil nu, l'affichage de l'origine devient le seul rempart praticable.</strong></p>
+
+        <p>Les cas d'usage critiques se multiplient :</p>
+        <div class="cases-grid">
+          <div class="case-item">
+            <span class="case-type">Politique</span>
+            <p>Déclarations fabriquées attribuées à des dirigeants en période électorale</p>
+          </div>
+          <div class="case-item">
+            <span class="case-type">Finance</span>
+            <p>Fausses annonces de PDG déclenchant des mouvements de marché</p>
+          </div>
+          <div class="case-item">
+            <span class="case-type">Justice</span>
+            <p>Preuves visuelles synthétisées versées dans des procédures</p>
+          </div>
+          <div class="case-item">
+            <span class="case-type">Intimité</span>
+            <p>Contenus sexuels non consentis générés à partir d'images publiques</p>
+          </div>
+        </div>
+
+        <p>Dans chacun de ces cas, l'absence d'affichage de l'origine IA n'est pas une omission technique. C'est une intention de tromper.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="section" id="s4">
+        <span class="section-num">04 · Droit</span>
+        <h2 class="section-title">Ce que le droit commence à dire — et ce qu'il ne dit pas encore</h2>
+
+        <div class="law-box">
+          <span class="label">AI Act européen — Art. 50</span>
+          <p>Le règlement européen sur l'IA (entré en vigueur août 2024) impose une <strong>obligation de transparence</strong> pour les systèmes d'IA interagissant avec des personnes et pour les contenus synthétiques (deepfakes, images, audio, vidéo générés). Les opérateurs doivent s'assurer que les personnes exposées sont informées qu'elles interagissent avec un contenu généré par IA.</p>
+          <p>Sanction potentielle : jusqu'à <strong>15 millions d'euros ou 3 % du chiffre d'affaires mondial</strong> pour non-conformité.</p>
+        </div>
+
+        <p>La loi existe donc — dans ses grands traits. Ce qui manque, c'est le <strong>dispositif concret</strong> permettant de matérialiser cette obligation à l'échelle de chaque contenu, de chaque publication, de chaque diffusion. Un article de loi ne suffit pas à changer un comportement de masse. Il faut une convention, un signe, un réflexe partagé.</p>
+        <p>C'est précisément ce que IA'm propose : non pas concurrencer la loi, mais lui donner un visage lisible pour les créateurs, les diffuseurs et les publics.</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="section" id="s5">
+        <span class="section-num">05 · Économie de l'attention</span>
+        <h2 class="section-title">L'économie de l'attention et le coût invisible de l'opacité</h2>
+        <p>Il existe un argument pragmatique que les acteurs économiques gagneraient à entendre : <strong>la confiance est une ressource rare et non renouvelable.</strong></p>
+        <p>Plusieurs études en économie comportementale montrent que la découverte a posteriori qu'un contenu était généré par IA — lorsqu'elle n'avait pas été déclarée — produit un effet de rupture de confiance significativement plus fort que si l'information avait été donnée dès l'origine. Le public ne punit pas l'usage de l'IA ; il punit la dissimulation.</p>
+        <p>Les marques qui adoptent proactivement la transparence IA construisent un capital de confiance. Celles qui attendent d'y être contraintes subiront l'effet inverse au moment où la norme d'affichage deviendra incontournable — ce qui est inéluctable.</p>
+
+        <div class="pull-quote">
+          <p>Déclarer l'IA n'est pas un aveu de faiblesse créative. C'est le signal d'une organisation qui comprend que son public est adulte, et qu'il mérite de savoir.</p>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="section" id="s6">
+        <span class="section-num">06 · Proposition</span>
+        <h2 class="section-title">IA'm comme convention d'affichage partagée</h2>
+        <p>Ce que le mouvement de transparence IA attend, c'est ce que l'industrie alimentaire a connu avec les labels nutritionnels, ou ce que la presse a développé avec la mention <em>publireportage</em> : un signe immédiatement reconnaissable qui dit, sans ambiguïté, quelle est la nature du contenu que l'on s'apprête à consommer.</p>
+        <p>IA'm est ce signe. Sa graduation en trois niveaux — <strong>Assisté, Co-créé, Généré</strong> — permet de distinguer l'œuvre augmentée par l'IA de l'œuvre entièrement produite par elle, sans réduire la complexité à un simple tampon binaire.</p>
+        <p>Son adoption par les acteurs des industries créatives, publicitaires et médiatiques n'attend pas une obligation réglementaire. Elle peut précéder la loi — comme toutes les normes volontaires qui, une fois suffisamment partagées, deviennent des standards de fait avant d'être des standards de droit.</p>
+
+        <div class="iam-conclusion">
+          <span class="label">En conclusion</span>
+          <p>L'image d'un produit qui n'a jamais été fabriqué, le visage d'une personne qui n'existe pas, la voix d'un dirigeant qui n'a jamais prononcé ces mots — tout cela est déjà là, dans nos flux, nos écrans, nos boîtes mail. La question n'est plus de savoir si l'IA produit des contenus. Elle le fait, massivement, quotidiennement.</p>
+          <p>La question est de savoir si les citoyens, les consommateurs, les spectateurs, les électeurs ont le droit de le savoir. La réponse est <strong>oui, sans condition et sans délai.</strong></p>
+          <p>IA'm est une réponse concrète, immédiatement déployable, portée par un projet citoyen indépendant. <strong>Un label. Une convention. Un acte de bonne foi envers celui qui regarde.</strong></p>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-block">
+        <span class="sidebar-label">Sommaire</span>
+        <nav class="sidebar-toc">
+          <a href="#s1">01 · Publicité &amp; consentement</a>
+          <a href="#s2">02 · Cinéma &amp; authenticité</a>
+          <a href="#s3">03 · Information &amp; deepfake</a>
+          <a href="#s4">04 · Ce que dit le droit</a>
+          <a href="#s5">05 · Économie de la confiance</a>
+          <a href="#s6">06 · IA'm comme réponse</a>
+        </nav>
+      </div>
+
+      <div class="sidebar-block">
+        <span class="sidebar-label">Références légales</span>
+        <div class="ref-item">
+          <em>AI Act européen</em><br />
+          Art. 50 — Obligations de transparence<br />
+          En vigueur : août 2024
+        </div>
+        <div class="ref-item">
+          <em>Directive UE Pratiques commerciales déloyales</em><br />
+          2005/29/CE — mis à jour 2022
+        </div>
+        <div class="ref-item">
+          <em>DSA — Digital Services Act</em><br />
+          Règlement 2022/2065<br />
+          Transparence des contenus recommandés
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <span class="sidebar-label">Domaines concernés</span>
+        <div>
+          <span class="tag">Publicité</span>
+          <span class="tag">Cinéma</span>
+          <span class="tag">Presse</span>
+          <span class="tag">Réseaux sociaux</span>
+          <span class="tag">Politique</span>
+          <span class="tag">Finance</span>
+          <span class="tag">Musique</span>
+          <span class="tag">Jeu vidéo</span>
+          <span class="tag">Mode</span>
+          <span class="tag">Architecture</span>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <span class="sidebar-label">Signature</span>
+        <div class="sidebar-text">
+          <strong>Tribune co-rédigée avec IA'm</strong>
+          Lionel Le Berre<br />
+          Fondateur, label IA'm<br />
+          Plogoff, Bretagne, France<br /><br />
+          INPI n° 5212301 · Classe 41
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <span class="sidebar-label">Label de co-création</span>
+        <div class="sidebar-text">
+          Ce texte est labellisé<br />
+          <strong>IA'm — Co-créé</strong><br /><br />
+          Angles, positions et arguments : humains. Structuration et mise en forme : produites en dialogue avec l'IA.
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <footer>
+    <p>IA'm · Label citoyen de transparence IA · <a href="https://github.com/myaiinside-png/IAm">github.com/myaiinside-png/IAm</a></p>
+    <p style="margin-top:0.5rem">INPI n° 5212301 · Classe 41 · Plogoff, Bretagne, France</p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    sections.forEach(s => observer.observe(s));
+
+    const tocLinks = document.querySelectorAll('.sidebar-toc a');
+    const sectionEls = document.querySelectorAll('.section[id]');
+    const tocObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          tocLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`.sidebar-toc a[href="#${e.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    sectionEls.forEach(s => tocObserver.observe(s));
+  </script>
+</body>
+</html>
