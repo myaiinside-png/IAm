@@ -97,7 +97,7 @@ Le label IA'm **n'affirme pas** :
 - Kit de marque / Brand kit
 - Modèles de licence / Licence templates
 - Charte & valeurs / Charter & values
-- Manifeste / Manifesto
+- Manifeste / Manifest
 
 ---
 
