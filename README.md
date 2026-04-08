@@ -22,10 +22,10 @@ Apposer IA'm est un acte libre et éclairant. Personne n'y est contraint — ni 
 *Using IA'm is a free and informed act. No one is required to do so — not by law, not by any institution. That is precisely what gives it its value.*
 
 Licence : CC BY-NC 4.0 — libre pour tout usage personnel, éducatif, artistique et associatif.
-Pour tout usage commercial ou institutionnel : [my.ai.inside@gmail.com](mailto:my.ai.inside@gmail.com)
+Pour tout usage commercial ou institutionnel : [liolb@iam-inside.eu](mailto:liolb@iam-inside.eu)
 
 *Licence: CC BY-NC 4.0 — free for personal, educational, artistic and non-profit use.
-For commercial or institutional use: [my.ai.inside@gmail.com](mailto:my.ai.inside@gmail.com)*
+For commercial or institutional use: [liolb@iam-inside.eu](mailto: liolb@iam-inside.eu)*
 
 ---
 
@@ -104,7 +104,7 @@ Le label IA'm **n'affirme pas** :
 
 ## Contact
 
-Lionel Le Berre — [my.ai.inside@gmail.com](mailto:my.ai.inside@gmail.com)
+Lionel Le Berre — [liolb@iam-inside.eu](mailto: liolb@iam-inside.eu)
 Marque INPI n° 5212301 · Classe 41
 
 ---
