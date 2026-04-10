@@ -93,3 +93,5 @@ L'IA ne commence rien. Elle complète, elle interpole, elle extrapole à partir 
 L'histoire montre que ce droit à la visibilité ne tombe pas du ciel. Il se construit dans les pratiques, par des acteurs qui décident de nommer ce qu'ils font plutôt que de le dissimuler. Il se stabilise dans des normes qui rendent cette pratique lisible pour tous.
 
 Parce que les révolutions techniques ne produisent pas leurs normes toutes seules. Elles les produisent quand des humains décident que certaines choses méritent d'être vues.
+
+L.LB (IA'm) & Claude (Anthropic)
