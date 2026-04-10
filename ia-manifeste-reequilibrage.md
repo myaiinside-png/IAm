@@ -1,9 +1,4 @@
----
-layout: default
-title: "L'IA comme levier de rééquilibrage social : Manifeste pour une visibilité humaine"
-date: 2026-04-10
-license: CC BY-NC 4.0
-authors: Lionel Le Berre & Claude
+
 ---
 
 # L'IA comme levier de rééquilibrage social : Manifeste pour une visibilité humaine
@@ -62,6 +57,5 @@ La transparence est l'acte politique qui permet de revendiquer la place de l'hum
 
 ---
 
-*Lionel Le Berre & Claude*
-*Co-création humain-IA — label IA'm · CC BY-NC 4.0*
-*→ [myaiinside-png.github.io/IAm](https://myaiinside-png.github.io/IAm)*
+*L.LB & Claude*
+
