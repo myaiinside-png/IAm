@@ -1,9 +1,4 @@
----
-layout: default
-title: "L'IA : Le grand rééquilibrage social ?"
-date: 2026-04-10
-license: CC BY-NC 4.0
-authors: Lionel Le Berre & Claude
+
 ---
 
 # L'IA : Le grand rééquilibrage social ?
@@ -54,6 +49,4 @@ L'enjeu n'est pas de savoir si l'IA est intelligente, mais si elle nous aide à 
 
 ---
 
-*Lionel Le Berre & Claude*
-*Co-création humain-IA — label IA'm · CC BY-NC 4.0*
-*→ [myaiinside-png.github.io/IAm](https://myaiinside-png.github.io/IAm)*
+
