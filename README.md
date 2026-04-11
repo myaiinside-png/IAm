@@ -91,21 +91,14 @@ Le label IA'm **n'affirme pas** :
 
 ---
 
-## Ce dépôt contient / This repository contains
 
-- Logo (PNG, SVG)
-- Kit de marque / Brand kit
-- Modèles de licence / Licence templates
-- [Charte des valeurs / Charter of Values](IAm_Charte_Valeurs.docx)
-- [Guide des usages / Usage Guide](IAm_guide_d_usages.docx)
-- Manifeste / Manifesto
 
 ---
 
 ## Contact
 
 Lionel Le Berre — [liolb@iam-inside.eu](mailto: liolb@iam-inside.eu)
-Marque INPI n° 5212301 · Classe 41
+
 
 ---
 
