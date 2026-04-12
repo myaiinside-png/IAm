@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logos/IAm-logo.png" alt="IA'm" width="180"/>
+  <img src="badges/IAm-logo-180.png" alt="IA'm" width="180"/>
 </p>
 
 <p align="center">
@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="#pourquoi-iam">Pourquoi</a> ·
-  <a href="#telecharger">Badge</a> ·
+  <a href="#telecharger">📥 Badge</a> ·
   <a href="#utilisation">Utilisation</a> ·
   <a href="#principes">Principes</a> ·
   <a href="#faq">FAQ</a> ·
@@ -27,21 +27,46 @@
 
 ---
 
-## 📥 Télécharger le badge officiel
+## 📥 Télécharger le badge officiel IA'm
 
 <p align="center">
-  <a href="logos/IAm-logo.png" download>
-    <img src="logos/IAm-logo.png" alt="Badge IA'm PNG" width="120"/>
-    <br/><strong>PNG — Prêt à utiliser</strong>
-  </a>
+  <strong>Toutes les tailles disponibles</strong>
 </p>
 
-**Tailles recommandées :**
-- Réseaux sociaux : 120px
-- Articles, README : 180px  
-- Impression : 300px
+<table align="center">
+<tr>
+  <td align="center" width="33%">
+    <a href="badges/IAm-logo-120.png" download>
+      <img src="badges/IAm-logo-120.png" width="120" alt="Badge IA'm 120px"/>
+      <br/><strong>120px</strong><br/>
+      <em>Réseaux sociaux</em>
+    </a>
+  </td>
+  <td align="center" width="33%">
+    <a href="badges/IAm-logo-180.png" download>
+      <img src="badges/IAm-logo-180.png" width="180" alt="Badge IA'm 180px"/>
+      <br/><strong>180px</strong><br/>
+      <em>Articles, README</em>
+    </a>
+  </td>
+  <td align="center" width="33%">
+    <a href="badges/IAm-logo-300.png" download>
+      <img src="badges/IAm-logo-300.png" width="200" alt="Badge IA'm 300px"/>
+      <br/><strong>300px</strong><br/>
+      <em>Impression</em>
+    </a>
+  </td>
+</tr>
+<tr>
+  <td colspan="3" align="center" style="padding-top: 20px;">
+    <a href="badges/IAm-logo.svg" download><strong>SVG (vectoriel)</strong></a> 
+    · 
+    <a href="badges/IAm-logo-dark.png" download><strong>Version foncée</strong></a>
+  </td>
+</tr>
+</table>
 
-**Utilisation :**
+**Instructions d'usage :**
 - Conserver "IA'm" avec apostrophe
 - Associer à une mention : "Co-créé avec l'IA"
 - Lien optionnel : github.com/myaiinside-png/IAm
@@ -77,7 +102,6 @@ Apposer IA'm est libre et éclairé. Personne n'y est contraint.
 ---
 
 ## Principes
-## What IA'm affirms
 
 ✅ **IA'm affirme :**
 - Humain initiateur, directeur, responsable
@@ -130,7 +154,7 @@ A: Contacter liolb@iam-inside.eu
 
 ## Mots-clés SEO
 
-`IA'm` `label IA` `co-création IA` `human-AI` `AI transparency` `AI ethics` `AI disclosure` 'ai-ethics' 'human-ai'  'ai-transparency'
+`IA'm` `label IA` `co-création IA` `human-AI` `AI transparency` `AI ethics` `AI disclosure`
 
 ---
 
