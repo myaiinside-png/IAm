@@ -9,119 +9,131 @@
 </p>
 
 <p align="center">
-  <a href="#pourquoi-iam">Pourquoi IA'm</a> ·
+  <a href="#pourquoi-iam">Pourquoi</a> ·
+  <a href="#telecharger">Badge</a> ·
   <a href="#utilisation">Utilisation</a> ·
-  <a href="#ce-que-le-label-affirme">Principes</a> ·
+  <a href="#principes">Principes</a> ·
   <a href="#faq">FAQ</a> ·
   <a href="#licence">Licence</a>
 </p>
 
 ---
 
-## IA'm
+## IA'm en 1 phrase
 
-IA'm est un label volontaire destiné à identifier toute création réalisée en collaboration entre un humain et une intelligence artificielle.  
-Il ne certifie pas une machine — il affirme la présence humaine.
+**IA'm identifie les créations réalisées en collaboration humain–IA, sous direction et responsabilité humaines.**
 
-*IA'm is a voluntary label to identify any work created in collaboration between a human and an artificial intelligence.  
-It does not certify a machine — it asserts human presence.*
+*IA'm identifies works created in human–AI collaboration, under human direction and responsibility.*
 
 ---
 
-## Télécharger le badge IA'm
+## 📥 Télécharger le badge officiel
 
 <p align="center">
   <a href="logos/IAm-logo.png" download>
     <img src="logos/IAm-logo.png" alt="Badge IA'm PNG" width="120"/>
+    <br/><strong>PNG — Prêt à utiliser</strong>
   </a>
-  <br/><em>PNG — Prêt à utiliser</em>
-</p>## Pourquoi IA'm
+</p>
 
-IA'm a été conçu pour rendre visible une co-création assumée, transparente et responsable.  
-Le label ne remplace ni le droit, ni une certification institutionnelle : il propose un geste simple de déclaration.
+**Tailles recommandées :**
+- Réseaux sociaux : 120px
+- Articles, README : 180px  
+- Impression : 300px
 
-*IA'm was designed to make acknowledged, transparent, and responsible co-creation visible.  
-The label does not replace law or institutional certification: it offers a simple act of declaration.*
+**Utilisation :**
+- Conserver "IA'm" avec apostrophe
+- Associer à une mention : "Co-créé avec l'IA"
+- Lien optionnel : github.com/myaiinside-png/IAm
+
+---
+
+## Pourquoi IA'm ?
+
+IA'm rend visible une co-création assumée, transparente et responsable.  
+Le label ne remplace ni le droit, ni une certification : c'est un geste simple de déclaration.
+
+*IA'm makes acknowledged, transparent, and responsible co-creation visible.  
+The label does not replace law or certification: it's a simple act of declaration.*
 
 ---
 
 ## Utilisation
 
-Apposer IA'm est un acte libre et éclairé.  
-Personne n'y est contraint — ni par la loi, ni par une institution.
-
-*Using IA'm is a free and informed act.  
-No one is required to do so — not by law, not by any institution.*
+Apposer IA'm est libre et éclairé. Personne n'y est contraint.
 
 ### Mentions recommandées
 
-**Mention courte**  
-> IA'm — Co-créé avec l'IA
+**Courte** (réseaux sociaux)  
+> IA'm — Co-créé avec l'IA  
+> IA'm — Co-created with AI
 
-**Mention standard**  
-> Ce contenu a été co-créé par un humain et une intelligence artificielle. Label IA'm — github.com/myaiinside-png/IAm
+**Standard** (articles, posts)  
+> Ce contenu a été co-créé par un humain et une IA. Label IA'm — github.com/myaiinside-png/IAm
 
-**Mention développée**  
-> Le présent travail a été réalisé en collaboration avec un système d'intelligence artificielle, sous la supervision et la direction de son auteur humain. Conformément aux principes du label IA'm, cette collaboration est revendiquée explicitement dans un souci de transparence et d'éthique créative.
-
----
-
-## Ce que le label affirme
-
-IA'm affirme :
-- Qu'un humain a initié, dirigé et assumé la création.
-- Qu'une IA a participé activement au processus créatif.
-- Que cette collaboration est revendiquée avec transparence.
-
-IA'm **n'affirme pas** :
-- Que la création est entièrement originale.
-- Que l'IA utilisée est certifiée éthique.
-- Que la création est libre de droits.
+**Développée** (publications)  
+> Réalisé en collaboration avec une IA, sous supervision humaine. Label IA'm.
 
 ---
 
-## Exemples d’usage
+## Principes
+## What IA'm affirms
 
-- Articles, essais, publications.
-- Portfolios et sites personnels.
-- Projets artistiques et associatifs.
-- Travaux pédagogiques et universitaires.
-- Médias sociaux et contenus de présentation.
+✅ **IA'm affirme :**
+- Humain initiateur, directeur, responsable
+- IA participante au processus créatif  
+- Collaboration revendiquée avec transparence
+
+❌ **IA'm n'affirme pas :**
+- Originalité totale de la création
+- Éthique certifiée de l'IA utilisée
+- Liberté de droits de la création
+
+---
+
+## Exemples d'usage
+
+- Articles, essais, publications
+- Portfolios, sites personnels  
+- Projets artistiques, associatifs
+- Travaux étudiants, universitaires
+- Posts réseaux sociaux
 
 ---
 
 ## FAQ
 
-### IA'm est-il une certification ?
-Non. IA'm est un label déclaratif et volontaire, pas une certification technique, juridique ou institutionnelle.
+**Q: IA'm est-il une certification ?**  
+A: Non, c'est un label déclaratif volontaire.
 
-### Puis-je l'utiliser gratuitement ?
-Oui, pour un usage personnel, éducatif, artistique ou associatif, conformément à la licence CC BY-NC 4.0.
+**Q: Usage gratuit ?**  
+A: Oui pour personnel, éducatif, artistique, associatif (CC BY-NC 4.0).
 
-### Puis-je l'utiliser dans un contexte commercial ?
-Pour tout usage commercial ou institutionnel, merci de contacter : **liolb@iam-inside.eu**
+**Q: Usage commercial ?**  
+A: Contacter liolb@iam-inside.eu
 
 ---
 
 ## Licence
 
-Licence : **CC BY-NC 4.0** — libre pour tout usage personnel, éducatif, artistique et associatif.  
-Pour tout usage commercial ou institutionnel : **liolb@iam-inside.eu**
+**CC BY-NC 4.0** — Usage personnel, éducatif, artistique, associatif.  
+**Commercial/institutionnel :** liolb@iam-inside.eu
 
 ---
 
 ## Contact
 
-Lionel Le Berre  
+**Lionel Le Berre**  
 [liolb@iam-inside.eu](mailto:liolb@iam-inside.eu)
 
 ---
 
-## Mots-clés
+## Mots-clés SEO
 
-`human-AI collaboration` `co-creation label` `AI transparency` `AI ethics` `AI Act` `artificial intelligence badge` `human creativity` `AI disclosure` `label IA` `co-création intelligence artificielle` `transparence IA` `badge IA` `éthique IA` `création assistée par IA`
+`IA'm` `label IA` `co-création IA` `human-AI` `AI transparency` `AI ethics` `AI disclosure` 'ai-ethics' 'human-ai'  'ai-transparency'
 
 ---
 
-*IA'm — Affirmer la créativité humaine à l'ère de l'intelligence artificielle.*  
-*IA'm — Affirming human creativity in the age of artificial intelligence.*
+<div align="center">
+  *IA'm — Affirmer la créativité humaine à l'ère de l'IA.*
+</div>
