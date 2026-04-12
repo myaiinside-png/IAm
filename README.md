@@ -28,7 +28,14 @@ It does not certify a machine — it asserts human presence.*
 
 ---
 
-## Pourquoi IA'm
+## Télécharger le badge IA'm
+
+<p align="center">
+  <a href="logos/IAm-logo.png" download>
+    <img src="logos/IAm-logo.png" alt="Badge IA'm PNG" width="120"/>
+  </a>
+  <br/><em>PNG — Prêt à utiliser</em>
+</p>## Pourquoi IA'm
 
 IA'm a été conçu pour rendre visible une co-création assumée, transparente et responsable.  
 Le label ne remplace ni le droit, ni une certification institutionnelle : il propose un geste simple de déclaration.
