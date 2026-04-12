@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="badges/IAm-logo-180.png" alt="IA'm" width="180"/>
+  <img src="badges/logos/IAm-logo.png" alt="IA'm" width="180"/>
 </p>
 
 <p align="center">
