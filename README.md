@@ -21,7 +21,7 @@
 
 <p align="center">
   <a href="#pourquoi">Pourquoi</a> ·
-  <a href="#telecharger">📥 Badge</a> ·
+  <a href="#telecharger"> Badge</a> ·
   <a href="#utilisation">Utilisation</a> ·
   <a href="#principes">Principes</a> ·
   <a href="#faq">FAQ</a> ·
@@ -38,7 +38,7 @@
 
 ---
 
-## 📥 Télécharger le badge officiel <a name="telecharger"></a>
+##  Télécharger le badge officiel <a name="telecharger"></a>
 
 <table align="center">
 <tr>
