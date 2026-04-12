@@ -1,6 +1,6 @@
 [![Licence CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-brightgreen)](https://creativecommons.org/licenses/by-nc/4.0/)
 [![IA'm Label](https://img.shields.io/badge/IA'm-Co--création%20humain--IA-blueviolet)](https://github.com/myaiinside-png/IAm)
-  <img src="IA'm-logo .png" alt="IA'm" width="180"/>
+  <p align="center"><img src="IA'm-logo .png" alt="IA'm" width="180"/>
 </p>
 
 <p align="center">
