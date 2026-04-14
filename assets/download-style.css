@@ -1,0 +1,208 @@
+:root {
+    --navy: #0B0E1A;
+    --gold: #C8973A;
+    --cream: #F5F0E8;
+    --gray: #7a7a8a;
+    --border: rgba(200, 151, 58, 0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+  }
+
+  .wrap {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Logo SVG inline — IA'm typographic */
+  .logo-display {
+    margin-bottom: 2.5rem;
+  }
+
+  .logo-svg {
+    font-family: 'Cormorant Garamond', serif;
+    display: inline-block;
+  }
+
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .logo-text .ia { font-size: 5rem; }
+  .logo-text .apos { color: var(--cream); font-size: 4rem; }
+  .logo-text .sm { font-size: 3.6rem; }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+
+  .formats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .dl-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 1.1rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--cream);
+    background: rgba(200, 151, 58, 0.05);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .dl-btn:hover {
+    background: rgba(200, 151, 58, 0.12);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .dl-btn .fmt {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .dl-btn .desc {
+    font-size: 0.82rem;
+    color: var(--gray);
+  }
+
+  .dl-btn:hover .desc { color: var(--cream); }
+
+  .dl-full {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 0.82rem;
+    text-align: center;
+    background: transparent;
+    transition: all 0.2s;
+    margin-bottom: 2.5rem;
+  }
+
+  .dl-full:hover {
+    color: var(--cream);
+    border-color: rgba(200,151,58,0.4);
+  }
+
+  .dl-full span {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .repo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+    margin-bottom: 2rem;
+  }
+
+  .repo-link:hover { color: var(--gold); }
+
+  .repo-link svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  .license {
+    font-size: 0.72rem;
+    color: var(--gray);
+    letter-spacing: 0.04em;
+    line-height: 1.8;
+    opacity: 0.7;
+  }
+
+  .license a {
+    color: var(--gold);
+    text-decoration: none;
+    opacity: 0.8;
+  }
+
+  /* Lang toggle */
+  .lang-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .lang-btn {
+    padding: 0.35rem 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--gray);
+    transition: all 0.2s;
+  }
+  .lang-btn.active { background: rgba(200,151,58,0.15); color: var(--gold); }
+
+  body.en .lang-fr { display: none; }
+  body.fr .lang-en { display: none; }
+
+  @media (max-width: 400px) {
+    .formats { grid-template-columns: 1fr; }
+  }
