@@ -94,6 +94,68 @@ body {
 }
 .gen-field select option { background: var(--ink); }
 
+/* Level cards — sélecteur principal v5 */
+.level-block {
+  margin-bottom: 2rem;
+}
+.level-block-label {
+  display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.level-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem;
+}
+.level-card {
+  background: transparent;
+  border: 1px solid rgba(200,151,58,0.2);
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--cream);
+  transition: all 0.25s;
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+.level-card:hover {
+  border-color: var(--gold);
+  background: rgba(200,151,58,0.04);
+}
+.level-card.active {
+  border-color: var(--gold);
+  background: rgba(200,151,58,0.1);
+  box-shadow: inset 0 0 0 1px var(--gold);
+}
+.level-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 700; line-height: 1;
+  color: var(--gold);
+}
+.level-card-name .num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; font-weight: 400;
+  letter-spacing: 0.15em; color: rgba(200,151,58,0.6);
+  margin-right: 0.5rem; vertical-align: middle;
+}
+.level-card-desc {
+  font-size: 0.78rem; line-height: 1.45;
+  color: rgba(244,239,228,0.6);
+}
+.level-card.active .level-card-desc {
+  color: rgba(244,239,228,0.85);
+}
+@media (max-width: 600px) {
+  .level-cards { grid-template-columns: 1fr; }
+}
+
+/* Secondary fields section */
+.secondary-fields-label {
+  display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid);
+  margin: 2rem 0 1rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
 /* Help toggle */
 .help-toggle {
   background: none; border: none; color: var(--gold);
@@ -262,6 +324,52 @@ body {
 
       <div class="gen-form">
 
+        <!-- Sélecteur principal : niveau en 4 cartes -->
+        <div class="level-block">
+          <span class="level-block-label" data-i18n="lbl-level">Niveau de co-création</span>
+          <div class="level-cards" id="level-cards" role="radiogroup" aria-label="Niveau de co-création">
+            <button type="button" class="level-card" data-level="hand" role="radio" aria-checked="false" onclick="selectLevel('hand')">
+              <span class="level-card-name"><span class="num">01</span><span data-i18n="card-hand-name">Hand</span></span>
+              <span class="level-card-desc" data-i18n="card-hand-desc">100% humain, aucune IA dans le processus.</span>
+            </button>
+            <button type="button" class="level-card active" data-level="assisted" role="radio" aria-checked="true" onclick="selectLevel('assisted')">
+              <span class="level-card-name"><span class="num">02</span><span data-i18n="card-assisted-name">Assisted</span></span>
+              <span class="level-card-desc" data-i18n="card-assisted-desc">IA en assistance : l'humain tranche chaque choix formel.</span>
+            </button>
+            <button type="button" class="level-card" data-level="initiated" role="radio" aria-checked="false" onclick="selectLevel('initiated')">
+              <span class="level-card-name"><span class="num">03</span><span data-i18n="card-initiated-name">Initiated</span></span>
+              <span class="level-card-desc" data-i18n="card-initiated-desc">Co-auctorialité assumée, propositions IA validées par l'humain.</span>
+            </button>
+            <button type="button" class="level-card" data-level="generated" role="radio" aria-checked="false" onclick="selectLevel('generated')">
+              <span class="level-card-name"><span class="num">04</span><span data-i18n="card-generated-name">Generated</span></span>
+              <span class="level-card-desc" data-i18n="card-generated-desc">IA décide la forme, l'humain est prescripteur.</span>
+            </button>
+          </div>
+
+          <button type="button" class="help-toggle" onclick="toggleHelp()">
+            <span id="help-arrow">▸</span>
+            <span data-i18n="help-toggle">Comment choisir mon niveau ?</span>
+          </button>
+          <div class="help-panel" id="help-panel">
+            <h4 data-i18n="h-hand">IA'm · Hand</h4>
+            <p data-i18n="p-hand">100% humain. Aucune IA dans le processus de création. Déclaration de pratique, pas de preuve technique exigée.</p>
+
+            <h4 data-i18n="h-assisted">IA'm · Assisted</h4>
+            <p data-i18n="p-assisted">L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain tranche chaque décision formelle. L'IA est outil, l'humain auteur.</p>
+
+            <h4 data-i18n="h-initiated">IA'm · Initiated</h4>
+            <p data-i18n="p-initiated">Co-auctorialité assumée. Certaines décisions formelles émergent de la proposition IA mais sont validées, retravaillées ou recadrées par l'humain.</p>
+
+            <h4 data-i18n="h-generated">IA'm · Generated</h4>
+            <p data-i18n="p-generated">L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.</p>
+
+            <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui tranche la forme finale.</p>
+          </div>
+        </div>
+
+        <!-- Champs secondaires -->
+        <span class="secondary-fields-label" data-i18n="secondary-label">Informations complémentaires (optionnel)</span>
+
         <div class="gen-field">
           <label data-i18n="lbl-author">Nom de l'auteur·e</label>
           <input type="text" id="gen-name" placeholder="ex. Lionel Le Berre" oninput="updateBadge()">
@@ -285,35 +393,8 @@ body {
           </select>
         </div>
 
-        <div class="gen-field">
-          <label data-i18n="lbl-level">Niveau de co-création</label>
-          <select id="gen-level" onchange="updateBadge()">
-            <option value="hand" data-i18n-opt="lvl-hand">Hand — 100% humain, aucune IA</option>
-            <option value="assisted" selected data-i18n-opt="lvl-assisted">Assisted — IA en assistance</option>
-            <option value="initiated" data-i18n-opt="lvl-initiated">Initiated — co-décision</option>
-            <option value="generated" data-i18n-opt="lvl-generated">Generated — IA prescrite, humain prescripteur</option>
-          </select>
-
-          <button type="button" class="help-toggle" onclick="toggleHelp()">
-            <span id="help-arrow">▸</span>
-            <span data-i18n="help-toggle">Comment choisir mon niveau ?</span>
-          </button>
-          <div class="help-panel" id="help-panel">
-            <h4 data-i18n="h-hand">IA'm · Hand</h4>
-            <p data-i18n="p-hand">100% humain. Aucune IA dans le processus de création. Déclaration de pratique, pas de preuve technique exigée.</p>
-
-            <h4 data-i18n="h-assisted">IA'm · Assisted</h4>
-            <p data-i18n="p-assisted">L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain tranche chaque décision formelle. L'IA est outil, l'humain auteur.</p>
-
-            <h4 data-i18n="h-initiated">IA'm · Initiated</h4>
-            <p data-i18n="p-initiated">Co-auctorialité assumée. Certaines décisions formelles émergent de la proposition IA mais sont validées, retravaillées ou recadrées par l'humain.</p>
-
-            <h4 data-i18n="h-generated">IA'm · Generated</h4>
-            <p data-i18n="p-generated">L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.</p>
-
-            <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui tranche la forme finale.</p>
-          </div>
-        </div>
+        <!-- État du niveau sélectionné (caché, utilisé par le JS) -->
+        <input type="hidden" id="gen-level" value="assisted">
 
       </div>
     </div>
@@ -395,6 +476,15 @@ const I18N = {
     "lvl-assisted": "Assisted — IA en assistance",
     "lvl-initiated": "Initiated — co-décision",
     "lvl-generated": "Generated — IA prescrite, humain prescripteur",
+    "card-hand-name": "Hand",
+    "card-hand-desc": "100% humain, aucune IA dans le processus.",
+    "card-assisted-name": "Assisted",
+    "card-assisted-desc": "IA en assistance : l'humain tranche chaque choix formel.",
+    "card-initiated-name": "Initiated",
+    "card-initiated-desc": "Co-auctorialité assumée, propositions IA validées par l'humain.",
+    "card-generated-name": "Generated",
+    "card-generated-desc": "IA décide la forme, l'humain est prescripteur.",
+    "secondary-label": "Informations complémentaires (optionnel)",
     "help-toggle": "Comment choisir mon niveau ?",
     "h-hand": "IA'm · Hand",
     "p-hand": "100% humain. Aucune IA dans le processus de création. Déclaration de pratique, pas de preuve technique exigée.",
@@ -434,6 +524,15 @@ const I18N = {
     "lvl-assisted": "Assisted — AI as assistant",
     "lvl-initiated": "Initiated — shared decision",
     "lvl-generated": "Generated — AI-led, human prescriber",
+    "card-hand-name": "Hand",
+    "card-hand-desc": "100% human, no AI in the process.",
+    "card-assisted-name": "Assisted",
+    "card-assisted-desc": "AI assists — the human decides every formal choice.",
+    "card-initiated-name": "Initiated",
+    "card-initiated-desc": "Shared authorship, AI proposals validated by the human.",
+    "card-generated-name": "Generated",
+    "card-generated-desc": "AI decides the form, the human is prescriber.",
+    "secondary-label": "Additional information (optional)",
     "help-toggle": "How do I choose my level?",
     "h-hand": "IA'm · Hand",
     "p-hand": "100% human. No AI in the creative process. A declaration of practice, no technical proof required.",
@@ -505,6 +604,17 @@ function toggleHelp() {
   const arrow = document.getElementById('help-arrow');
   panel.classList.toggle('open');
   arrow.textContent = panel.classList.contains('open') ? '▾' : '▸';
+}
+
+/* ---------- Level cards ---------- */
+function selectLevel(level) {
+  document.getElementById('gen-level').value = level;
+  document.querySelectorAll('.level-card').forEach(card => {
+    const isActive = card.dataset.level === level;
+    card.classList.toggle('active', isActive);
+    card.setAttribute('aria-checked', isActive ? 'true' : 'false');
+  });
+  updateBadge();
 }
 
 /* ---------- Badge preview ---------- */
@@ -658,7 +768,9 @@ function downloadPNG() {
   document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
 
   if (pLevel && ['hand','assisted','initiated','generated'].includes(pLevel)) {
-    document.getElementById('gen-level').value = pLevel;
+    selectLevel(pLevel);
+  } else {
+    selectLevel('assisted');
   }
   if (pName) document.getElementById('gen-name').value = pName;
   if (pTitle) document.getElementById('gen-title').value = pTitle;
