@@ -1,7 +1,7 @@
 # IA'm
 
 <p align="center">
-  <img src="IA'm-logo .png" alt="IA'm" width="180"/>
+  <img src="iam-logo.png" alt="IA'm" width="180"/>
 </p>
 
 **Label éthique de co-création IA-humain**
