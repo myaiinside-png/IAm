@@ -201,6 +201,429 @@ body {
 .badge-frame {
   width: 280px; height: 280px; position: relative;
   display: flex; align-items: center; justify-content: center;
+}
+.badge-generated {
+  width: 240px; height: 240px;
+  border: 1.5px solid var(--gold);
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: radial-gradient(circle at 40% 40%, rgba(200,151,58,0.1) 0%, transparent 70%);
+  position: relative; transition: all 0.5s;
+  padding: 1rem;
+}
+.badge-generated-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.2rem; font-weight: 700; line-height: 1;
+  color: var(--cream);
+}
+.badge-generated-title .apo { color: var(--gold); font-style: italic; }
+.badge-generated-level {
+  font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-top: 0.5rem; text-align: center;
+  font-weight: 500;
+}
+.badge-generated-sub {
+  font-family: 'DM Mono', monospace; font-size: 0.48rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(200,151,58,0.75); margin-top: 0.3rem; text-align: center;
+  max-width: 150px;
+}
+.badge-generated-author {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: 0.7rem; color: rgba(244,239,228,0.5); margin-top: 0.4rem;
+  text-align: center; max-width: 160px;
+}
+#badge-ring-svg {
+  position: absolute; inset: -20px;
+  width: calc(100% + 40px); height: calc(100% + 40px);
+  transform-origin: 50% 50%;
+  animation: rotateSlow 25s linear infinite;
+}
+.download-btns {
+  display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
+}
+.btn-dl {
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.7rem 1.2rem; border: 1px solid var(--rule);
+  color: var(--mid); background: transparent; cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-dl:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Embed section */
+.embed-section {
+  width: 100%; margin-top: 1rem;
+}
+.embed-section h3 {
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.8rem;
+}
+.embed-tabs {
+  display: flex; gap: 0; margin-bottom: 0.6rem;
+}
+.embed-tab {
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--mid); font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.5rem 0.9rem; cursor: pointer; transition: all 0.3s;
+}
+.embed-tab.active { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.embed-code {
+  width: 100%; background: rgba(0,0,0,0.3);
+  border: 1px solid var(--rule); color: var(--cream);
+  font-family: 'DM Mono', monospace; font-size: 0.72rem;
+  padding: 0.9rem 1rem; min-height: 70px;
+  resize: vertical; line-height: 1.5;
+}
+.btn-copy {
+  margin-top: 0.5rem;
+  font-family: 'DM Mono', monospace; font-size: 0.6rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.5rem 1rem; border: 1px solid var(--rule);
+  color: var(--mid); background: transparent; cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-copy:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Footer */
+.page-foot {
+  max-width: 1200px; margin: 4rem auto 0; padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.1em; color: var(--mid);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.page-foot a { color: var(--gold); text-decoration: none; }
+.page-foot a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <h1>IA<span class="apo">'</span>m <span class="ver">· Générateur v5</span></h1>
+  <div class="lang-toggle" role="group" aria-label="Langue">
+    <button type="button" id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
+    <button type="button" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<section id="badge">
+  <div class="badge-gen-layout">
+
+    <!-- Colonne gauche : formulaire -->
+    <div class="badge-gen-left">
+      <h2 class="label-heading" data-i18n="heading">
+        Assumez votre <em>niveau</em> de co-création
+      </h2>
+      <p class="badge-gen-desc" data-i18n="desc">
+        Le badge IA'm rend visible la part de l'IA dans votre œuvre.
+        Quatre postures, un seul critère de bascule : <em>qui tranche la forme finale</em> ?
+      </p>
+
+      <div class="gen-form">
+
+        <!-- Sélecteur principal : niveau en 4 cartes -->
+        <div class="level-block">
+          <span class="level-block-label" data-i18n="lbl-level">Niveau de co-création</span>
+          <div class="level-cards" id="level-cards" role="radiogroup" aria-label="Niveau de co-création">
+            <button type="button" class="level-card" data-level="hand" role="radio" aria-checked="false" onclick="selectLevel('hand')">
+              <span class="level-card-name"><span class="num">01</span><span data-i18n="card-hand-name">Main</span></span>
+              <span class="level-card-desc" data-i18n="card-hand-desc">100% humain, aucune IA dans le processus.</span>
+            </button>
+            <button type="button" class="level-card active" data-level="assisted" role="radio" aria-checked="true" onclick="selectLevel('assisted')">
+              <span class="level-card-name"><span class="num">02</span><span data-i18n="card-assisted-name">Assisté</span></span>
+              <span class="level-card-desc" data-i18n="card-assisted-desc">IA en assistance : l'humain tranche chaque choix formel.</span>
+            </button>
+            <button type="button" class="level-card" data-level="initiated" role="radio" aria-checked="false" onclick="selectLevel('initiated')">
+              <span class="level-card-name"><span class="num">03</span><span data-i18n="card-initiated-name">Initié</span></span>
+              <span class="level-card-desc" data-i18n="card-initiated-desc">Co-création dirigée, propositions IA validées par l'humain.</span>
+            </button>
+            <button type="button" class="level-card" data-level="generated" role="radio" aria-checked="false" onclick="selectLevel('generated')">
+              <span class="level-card-name"><span class="num">04</span><span data-i18n="card-generated-name">Généré</span></span>
+              <span class="level-card-desc" data-i18n="card-generated-desc">IA décide la forme, l'humain est prescripteur.</span>
+            </button>
+          </div>
+
+          <button type="button" class="help-toggle" onclick="toggleHelp()">
+            <span id="help-arrow">▸</span>
+            <span data-i18n="help-toggle">Comment choisir mon niveau ?</span>
+          </button>
+          <div class="help-panel" id="help-panel">
+            <h4 data-i18n="h-hand">IA'm · Main</h4>
+            <p data-i18n="p-hand">100% humain. Aucune IA dans le processus de création. Déclaration de pratique, pas de preuve technique exigée.</p>
+
+            <h4 data-i18n="h-assisted">IA'm · Assisté</h4>
+            <p data-i18n="p-assisted">L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain tranche chaque décision formelle. L'IA est outil, l'humain auteur.</p>
+
+            <h4 data-i18n="h-initiated">IA'm · Initié</h4>
+            <p data-i18n="p-initiated">Co-création dirigée. Certaines décisions formelles émergent de la proposition IA mais sont validées, retravaillées ou recadrées par l'humain.</p>
+
+            <h4 data-i18n="h-generated">IA'm · Généré</h4>
+            <p data-i18n="p-generated">L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.</p>
+
+            <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui tranche la forme finale.</p>
+          </div>
+        </div>
+
+        <!-- Champs secondaires -->
+        <span class="secondary-fields-label" data-i18n="secondary-label">Informations complémentaires (optionnel)</span>
+
+        <div class="gen-field">
+          <label data-i18n="lbl-author">Nom de l'auteur·e</label>
+          <input type="text" id="gen-name" placeholder="ex. Lionel Le Berre" oninput="updateBadge()">
+        </div>
+
+        <div class="gen-field">
+          <label data-i18n="lbl-title">Titre de l'œuvre</label>
+          <input type="text" id="gen-title" placeholder="ex. Roman, série pédagogique…" oninput="updateBadge()">
+        </div>
+
+        <div class="gen-field">
+          <label data-i18n="lbl-type">Type de création</label>
+          <select id="gen-type" onchange="updateBadge()">
+            <option value="">— Choisir —</option>
+            <option data-i18n-opt="t-lit">Œuvre littéraire</option>
+            <option data-i18n-opt="t-edu">Contenu éducatif</option>
+            <option data-i18n-opt="t-art">Création artistique</option>
+            <option data-i18n-opt="t-aca">Recherche académique</option>
+            <option data-i18n-opt="t-jou">Journalisme</option>
+            <option data-i18n-opt="t-oth">Autre</option>
+          </select>
+        </div>
+
+        <!-- État du niveau sélectionné (caché, utilisé par le JS) -->
+        <input type="hidden" id="gen-level" value="assisted">
+
+      </div>
+    </div>
+
+    <!-- Colonne droite : aperçu + export -->
+    <div class="badge-preview-area">
+
+      <div class="badge-frame">
+        <svg id="badge-ring-svg" viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <path id="bp-v5" d="M 140,140 m -118,0 a 118,118 0 1,1 236,0 a 118,118 0 1,1 -236,0"/>
+          </defs>
+          <text font-family="DM Mono, monospace" font-size="9" fill="rgba(200,151,58,0.4)" letter-spacing="4">
+            <textPath href="#bp-v5" id="ring-text-path">IA'm · CO-CRÉATION · TRANSPARENCE · LABEL · </textPath>
+          </text>
+        </svg>
+        <div class="badge-generated" id="badgePreview">
+          <div class="badge-generated-title">IA<span class="apo">'</span>m</div>
+          <div class="badge-generated-level" id="badge-level-display">· Assisted</div>
+          <div class="badge-generated-sub" id="badge-type-display"></div>
+          <div class="badge-generated-author" id="badge-author-display"></div>
+        </div>
+      </div>
+
+      <div class="download-btns">
+        <button class="btn-dl" onclick="downloadSVG()" data-i18n="dl-svg">↓ SVG</button>
+        <button class="btn-dl" onclick="downloadPNG()" data-i18n="dl-png">↓ PNG</button>
+      </div>
+
+      <div class="embed-section">
+        <h3 data-i18n="embed-title">Code embed HTML</h3>
+        <div class="embed-tabs">
+          <button type="button" class="embed-tab active" onclick="setEmbedMode('img')">&lt;img&gt; statique</button>
+          <button type="button" class="embed-tab" onclick="setEmbedMode('iframe')">&lt;iframe&gt; dynamique</button>
+        </div>
+        <textarea class="embed-code" id="embed-code" readonly></textarea>
+        <button type="button" class="btn-copy" onclick="copyEmbed()" data-i18n="copy">Copier</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="page-foot">
+  <span>IA'm · INPI 5212301 · CC BY-NC 4.0</span>
+  <span>
+    <a href="index.html" data-i18n="back">← Retour</a>
+    &nbsp;·&nbsp;
+    <a href="badge-v4.html" data-i18n="v4">Version 4 (sans niveaux)</a>
+  </span>
+</footer>
+
+<script>
+/* =========================================================
+   IA'm Badge Generator v5
+   - 4 niveaux : Hand / Assisted / Initiated / Generated
+   - Bilingue FR/EN : priorité document.documentElement.lang,
+     fallback navigator.language, override par toggle manuel
+   ========================================================= */
+
+const I18N = {
+  fr: {
+    "heading": "Assumez votre <em>niveau</em> de co-création",
+    "desc": "Le badge IA'm rend visible la part de l'IA dans votre œuvre. Quatre postures, un seul critère de bascule : <em>qui tranche la forme finale</em> ?",
+    "lbl-author": "Nom de l'auteur·e",
+    "lbl-title": "Titre de l'œuvre",
+    "lbl-type": "Type de création",
+    "lbl-level": "Niveau de co-création",
+    "ph-author": "ex. Lionel Le Berre",
+    "ph-title": "ex. Roman, série pédagogique…",
+    "t-choose": "— Choisir —",
+    "t-lit": "Œuvre littéraire",
+    "t-edu": "Contenu éducatif",
+    "t-art": "Création artistique",
+    "t-aca": "Recherche académique",
+    "t-jou": "Journalisme",
+    "t-oth": "Autre",
+    "lvl-hand": "Hand — 100% humain, aucune IA",
+    "lvl-assisted": "Assisted — IA en assistance",
+    "lvl-initiated": "Initiated — co-décision",
+    "lvl-generated": "Generated — IA prescrite, humain prescripteur",
+    "card-hand-name": "Main",
+    "card-hand-desc": "100% humain, aucune IA dans le processus.",
+    "card-assisted-name": "Assisté",
+    "card-assisted-desc": "IA en assistance : l'humain tranche chaque choix formel.",
+    "card-initiated-name": "Initié",
+    "card-initiated-desc": "Co-création dirigée, propositions IA validées par l'humain.",
+    "card-generated-name": "Généré",
+    "card-generated-desc": "IA décide la forme, l'humain est prescripteur.",
+    "secondary-label": "Informations complémentaires (optionnel)",
+    "help-toggle": "Comment choisir mon niveau ?",
+    "h-hand": "IA'm · Main",
+    "p-hand":   font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; font-weight: 400; line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+.label-heading em { color: var(--gold); font-style: italic; }
+.badge-gen-desc {
+  font-size: 0.95rem; line-height: 1.75; color: rgba(244,239,228,0.6);
+  margin-bottom: 2.5rem;
+}
+.gen-form { display: flex; flex-direction: column; gap: 1.2rem; }
+.gen-field label {
+  display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.gen-field input, .gen-field select, .gen-field textarea {
+  width: 100%; background: transparent;
+  border: 1px solid rgba(200,151,58,0.25);
+  color: var(--cream); font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem; padding: 0.85rem 1rem;
+  outline: none; transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+.gen-field input:focus, .gen-field select:focus, .gen-field textarea:focus {
+  border-color: var(--gold);
+}
+.gen-field select option { background: var(--ink); }
+
+/* Level cards — sélecteur principal v5 */
+.level-block {
+  margin-bottom: 2rem;
+}
+.level-block-label {
+  display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.level-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem;
+}
+.level-card {
+  background: transparent;
+  border: 1px solid rgba(200,151,58,0.2);
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  color: var(--cream);
+  transition: all 0.25s;
+  display: flex; flex-direction: column; gap: 0.35rem;
+}
+.level-card:hover {
+  border-color: var(--gold);
+  background: rgba(200,151,58,0.04);
+}
+.level-card.active {
+  border-color: var(--gold);
+  background: rgba(200,151,58,0.1);
+  box-shadow: inset 0 0 0 1px var(--gold);
+}
+.level-card-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 700; line-height: 1;
+  color: var(--gold);
+}
+.level-card-name .num {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; font-weight: 400;
+  letter-spacing: 0.15em; color: rgba(200,151,58,0.6);
+  margin-right: 0.5rem; vertical-align: middle;
+}
+.level-card-desc {
+  font-size: 0.78rem; line-height: 1.45;
+  color: rgba(244,239,228,0.6);
+}
+.level-card.active .level-card-desc {
+  color: rgba(244,239,228,0.85);
+}
+@media (max-width: 600px) {
+  .level-cards { grid-template-columns: 1fr; }
+}
+
+/* Secondary fields section */
+.secondary-fields-label {
+  display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid);
+  margin: 2rem 0 1rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* Help toggle */
+.help-toggle {
+  background: none; border: none; color: var(--gold);
+  font-family: 'DM Mono', monospace; font-size: 0.65rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; padding: 0.3rem 0 0.5rem; text-align: left;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.help-toggle:hover { opacity: 0.8; }
+.help-panel {
+  display: none; border-left: 2px solid var(--gold);
+  padding: 1rem 1.2rem; margin-top: 0.6rem;
+  background: rgba(200,151,58,0.04);
+  font-size: 0.85rem; line-height: 1.7;
+}
+.help-panel.open { display: block; }
+.help-panel h4 {
+  font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--gold); margin: 1rem 0 0.4rem;
+}
+.help-panel h4:first-child { margin-top: 0; }
+.help-panel p { color: rgba(244,239,228,0.75); margin-bottom: 0.4rem; }
+.help-panel .crit {
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-style: italic; color: var(--mid);
+}
+
+.btn-generate {
+  background: transparent; border: 1.5px solid var(--gold);
+  color: var(--gold); font-family: 'DM Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 1rem 2rem; cursor: pointer; transition: all 0.3s;
+  margin-top: 0.5rem; text-align: left;
+}
+.btn-generate:hover { background: var(--gold); color: var(--ink); }
+
+.badge-preview-area {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2rem; position: sticky; top: 2rem;
+}
+.badge-frame {
+  width: 280px; height: 280px; position: relative;
+  display: flex; align-items: center; justify-content: center;
   background: #FDFAF5;
   border-radius: 4px;
 }
