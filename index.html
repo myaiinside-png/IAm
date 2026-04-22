@@ -701,86 +701,8 @@
   </div>
 </section>
 
-<!-- Badge generator -->
-<section id="badge-v4-legacy">
-  <div class="divider">
-    <div class="divider-line"></div>
-    <div class="divider-mark">03 &mdash; G&eacute;n&eacute;rateur de badge</div>
-    <div class="divider-line"></div>
-  </div>
-  <div class="section-inner" style="margin-top:4rem;">
-    <div class="badge-gen-layout reveal">
 
-      <div class="badge-gen-left">
-        <span class="label-section-tag">Votre badge</span>
-        <h2 class="label-heading">Cr&eacute;ez votre <em>signature IA&rsquo;m</em></h2>
-        <p class="badge-gen-desc">Personnalisez et t&eacute;l&eacute;chargez votre badge pour l&rsquo;apposer sur vos &oelig;uvres, publications et travaux co-cr&eacute;&eacute;s avec une IA.</p>
-
-        <div class="gen-form">
-          <div class="gen-field">
-            <label>Couleur de fond</label>
-            <div class="gen-bg-grid" id="bg-grid">
-              <button class="gen-swatch swatch-trans active" data-bg="transparent" data-dark="0" onclick="pickBg(this)" title="Transparent"><span>Transp.</span></button>
-              <button class="gen-swatch" data-bg="#ffffff" data-dark="0" onclick="pickBg(this)" style="background:#ffffff" title="Blanc"></button>
-              <button class="gen-swatch" data-bg="#0B0E1A" data-dark="1" onclick="pickBg(this)" style="background:#0B0E1A;border-color:rgba(200,151,58,0.4)" title="Nuit"></button>
-              <button class="gen-swatch" data-bg="#0F6E56" data-dark="1" onclick="pickBg(this)" style="background:#0F6E56" title="For&ecirc;t"></button>
-              <button class="gen-swatch" data-bg="#185FA5" data-dark="1" onclick="pickBg(this)" style="background:#185FA5" title="Marine"></button>
-              <button class="gen-swatch" data-bg="#C8490B" data-dark="1" onclick="pickBg(this)" style="background:#C8490B" title="Terre"></button>
-              <button class="gen-swatch" data-bg="#C8973A" data-dark="0" onclick="pickBg(this)" style="background:#C8973A" title="Or"></button>
-              <button class="gen-swatch" data-bg="#F4EFE4" data-dark="0" onclick="pickBg(this)" style="background:#F4EFE4" title="Cr&egrave;me"></button>
-            </div>
-          </div>
-          <div class="gen-field">
-            <label>Taille</label>
-            <div class="gen-size-row" id="size-row">
-              <button class="gen-size-btn" data-size="xs" onclick="pickSize(this)">XS</button>
-              <button class="gen-size-btn active" data-size="sm" onclick="pickSize(this)">S</button>
-              <button class="gen-size-btn" data-size="md" onclick="pickSize(this)">M</button>
-              <button class="gen-size-btn" data-size="lg" onclick="pickSize(this)">L</button>
-            </div>
-          </div>
-          <div class="gen-field">
-            <label>Langue du sous-titre</label>
-            <div class="gen-lang-toggle" id="lang-toggle">
-              <button class="gen-lang-btn active" data-lang="fr" onclick="pickLang(this)">Fran&ccedil;ais</button>
-              <button class="gen-lang-btn" data-lang="en" onclick="pickLang(this)">English</button>
-            </div>
-          </div>
-          <div class="gen-field">
-            <label>Texte personnalis&eacute;</label>
-            <input type="text" id="custom-sub" placeholder="nom, titre de l'oeuvre, date" oninput="update()"/>
-            <p class="gen-hint">ex. : Marie D. &middot; Les Yeux du Monde &middot; 2025</p>
-          </div>
-          <div class="gen-field">
-            <label>Options</label>
-            <div class="gen-check-row">
-              <span>Afficher le symbole &reg;</span>
-              <input type="checkbox" id="opt-tm" checked onchange="update()">
-            </div>
-            <div class="gen-check-row">
-              <span>Afficher le sous-titre</span>
-              <input type="checkbox" id="opt-sub" checked onchange="update()">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="badge-preview-area">
-        <div class="gen-preview-strip gen-strip-light">
-          <span class="gen-preview-label">Fond clair</span>
-          <div id="preview-light-svg"></div>
-        </div>
-        <div class="gen-preview-strip gen-strip-dark">
-          <span class="gen-preview-label">Fond sombre</span>
-          <div id="preview-dark-svg"></div>
-        </div>
-        <div class="gen-preview-strip gen-strip-check">
-          <span class="gen-preview-label">Transparent</span>
-          <div id="preview-trans-svg"></div>
-        </div>
-        <div class="download-btns" style="flex-wrap:wrap;">
-          <button class="btn-dl" onclick="downloadPNG('#ffffff')">&#8595; PNG clair</button>
-          <button class="btn-dl" onclick="downloadPNG('#0B0E1A')">&#8595; PNG sombre</button>
+        
 <!-- Générateur de badge -->
 <section id="badge-v4-legacy" style="padding:8rem 0;text-align:center;">
   <div style="max-width:600px;margin:0 auto;padding:0 2rem;">
