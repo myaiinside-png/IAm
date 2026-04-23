@@ -302,6 +302,201 @@ body {
 </style>
 </head>
 <body>
+<header class="page-head">
+  <h1>IA<span class="apo">'</span>m <span class="ver">· Générateur v5</span></h1>
+  <div class="lang-toggle" role="group" aria-label="Langue">
+    <button type="button" id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
+    <button type="button" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<section id="badge">
+  <div class="badge-gen-layout">
+
+    <!-- Colonne gauche : formulaire -->
+    <div class="badge-gen-left">
+      <h2 class="label-heading" data-i18n="heading">
+        Assumez votre <em>niveau</em> de co-création
+      </h2>
+      <p class="badge-gen-desc" data-i18n="desc">
+        Le badge IA'm rend visible la part de l'IA dans votre œuvre.
+        Quatre postures, un seul critère de bascule : <em>qui tranche la forme finale</em> ?
+      </p>
+
+      <div class="gen-form">
+
+        <!-- Sélecteur principal : niveau en 4 cartes -->
+        <div class="level-block">
+          <span class="level-block-label" data-i18n="lbl-level">Niveau de co-création</span>
+          <div class="level-cards" id="level-cards" role="radiogroup" aria-label="Niveau de co-création">
+            <button type="button" class="level-card" data-level="hand" role="radio" aria-checked="false" onclick="selectLevel('hand')">
+              <span class="level-card-name"><span class="num">01</span><span data-i18n="card-hand-name">Main</span></span>
+              <span class="level-card-desc" data-i18n="card-hand-desc">100% humain, aucune IA dans le processus.</span>
+            </button>
+            <button type="button" class="level-card active" data-level="assisted" role="radio" aria-checked="true" onclick="selectLevel('assisted')">
+              <span class="level-card-name"><span class="num">02</span><span data-i18n="card-assisted-name">Assisté</span></span>
+              <span class="level-card-desc" data-i18n="card-assisted-desc">IA en assistance : l'humain tranche chaque choix formel.</span>
+            </button>
+            <button type="button" class="level-card" data-level="initiated" role="radio" aria-checked="false" onclick="selectLevel('initiated')">
+              <span class="level-card-name"><span class="num">03</span><span data-i18n="card-initiated-name">Initié</span></span>
+              <span class="level-card-desc" data-i18n="card-initiated-desc">Co-auctorialité assumée, propositions IA validées par l'humain.</span>
+            </button>
+            <button type="button" class="level-card" data-level="generated" role="radio" aria-checked="false" onclick="selectLevel('generated')">
+              <span class="level-card-name"><span class="num">04</span><span data-i18n="card-generated-name">Généré</span></span>
+              <span class="level-card-desc" data-i18n="card-generated-desc">IA décide la forme, l'humain est prescripteur.</span>
+            </button>
+          </div>
+
+          <button type="button" class="help-toggle" onclick="toggleHelp()">
+            <span id="help-arrow">▸</span>
+            <span data-i18n="help-toggle">Comment choisir mon niveau ?</span>
+          </button>
+          <div class="help-panel" id="help-panel">
+            <h4 data-i18n="h-hand">IA'm · Main</h4>
+            <p data-i18n="p-hand">100% humain. Aucune IA dans le processus de création. Déclaration de pratique, pas de preuve technique exigée.</p>
+
+            <h4 data-i18n="h-assisted">IA'm · Assisté</h4>
+            <p data-i18n="p-assisted">L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain tranche chaque décision formelle. L'IA est outil, l'humain auteur.</p>
+
+            <h4 data-i18n="h-initiated">IA'm · Initié</h4>
+            <p data-i18n="p-initiated">Co-auctorialité assumée. Certaines décisions formelles émergent de la proposition IA mais sont validées, retravaillées ou recadrées par l'humain.</p>
+
+            <h4 data-i18n="h-generated">IA'm · Généré</h4>
+            <p data-i18n="p-generated">L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.</p>
+
+            <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui tranche la forme finale.</p>
+          </div>
+        </div>
+
+        <!-- Champs secondaires -->
+        <span class="secondary-fields-label" data-i18n="secondary-label">Informations complémentaires (optionnel)</span>
+
+        <div class="gen-field">
+          <label data-i18n="lbl-author">Nom de l'auteur·e</label>
+          <input type="text" id="gen-name" placeholder="ex. Lionel Le Berre" oninput="updateBadge()">
+        </div>
+
+        <div class="gen-field">
+          <label data-i18n="lbl-title">Titre de l'œuvre</label>
+          <input type="text" id="gen-title" placeholder="ex. Roman, série pédagogique…" oninput="updateBadge()">
+        </div>
+
+        <div class="gen-field">
+          <label data-i18n="lbl-type">Type de création</label>
+          <select id="gen-type" onchange="updateBadge()">
+            <option value="">— Choisir —</option>
+            <option data-i18n-opt="t-lit">Œuvre littéraire</option>
+            <option data-i18n-opt="t-edu">Contenu éducatif</option>
+            <option data-i18n-opt="t-art">Création artistique</option>
+            <option data-i18n-opt="t-aca">Recherche académique</option>
+            <option data-i18n-opt="t-jou">Journalisme</option>
+            <option data-i18n-opt="t-oth">Autre</option>
+          </select>
+        </div>
+
+        <!-- État du niveau sélectionné (caché, utilisé par le JS) -->
+        <input type="hidden" id="gen-level" value="assisted">
+
+      </div>
+    </div>
+
+    <!-- Colonne droite : aperçu + export -->
+    <div class="badge-preview-area">
+
+      <div class="badge-frame">
+        <img src="iam-logo.png" alt="IA'm" class="badge-logo-img">
+        <div class="badge-level-overlay">
+          <span class="filet-left"></span>
+          <span class="badge-level-text" id="badge-level-display">INITIÉ</span>
+          <span class="filet-right"></span>
+        </div>
+        <div class="badge-meta">
+          <div class="badge-generated-sub" id="badge-type-display"></div>
+          <div class="badge-generated-author" id="badge-author-display"></div>
+        </div>
+      </div>
+
+      <div class="download-btns">
+        <button class="btn-dl" onclick="downloadSVG()" data-i18n="dl-svg">↓ SVG</button>
+        <button class="btn-dl" onclick="downloadPNG()" data-i18n="dl-png">↓ PNG</button>
+      </div>
+
+      <div class="embed-section">
+        <h3 data-i18n="embed-title">Code embed HTML</h3>
+        <div class="embed-tabs">
+          <button type="button" class="embed-tab active" onclick="setEmbedMode('img')">&lt;img&gt; statique</button>
+          <button type="button" class="embed-tab" onclick="setEmbedMode('iframe')">&lt;iframe&gt; dynamique</button>
+        </div>
+        <textarea class="embed-code" id="embed-code" readonly></textarea>
+        <button type="button" class="btn-copy" onclick="copyEmbed()" data-i18n="copy">Copier</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="page-foot">
+  <span>IA'm · INPI 5212301 · CC BY-NC 4.0</span>
+  <span>
+    <a href="index.html" data-i18n="back">← Retour</a>
+    &nbsp;·&nbsp;
+    <a href="badge-v4.html" data-i18n="v4">Version 4 (sans niveaux)</a>
+  </span>
+</footer>
+
+<script>
+/* =========================================================
+   IA'm Badge Generator v5
+   - 4 niveaux : Hand / Assisted / Initiated / Generated
+   - Bilingue FR/EN : priorité document.documentElement.lang,
+     fallback navigator.language, override par toggle manuel
+   ========================================================= */
+
+const I18N = {
+  fr: {
+    "heading": "Assumez votre <em>niveau</em> de co-création",
+    "desc": "Le badge IA'm rend visible la part de l'IA dans votre œuvre. Quatre postures, un seul critère de bascule : <em>qui tranche la forme finale</em> ?",
+    "lbl-author": "Nom de l'auteur·e",
+    "lbl-title": "Titre de l'œuvre",
+    "lbl-type": "Type de création",
+    "lbl-level": "Niveau de co-création",
+    "ph-author": "ex. Lionel Le Berre",
+    "ph-title": "ex. Roman, série pédagogique…",
+    "t-choose": "— Choisir —",
+    "t-lit": "Œuvre littéraire",
+    "t-edu": "Contenu éducatif",
+    "t-art": "Création artistique",
+    "t-aca": "Recherche académique",
+    "t-jou": "Journalisme",
+    "t-oth": "Autre",
+    "lvl-hand": "Hand — 100% humain, aucune IA",
+    "lvl-assisted": "Assisted — IA en assistance",
+    "lvl-initiated": "Initiated — co-décision",
+    "lvl-generated": "Generated — IA prescrite, humain prescripteur",
+    "card-hand-name": "Main",
+    "card-hand-desc": "100% humain, aucune IA dans le processus.",
+    "card-assisted-name": "Assisté",
+    "card-assisted-desc": "IA en assistance : l'humain tranche chaque choix formel.",
+    "card-initiated-name": "Initié",
+    "card-initiated-desc": "Co-auctorialité assumée, propositions IA validées par l'humain.",
+    "card-generated-name": "Généré",
+    "card-generated-desc": "IA décide la forme, l'humain est prescripteur.",
+    "secondary-label": "Informations complémentaires (optionnel)",
+    "help-toggle": "Comment choisir mon niveau ?",
+    "h-hand": "IA'm · Main",
+    "p-hand": "100% humain. Aucune IA dans le processus de création. Déclaration de pratique, pas de preuve technique exigée.",
+    "h-assisted": "IA'm · Assisté",
+    "p-assisted": "L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain tranche chaque décision formelle. L'IA est outil, l'humain auteur.",
+    "h-initiated": "IA'm · Initié",
+    "p-initiated": "Co-auctorialité assumée. Certno', monospace; font-size: 0.65rem;
+  letter-spacing: 0.1em; color: var(--mid);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.page-foot a { color: var(--gold); text-decoration: none; }
+.page-foot a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
 
 <header class="page-head">
   <h1>IA<span class="apo">'</span>m <span class="ver">· Générateur v5</span></h1>
