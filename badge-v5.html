@@ -9,7 +9,46 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 
-<style>
+<style>.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(11,14,26,0.95);
+  border-bottom: 1px solid rgba(200,151,58,0.2);
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--cream);
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
 :root {
   --ink: #0B0E1A;
   --cream: #F4EFE4;
