@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA'm — Mode d'emploi</title>
+  <meta name="description" content="Mode d'emploi du label IA'm : comprendre les niveaux Assisté, Initié, Généré et apposer un badge de transparence IA sur ses contenus." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0B0E1A;
+      --gold: #C8973A;
+      --gold-light: #E8B85A;
+      --cream: #F4EFE4;
+      --warm-white: #FDFAF5;
+      --mid: #9E9585;
+      --muted: rgba(244,239,228,0.72);
+      --soft: rgba(244,239,228,0.08);
+      --rule: rgba(200,151,58,0.28);
+      --card: rgba(255,255,255,0.035);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 5%, rgba(200,151,58,0.13), transparent 28rem),
+        radial-gradient(circle at 85% 20%, rgba(232,184,90,0.08), transparent 28rem),
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(200,151,58,0.035) 79px, rgba(200,151,58,0.035) 80px);
+      z-index: -1;
+    }
+
+    a { color: var(--gold-light); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      padding: 1.1rem clamp(1.2rem, 4vw, 4rem);
+      background: rgba(11,14,26,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(200,151,58,0.14);
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--gold); font-style: italic; }
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .nav-links a:hover { color: var(--gold); text-decoration: none; }
+
+    main { overflow: hidden; }
+    .hero {
+      min-height: 78vh;
+      display: grid;
+      place-items: center;
+      padding: 7rem clamp(1.4rem, 5vw, 4rem) 5rem;
+      text-align: center;
+    }
+    .hero-inner { max-width: 900px; }
+    .eyebrow,
+    .section-tag {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      line-height: 1.05;
+    }
+    h1 {
+      font-size: clamp(4.2rem, 12vw, 9rem);
+      letter-spacing: -0.045em;
+      margin-bottom: 1.4rem;
+    }
+    h1 span { color: var(--gold); font-style: italic; }
+    .subtitle {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: var(--muted);
+    }
+    .meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .hero-actions {
+      margin-top: 2.3rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--rule);
+      padding: 0.9rem 1.25rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform .2s, border-color .2s, background .2s, color .2s;
+    }
+    .btn-primary { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 500; }
+    .btn-secondary { color: var(--cream); }
+    .btn:hover { transform: translateY(-2px); text-decoration: none; border-color: var(--gold-light); }
+
+    .section {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.4rem, 5vw, 4rem);
+      border-top: 1px solid var(--rule);
+    }
+    .section-inner {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+    .narrow { width: min(760px, 100%); }
+    .section h2 {
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      margin-bottom: 1.6rem;
+    }
+    .section h3 {
+      font-size: clamp(1.55rem, 3vw, 2.25rem);
+      margin-bottom: 0.7rem;
+    }
+    p + p { margin-top: 1rem; }
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 780px;
+    }
+    .muted { color: var(--muted); }
+
+    .quote-block {
+      margin-top: 2rem;
+      padding: 1.4rem 1.6rem;
+      border-left: 2px solid var(--gold);
+      background: rgba(200,151,58,0.055);
+      color: rgba(244,239,228,0.86);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.35rem, 3vw, 1.9rem);
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(2rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+    .cards,
+    .level-grid,
+    .steps,
+    .faq-list,
+    .calendar {
+      display: grid;
+      gap: 1rem;
+    }
+    .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 2rem; }
+    .card,
+    .level-card,
+    .step,
+    .faq-item,
+    .calendar-item {
+      border: 1px solid var(--rule);
+      background: var(--card);
+      padding: 1.35rem;
+    }
+    .card-title,
+    .level-title,
+    .step-title,
+    .faq-question,
+    .calendar-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .level-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 2rem; }
+    .level-card { min-height: 100%; }
+    .level-card h3 { color: var(--cream); }
+    .level-card ul,
+    .audience-list,
+    .usage-list {
+      list-style: none;
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.55rem;
+      color: var(--muted);
+    }
+    .level-card li::before,
+    .audience-list li::before,
+    .usage-list li::before {
+      content: "·";
+      color: var(--gold);
+      margin-right: 0.55rem;
+      font-weight: 700;
+    }
+    .note {
+      margin-top: 1.5rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid rgba(232,184,90,0.24);
+      background: rgba(232,184,90,0.045);
+      color: rgba(244,239,228,0.78);
+    }
+
+    .steps { counter-reset: steps; margin-top: 2rem; }
+    .step { position: relative; padding-left: 5rem; }
+    .step::before {
+      counter-increment: steps;
+      content: "0" counter(steps);
+      position: absolute;
+      top: 1.35rem;
+      left: 1.35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      line-height: 1;
+      color: rgba(200,151,58,0.32);
+    }
+
+    .calendar { margin-top: 2rem; }
+    .calendar-item {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 1rem;
+    }
+    .calendar-date { margin-bottom: 0; }
+
+    .faq-list { margin-top: 2rem; }
+    .faq-item { padding: 1.3rem 0; border-left: 0; border-right: 0; background: transparent; }
+    .faq-item + .faq-item { border-top: 0; }
+    .faq-question { margin-bottom: 0.35rem; }
+
+    .manifesto {
+      text-align: center;
+      padding: clamp(5rem, 9vw, 8rem) clamp(1.4rem, 5vw, 4rem);
+      border-top: 1px solid var(--rule);
+      background: linear-gradient(180deg, rgba(200,151,58,0.035), transparent);
+    }
+    .manifesto p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 3.4rem);
+      line-height: 1.22;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .manifesto .small {
+      margin-top: 2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 2rem clamp(1.4rem, 5vw, 4rem);
+      border-top: 1px solid var(--rule);
+      color: var(--mid);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 860px) {
+      .site-nav { align-items: flex-start; flex-direction: column; }
+      .nav-links { justify-content: flex-start; gap: 0.9rem; }
+      .grid-two, .level-grid, .cards, .calendar-item { grid-template-columns: 1fr; }
+      .step { padding-left: 1.35rem; padding-top: 4.7rem; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <a href="index.html" class="logo">IA<span>'</span>m</a>
+    <div class="nav-links">
+      <a href="index.html#label">Le label</a>
+      <a href="mode-emploi.html">Mode d'emploi</a>
+      <a href="index.html#galerie">Galerie</a>
+      <a href="faq.html">FAQ</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="hero-inner">
+        <span class="eyebrow">Label volontaire de transparence</span>
+        <h1>Mode d’emploi IA<span>'</span>m</h1>
+        <p class="subtitle">Un guide pour dire clairement si un contenu a été créé seul, assisté, co-construit ou généré avec une intelligence artificielle.</p>
+        <p class="meta">INPI n° 5212301 · Classe 41 · CC BY-NC 4.0 · iam-inside.eu</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="badge-v5.html">Générer un badge</a>
+          <a class="btn btn-secondary" href="#niveaux">Voir les trois niveaux</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="definition">
+      <div class="section-inner grid-two">
+        <div>
+          <span class="section-tag">01 — Comprendre</span>
+          <h2>Qu’est-ce qu’IA’m&nbsp;?</h2>
+        </div>
+        <div class="lead">
+          <p>IA’m est un label que tu peux apposer sur ce que tu publies — un texte, une image, un post, un document — pour dire si tu l’as créé seul, ou avec l’aide d’une intelligence artificielle, et à quel point.</p>
+          <p>L’idée est simple : quand tu publies aujourd’hui, ton lecteur ne sait plus toujours ce qui vient de toi et ce qui vient d’une machine. IA’m te donne le moyen de répondre clairement, avant même qu’on te pose la question.</p>
+          <div class="quote-block">Ce n’est pas une obligation, ni une certification. C’est un acte d’honnêteté que tu offres à celui qui te lit.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pourquoi">
+      <div class="section-inner narrow">
+        <span class="section-tag">02 — Pourquoi</span>
+        <h2>Parce que la confiance se gagne par la clarté.</h2>
+        <p class="lead">Beaucoup d’auteurs cachent leur usage de l’IA par peur d’être jugés. D’autres l’affichent sans nuance, sans dire ce qu’ils ont vraiment fait. Entre les deux, il y a une vérité simple à dire : tu as utilisé une IA, à un certain degré, pour ce contenu précis.</p>
+        <div class="note">Marquer ton niveau, ce n’est pas te juger toi-même. C’est rendre à celui qui te lit le pouvoir de te lire en connaissance de cause.</div>
+      </div>
+    </section>
+
+    <section class="section" id="fonctionnement">
+      <div class="section-inner grid-two">
+        <div>
+          <span class="section-tag">03 — Comment ça marche</span>
+          <h2>Identifier, générer, rendre visible.</h2>
+        </div>
+        <div>
+          <p class="lead">Tu identifies à quel niveau se situe ton contenu, tu vas sur le générateur IA’m, tu télécharges ton badge ou tu copies son code HTML, puis tu l’apposes là où ton contenu sera lu.</p>
+          <div class="cards">
+            <div class="card">
+              <div class="card-title">Gratuit</div>
+              <p>Le badge est gratuit et utilisable sans inscription.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Déclaratif</div>
+              <p>Personne ne te demande de prouver quoi que ce soit.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Libre</div>
+              <p>Le label est sous licence CC BY-NC 4.0.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Visible</div>
+              <p>Le geste compte : rendre claire la part d’IA.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="niveaux">
+      <div class="section-inner">
+        <span class="section-tag">04 — Les trois niveaux</span>
+        <h2>IA’m repose sur un critère unique&nbsp;: qui décide de la forme finale&nbsp;?</h2>
+        <p class="lead">Ce n’est pas un seuil technique. Ce n’est pas une quantification d’intervention. C’est un acte de responsabilité assumée par celui qui publie.</p>
+
+        <div class="level-grid">
+          <article class="level-card">
+            <div class="level-title">Assisté</div>
+            <h3>L’IA propose, tu disposes.</h3>
+            <p class="muted">Tu décides de la forme finale.</p>
+            <ul>
+              <li>Un mail relu par ChatGPT, corrections validées</li>
+              <li>Un article où l’IA a reformulé une phrase</li>
+              <li>Un rapport dont l’IA a corrigé l’orthographe</li>
+            </ul>
+          </article>
+
+          <article class="level-card">
+            <div class="level-title">Initié</div>
+            <h3>Co-auctorialité assumée.</h3>
+            <p class="muted">Dialogue itératif avec l’IA, validation humaine à chaque étape déterminante.</p>
+            <ul>
+              <li>Une nouvelle co-construite avec Claude</li>
+              <li>Un plan de cours pensé en dialogue</li>
+              <li>Une stratégie éditoriale affinée en conversation</li>
+            </ul>
+          </article>
+
+          <article class="level-card">
+            <div class="level-title">Généré</div>
+            <h3>L’IA décide de la forme finale.</h3>
+            <p class="muted">Tu fournis une intention, un prompt ou un cahier des charges.</p>
+            <ul>
+              <li>Une newsletter produite par prompt, publiée</li>
+              <li>Une image Midjourney diffusée telle quelle</li>
+              <li>Un résumé automatique non retravaillé</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="note">Les trois niveaux ne sont pas hiérarchisés moralement. Ce que le label refuse, c’est l’opacité. Ce qu’il défend, c’est ton droit de nommer ta pratique.</div>
+      </div>
+    </section>
+
+    <section class="section" id="publics">
+      <div class="section-inner grid-two">
+        <div>
+          <span class="section-tag">05 — Pour qui</span>
+          <h2>Pour tous ceux qui publient sous leur nom.</h2>
+          <p class="lead">IA’m ne s’adresse pas qu’aux artistes ou aux écrivains. Chaque fois qu’une IA participe à la forme d’un texte, d’une image ou d’un document qui circule sous ton nom, la même question se pose.</p>
+        </div>
+        <div>
+          <ul class="audience-list">
+            <li>Créateurs visuels : peintres, photographes, illustrateurs, designers</li>
+            <li>Écrivains, journalistes, rédacteurs, éditeurs</li>
+            <li>Enseignants ou formateurs</li>
+            <li>Soignants, pour leur documentation et leurs écrits professionnels</li>
+            <li>Élus locaux ou agents institutionnels</li>
+            <li>Chercheurs ou universitaires</li>
+            <li>Entrepreneurs ou consultants</li>
+            <li>Étudiants, selon les règles de leur établissement</li>
+            <li>Communicants, community managers, rédacteurs web</li>
+            <li>Membres d’associations, pour rapports et tribunes</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="usages">
+      <div class="section-inner narrow">
+        <span class="section-tag">06 — Usages</span>
+        <h2>Et pour quels contenus&nbsp;?</h2>
+        <ul class="usage-list lead">
+          <li>Un mail reformulé</li>
+          <li>Un post LinkedIn rédigé avec Claude</li>
+          <li>Une présentation structurée avec l’aide d’une IA</li>
+          <li>Un avis client corrigé</li>
+          <li>Un compte-rendu résumé automatiquement</li>
+          <li>Une lettre administrative dont la formulation a été polie</li>
+          <li>Un plan de discours affiné en conversation</li>
+          <li>Une fiche produit enrichie</li>
+          <li>Une newsletter scénarisée</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="apposer">
+      <div class="section-inner">
+        <span class="section-tag">07 — Apposer ton badge</span>
+        <h2>Trois étapes simples.</h2>
+        <div class="steps">
+          <article class="step">
+            <div class="step-title">Identifier ton niveau</div>
+            <p>Pour chaque contenu, pose-toi une seule question : qui a décidé de la forme finale ? Si tu as tranché chaque choix après suggestion de l’IA : Assisté. Si la décision est partagée dans un dialogue itératif : Initié. Si l’IA a porté la forme et que tu as accepté : Généré.</p>
+          </article>
+          <article class="step">
+            <div class="step-title">Générer le badge</div>
+            <p>Va sur <a href="badge-v5.html">iam-inside.eu/badge-v5.html</a>, remplis les champs, sélectionne le niveau, puis télécharge le badge en SVG ou PNG. Un code HTML embed est aussi disponible pour l’intégrer dans un site web ou une signature email.</p>
+          </article>
+          <article class="step">
+            <div class="step-title">Le rendre visible</div>
+            <p>Le badge peut être apposé sur le contenu lui-même, sur sa page de présentation, dans ses métadonnées, dans un colophon, dans une signature d’email ou à la fin d’un article. L’important est qu’il soit visible au moment où la personne accède au contenu.</p>
+          </article>
+        </div>
+        <div class="note">En cas de doute, choisis le niveau le plus proche de l’IA. L’enjeu n’est pas de te valoriser, c’est de dire juste.</div>
+      </div>
+    </section>
+
+    <section class="section" id="maintenant">
+      <div class="section-inner grid-two">
+        <div>
+          <span class="section-tag">08 — Pourquoi maintenant</span>
+          <h2>Une fenêtre de temps décisive.</h2>
+          <p class="lead">D’août 2026 à la fin de l’année 2026, plusieurs chantiers européens et français convergent autour d’une même question : comment nommer l’intervention de l’IA dans les contenus qui circulent ?</p>
+        </div>
+        <div class="calendar">
+          <div class="calendar-item">
+            <div class="calendar-date">Mars 2026</div>
+            <p>La deuxième version du Code de bonnes pratiques européen retire la distinction entre contenu entièrement généré par IA et contenu assisté par IA, jugée trop complexe à opérationnaliser.</p>
+          </div>
+          <div class="calendar-item">
+            <div class="calendar-date">Juin 2026</div>
+            <p>Rapport de la mission CSPLA confiée à Alexandra Bensamoun, avec Julie Groffe-Charrier pour rapporteure, sur les contenus co-créés avec l’IA générative.</p>
+          </div>
+          <div class="calendar-item">
+            <div class="calendar-date">2 août 2026</div>
+            <p>Entrée en application de l’article 50 du règlement européen sur l’IA : les contenus générés ou significativement modifiés par IA doivent être signalés aux utilisateurs finaux.</p>
+          </div>
+          <div class="calendar-item">
+            <div class="calendar-date">Automne 2026</div>
+            <p>Premières décisions administratives et jurisprudentielles sur l’application concrète de l’AI Act et du droit d’auteur aux œuvres co-créées.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="vide">
+      <div class="section-inner narrow">
+        <span class="section-tag">09 — Le vide qu’IA’m occupe</span>
+        <h2>Un marquage humain, volontaire, déclaratif.</h2>
+        <p class="lead">La régulation européenne se replie sur le marquage technique machine, qui dit seulement : ce contenu implique une IA. Elle ne dit rien sur le degré d’intervention humaine.</p>
+        <p class="lead">IA’m propose précisément cela : un marquage intentionnel humain, volontaire et déclaratif. Il complète le marquage machine sans le concurrencer. Il s’ancre dans ce que la régulation ne peut pas qualifier : la responsabilité assumée par celui qui publie.</p>
+      </div>
+    </section>
+
+    <section class="section" id="questions">
+      <div class="section-inner narrow">
+        <span class="section-tag">10 — Questions fréquentes</span>
+        <h2>Les réponses rapides.</h2>
+        <div class="faq-list">
+          <article class="faq-item">
+            <div class="faq-question">Comment je prouve mon niveau ?</div>
+            <p>Le label est purement déclaratif. Il repose sur ta responsabilité. Personne ne vient vérifier. C’est la force et la simplicité d’IA’m : il ne se substitue pas à la confiance, il la rend possible en te donnant les mots pour l’énoncer.</p>
+          </article>
+          <article class="faq-item">
+            <div class="faq-question">Et si je me trompe de niveau ?</div>
+            <p>Tu peux le changer. Le label n’est pas gravé dans le marbre. L’enjeu n’est pas la perfection de la classification, c’est la transparence du geste.</p>
+          </article>
+          <article class="faq-item">
+            <div class="faq-question">Est-ce que ça peut être utilisé contre moi juridiquement ?</div>
+            <p>Le label est un acte volontaire et privé, hors champ juridique contraignant. Il ne crée ni obligation légale, ni présomption de responsabilité.</p>
+          </article>
+          <article class="faq-item">
+            <div class="faq-question">Pourquoi ne pas attendre l’AI Act et la régulation ?</div>
+            <p>Parce que la régulation ne qualifie pas l’intervention humaine. Elle impose un marquage technique automatique ; IA’m dit ce que toi tu as fait dans cette présence.</p>
+          </article>
+          <article class="faq-item">
+            <div class="faq-question">Est-ce gratuit ?</div>
+            <p>Entièrement gratuit. Le label est placé sous licence Creative Commons CC BY-NC 4.0, qui autorise toute utilisation non commerciale avec attribution.</p>
+          </article>
+          <article class="faq-item">
+            <div class="faq-question">Qui contrôle IA’m ?</div>
+            <p>Personne, et tout le monde. La marque est déposée à l’INPI par un créateur individuel, mais placée sous licence libre. L’ambition n’est pas de contrôler, c’est de mettre à disposition un vocabulaire commun.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto" id="manifeste">
+      <span class="section-tag">Manifeste court</span>
+      <p>Dire ce qu’on a fait.<br>Ne pas cacher l’outil.<br>Ne pas rougir de la main.<br><br>Marquer n’est pas juger — c’est rendre visible.<br><br>IA’m ne tranche pas.<br>Il nomme.</p>
+      <div class="small">Le logo d’IA’m est dessiné à la main, sans recours à aucune IA. Un paradoxe fondateur.</div>
+    </section>
+  </main>
+
+  <footer>
+    <div>iam-inside.eu · INPI n° 5212301</div>
+    <div><a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a></div>
+  </footer>
+</body>
+</html>
