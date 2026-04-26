@@ -10,26 +10,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/css/styles.css"/>
 </head>
-<body>
+<script>
+async function loadComponent(id, file) {
+  const res = await fetch(file);
+  const html = await res.text();
+  document.getElementById(id).innerHTML = html;
+}
+
+loadComponent("header", "header.html");
+loadComponent("footer", "footer.html");
+</script>
+  <body>
 <div class="cursor">
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 </div>
 
-<!-- Nav -->
-<nav>
-  <a href="index.html" class="nav-logo"><img src="assets/img/logo-iam.svg" alt="IA'm" style="height:38px;vertical-align:middle;"></a>
-  <div class="nav-links">
-  <a href="index.html#label">Le label</a>
-  <a href="mode-emploi.html">Mode d’emploi</a>
-  <a href="index.html#realisations">Réalisations</a>
-  <a href="index.html#charte">Charte</a>
-  <a href="badge-v5.html">Badge</a>
-  <a href="index.html#apropos">À propos</a>
-  <a href="index.html#contact">Contact</a>
-  <a href="faq.html">FAQ</a>
-</div>
-</nav>
+<div id="header"></div>
 
 
 <main class="page-main">
@@ -53,18 +50,7 @@
 </main>
 
 <!-- Footer -->
-<footer>
-  <div class="footer-logo">
-    <img src="assets/img/logo-iam.svg" alt="IA'm" style="height:80px;opacity:0.85;">
-  </div>
-  <div class="footer-text">
-    Label éthique de co-création avec l'IA<br/>
-    Marque déposée n° 5212301 · INPI · Classe 41
-  </div>
-  <div class="footer-mark">
-    © 2025 L LB<br/>
-  </div>
-</footer>
+<div id="footer"></div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script src="assets/js/main.js"></script>
