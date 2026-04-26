@@ -57,7 +57,18 @@
   --rule: rgba(244,239,228,0.15);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
+<script>
+async function loadComponent(id, file) {
+  const res = await fetch(file);
+  const html = await res.text();
+  document.getElementById(id).innerHTML = html;
+}
+
+loadComponent("header", "header.html");
+loadComponent("footer", "footer.html");
+</script>
+  
+  body {
   background: var(--ink);
   color: var(--cream);
   font-family: 'DM Sans', sans-serif;
@@ -490,14 +501,7 @@ body {
   </div>
 </section>
 
-<footer class="page-foot">
-  <span>IA'm · INPI 5212301 · CC BY-NC 4.0</span>
-  <span>
-    <a href="index.html" data-i18n="back">← Retour</a>
-    &nbsp;·&nbsp;
-    <a href="badge-v4.html" data-i18n="v4">Version 4 (sans niveaux)</a>
-  </span>
-</footer>
+<div id="footer"></div>
 
 <script>
 /* =========================================================
