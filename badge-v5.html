@@ -9,7 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/styles-with-gallery.css">
 <style>.site-nav {
   position: sticky;
   top: 0;
@@ -63,7 +62,7 @@ body {
   color: var(--cream);
   font-family: 'DM Sans', sans-serif;
   min-height: 100vh;
-  padding: 0;
+  padding: 2rem;
 }
 @keyframes rotateSlow {
   from { transform: rotate(0deg); }
@@ -72,7 +71,7 @@ body {
 
 /* Header */
 .page-head {
-  max-width: 1200px; margin: 0 auto 3rem; padding: 3rem 2rem 2rem;
+  max-width: 1200px; margin: 0 auto 3rem; padding-bottom: 2rem;
   border-bottom: 1px solid var(--rule);
   display: flex; justify-content: space-between; align-items: baseline;
   flex-wrap: wrap; gap: 1rem;
@@ -292,6 +291,48 @@ body {
 .download-btns {
   display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
 }
+.export-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: -0.7rem;
+}
+.export-options-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+.export-bg-tabs {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+.export-bg-tab {
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--rule);
+  color: var(--mid);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  padding: 0.55rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.export-bg-tab:last-child { border-right: 0; }
+.export-bg-tab.active { background: var(--gold); color: var(--ink); }
+.export-note {
+  max-width: 310px;
+  text-align: center;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(244,239,228,0.48);
+}
+
 .btn-dl {
   font-family: 'DM Mono', monospace; font-size: 0.6rem;
   letter-spacing: 0.12em; text-transform: uppercase;
@@ -347,19 +388,11 @@ body {
 }
 .page-foot a { color: var(--gold); text-decoration: none; }
 .page-foot a:hover { text-decoration: underline; }
-
-/* Harmonisation avec la page d'accueil */
-#badge { padding-left: 2rem; padding-right: 2rem; }
-.page-foot { padding-left: 2rem; padding-right: 2rem; }
-@media (max-width: 700px) {
-  .page-head { padding-left: 1.25rem; padding-right: 1.25rem; }
-  #badge { padding-left: 1.25rem; padding-right: 1.25rem; }
-}
 </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="nav-logo"><img src="assets/img/logo-iam.svg" alt="IA'm" style="height:38px;vertical-align:middle;"></a>
+<nav class="site-nav">
+  <a href="index.html" class="logo">IA<span>'</span>m</a>
   <div class="nav-links">
     <a href="index.html#label">Le label</a>
     <a href="mode-emploi.html">Mode d’emploi</a>
@@ -481,8 +514,18 @@ body {
       </div>
 
       <div class="download-btns">
-        <button class="btn-dl" onclick="downloadSVG()" data-i18n="dl-svg">↓ SVG</button>
+        <button class="btn-dl" onclick="downloadSVG()" data-i18n="dl-svg">↓ SVG transparent</button>
         <button class="btn-dl" onclick="downloadPNG()" data-i18n="dl-png">↓ PNG</button>
+      </div>
+
+      <div class="export-options" aria-label="Options d’export PNG">
+        <div class="export-options-label" data-i18n="png-bg-label">Fond PNG</div>
+        <div class="export-bg-tabs">
+          <button type="button" class="export-bg-tab active" data-bg="cream" onclick="setPngBackground('cream')" data-i18n="png-bg-cream">Crème</button>
+          <button type="button" class="export-bg-tab" data-bg="dark" onclick="setPngBackground('dark')" data-i18n="png-bg-dark">Sombre</button>
+          <button type="button" class="export-bg-tab" data-bg="transparent" onclick="setPngBackground('transparent')" data-i18n="png-bg-transparent">Transparent</button>
+        </div>
+        <p class="export-note" data-i18n="export-note">SVG : fond transparent. PNG : fond au choix, crème par défaut.</p>
       </div>
 
       <div class="embed-section">
@@ -551,8 +594,13 @@ const I18N = {
     "h-generated": "IA'm · Généré",
     "p-generated": "L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.",
     "crit": "Critère de bascule entre niveaux : qui tranche la forme finale.",
-    "dl-svg": "↓ SVG",
+    "dl-svg": "↓ SVG transparent",
     "dl-png": "↓ PNG",
+    "png-bg-label": "Fond PNG",
+    "png-bg-cream": "Crème",
+    "png-bg-dark": "Sombre",
+    "png-bg-transparent": "Transparent",
+    "export-note": "SVG : fond transparent. PNG : fond au choix, crème par défaut.",
     "embed-title": "Code embed HTML",
     "copy": "Copier",
     "copied": "Copié ✓",
@@ -594,8 +642,13 @@ const I18N = {
     "h-generated": "IA'm · Generated",
     "p-generated": "AI decides most of the final form. The human provides intention (prompt, brief, framing) but accepts the output with little or no formal intervention. The human is prescriber more than formal author.",
     "crit": "Switching criterion between levels: who decides the final form.",
-    "dl-svg": "↓ SVG",
+    "dl-svg": "↓ SVG transparent",
     "dl-png": "↓ PNG",
+    "png-bg-label": "PNG background",
+    "png-bg-cream": "Cream",
+    "png-bg-dark": "Dark",
+    "png-bg-transparent": "Transparent",
+    "export-note": "SVG: transparent background. PNG: selectable background, cream by default.",
     "embed-title": "HTML embed code",
     "copy": "Copy",
     "copied": "Copied ✓",
@@ -607,6 +660,7 @@ const I18N = {
 
 let currentLang = 'fr';
 let embedMode = 'img';
+let pngBackground = 'cream';
 
 /* ---------- Langue : détection + toggle ---------- */
 function detectLang() {
@@ -730,6 +784,13 @@ function copyEmbed() {
   });
 }
 
+function setPngBackground(bg) {
+  pngBackground = bg;
+  document.querySelectorAll('.export-bg-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.bg === bg);
+  });
+}
+
 /* ---------- Downloads ---------- */
 let logoBase64Cache = null;
 
@@ -752,7 +813,7 @@ async function loadLogoBase64() {
   }
 }
 
-async function buildSVG() {
+async function buildSVG(options = {}) {
   const dict = I18N[currentLang];
   const level = document.getElementById('gen-level').value || 'assisted';
   const name = document.getElementById('gen-name').value.trim();
@@ -781,15 +842,21 @@ async function buildSVG() {
   const filetLength = 25;
   const filetOffset = 5;
 
+  const includeBackground = options.background && options.background !== 'transparent';
+  const backgroundFill = options.background === 'dark' ? '#0B0E1A' : '#FDFAF5';
+  const inkFill = options.background === 'dark' ? '#FDFAF5' : '#0B0E1A';
+  const logoFilter = options.background === 'dark' ? ' filter="invert(1)"' : '';
+  const subtleFillOpacity = options.background === 'dark' ? '0.70' : '0.55';
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
-  <rect width="${s}" height="${s}" fill="#FDFAF5"/>
-  ${logoHref ? `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoHref}" preserveAspectRatio="xMidYMid meet"/>` : ''}
-  <line x1="${cx - filetW - filetLength}" y1="${y - filetOffset}" x2="${cx - filetW}" y2="${y - filetOffset}" stroke="#0B0E1A" stroke-width="1"/>
-  <line x1="${cx + filetW}" y1="${y - filetOffset}" x2="${cx + filetW + filetLength}" y2="${y - filetOffset}" stroke="#0B0E1A" stroke-width="1"/>
-  <text x="${cx}" y="${y}" text-anchor="middle" font-family="DM Mono, monospace" font-size="${fontSize}" letter-spacing="${letterSpacing}" fill="#0B0E1A" font-weight="500">${escapeXml(levelLabel)}</text>
-  ${subtitle ? `<text x="${cx}" y="${s - 50}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" fill="#0B0E1A" fill-opacity="0.55">${escapeXml(subtitle.toUpperCase())}</text>` : ''}
-  ${author ? `<text x="${cx}" y="${s - 28}" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="12" fill="#0B0E1A" fill-opacity="0.55">${escapeXml(author)}</text>` : ''}
+  ${includeBackground ? `<rect width="${s}" height="${s}" fill="${backgroundFill}"/>` : ''}
+  ${logoHref ? `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoHref}" preserveAspectRatio="xMidYMid meet"${logoFilter}/>` : ''}
+  <line x1="${cx - filetW - filetLength}" y1="${y - filetOffset}" x2="${cx - filetW}" y2="${y - filetOffset}" stroke="${inkFill}" stroke-width="1"/>
+  <line x1="${cx + filetW}" y1="${y - filetOffset}" x2="${cx + filetW + filetLength}" y2="${y - filetOffset}" stroke="${inkFill}" stroke-width="1"/>
+  <text x="${cx}" y="${y}" text-anchor="middle" font-family="DM Mono, monospace" font-size="${fontSize}" letter-spacing="${letterSpacing}" fill="${inkFill}" font-weight="500">${escapeXml(levelLabel)}</text>
+  ${subtitle ? `<text x="${cx}" y="${s - 50}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" fill="${inkFill}" fill-opacity="${subtleFillOpacity}">${escapeXml(subtitle.toUpperCase())}</text>` : ''}
+  ${author ? `<text x="${cx}" y="${s - 28}" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="12" fill="${inkFill}" fill-opacity="${subtleFillOpacity}">${escapeXml(author)}</text>` : ''}
 </svg>`;
 }
 
@@ -810,7 +877,8 @@ async function downloadSVG() {
 }
 
 async function downloadPNG() {
-  const svg = await buildSVG();
+  const background = pngBackground || 'cream';
+  const svg = await buildSVG({ background });
   const blob = new Blob([svg], { type: 'image/svg+xml' });
   const url = URL.createObjectURL(blob);
   const img = new Image();
@@ -818,16 +886,24 @@ async function downloadPNG() {
     const canvas = document.createElement('canvas');
     canvas.width = 960; canvas.height = 960;
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#FDFAF5';
-    ctx.fillRect(0, 0, 960, 960);
+
+    if (background === 'cream') {
+      ctx.fillStyle = '#FDFAF5';
+      ctx.fillRect(0, 0, 960, 960);
+    } else if (background === 'dark') {
+      ctx.fillStyle = '#0B0E1A';
+      ctx.fillRect(0, 0, 960, 960);
+    }
+
     ctx.drawImage(img, 0, 0, 960, 960);
     URL.revokeObjectURL(url);
     canvas.toBlob(b => {
       const purl = URL.createObjectURL(b);
       const level = document.getElementById('gen-level').value || 'assisted';
+      const suffix = background === 'transparent' ? 'transparent' : background;
       const a = document.createElement('a');
       a.href = purl;
-      a.download = `iam-badge-${level}.png`;
+      a.download = `iam-badge-${level}-${suffix}.png`;
       a.click();
       URL.revokeObjectURL(purl);
     }, 'image/png');
