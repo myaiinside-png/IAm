@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="assets/styles-with-gallery.css">
 <style>.site-nav {
   position: sticky;
   top: 0;
@@ -57,23 +58,12 @@
   --rule: rgba(244,239,228,0.15);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-<script>
-async function loadComponent(id, file) {
-  const res = await fetch(file);
-  const html = await res.text();
-  document.getElementById(id).innerHTML = html;
-}
-
-loadComponent("header", "header.html");
-loadComponent("footer", "footer.html");
-</script>
-  
-  body {
+body {
   background: var(--ink);
   color: var(--cream);
   font-family: 'DM Sans', sans-serif;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 0;
 }
 @keyframes rotateSlow {
   from { transform: rotate(0deg); }
@@ -82,7 +72,7 @@ loadComponent("footer", "footer.html");
 
 /* Header */
 .page-head {
-  max-width: 1200px; margin: 0 auto 3rem; padding-bottom: 2rem;
+  max-width: 1200px; margin: 0 auto 3rem; padding: 3rem 2rem 2rem;
   border-bottom: 1px solid var(--rule);
   display: flex; justify-content: space-between; align-items: baseline;
   flex-wrap: wrap; gap: 1rem;
@@ -357,21 +347,29 @@ loadComponent("footer", "footer.html");
 }
 .page-foot a { color: var(--gold); text-decoration: none; }
 .page-foot a:hover { text-decoration: underline; }
+
+/* Harmonisation avec la page d'accueil */
+#badge { padding-left: 2rem; padding-right: 2rem; }
+.page-foot { padding-left: 2rem; padding-right: 2rem; }
+@media (max-width: 700px) {
+  .page-head { padding-left: 1.25rem; padding-right: 1.25rem; }
+  #badge { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
 </style>
 </head>
 <body>
-<nav class="site-nav">
-  <a href="index.html" class="logo">IA<span>'</span>m</a>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/img/logo-iam.svg" alt="IA'm" style="height:38px;vertical-align:middle;"></a>
   <div class="nav-links">
-  <a href="index.html#label">Le label</a>
-  <a href="mode-emploi.html">Mode d’emploi</a>
-  <a href="index.html#realisations">Réalisations</a>
-  <a href="index.html#charte">Charte</a>
-  <a href="badge-v5.html">Badge</a>
-  <a href="index.html#apropos">À propos</a>
-  <a href="index.html#contact">Contact</a>
-  <a href="faq.html">FAQ</a>
-</div>
+    <a href="index.html#label">Le label</a>
+    <a href="mode-emploi.html">Mode d’emploi</a>
+    <a href="index.html#realisations">Réalisations</a>
+    <a href="index.html#charte">Charte</a>
+    <a href="badge-v5.html">Badge</a>
+    <a href="index.html#apropos">À propos</a>
+    <a href="index.html#contact">Contact</a>
+    <a href="faq.html">FAQ</a>
+  </div>
 </nav><header class="page-head">
   <h1>IA<span class="apo">'</span>m <span class="ver">· Générateur v5</span></h1>
   <div class="lang-toggle" role="group" aria-label="Langue">
@@ -501,7 +499,14 @@ loadComponent("footer", "footer.html");
   </div>
 </section>
 
-<div id="footer"></div>
+<footer class="page-foot">
+  <span>IA'm · INPI 5212301 · CC BY-NC 4.0</span>
+  <span>
+    <a href="index.html" data-i18n="back">← Retour</a>
+    &nbsp;·&nbsp;
+    <a href="badge-v4.html" data-i18n="v4">Version 4 (sans niveaux)</a>
+  </span>
+</footer>
 
 <script>
 /* =========================================================
