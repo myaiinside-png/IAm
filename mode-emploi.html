@@ -30,7 +30,19 @@
     .mode-step p { color: rgba(244,239,228,0.68); line-height: 1.75; }
     .mode-list { list-style: none; display: grid; gap: 0.6rem; margin-top: 1.5rem; color: rgba(244,239,228,0.72); }
     .mode-list li::before { content: '·'; color: var(--gold); margin-right: 0.5rem; }
-    @media (max-width: 900px) { .mode-grid, .mode-grid.two { grid-template-columns: 1fr; } .mode-step { padding-left: 1.5rem; padding-top: 4.6rem; } }
+    .placement-map { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 0.85fr; gap: 1.2rem; align-items: stretch; }
+    .placement-canvas { border: 1px solid var(--rule); background: rgba(255,255,255,0.025); padding: 1.4rem; min-height: 340px; display: grid; grid-template-rows: auto 1fr auto; gap: 1rem; }
+    .mock-bar, .mock-footer { height: 18px; border: 1px solid rgba(200,151,58,0.28); background: rgba(200,151,58,0.05); }
+    .mock-content { display: grid; grid-template-columns: 1fr 0.42fr; gap: 1rem; }
+    .mock-article, .mock-side { border: 1px solid rgba(244,239,228,0.11); padding: 1rem; position: relative; }
+    .mock-line { height: 8px; background: rgba(244,239,228,0.12); margin-bottom: 0.65rem; }
+    .mock-line.short { width: 55%; }
+    .mock-badge { position: absolute; right: 1rem; bottom: 1rem; width: 76px; height: 76px; border: 1.5px solid var(--gold); border-radius: 50%; display: grid; place-items: center; font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.08em; color: var(--gold); background: rgba(11,14,26,0.72); text-align: center; }
+    .placement-rule { border: 1px solid var(--rule); background: rgba(200,151,58,0.045); padding: 1.4rem; display: flex; flex-direction: column; justify-content: center; }
+    .placement-rule strong { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--cream); line-height: 1.15; }
+    .placement-rule p { margin-top: 1rem; color: rgba(244,239,228,0.72); line-height: 1.75; }
+    .code-sample { margin-top: 1.2rem; padding: 1rem; border: 1px solid rgba(244,239,228,0.12); background: rgba(0,0,0,0.22); font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(244,239,228,0.72); overflow-x: auto; }
+    @media (max-width: 900px) { .mode-grid, .mode-grid.two, .placement-map { grid-template-columns: 1fr; } .mode-step { padding-left: 1.5rem; padding-top: 4.6rem; } .mock-content { grid-template-columns: 1fr; } .placement-canvas { min-height: 420px; } }
   </style>
 </head>
 <body>
@@ -50,7 +62,6 @@
     <a href="index.html#apropos">À propos</a>
     <a href="index.html#contact">Contact</a>
     <a href="faq.html">FAQ</a>
-    <a href="integration.html">Comment utiliser le badge</a>
   </div>
 </nav>
 
@@ -63,7 +74,7 @@
       <p class="mode-meta">INPI n° 5212301 · Classe 41 · CC BY-NC 4.0</p>
       <div class="mode-actions">
         <a href="badge-v5.html" class="btn-primary">Générer mon badge</a>
-        <a href="#niveaux" class="btn-ghost">Voir les trois niveaux →</a>
+        <a href="#placer" class="btn-ghost">Où placer le badge →</a>
       </div>
     </div>
   </section>
@@ -123,75 +134,92 @@
     </div>
   </section>
 
-  <section class="content-section" id="apposer">
-    <section class="section" id="apposer">
-  <div class="section-inner">
-    <span class="section-tag">07 — Apposer le badge</span>
-    <h2>Un principe simple</h2>
-
-```
-<p class="lead">
-  Le badge IA’m accompagne chaque contenu individuellement.
-</p>
-
-<div class="note">
-  Le badge ne se place ni globalement, ni à part.<br>
-  Il apparaît là où le contenu est vu.
-</div>
-
-<p style="margin-top:2rem;">
-  <a href="integration.html">→ Voir des exemples concrets</a>
-</p>
-```
-
-  </div>
-</section>
-
-  </section>
-
-  <section class="section" id="integration">
-  <div class="section-inner narrow">
-    <span class="section-tag">08 — Intégration</span>
-    <h2>Comment utiliser concrètement votre badge</h2>
-
-    <p class="lead">
-      Une fois généré, votre badge IA’m peut être utilisé de plusieurs façons selon votre support.
-    </p>
-
-    <div class="cards">
-
-      <div class="card">
-        <div class="card-title">Site web</div>
-        <p>Copiez le code HTML fourni par le générateur et collez-le dans votre page, article ou portfolio.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Documents</div>
-        <p>Téléchargez le badge en PNG et insérez-le dans vos PDF, rapports ou supports pédagogiques.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Réseaux sociaux</div>
-        <p>Ajoutez le badge directement dans vos visuels ou en description de publication.</p>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Signature</div>
-        <p>Utilisez le badge dans votre signature email ou votre page de présentation.</p>
-      </div>
-
-    </div>
-
-    <div class="note">
-      Le badge IA’m n’est pas une certification technique.<br>
-      C’est un acte volontaire de transparence.
-    </div>
-  </div>
-</section>
-  <section class="content-section section-border" id="publics">
+  <section class="content-section" id="placer">
     <div class="section-inner">
       <div class="section-header reveal">
-        <span class="label-section-tag">05 — Publics & usages</span>
+        <span class="label-section-tag">04 — Où placer le badge</span>
+        <h2 class="label-heading">Au plus proche du contenu qu’il décrit.</h2>
+        <p class="section-intro">Le badge doit être visible au moment où le contenu est découvert. Il ne se place ni à part, ni globalement pour tout un site.</p>
+      </div>
+
+      <div class="placement-map reveal" aria-label="Schéma de placement du badge IA'm">
+        <div class="placement-canvas">
+          <div class="mock-bar"></div>
+          <div class="mock-content">
+            <div class="mock-article">
+              <div class="mock-line short"></div>
+              <div class="mock-line"></div>
+              <div class="mock-line"></div>
+              <div class="mock-line"></div>
+              <div class="mock-line short"></div>
+              <div class="mock-badge">IA'm<br>badge</div>
+            </div>
+            <div class="mock-side">
+              <div class="mock-line"></div>
+              <div class="mock-line short"></div>
+              <div class="mock-line"></div>
+            </div>
+          </div>
+          <div class="mock-footer"></div>
+        </div>
+        <div class="placement-rule">
+          <strong>Le lecteur ne doit pas chercher le badge.</strong>
+          <p>Si le badge décrit un article, il accompagne cet article. S’il décrit une image, il est dans l’image ou sa légende. S’il décrit un document, il est dans le document.</p>
+          <p><em>Règle IA’m : un contenu, un niveau, un badge visible.</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section section-border" id="formats">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="label-section-tag">05 — Exemples concrets</span>
+        <h2 class="label-heading">Selon le support, le bon endroit change.</h2>
+      </div>
+      <div class="mode-grid two reveal">
+        <article class="mode-card"><h3>Article / page web</h3><p>En bas du contenu ou en introduction, près du titre ou des crédits.</p></article>
+        <article class="mode-card"><h3>Image / création</h3><p>Directement dans le visuel, ou dans la légende si le visuel ne doit pas être altéré.</p></article>
+        <article class="mode-card"><h3>PDF / document</h3><p>En pied de page, dans le colophon, ou sur la dernière page du document.</p></article>
+        <article class="mode-card"><h3>Réseaux sociaux</h3><p>Dans l’image publiée, dans le carrousel, ou dans la description du post.</p></article>
+      </div>
+      <div class="mode-note reveal">Si le badge n’est pas visible sans le chercher, il est mal placé.</div>
+    </div>
+  </section>
+
+  <section class="content-section" id="integration">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="label-section-tag">06 — Intégration technique</span>
+        <h2 class="label-heading">Trois manières d’intégrer IA’m.</h2>
+      </div>
+      <div class="mode-grid reveal">
+        <article class="mode-card"><h3>SVG</h3><p>Format transparent, idéal pour un site web, un portfolio ou une mise en page propre.</p></article>
+        <article class="mode-card"><h3>PNG</h3><p>Format image classique, pratique pour PDF, réseaux sociaux, documents et emails.</p></article>
+        <article class="mode-card"><h3>Code HTML</h3><p>Copiez le code fourni par le générateur pour intégrer le badge cliquable sur une page web.</p></article>
+      </div>
+      <div class="code-sample reveal">&lt;a href=&quot;https://iam-inside.eu&quot;&gt;&lt;img src=&quot;https://iam-inside.eu/badges/iam-assisted-fr-240.svg&quot; alt=&quot;IA'm Assisté&quot;&gt;&lt;/a&gt;</div>
+    </div>
+  </section>
+
+  <section class="content-section section-border" id="apposer">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="label-section-tag">07 — Apposer son badge</span>
+        <h2 class="label-heading">Trois étapes simples.</h2>
+      </div>
+      <div class="mode-steps reveal">
+        <article class="mode-step"><h3>Identifier ton niveau</h3><p>Pose-toi une seule question : qui a décidé de la forme finale ? En cas de doute, choisis le niveau le plus proche de l’IA.</p></article>
+        <article class="mode-step"><h3>Générer le badge</h3><p>Va sur le générateur IA’m, remplis les champs, sélectionne le niveau, puis télécharge le badge en SVG ou PNG.</p></article>
+        <article class="mode-step"><h3>Le rendre visible</h3><p>Place le badge près de l’œuvre, dans les crédits, la légende, le portfolio, le document ou la page de présentation.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section" id="publics">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <span class="label-section-tag">08 — Publics & usages</span>
         <h2 class="label-heading">Pour tous ceux qui publient sous leur nom.</h2>
         <p class="section-intro">IA’m concerne les artistes, auteurs, enseignants, chercheurs, étudiants, institutions, communicants, journalistes, associations et créateurs indépendants.</p>
       </div>
@@ -204,7 +232,7 @@
     </div>
   </section>
 
-  <section class="content-section" id="manifeste">
+  <section class="content-section section-border" id="manifeste">
     <div class="section-inner reveal" style="text-align:center;max-width:820px;">
       <span class="label-section-tag">Manifeste court</span>
       <h2 class="label-heading">IA’m ne tranche pas.<br>Il nomme.</h2>
