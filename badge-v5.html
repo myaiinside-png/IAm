@@ -291,48 +291,6 @@ body {
 .download-btns {
   display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
 }
-.export-options {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: -0.7rem;
-}
-.export-options-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--mid);
-}
-.export-bg-tabs {
-  display: flex;
-  gap: 0;
-  border: 1px solid var(--rule);
-}
-.export-bg-tab {
-  background: transparent;
-  border: 0;
-  border-right: 1px solid var(--rule);
-  color: var(--mid);
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-  padding: 0.55rem 0.85rem;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.export-bg-tab:last-child { border-right: 0; }
-.export-bg-tab.active { background: var(--gold); color: var(--ink); }
-.export-note {
-  max-width: 310px;
-  text-align: center;
-  font-size: 0.72rem;
-  line-height: 1.5;
-  color: rgba(244,239,228,0.48);
-}
-
 .btn-dl {
   font-family: 'DM Mono', monospace; font-size: 0.6rem;
   letter-spacing: 0.12em; text-transform: uppercase;
@@ -388,20 +346,74 @@ body {
 }
 .page-foot a { color: var(--gold); text-decoration: none; }
 .page-foot a:hover { text-decoration: underline; }
+
+/* QR IA'm */
+.qr-section {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(200,151,58,0.22);
+  background: rgba(200,151,58,0.035);
+  text-align: center;
+}
+.qr-section h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.qr-box {
+  width: 132px;
+  height: 132px;
+  margin: 0 auto 0.8rem;
+  display: grid;
+  place-items: center;
+  background: #FDFAF5;
+  padding: 6px;
+}
+#qrCanvas {
+  width: 120px;
+  height: 120px;
+  display: block;
+}
+.qr-link {
+  display: block;
+  color: rgba(244,239,228,0.65);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+.qr-link a {
+  color: var(--gold);
+  text-decoration: none;
+}
+.qr-link a:hover {
+  text-decoration: underline;
+}
+.qr-note {
+  margin-top: 0.7rem;
+  color: rgba(244,239,228,0.5);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
 </style>
 </head>
 <body>
 <nav class="site-nav">
   <a href="index.html" class="logo">IA<span>'</span>m</a>
   <div class="nav-links">
-    <a href="index.html#label">Le label</a>
-    <a href="mode-emploi.html">Mode d’emploi</a>
-    <a href="index.html#realisations">Réalisations</a>
-    <a href="index.html#charte">Charte</a>
-    <a href="badge-v5.html">Badge</a>
-    <a href="index.html#apropos">À propos</a>
-    <a href="index.html#contact">Contact</a>
-    <a href="faq.html">FAQ</a>
+    <a href="./index.html#label">Le label</a>
+    <a href="./mode-emploi.html">Mode d’emploi</a>
+    <a href="./index.html#galerie">Réalisations</a>
+    <a href="./index.html#charte">Charte</a>
+    <a href="./badge-v5.html">Badge</a>
+    <a href="./index.html#apropos">À propos</a>
+    <a href="./index.html#contact">Contact</a>
+    <a href="./faq.html">FAQ</a>
   </div>
 </nav><header class="page-head">
   <h1>IA<span class="apo">'</span>m <span class="ver">· Générateur v5</span></h1>
@@ -514,18 +526,19 @@ body {
       </div>
 
       <div class="download-btns">
-        <button class="btn-dl" onclick="downloadSVG()" data-i18n="dl-svg">↓ SVG transparent</button>
+        <button class="btn-dl" onclick="downloadSVG()" data-i18n="dl-svg">↓ SVG</button>
         <button class="btn-dl" onclick="downloadPNG()" data-i18n="dl-png">↓ PNG</button>
       </div>
 
-      <div class="export-options" aria-label="Options d’export PNG">
-        <div class="export-options-label" data-i18n="png-bg-label">Fond PNG</div>
-        <div class="export-bg-tabs">
-          <button type="button" class="export-bg-tab active" data-bg="cream" onclick="setPngBackground('cream')" data-i18n="png-bg-cream">Crème</button>
-          <button type="button" class="export-bg-tab" data-bg="dark" onclick="setPngBackground('dark')" data-i18n="png-bg-dark">Sombre</button>
-          <button type="button" class="export-bg-tab" data-bg="transparent" onclick="setPngBackground('transparent')" data-i18n="png-bg-transparent">Transparent</button>
+      <div class="qr-section">
+        <h3>QR code de déclaration</h3>
+        <div class="qr-box">
+          <canvas id="qrCanvas" width="120" height="120" aria-label="QR code IA'm"></canvas>
         </div>
-        <p class="export-note" data-i18n="export-note">SVG : fond transparent. PNG : fond au choix, crème par défaut.</p>
+        <span class="qr-link">
+          <a id="qrLink" href="badge.html" target="_blank" rel="noopener">Ouvrir la page de déclaration</a>
+        </span>
+        <p class="qr-note">Le QR code renvoie vers une page lisible avec le niveau, le titre et l’auteur.</p>
       </div>
 
       <div class="embed-section">
@@ -536,18 +549,7 @@ body {
         </div>
         <textarea class="embed-code" id="embed-code" readonly></textarea>
         <button type="button" class="btn-copy" onclick="copyEmbed()" data-i18n="copy">Copier</button>
-      </div> <!-- FIN embed-section -->
-
-<div style="margin-top:2rem; max-width:420px; text-align:center; color:rgba(244,239,228,0.6); font-size:0.85rem;">
-  Une fois généré, ce badge peut être utilisé :
-  <br>— sur votre site web
-  <br>— dans vos documents
-  <br>— sur vos réseaux sociaux
-  <br><br>
-  <a href="integration.html" style="color:#C8973A;">
-    Voir comment l’utiliser →
-  </a>
-</div>
+      </div>
 
     </div>
   </div>
@@ -562,6 +564,7 @@ body {
   </span>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
 /* =========================================================
    IA'm Badge Generator v5
@@ -605,13 +608,8 @@ const I18N = {
     "h-generated": "IA'm · Généré",
     "p-generated": "L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.",
     "crit": "Critère de bascule entre niveaux : qui tranche la forme finale.",
-    "dl-svg": "↓ SVG transparent",
+    "dl-svg": "↓ SVG",
     "dl-png": "↓ PNG",
-    "png-bg-label": "Fond PNG",
-    "png-bg-cream": "Crème",
-    "png-bg-dark": "Sombre",
-    "png-bg-transparent": "Transparent",
-    "export-note": "SVG : fond transparent. PNG : fond au choix, crème par défaut.",
     "embed-title": "Code embed HTML",
     "copy": "Copier",
     "copied": "Copié ✓",
@@ -653,13 +651,8 @@ const I18N = {
     "h-generated": "IA'm · Generated",
     "p-generated": "AI decides most of the final form. The human provides intention (prompt, brief, framing) but accepts the output with little or no formal intervention. The human is prescriber more than formal author.",
     "crit": "Switching criterion between levels: who decides the final form.",
-    "dl-svg": "↓ SVG transparent",
+    "dl-svg": "↓ SVG",
     "dl-png": "↓ PNG",
-    "png-bg-label": "PNG background",
-    "png-bg-cream": "Cream",
-    "png-bg-dark": "Dark",
-    "png-bg-transparent": "Transparent",
-    "export-note": "SVG: transparent background. PNG: selectable background, cream by default.",
     "embed-title": "HTML embed code",
     "copy": "Copy",
     "copied": "Copied ✓",
@@ -671,7 +664,6 @@ const I18N = {
 
 let currentLang = 'fr';
 let embedMode = 'img';
-let pngBackground = 'cream';
 
 /* ---------- Langue : détection + toggle ---------- */
 function detectLang() {
@@ -733,6 +725,57 @@ function selectLevel(level) {
   updateBadge();
 }
 
+
+/* ---------- QR declaration URL ---------- */
+function getDeclarationURL() {
+  const level = document.getElementById('gen-level')?.value || 'assisted';
+  const name = document.getElementById('gen-name')?.value.trim() || '';
+  const title = document.getElementById('gen-title')?.value.trim() || '';
+  const params = new URLSearchParams();
+
+  params.set('level', level);
+  if (title) params.set('title', title);
+  if (name) params.set('author', name);
+  params.set('date', new Date().toISOString().slice(0, 10));
+
+  return `https://iam-inside.eu/badge.html?${params.toString()}`;
+}
+
+function drawFallbackQR(canvas) {
+  const ctx = canvas.getContext('2d');
+  const size = canvas.width;
+  ctx.fillStyle = '#FDFAF5';
+  ctx.fillRect(0, 0, size, size);
+  ctx.fillStyle = '#0B0E1A';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('QR IA\\'m', size / 2, size / 2 - 4);
+  ctx.fillText('à recharger', size / 2, size / 2 + 12);
+}
+
+function updateQR() {
+  const canvas = document.getElementById('qrCanvas');
+  const link = document.getElementById('qrLink');
+  if (!canvas || !link) return;
+
+  const url = getDeclarationURL();
+  link.href = url;
+
+  if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
+    window.QRCode.toCanvas(canvas, url, {
+      width: 120,
+      margin: 1,
+      color: {
+        dark: '#0B0E1A',
+        light: '#FDFAF5'
+      }
+    }).catch(() => drawFallbackQR(canvas));
+  } else {
+    drawFallbackQR(canvas);
+  }
+}
+
+
 /* ---------- Badge preview ---------- */
 function updateBadge() {
   const dict = I18N[currentLang];
@@ -750,6 +793,7 @@ function updateBadge() {
   document.getElementById('badge-author-display').textContent = name ? '— ' + name : '';
 
   updateEmbed();
+  updateQR();
 }
 
 /* ---------- Embed ---------- */
@@ -768,20 +812,24 @@ function updateEmbed() {
   const params = new URLSearchParams();
   params.set('level', level);
   params.set('lang', currentLang);
-  if (name) params.set('name', name);
+  if (name) params.set('author', name);
   if (title) params.set('title', title);
+  params.set('date', new Date().toISOString().slice(0, 10));
 
   const base = 'https://iam-inside.eu';
+  const declarationURL = `${base}/badge.html?${params.toString()}`;
   const box = document.getElementById('embed-code');
 
   if (embedMode === 'img') {
-    box.value = `<a href="${base}/" target="_blank" rel="noopener">
+    box.value = `<a href="${declarationURL}" target="_blank" rel="noopener">
   <img src="${base}/badges/iam-${level}-${currentLang}-240.svg" alt="IA'm ${level}" width="240" height="240">
 </a>`;
   } else {
-    box.value = `<iframe src="${base}/badge-v5.html?${params.toString()}"
-  width="300" height="300" style="border:0" title="IA'm badge"></iframe>`;
+    box.value = `<iframe src="${declarationURL}"
+  width="320" height="420" style="border:0" title="Déclaration IA'm"></iframe>`;
   }
+
+  updateQR();
 }
 
 function copyEmbed() {
@@ -792,13 +840,6 @@ function copyEmbed() {
     const original = btn.textContent;
     btn.textContent = I18N[currentLang]['copied'];
     setTimeout(() => btn.textContent = original, 1500);
-  });
-}
-
-function setPngBackground(bg) {
-  pngBackground = bg;
-  document.querySelectorAll('.export-bg-tab').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.bg === bg);
   });
 }
 
@@ -824,7 +865,7 @@ async function loadLogoBase64() {
   }
 }
 
-async function buildSVG(options = {}) {
+async function buildSVG() {
   const dict = I18N[currentLang];
   const level = document.getElementById('gen-level').value || 'assisted';
   const name = document.getElementById('gen-name').value.trim();
@@ -853,21 +894,15 @@ async function buildSVG(options = {}) {
   const filetLength = 25;
   const filetOffset = 5;
 
-  const includeBackground = options.background && options.background !== 'transparent';
-  const backgroundFill = options.background === 'dark' ? '#0B0E1A' : '#FDFAF5';
-  const inkFill = options.background === 'dark' ? '#FDFAF5' : '#0B0E1A';
-  const logoFilter = options.background === 'dark' ? ' filter="invert(1)"' : '';
-  const subtleFillOpacity = options.background === 'dark' ? '0.70' : '0.55';
-
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
-  ${includeBackground ? `<rect width="${s}" height="${s}" fill="${backgroundFill}"/>` : ''}
-  ${logoHref ? `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoHref}" preserveAspectRatio="xMidYMid meet"${logoFilter}/>` : ''}
-  <line x1="${cx - filetW - filetLength}" y1="${y - filetOffset}" x2="${cx - filetW}" y2="${y - filetOffset}" stroke="${inkFill}" stroke-width="1"/>
-  <line x1="${cx + filetW}" y1="${y - filetOffset}" x2="${cx + filetW + filetLength}" y2="${y - filetOffset}" stroke="${inkFill}" stroke-width="1"/>
-  <text x="${cx}" y="${y}" text-anchor="middle" font-family="DM Mono, monospace" font-size="${fontSize}" letter-spacing="${letterSpacing}" fill="${inkFill}" font-weight="500">${escapeXml(levelLabel)}</text>
-  ${subtitle ? `<text x="${cx}" y="${s - 50}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" fill="${inkFill}" fill-opacity="${subtleFillOpacity}">${escapeXml(subtitle.toUpperCase())}</text>` : ''}
-  ${author ? `<text x="${cx}" y="${s - 28}" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="12" fill="${inkFill}" fill-opacity="${subtleFillOpacity}">${escapeXml(author)}</text>` : ''}
+  <rect width="${s}" height="${s}" fill="#FDFAF5"/>
+  ${logoHref ? `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoHref}" preserveAspectRatio="xMidYMid meet"/>` : ''}
+  <line x1="${cx - filetW - filetLength}" y1="${y - filetOffset}" x2="${cx - filetW}" y2="${y - filetOffset}" stroke="#0B0E1A" stroke-width="1"/>
+  <line x1="${cx + filetW}" y1="${y - filetOffset}" x2="${cx + filetW + filetLength}" y2="${y - filetOffset}" stroke="#0B0E1A" stroke-width="1"/>
+  <text x="${cx}" y="${y}" text-anchor="middle" font-family="DM Mono, monospace" font-size="${fontSize}" letter-spacing="${letterSpacing}" fill="#0B0E1A" font-weight="500">${escapeXml(levelLabel)}</text>
+  ${subtitle ? `<text x="${cx}" y="${s - 50}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" fill="#0B0E1A" fill-opacity="0.55">${escapeXml(subtitle.toUpperCase())}</text>` : ''}
+  ${author ? `<text x="${cx}" y="${s - 28}" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="12" fill="#0B0E1A" fill-opacity="0.55">${escapeXml(author)}</text>` : ''}
 </svg>`;
 }
 
@@ -888,8 +923,7 @@ async function downloadSVG() {
 }
 
 async function downloadPNG() {
-  const background = pngBackground || 'cream';
-  const svg = await buildSVG({ background });
+  const svg = await buildSVG();
   const blob = new Blob([svg], { type: 'image/svg+xml' });
   const url = URL.createObjectURL(blob);
   const img = new Image();
@@ -897,24 +931,16 @@ async function downloadPNG() {
     const canvas = document.createElement('canvas');
     canvas.width = 960; canvas.height = 960;
     const ctx = canvas.getContext('2d');
-
-    if (background === 'cream') {
-      ctx.fillStyle = '#FDFAF5';
-      ctx.fillRect(0, 0, 960, 960);
-    } else if (background === 'dark') {
-      ctx.fillStyle = '#0B0E1A';
-      ctx.fillRect(0, 0, 960, 960);
-    }
-
+    ctx.fillStyle = '#FDFAF5';
+    ctx.fillRect(0, 0, 960, 960);
     ctx.drawImage(img, 0, 0, 960, 960);
     URL.revokeObjectURL(url);
     canvas.toBlob(b => {
       const purl = URL.createObjectURL(b);
       const level = document.getElementById('gen-level').value || 'assisted';
-      const suffix = background === 'transparent' ? 'transparent' : background;
       const a = document.createElement('a');
       a.href = purl;
-      a.download = `iam-badge-${level}-${suffix}.png`;
+      a.download = `iam-badge-${level}.png`;
       a.click();
       URL.revokeObjectURL(purl);
     }, 'image/png');
