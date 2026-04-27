@@ -46,6 +46,19 @@
   display: block;
   margin-top: 0.35rem;
   color: #C8973A;
+  font-family: "DM Mono", monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.gallery-card-caption p {
+  margin: 0.4rem 0 0;
+}
+
+.gallery-empty {
+  color: rgba(244,239,228,.65);
+  grid-column: 1 / -1;
 }
 
 .gallery-error {
@@ -68,10 +81,6 @@
   display: block;
   margin-top: .35rem;
   word-break: break-word;
-  color: rgba(244,239,228,.65);
-}
-
-.gallery-empty {
   color: rgba(244,239,228,.65);
 }
 
