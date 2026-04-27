@@ -347,7 +347,7 @@ body {
 .page-foot a { color: var(--gold); text-decoration: none; }
 .page-foot a:hover { text-decoration: underline; }
 
-/* QR IA'm — version robuste image */
+/* QR IA'm — robuste + exports */
 .qr-section {
   width: 100%;
   max-width: 420px;
@@ -379,6 +379,13 @@ body {
   height: 124px;
   display: block;
 }
+.qr-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0;
+}
 .qr-link {
   display: block;
   color: rgba(244,239,228,0.65);
@@ -386,13 +393,8 @@ body {
   line-height: 1.5;
   word-break: break-word;
 }
-.qr-link a {
-  color: var(--gold);
-  text-decoration: none;
-}
-.qr-link a:hover {
-  text-decoration: underline;
-}
+.qr-link a { color: var(--gold); text-decoration: none; }
+.qr-link a:hover { text-decoration: underline; }
 .qr-note {
   margin-top: 0.7rem;
   color: rgba(244,239,228,0.5);
@@ -528,14 +530,20 @@ body {
       <div class="download-btns">
         <button class="btn-dl" onclick="downloadSVG()" data-i18n="dl-svg">↓ SVG</button>
         <button class="btn-dl" onclick="downloadPNG()" data-i18n="dl-png">↓ PNG</button>
+        <button class="btn-dl" onclick="downloadPNGWithQR()">↓ PNG + QR</button>
       </div>
 
       <div class="qr-section">
         <h3>QR code de déclaration</h3>
         <div class="qr-box">
           <img id="qrImage" alt="QR code IA'm" src="" loading="lazy">
-        <button class="btn-dl" onclick="downloadQR()">↓ QR</button>
         </div>
+
+        <div class="qr-actions">
+          <button class="btn-dl" onclick="downloadQR()">↓ QR seul</button>
+          <button class="btn-dl" onclick="downloadPNGWithQR()">↓ Badge + QR</button>
+        </div>
+
         <span class="qr-link">
           <a id="qrLink" href="badge.html" target="_blank" rel="noopener">Ouvrir la page de déclaration</a>
         </span>
@@ -732,26 +740,44 @@ function getDeclarationURL() {
   const name = document.getElementById('gen-name')?.value.trim() || '';
   const title = document.getElementById('gen-title')?.value.trim() || '';
   const params = new URLSearchParams();
-
   params.set('level', level);
   if (title) params.set('title', title);
   if (name) params.set('author', name);
   params.set('date', new Date().toISOString().slice(0, 10));
-
   return `https://iam-inside.eu/badge.html?${params.toString()}`;
+}
+
+function getQRImageURL(size = 240) {
+  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&margin=12&data=${encodeURIComponent(getDeclarationURL())}`;
 }
 
 function updateQR() {
   const img = document.getElementById('qrImage');
   const link = document.getElementById('qrLink');
   if (!img || !link) return;
-
   const declarationURL = getDeclarationURL();
   link.href = declarationURL;
-
-  const qrAPI = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=' + encodeURIComponent(declarationURL);
-  img.src = qrAPI;
+  img.src = getQRImageURL(240);
   img.alt = "QR code IA'm — " + declarationURL;
+}
+
+function downloadQR() {
+  const a = document.createElement('a');
+  a.href = getQRImageURL(600);
+  a.download = 'iam-qr-code.png';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function loadImageSafe(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
 }
 
 
@@ -786,13 +812,9 @@ function setEmbedMode(mode) {
 
 function updateEmbed() {
   const level = document.getElementById('gen-level').value || 'assisted';
-  const name = document.getElementById('gen-name').value.trim();
-  const title = document.getElementById('gen-title').value.trim();
-
   const declarationURL = getDeclarationURL();
   const base = 'https://iam-inside.eu';
   const box = document.getElementById('embed-code');
-
   if (!box) return;
 
   if (embedMode === 'img') {
@@ -803,7 +825,6 @@ function updateEmbed() {
     box.value = `<iframe src="${declarationURL}"
   width="320" height="420" style="border:0" title="Déclaration IA'm"></iframe>`;
   }
-
   updateQR();
 }
 
@@ -923,6 +944,92 @@ async function downloadPNG() {
   img.src = url;
 }
 
+
+async function downloadPNGWithQR() {
+  const svg = await buildSVG();
+  const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const svgUrl = URL.createObjectURL(blob);
+  const badgeImg = new Image();
+
+  badgeImg.onload = async () => {
+    try {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1200;
+      canvas.height = 960;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#FDFAF5';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.drawImage(badgeImg, 0, 0, 960, 960);
+      URL.revokeObjectURL(svgUrl);
+
+      ctx.fillStyle = '#0B0E1A';
+      ctx.fillRect(960, 0, 240, 960);
+
+      ctx.strokeStyle = '#C8973A';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(990, 80, 180, 800);
+
+      ctx.fillStyle = '#C8973A';
+      ctx.font = '16px DM Mono, monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText("QR IA'm", 1080, 135);
+
+      const qrImg = await loadImageSafe(getQRImageURL(360));
+      ctx.fillStyle = '#FDFAF5';
+      ctx.fillRect(1010, 170, 140, 140);
+      ctx.drawImage(qrImg, 1020, 180, 120, 120);
+
+      ctx.fillStyle = 'rgba(244,239,228,0.78)';
+      ctx.font = '13px DM Mono, monospace';
+      ctx.fillText('DÉCLARATION', 1080, 350);
+
+      ctx.fillStyle = 'rgba(244,239,228,0.55)';
+      ctx.font = '11px DM Sans, sans-serif';
+      wrapCanvasText(ctx, 'Scannez pour lire le niveau, le titre et l’auteur déclarés.', 1080, 385, 160, 18);
+
+      ctx.fillStyle = '#C8973A';
+      ctx.font = '11px DM Mono, monospace';
+      wrapCanvasText(ctx, 'iam-inside.eu', 1080, 760, 160, 18);
+
+      canvas.toBlob(b => {
+        const purl = URL.createObjectURL(b);
+        const level = document.getElementById('gen-level').value || 'assisted';
+        const a = document.createElement('a');
+        a.href = purl;
+        a.download = `iam-badge-${level}-qr.png`;
+        a.click();
+        URL.revokeObjectURL(purl);
+      }, 'image/png');
+    } catch (error) {
+      URL.revokeObjectURL(svgUrl);
+      alert("Le QR n'a pas pu être intégré au PNG. Téléchargez le QR séparément avec le bouton ↓ QR seul.");
+      console.error(error);
+    }
+  };
+
+  badgeImg.src = svgUrl;
+}
+
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(' ');
+  let line = '';
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + ' ';
+    if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+      ctx.fillText(line.trim(), x, y);
+      line = words[n] + ' ';
+      y += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line.trim(), x, y);
+}
+
+
+
 /* ---------- Bootstrap ---------- */
 (function init() {
   // Paramètres d'URL (utile pour le mode iframe)
@@ -948,19 +1055,6 @@ async function downloadPNG() {
   applyI18n();
   updateBadge();
 })();
-</script>
-<script>
-function downloadQR() {
-  const img = document.getElementById('qrImage');
-  if (!img || !img.src) return;
-
-  const link = document.createElement('a');
-  link.href = img.src;
-  link.download = 'iam-qr-code.png';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
 </script>
 </body>
 </html>

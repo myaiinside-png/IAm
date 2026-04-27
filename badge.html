@@ -4,24 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>IA'm — Déclaration de co-création</title>
-  <meta name="description" content="Page de lecture d’un badge IA’m : niveau de co-création, titre, auteur et déclaration de transparence."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/styles-with-gallery.css"/>
-  <style>
-    .badge-proof { min-height: 80vh; display:grid; place-items:center; padding:8rem 2rem 5rem; }
-    .badge-proof-card { width:min(860px,100%); border:1px solid rgba(200,151,58,.28); background:rgba(244,239,228,.035); padding:clamp(2rem,6vw,4rem); text-align:center; }
-    .badge-proof-title { font-family:"Cormorant Garamond",serif; font-size:clamp(2.4rem,7vw,5.2rem); font-weight:300; line-height:1; margin:0 0 1.5rem; }
-    .badge-proof-title em { color:var(--gold); }
-    .badge-proof-meta { display:grid; gap:1rem; margin:2.5rem 0; text-align:left; }
-    .badge-proof-row { border-top:1px solid rgba(200,151,58,.18); padding-top:1rem; display:grid; grid-template-columns:10rem 1fr; gap:1rem; }
-    .badge-proof-label { font-family:"DM Mono",monospace; color:var(--gold); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; }
-    .badge-proof-value { color:rgba(244,239,228,.88); font-size:1.05rem; }
-    .badge-proof-note { margin-top:2rem; color:rgba(244,239,228,.68); line-height:1.8; }
-    .badge-level-pill { display:inline-flex; border:1px solid var(--gold); color:var(--gold); font-family:"DM Mono",monospace; letter-spacing:.15em; text-transform:uppercase; font-size:.7rem; padding:.7rem 1rem; margin-bottom:1.5rem; }
-    @media (max-width:640px) { .badge-proof-row { grid-template-columns:1fr; } }
-  </style>
 </head>
 <body>
 <nav>
@@ -37,46 +20,42 @@
     <a href="faq.html">FAQ</a>
   </div>
 </nav>
-<main class="badge-proof">
-  <section class="badge-proof-card">
-    <div class="badge-level-pill" id="level-pill">IA’m</div>
-    <h1 class="badge-proof-title">Déclaration de <em>co-création</em></h1>
-    <div class="badge-proof-meta">
-      <div class="badge-proof-row"><div class="badge-proof-label">Niveau</div><div class="badge-proof-value" id="level-value">Non précisé</div></div>
-      <div class="badge-proof-row"><div class="badge-proof-label">Titre</div><div class="badge-proof-value" id="title-value">Création non renseignée</div></div>
-      <div class="badge-proof-row"><div class="badge-proof-label">Auteur·e</div><div class="badge-proof-value" id="author-value">Non renseigné</div></div>
-      <div class="badge-proof-row"><div class="badge-proof-label">Date</div><div class="badge-proof-value" id="date-value">Non renseignée</div></div>
+
+<main style="min-height:80vh;display:grid;place-items:center;padding:8rem 2rem 5rem;">
+  <section style="width:min(860px,100%);border:1px solid rgba(200,151,58,.28);background:rgba(244,239,228,.035);padding:clamp(2rem,6vw,4rem);text-align:center;">
+    <div style="display:inline-flex;border:1px solid var(--gold);color:var(--gold);font-family:'DM Mono',monospace;letter-spacing:.15em;text-transform:uppercase;font-size:.7rem;padding:.7rem 1rem;margin-bottom:1.5rem;" id="level-pill">IA’m</div>
+    <h1 class="label-heading">Déclaration de <em>co-création</em></h1>
+
+    <div class="label-body" style="text-align:left;margin-top:2rem;">
+      <p><strong>Niveau :</strong> <span id="level-value">Non précisé</span></p>
+      <p><strong>Titre :</strong> <span id="title-value">Création non renseignée</span></p>
+      <p><strong>Auteur·e :</strong> <span id="author-value">Non renseigné</span></p>
+      <p><strong>Date :</strong> <span id="date-value">Non renseignée</span></p>
+      <hr style="border:none;border-top:1px solid var(--rule);margin:2rem 0;">
+      <p id="level-note">Cette page accompagne un badge IA’m. Elle rend visible une déclaration volontaire de transparence.</p>
+      <p>IA’m est un label déclaratif : il nomme la place de l’IA dans un processus créatif, sans juger la qualité de l’œuvre.</p>
     </div>
-    <p class="badge-proof-note" id="level-note">Cette page accompagne un badge IA’m. Elle ne certifie pas techniquement une œuvre : elle rend visible une déclaration volontaire de transparence.</p>
-    <p class="badge-proof-note">IA’m est un label déclaratif : il nomme la place de l’IA dans un processus créatif, sans juger la qualité de l’œuvre.</p>
   </section>
 </main>
-<footer>
-  <div class="footer-logo"><img src="assets/img/logo-iam.svg" alt="IA'm" style="height:80px;opacity:0.85;"></div>
-  <div class="footer-text">Label éthique de co-création avec l'IA<br/>Marque déposée n° 5212301 · INPI · Classe 41</div>
-  <div class="footer-mark">© 2025 L LB</div>
-</footer>
+
 <script>
 (function () {
   const params = new URLSearchParams(window.location.search);
   const rawLevel = (params.get("level") || "").toLowerCase();
-  const title = params.get("title") || params.get("titre") || "";
-  const author = params.get("author") || params.get("auteur") || "";
-  const date = params.get("date") || "";
   const levels = {
-    assisted:{fr:"Assisté",note:"L’IA intervient comme assistance : correction, reformulation, recherche ou suggestion. L’humain tranche la forme finale."},
-    assiste:{fr:"Assisté",note:"L’IA intervient comme assistance : correction, reformulation, recherche ou suggestion. L’humain tranche la forme finale."},
-    initiated:{fr:"Initié",note:"La création résulte d’un dialogue humain–IA. L’humain valide, recadre et assume les choix déterminants."},
-    initie:{fr:"Initié",note:"La création résulte d’un dialogue humain–IA. L’humain valide, recadre et assume les choix déterminants."},
-    generated:{fr:"Généré",note:"L’IA porte majoritairement la forme finale. L’humain formule l’intention, le cadre ou le prompt."},
-    genere:{fr:"Généré",note:"L’IA porte majoritairement la forme finale. L’humain formule l’intention, le cadre ou le prompt."}
+    assisted:{fr:"Assisté",note:"L’IA intervient comme assistance. L’humain tranche la forme finale."},
+    assiste:{fr:"Assisté",note:"L’IA intervient comme assistance. L’humain tranche la forme finale."},
+    initiated:{fr:"Initié",note:"La création résulte d’un dialogue humain–IA. L’humain valide et recadre."},
+    initie:{fr:"Initié",note:"La création résulte d’un dialogue humain–IA. L’humain valide et recadre."},
+    generated:{fr:"Généré",note:"L’IA porte majoritairement la forme finale. L’humain formule l’intention."},
+    genere:{fr:"Généré",note:"L’IA porte majoritairement la forme finale. L’humain formule l’intention."}
   };
   const level = levels[rawLevel] || null;
   document.getElementById("level-pill").textContent = level ? "IA’m · " + level.fr : "IA’m";
   document.getElementById("level-value").textContent = level ? level.fr : "Non précisé";
-  document.getElementById("title-value").textContent = title || "Création non renseignée";
-  document.getElementById("author-value").textContent = author || "Non renseigné";
-  document.getElementById("date-value").textContent = date || "Non renseignée";
+  document.getElementById("title-value").textContent = params.get("title") || params.get("titre") || "Création non renseignée";
+  document.getElementById("author-value").textContent = params.get("author") || params.get("auteur") || "Non renseigné";
+  document.getElementById("date-value").textContent = params.get("date") || "Non renseignée";
   if (level) document.getElementById("level-note").textContent = level.note;
 })();
 </script>
