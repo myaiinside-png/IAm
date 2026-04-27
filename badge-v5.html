@@ -534,6 +534,7 @@ body {
         <h3>QR code de déclaration</h3>
         <div class="qr-box">
           <img id="qrImage" alt="QR code IA'm" src="" loading="lazy">
+        <button class="btn-dl" onclick="downloadQR()">↓ QR</button>
         </div>
         <span class="qr-link">
           <a id="qrLink" href="badge.html" target="_blank" rel="noopener">Ouvrir la page de déclaration</a>
@@ -947,6 +948,19 @@ async function downloadPNG() {
   applyI18n();
   updateBadge();
 })();
+</script>
+<script>
+function downloadQR() {
+  const img = document.getElementById('qrImage');
+  if (!img || !img.src) return;
+
+  const link = document.createElement('a');
+  link.href = img.src;
+  link.download = 'iam-qr-code.png';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 </script>
 </body>
 </html>
