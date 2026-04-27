@@ -1,83 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IA’m · Studio galerie</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IA'm — Studio Galerie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
-    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0B0E1A;color:#F4EFE4;margin:0;padding:2rem;}
-    .wrap{max-width:1100px;margin:auto;}
-    h1{font-size:2rem;font-weight:500;margin-bottom:.5rem}.muted{color:rgba(244,239,228,.65);line-height:1.6}.drop{border:1px dashed #C8973A;padding:2rem;text-align:center;margin:2rem 0;background:rgba(200,151,58,.06);border-radius:18px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}.card{border:1px solid rgba(200,151,58,.25);padding:1rem;background:rgba(255,255,255,.035);border-radius:14px}.card img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;margin-bottom:.8rem}input,select,textarea{width:100%;box-sizing:border-box;margin:.35rem 0 .75rem;padding:.7rem;background:#111629;color:#F4EFE4;border:1px solid rgba(200,151,58,.3);border-radius:8px}button{background:#C8973A;color:#0B0E1A;border:0;padding:.8rem 1rem;border-radius:999px;cursor:pointer;font-weight:700}.secondary{background:transparent;color:#C8973A;border:1px solid #C8973A}.actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0}pre{white-space:pre-wrap;background:#050713;color:#F4EFE4;padding:1rem;border-radius:14px;border:1px solid rgba(200,151,58,.2)}label{font-size:.75rem;color:#C8973A;text-transform:uppercase;letter-spacing:.08em}.small{font-size:.85rem;color:rgba(244,239,228,.6)}
+    :root{--ink:#0B0E1A;--cream:#F4EFE4;--gold:#C8973A;--mid:rgba(244,239,228,.62);--rule:rgba(200,151,58,.25);--soft:rgba(244,239,228,.045)}
+    *{box-sizing:border-box}body{margin:0;background:var(--ink);color:var(--cream);font-family:'DM Sans',sans-serif;line-height:1.6;padding:2rem}a{color:var(--gold)}.wrap{max-width:1180px;margin:0 auto}header{border-bottom:1px solid var(--rule);padding-bottom:2rem;margin-bottom:2rem;display:flex;justify-content:space-between;gap:2rem;align-items:flex-end;flex-wrap:wrap}h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,7vw,5.5rem);font-weight:400;line-height:.95;margin:0 0 1rem}h1 span{color:var(--gold);font-style:italic}.kicker{font-family:'DM Mono',monospace;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;font-size:.68rem;margin-bottom:1rem}.lead{color:var(--mid);max-width:720px;margin:0}.drop{border:1.5px dashed rgba(200,151,58,.55);background:rgba(200,151,58,.045);padding:3rem 2rem;text-align:center;margin:2rem 0;transition:.2s;display:block;cursor:pointer}.drop.dragover{background:rgba(200,151,58,.12);transform:translateY(-2px)}.drop strong{display:block;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;margin-bottom:.5rem}.drop small{color:var(--mid);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.62rem}input[type=file]{display:none}.btn{border:1px solid var(--gold);background:transparent;color:var(--gold);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.68rem;padding:.85rem 1.1rem;cursor:pointer;display:inline-flex;gap:.5rem;align-items:center;justify-content:center;text-decoration:none}.btn:hover{background:var(--gold);color:var(--ink)}.btn-row{display:flex;gap:.8rem;flex-wrap:wrap;margin:1rem 0 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:2rem 0}.card{border:1px solid var(--rule);background:var(--soft);overflow:hidden}.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-bottom:1px solid var(--rule)}.card-body{padding:1rem}label.textlabel{display:block;font-family:'DM Mono',monospace;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-size:.6rem;margin:.7rem 0 .35rem}input,select,textarea{width:100%;background:rgba(0,0,0,.2);border:1px solid rgba(200,151,58,.25);color:var(--cream);padding:.75rem;font-family:'DM Sans',sans-serif}select option{background:#0B0E1A}.filename{color:var(--mid);font-family:'DM Mono',monospace;font-size:.62rem;word-break:break-word;margin-bottom:.5rem}.remove{margin-top:.8rem;border-color:rgba(244,239,228,.25);color:var(--mid);width:100%}.output{margin-top:2rem;border-top:1px solid var(--rule);padding-top:2rem}textarea{min-height:320px;font-family:'DM Mono',monospace;font-size:.75rem;line-height:1.5;color:#F4EFE4}.note{border-left:2px solid var(--gold);padding:1rem 1.2rem;background:rgba(200,151,58,.05);color:var(--mid);margin:1.5rem 0}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:2rem 0}.step{border:1px solid var(--rule);padding:1rem;background:var(--soft)}.step b{color:var(--gold);font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}.success{color:var(--gold);font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.1em;margin-left:.5rem;display:none}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Studio galerie IA’m</h1>
-    <p class="muted">Glissez vos images ici, remplissez les titres, réordonnez si besoin, puis exportez le fichier <code>gallery-data.js</code>. Ensuite, uploadez les images dans <code>assets/img/galerie/</code> et remplacez <code>gallery-data.js</code> dans le repo.</p>
-
-    <div class="drop" id="drop">Déposez vos images ici<br><span class="small">JPG, PNG, WebP — cet outil ne téléverse rien automatiquement sur GitHub.</span></div>
-
-    <div class="actions">
-      <button onclick="exportData()">Exporter gallery-data.js</button>
-      <button class="secondary" onclick="copyData()">Copier le code</button>
-      <button class="secondary" onclick="clearGallery()">Vider</button>
-    </div>
-
-    <div class="grid" id="grid"></div>
-    <h2>Code généré</h2>
-    <pre id="output">window.IAM_GALLERY_ITEMS = [];</pre>
+    <header><div><div class="kicker">IA’m — Studio Galerie</div><h1>Préparer les <span>réalisations</span></h1><p class="lead">Glissez vos images ici, vérifiez les titres et niveaux, puis copiez le fichier généré dans <code>gallery-data.js</code>.</p></div><a class="btn" href="index.html">← Retour au site</a></header>
+    <div class="steps"><div class="step"><b>01</b><p>Glissez vos images dans cette page.</p></div><div class="step"><b>02</b><p>Uploadez les mêmes images dans <code>assets/img/galerie/</code>.</p></div><div class="step"><b>03</b><p>Copiez le code généré dans <code>gallery-data.js</code>.</p></div></div>
+    <label class="drop" id="dropZone" for="fileInput"><strong>Glisser-déposer les images ici</strong><small>ou cliquez pour sélectionner des fichiers</small></label><input id="fileInput" type="file" accept="image/*" multiple/>
+    <div class="btn-row"><button class="btn" type="button" id="generateBtn">Générer gallery-data.js</button><button class="btn" type="button" id="copyBtn">Copier le code</button><button class="btn" type="button" id="downloadBtn">Télécharger gallery-data.js</button><span class="success" id="successMsg">Copié ✓</span></div>
+    <div class="note">Ce studio ne modifie pas GitHub automatiquement. Il prépare le fichier. Les images doivent aussi être déposées dans <code>assets/img/galerie/</code>.</div>
+    <div class="grid" id="galleryEditor"></div>
+    <section class="output"><div class="kicker">Fichier généré</div><textarea id="output" spellcheck="false"></textarea></section>
   </div>
 <script>
-let items = [];
-const drop = document.getElementById('drop');
-const grid = document.getElementById('grid');
-const output = document.getElementById('output');
-
-drop.addEventListener('dragover', e => { e.preventDefault(); drop.style.background='rgba(200,151,58,.13)'; });
-drop.addEventListener('dragleave', () => drop.style.background='rgba(200,151,58,.06)');
-drop.addEventListener('drop', e => {
-  e.preventDefault(); drop.style.background='rgba(200,151,58,.06)';
-  [...e.dataTransfer.files].filter(f => f.type.startsWith('image/')).forEach(file => {
-    const slug = file.name.toLowerCase().replace(/[^a-z0-9.]+/g,'-');
-    items.push({
-      preview: URL.createObjectURL(file),
-      image: 'assets/img/galerie/' + slug,
-      title: file.name.replace(/\.[^.]+$/, '').replaceAll('-', ' '),
-      level: 'Assisté',
-      description: '',
-      link: ''
-    });
-  });
-  render();
-});
-
-function render(){
-  grid.innerHTML = items.map((item, i) => `
-    <div class="card">
-      <img src="${item.preview || item.image}" alt="">
-      <label>Chemin image</label><input value="${item.image}" oninput="items[${i}].image=this.value;update()">
-      <label>Titre</label><input value="${item.title}" oninput="items[${i}].title=this.value;update()">
-      <label>Niveau</label><select onchange="items[${i}].level=this.value;update()">
-        ${['Assisté','Initié','Généré'].map(l => `<option ${item.level===l?'selected':''}>${l}</option>`).join('')}
-      </select>
-      <label>Description</label><textarea rows="3" oninput="items[${i}].description=this.value;update()">${item.description}</textarea>
-      <label>Lien optionnel</label><input value="${item.link}" oninput="items[${i}].link=this.value;update()">
-      <div class="actions">
-        <button class="secondary" onclick="move(${i},-1)">↑</button>
-        <button class="secondary" onclick="move(${i},1)">↓</button>
-        <button class="secondary" onclick="removeItem(${i})">Supprimer</button>
-      </div>
-    </div>`).join('');
-  update();
-}
-function publicItems(){ return items.map(({preview, ...rest}) => rest); }
-function update(){ output.textContent = 'window.IAM_GALLERY_ITEMS = ' + JSON.stringify(publicItems(), null, 2) + ';'; }
-function move(i, dir){ const j=i+dir; if(j<0||j>=items.length)return; [items[i],items[j]]=[items[j],items[i]]; render(); }
-function removeItem(i){ items.splice(i,1); render(); }
-function clearGallery(){ if(confirm('Vider la galerie ?')){items=[];render();} }
-function exportData(){ const blob=new Blob([output.textContent],{type:'text/javascript'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='gallery-data.js'; a.click(); }
-function copyData(){ navigator.clipboard.writeText(output.textContent); alert('Code copié.'); }
-render();
+const files=[];const editor=document.getElementById('galleryEditor'),output=document.getElementById('output'),fileInput=document.getElementById('fileInput'),dropZone=document.getElementById('dropZone'),successMsg=document.getElementById('successMsg');
+function safeTitle(n){return n.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ').replace(/\s+/g,' ').trim()||'Création IA’m'}
+function escapeAttr(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function addFiles(list){Array.from(list).filter(f=>f.type.startsWith('image/')).forEach(file=>{const r=new FileReader();r.onload=()=>{files.push({file,preview:r.result,title:safeTitle(file.name),level:'',note:''});renderEditor();generateCode()};r.readAsDataURL(file)})}
+function renderEditor(){editor.innerHTML=files.map((it,i)=>`<article class="card"><img src="${it.preview}" alt=""><div class="card-body"><div class="filename">${it.file.name}</div><label class="textlabel">Titre</label><input value="${escapeAttr(it.title)}" data-index="${i}" data-field="title"><label class="textlabel">Niveau IA’m</label><select data-index="${i}" data-field="level"><option value="" ${it.level===''?'selected':''}>— Non précisé —</option><option value="Assisté" ${it.level==='Assisté'?'selected':''}>Assisté</option><option value="Initié" ${it.level==='Initié'?'selected':''}>Initié</option><option value="Généré" ${it.level==='Généré'?'selected':''}>Généré</option></select><label class="textlabel">Note courte</label><input value="${escapeAttr(it.note)}" data-index="${i}" data-field="note" placeholder="ex. affiche, texte, visuel…"><button class="btn remove" type="button" data-remove="${i}">Retirer</button></div></article>`).join('');editor.querySelectorAll('input,select').forEach(el=>{el.addEventListener('input',updateField);el.addEventListener('change',updateField)});editor.querySelectorAll('[data-remove]').forEach(btn=>btn.addEventListener('click',()=>{files.splice(Number(btn.dataset.remove),1);renderEditor();generateCode()}))}
+function updateField(e){const i=Number(e.target.dataset.index),f=e.target.dataset.field;files[i][f]=e.target.value;generateCode()}
+function generateCode(){const items=files.map(it=>{const path='assets/img/galerie/'+it.file.name;const parts=[`image: encodeURI(${JSON.stringify(path)})`,`title: ${JSON.stringify(it.title||'Création IA’m')}`];if(it.level)parts.push(`level: ${JSON.stringify(it.level)}`);if(it.note)parts.push(`note: ${JSON.stringify(it.note)}`);return `  { ${parts.join(', ')} }`});output.value=`window.galleryData = [\n${items.join(',\n')}\n];\n`}
+function copyCode(){output.select();navigator.clipboard.writeText(output.value).then(()=>{successMsg.style.display='inline';setTimeout(()=>successMsg.style.display='none',1500)})}
+function downloadCode(){const blob=new Blob([output.value],{type:'text/javascript;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='gallery-data.js';a.click();URL.revokeObjectURL(url)}
+fileInput.addEventListener('change',e=>addFiles(e.target.files));dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('dragover')});dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('dragover'));dropZone.addEventListener('drop',e=>{e.preventDefault();dropZone.classList.remove('dragover');addFiles(e.dataTransfer.files)});document.getElementById('generateBtn').addEventListener('click',generateCode);document.getElementById('copyBtn').addEventListener('click',copyCode);document.getElementById('downloadBtn').addEventListener('click',downloadCode);generateCode();
 </script>
 </body>
 </html>
