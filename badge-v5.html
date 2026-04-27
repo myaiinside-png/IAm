@@ -347,7 +347,7 @@ body {
 .page-foot a { color: var(--gold); text-decoration: none; }
 .page-foot a:hover { text-decoration: underline; }
 
-/* QR IA'm */
+/* QR IA'm — version robuste image */
 .qr-section {
   width: 100%;
   max-width: 420px;
@@ -366,17 +366,17 @@ body {
   margin-bottom: 0.8rem;
 }
 .qr-box {
-  width: 132px;
-  height: 132px;
+  width: 140px;
+  height: 140px;
   margin: 0 auto 0.8rem;
   display: grid;
   place-items: center;
   background: #FDFAF5;
-  padding: 6px;
+  padding: 8px;
 }
-#qrCanvas {
-  width: 120px;
-  height: 120px;
+#qrImage {
+  width: 124px;
+  height: 124px;
   display: block;
 }
 .qr-link {
@@ -533,7 +533,7 @@ body {
       <div class="qr-section">
         <h3>QR code de déclaration</h3>
         <div class="qr-box">
-          <canvas id="qrCanvas" width="120" height="120" aria-label="QR code IA'm"></canvas>
+          <img id="qrImage" alt="QR code IA'm" src="" loading="lazy">
         </div>
         <span class="qr-link">
           <a id="qrLink" href="badge.html" target="_blank" rel="noopener">Ouvrir la page de déclaration</a>
@@ -564,7 +564,6 @@ body {
   </span>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
 /* =========================================================
    IA'm Badge Generator v5
@@ -726,7 +725,7 @@ function selectLevel(level) {
 }
 
 
-/* ---------- QR declaration URL ---------- */
+/* ---------- QR declaration URL — robuste ---------- */
 function getDeclarationURL() {
   const level = document.getElementById('gen-level')?.value || 'assisted';
   const name = document.getElementById('gen-name')?.value.trim() || '';
@@ -741,38 +740,17 @@ function getDeclarationURL() {
   return `https://iam-inside.eu/badge.html?${params.toString()}`;
 }
 
-function drawFallbackQR(canvas) {
-  const ctx = canvas.getContext('2d');
-  const size = canvas.width;
-  ctx.fillStyle = '#FDFAF5';
-  ctx.fillRect(0, 0, size, size);
-  ctx.fillStyle = '#0B0E1A';
-  ctx.font = '10px monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('QR IA\\'m', size / 2, size / 2 - 4);
-  ctx.fillText('à recharger', size / 2, size / 2 + 12);
-}
-
 function updateQR() {
-  const canvas = document.getElementById('qrCanvas');
+  const img = document.getElementById('qrImage');
   const link = document.getElementById('qrLink');
-  if (!canvas || !link) return;
+  if (!img || !link) return;
 
-  const url = getDeclarationURL();
-  link.href = url;
+  const declarationURL = getDeclarationURL();
+  link.href = declarationURL;
 
-  if (window.QRCode && typeof window.QRCode.toCanvas === 'function') {
-    window.QRCode.toCanvas(canvas, url, {
-      width: 120,
-      margin: 1,
-      color: {
-        dark: '#0B0E1A',
-        light: '#FDFAF5'
-      }
-    }).catch(() => drawFallbackQR(canvas));
-  } else {
-    drawFallbackQR(canvas);
-  }
+  const qrAPI = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=12&data=' + encodeURIComponent(declarationURL);
+  img.src = qrAPI;
+  img.alt = "QR code IA'm — " + declarationURL;
 }
 
 
@@ -809,16 +787,12 @@ function updateEmbed() {
   const level = document.getElementById('gen-level').value || 'assisted';
   const name = document.getElementById('gen-name').value.trim();
   const title = document.getElementById('gen-title').value.trim();
-  const params = new URLSearchParams();
-  params.set('level', level);
-  params.set('lang', currentLang);
-  if (name) params.set('author', name);
-  if (title) params.set('title', title);
-  params.set('date', new Date().toISOString().slice(0, 10));
 
+  const declarationURL = getDeclarationURL();
   const base = 'https://iam-inside.eu';
-  const declarationURL = `${base}/badge.html?${params.toString()}`;
   const box = document.getElementById('embed-code');
+
+  if (!box) return;
 
   if (embedMode === 'img') {
     box.value = `<a href="${declarationURL}" target="_blank" rel="noopener">
