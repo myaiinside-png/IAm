@@ -1,8 +1,11 @@
 (function () {
-  function getGalleryItems() {
-    return Array.from(document.querySelectorAll(
-      "#gallery img, .gallery-grid img, .gallery-item img, .gallery-card img"
-    ));
+  function getData() {
+    if (Array.isArray(window.galleryData)) return window.galleryData;
+    if (Array.isArray(window.GALLERY_DATA)) return window.GALLERY_DATA;
+    try {
+      if (typeof galleryData !== "undefined" && Array.isArray(galleryData)) return galleryData;
+    } catch (e) {}
+    return [];
   }
 
   function createLightbox() {
@@ -49,12 +52,40 @@
     document.body.classList.remove("iam-lightbox-open");
   }
 
+  function renderGallery() {
+    const container = document.getElementById("gallery") || document.querySelector("[data-iam-gallery]");
+    if (!container) return;
+
+    const data = getData();
+
+    if (!data.length) {
+      container.innerHTML = `<p style="color:rgba(244,239,228,.65);">Aucune image de galerie n’est encore configurée.</p>`;
+      return;
+    }
+
+    container.innerHTML = data.map(function (item) {
+      const src = item.image || item.src || "";
+      const title = item.title || item.alt || "Création IA'm";
+      const level = item.level || "";
+      return `
+        <article class="gallery-card">
+          <img src="${src}" alt="${title}" loading="lazy">
+          <div class="gallery-card-caption">
+            <strong>${title}</strong>
+            ${level ? `<span>${level}</span>` : ""}
+          </div>
+        </article>
+      `;
+    }).join("");
+
+    attachLightbox();
+  }
+
   function attachLightbox() {
-    const images = getGalleryItems();
+    const images = Array.from(document.querySelectorAll("#gallery img, [data-iam-gallery] img, .gallery-grid img, .gallery-card img"));
 
     images.forEach(function (img) {
       if (img.dataset.iamLightboxReady === "true") return;
-
       img.dataset.iamLightboxReady = "true";
       img.style.cursor = "zoom-in";
 
@@ -64,49 +95,14 @@
     });
   }
 
-  function renderGalleryIfNeeded() {
-    const container = document.getElementById("gallery");
-    if (!container) return;
-
-    const hasImages = container.querySelector("img");
-    const data = window.galleryData || window.GALLERY_DATA || [];
-
-    if (!hasImages && Array.isArray(data) && data.length) {
-      container.innerHTML = data.map(function (item) {
-        const src = item.image || item.src || "";
-        const title = item.title || item.alt || "Création IA'm";
-        const level = item.level || "";
-        return `
-          <article class="gallery-card">
-            <img src="${src}" alt="${title}">
-            <div class="gallery-card-caption">
-              <strong>${title}</strong>
-              ${level ? `<span>${level}</span>` : ""}
-            </div>
-          </article>
-        `;
-      }).join("");
-    }
-  }
-
-  function initGallery() {
-    renderGalleryIfNeeded();
-    attachLightbox();
-  }
-
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initGallery);
+    document.addEventListener("DOMContentLoaded", renderGallery);
   } else {
-    initGallery();
+    renderGallery();
   }
 
-  window.addEventListener("load", initGallery);
-
-  const observer = new MutationObserver(function () {
+  window.addEventListener("load", function () {
+    renderGallery();
     attachLightbox();
   });
-
-  if (document.body) {
-    observer.observe(document.body, { childList: true, subtree: true });
-  }
 })();
