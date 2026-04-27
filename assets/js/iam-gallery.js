@@ -39,15 +39,8 @@
     });
 
     lightbox.querySelector(".iam-lightbox-close").addEventListener("click", closeLightbox);
-
-    lightbox.querySelector('[data-action="zoom-in"]').addEventListener("click", function () {
-      setZoom(zoom + 0.25);
-    });
-
-    lightbox.querySelector('[data-action="zoom-out"]').addEventListener("click", function () {
-      setZoom(zoom - 0.25);
-    });
-
+    lightbox.querySelector('[data-action="zoom-in"]').addEventListener("click", function () { setZoom(zoom + 0.25); });
+    lightbox.querySelector('[data-action="zoom-out"]').addEventListener("click", function () { setZoom(zoom - 0.25); });
     lightbox.querySelector('[data-action="reset"]').addEventListener("click", function () {
       zoom = 1; panX = 0; panY = 0; applyTransform();
     });
@@ -57,8 +50,7 @@
 
     stage.addEventListener("wheel", function (event) {
       event.preventDefault();
-      const direction = event.deltaY < 0 ? 0.18 : -0.18;
-      setZoom(zoom + direction);
+      setZoom(zoom + (event.deltaY < 0 ? 0.18 : -0.18));
     }, { passive: false });
 
     img.addEventListener("mousedown", function (event) {
@@ -108,9 +100,7 @@
   function openLightbox(src, alt) {
     const lightbox = createLightbox();
     const img = lightbox.querySelector(".iam-lightbox-img");
-    zoom = 1;
-    panX = 0;
-    panY = 0;
+    zoom = 1; panX = 0; panY = 0;
     img.src = src;
     img.alt = alt || "Image de la galerie IA'm";
     img.style.transform = "translate(0, 0) scale(1)";
@@ -132,7 +122,7 @@
     const data = getData();
 
     if (!data.length) {
-      container.innerHTML = `<p class="gallery-empty">Aucune image de galerie n’est encore configurée.</p>`;
+      container.innerHTML = `<p class="gallery-empty">Aucune image configurée. Utilisez <a href="gallery-studio.html">gallery-studio.html</a> pour préparer la galerie.</p>`;
       return;
     }
 
@@ -140,12 +130,14 @@
       const src = item.image || item.src || "";
       const title = item.title || item.alt || "Création IA'm";
       const level = item.level || "";
+      const note = item.note || "";
       return `
         <article class="gallery-card">
-          <img src="${src}" alt="${title}" loading="lazy" data-original-src="${src}">
+          <img src="${src}" alt="${escapeHtml(title)}" loading="lazy" data-original-src="${src}">
           <div class="gallery-card-caption">
-            <strong>${title}</strong>
-            ${level ? `<span>${level}</span>` : ""}
+            <strong>${escapeHtml(title)}</strong>
+            ${level ? `<span>${escapeHtml(level)}</span>` : ""}
+            ${note ? `<p>${escapeHtml(note)}</p>` : ""}
           </div>
         </article>
       `;
@@ -160,7 +152,6 @@
     images.forEach(function (img) {
       if (img.dataset.iamReady === "true") return;
       img.dataset.iamReady = "true";
-      img.style.cursor = "zoom-in";
 
       img.addEventListener("click", function () {
         openLightbox(img.currentSrc || img.src, img.alt);
@@ -172,10 +163,16 @@
         const rawSrc = img.dataset.originalSrc || img.getAttribute("src");
         const error = document.createElement("div");
         error.className = "gallery-error";
-        error.innerHTML = `<strong>Image introuvable</strong><br><code>${rawSrc}</code>`;
+        error.innerHTML = `<strong>Image introuvable</strong><br><code>${escapeHtml(rawSrc)}</code>`;
         card.appendChild(error);
         img.style.display = "none";
       });
+    });
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (char) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[char];
     });
   }
 
