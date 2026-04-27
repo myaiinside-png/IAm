@@ -1,43 +1,112 @@
 (function () {
-  const root = document.querySelector('[data-iam-gallery]');
-  if (!root) return;
-
-  const items = Array.isArray(window.IAM_GALLERY_ITEMS) ? window.IAM_GALLERY_ITEMS : [];
-
-  if (!items.length) {
-    root.innerHTML = '<p class="iam-gallery-empty">Aucune réalisation pour le moment.</p>';
-    return;
+  function getGalleryItems() {
+    return Array.from(document.querySelectorAll(
+      "#gallery img, .gallery-grid img, .gallery-item img, .gallery-card img"
+    ));
   }
 
-  root.innerHTML = items.map((item) => {
-    const image = escapeHtml(item.image || '');
-    const title = escapeHtml(item.title || 'Sans titre');
-    const level = escapeHtml(item.level || 'IA’m');
-    const description = escapeHtml(item.description || '');
-    const link = escapeHtml(item.link || '');
+  function createLightbox() {
+    let lightbox = document.getElementById("iam-lightbox");
+    if (lightbox) return lightbox;
 
-    const card = `
-      <article class="iam-gallery-card">
-        <div class="iam-gallery-image-wrap">
-          <img src="${image}" alt="${title}" loading="lazy">
-          <span class="iam-gallery-level">IA’m · ${level}</span>
-        </div>
-        <div class="iam-gallery-content">
-          <h3>${title}</h3>
-          ${description ? `<p>${description}</p>` : ''}
-        </div>
-      </article>
+    lightbox = document.createElement("div");
+    lightbox.id = "iam-lightbox";
+    lightbox.innerHTML = `
+      <button class="iam-lightbox-close" type="button" aria-label="Fermer">×</button>
+      <img class="iam-lightbox-img" alt="">
     `;
+    document.body.appendChild(lightbox);
 
-    return link ? `<a class="iam-gallery-link" href="${link}">${card}</a>` : card;
-  }).join('');
+    lightbox.addEventListener("click", function (event) {
+      if (
+        event.target.id === "iam-lightbox" ||
+        event.target.classList.contains("iam-lightbox-close")
+      ) {
+        closeLightbox();
+      }
+    });
 
-  function escapeHtml(value) {
-    return String(value)
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&#039;');
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeLightbox();
+    });
+
+    return lightbox;
+  }
+
+  function openLightbox(src, alt) {
+    const lightbox = createLightbox();
+    const img = lightbox.querySelector(".iam-lightbox-img");
+    img.src = src;
+    img.alt = alt || "Image de la galerie IA'm";
+    lightbox.classList.add("is-open");
+    document.body.classList.add("iam-lightbox-open");
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById("iam-lightbox");
+    if (!lightbox) return;
+    lightbox.classList.remove("is-open");
+    document.body.classList.remove("iam-lightbox-open");
+  }
+
+  function attachLightbox() {
+    const images = getGalleryItems();
+
+    images.forEach(function (img) {
+      if (img.dataset.iamLightboxReady === "true") return;
+
+      img.dataset.iamLightboxReady = "true";
+      img.style.cursor = "zoom-in";
+
+      img.addEventListener("click", function () {
+        openLightbox(img.currentSrc || img.src, img.alt);
+      });
+    });
+  }
+
+  function renderGalleryIfNeeded() {
+    const container = document.getElementById("gallery");
+    if (!container) return;
+
+    const hasImages = container.querySelector("img");
+    const data = window.galleryData || window.GALLERY_DATA || [];
+
+    if (!hasImages && Array.isArray(data) && data.length) {
+      container.innerHTML = data.map(function (item) {
+        const src = item.image || item.src || "";
+        const title = item.title || item.alt || "Création IA'm";
+        const level = item.level || "";
+        return `
+          <article class="gallery-card">
+            <img src="${src}" alt="${title}">
+            <div class="gallery-card-caption">
+              <strong>${title}</strong>
+              ${level ? `<span>${level}</span>` : ""}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+  }
+
+  function initGallery() {
+    renderGalleryIfNeeded();
+    attachLightbox();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initGallery);
+  } else {
+    initGallery();
+  }
+
+  window.addEventListener("load", initGallery);
+
+  const observer = new MutationObserver(function () {
+    attachLightbox();
+  });
+
+  if (document.body) {
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 })();
