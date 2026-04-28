@@ -22,7 +22,23 @@
     })[c]);
   }
 
+  function enableNativeCursorZone() {
+    const zone = document.getElementById("realisations");
+    if (!zone || zone.dataset.cursorReady === "true") return;
+    zone.dataset.cursorReady = "true";
+
+    zone.addEventListener("mouseenter", function () {
+      document.body.classList.add("iam-gallery-native-cursor");
+    });
+
+    zone.addEventListener("mouseleave", function () {
+      document.body.classList.remove("iam-gallery-native-cursor");
+    });
+  }
+
   function renderGallery() {
+    enableNativeCursorZone();
+
     const container = document.getElementById("gallery") || document.querySelector("[data-iam-gallery]");
     if (!container) return;
 
@@ -38,6 +54,7 @@
       const title = item.title || item.alt || "Création IA'm";
       const level = item.level || "";
       const note = item.note || "";
+
       return `
         <article class="gallery-card">
           <button class="gallery-zoom-trigger" type="button" aria-label="Agrandir ${escapeHtml(title)}">
@@ -72,6 +89,7 @@
         <img class="iam-lightbox-img" alt="">
       </div>
     `;
+
     document.body.appendChild(lightbox);
 
     lightbox.addEventListener("click", function (event) {
@@ -150,10 +168,12 @@
     const img = document.querySelector(".iam-lightbox-img");
     if (!img) return;
     img.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
-    img.style.cursor = zoom > 1 ? "grab" : "zoom-in";
+    img.classList.toggle("is-zoomed", zoom > 1);
   }
 
   function openLightbox(src, alt) {
+    document.body.classList.add("iam-gallery-native-cursor");
+
     const lightbox = createLightbox();
     const img = lightbox.querySelector(".iam-lightbox-img");
 
@@ -164,6 +184,7 @@
     img.src = src;
     img.alt = alt || "Image de la galerie IA'm";
     img.style.transform = "translate(0, 0) scale(1)";
+    img.classList.remove("is-zoomed", "is-dragging");
 
     lightbox.classList.add("is-open");
     document.body.classList.add("iam-lightbox-open");
@@ -172,8 +193,14 @@
   function closeLightbox() {
     const lightbox = document.getElementById("iam-lightbox");
     if (!lightbox) return;
+
     lightbox.classList.remove("is-open");
     document.body.classList.remove("iam-lightbox-open");
+
+    const zone = document.getElementById("realisations");
+    if (!zone || !zone.matches(":hover")) {
+      document.body.classList.remove("iam-gallery-native-cursor");
+    }
   }
 
   function attachImageHandlers() {
