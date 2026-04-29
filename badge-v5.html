@@ -844,21 +844,45 @@ let logoBase64Cache = null;
 
 async function loadLogoBase64() {
   if (logoBase64Cache) return logoBase64Cache;
-  try {
-    const response = await fetch('iam-logo-badge.png');
-    const blob = await response.blob();
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        logoBase64Cache = reader.result;
-        resolve(logoBase64Cache);
-      };
-      reader.readAsDataURL(blob);
-    });
-  } catch (e) {
-    console.error('Erreur chargement logo:', e);
-    return null;
+
+  const candidates = [
+    'iam-logo-badge.png',
+    './iam-logo-badge.png',
+    '/iam-logo-badge.png',
+    'assets/img/iam-logo-badge.png',
+    'assets/img/logo-iam.svg'
+  ];
+
+  for (const path of candidates) {
+    try {
+      const response = await fetch(path, { cache: 'no-store' });
+      if (!response.ok) continue;
+      const blob = await response.blob();
+      if (!blob || blob.size === 0) continue;
+
+      const dataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+
+      logoBase64Cache = dataUrl;
+      return logoBase64Cache;
+    } catch (e) {
+      console.warn('Logo non chargé depuis', path, e);
+    }
   }
+
+  return null;
+}
+
+function buildFallbackLogoSVG(cx, y) {
+  return `
+  <g aria-label="IA'm logo fallback">
+    <text x="${cx}" y="${y}" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="118" font-weight="700" fill="#0B0E1A">IA<tspan fill="#C8973A" font-style="italic">'</tspan>m</text>
+    <text x="${cx}" y="${y + 36}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="7" fill="#0B0E1A" fill-opacity="0.55">TRANSPARENCE IA</text>
+  </g>`;
 }
 
 async function buildSVG() {
@@ -874,15 +898,12 @@ async function buildSVG() {
   const logoData = await loadLogoBase64();
   const logoHref = logoData || '';
 
-  // Proportions cohérentes avec l'aperçu écran
   const s = 480;
   const fontSize = 13;
   const letterSpacing = 4;
-  // Logo : ~60% du canvas, centré horizontalement, décalé vers le haut
   const logoSize = Math.round(s * 0.46);
   const logoX = (s - logoSize) / 2;
   const logoY = Math.round(s * 0.12);
-  // Texte niveau : sous le logo, à ~75% de la hauteur
   const y = Math.round(s * 0.75);
   const cx = s / 2;
   const textW = levelLabel.length * (fontSize * 0.65 + letterSpacing);
@@ -890,10 +911,14 @@ async function buildSVG() {
   const filetLength = 25;
   const filetOffset = 5;
 
+  const logoMarkup = logoHref
+    ? `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoHref}" xlink:href="${logoHref}" preserveAspectRatio="xMidYMid meet"/>`
+    : buildFallbackLogoSVG(cx, 210);
+
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
-  <rect width="${s}" height="${s}" fill="#FDFAF5"/>
-  ${logoHref ? `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoHref}" preserveAspectRatio="xMidYMid meet"/>` : ''}
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
+  <!-- SVG volontairement transparent. Le PNG ajoute un fond crème à l'export. -->
+  ${logoMarkup}
   <line x1="${cx - filetW - filetLength}" y1="${y - filetOffset}" x2="${cx - filetW}" y2="${y - filetOffset}" stroke="#0B0E1A" stroke-width="1"/>
   <line x1="${cx + filetW}" y1="${y - filetOffset}" x2="${cx + filetW + filetLength}" y2="${y - filetOffset}" stroke="#0B0E1A" stroke-width="1"/>
   <text x="${cx}" y="${y}" text-anchor="middle" font-family="DM Mono, monospace" font-size="${fontSize}" letter-spacing="${letterSpacing}" fill="#0B0E1A" font-weight="500">${escapeXml(levelLabel)}</text>
