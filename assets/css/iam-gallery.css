@@ -1,80 +1,84 @@
-/* Galerie IA'm — mobile robuste */
-#realisations,
-#gallery {
-  overflow: visible !important;
-}
+/* IA'm — Correctif mobile vignettes galerie */
 
+/* Le site a un curseur custom et certains effets reveal :
+   on force la galerie à rester visible sur mobile. */
 #realisations,
-#realisations *,
+#realisations .section-inner,
 #gallery,
-#gallery * {
-  box-sizing: border-box;
+.gallery-grid {
+  display: block;
+  overflow: visible !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
 }
 
-#realisations .gallery-zoom-trigger,
-#realisations .gallery-zoom-trigger *,
-#realisations .gallery-card img,
-#gallery img {
-  cursor: zoom-in !important;
-}
-
-body.iam-gallery-native-cursor .cursor,
-body.iam-gallery-native-cursor .cursor-dot,
-body.iam-gallery-native-cursor .cursor-ring,
-body.iam-gallery-native-cursor #cursorDot,
-body.iam-gallery-native-cursor #cursorRing {
-  opacity: 0 !important;
-  display: none !important;
-}
-
+/* Grille responsive */
+#gallery.gallery-grid,
 .gallery-grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.4rem;
-  margin-top: 2.5rem;
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  gap: 1.4rem !important;
+  width: 100% !important;
+  margin-top: 2.5rem !important;
 }
 
+/* Cartes toujours visibles */
 .gallery-card {
   display: block !important;
-  min-width: 0;
+  position: relative !important;
+  min-width: 0 !important;
+  min-height: 1px !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
   border: 1px solid rgba(200,151,58,0.22);
   background: rgba(244,239,228,0.035);
   overflow: hidden;
 }
 
+/* Le bouton qui contient l'image ne doit pas s'effondrer */
 .gallery-zoom-trigger {
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  appearance: none;
-  cursor: zoom-in !important;
-}
-
-.gallery-card img,
-.gallery-grid img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
   display: block !important;
+  width: 100% !important;
+  min-height: 220px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: rgba(244,239,228,0.04) !important;
+  appearance: none !important;
   cursor: zoom-in !important;
-  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-.gallery-card:hover img {
-  transform: scale(1.035);
-  opacity: 0.92;
+/* Force absolue : les vignettes doivent être visibles */
+.gallery-card img,
+.gallery-grid img,
+#gallery img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 260px !important;
+  min-height: 220px !important;
+  object-fit: cover !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  filter: none !important;
+  position: relative !important;
+  z-index: 1 !important;
+  cursor: zoom-in !important;
 }
 
+/* Légendes */
 .gallery-card-caption {
+  display: block !important;
+  position: relative !important;
+  z-index: 2 !important;
   padding: 1rem;
   color: rgba(244,239,228,0.72);
   font-size: 0.9rem;
   line-height: 1.6;
+  background: rgba(11,14,26,0.72);
 }
 
 .gallery-card-caption strong {
@@ -97,36 +101,16 @@ body.iam-gallery-native-cursor #cursorRing {
   text-transform: uppercase;
 }
 
-.gallery-card-caption p { margin: 0.4rem 0 0; }
+.gallery-card-caption p {
+  margin: 0.4rem 0 0;
+}
 
 .gallery-empty {
   color: rgba(244,239,228,.65);
   grid-column: 1 / -1;
 }
 
-.gallery-error {
-  padding: 1rem;
-  color: rgba(244,239,228,.75);
-  border-top: 1px solid rgba(200,151,58,0.22);
-  font-size: .8rem;
-  line-height: 1.5;
-}
-
-.gallery-error strong {
-  color: #C8973A;
-  font-family: "DM Mono", monospace;
-  text-transform: uppercase;
-  font-size: .65rem;
-  letter-spacing: .12em;
-}
-
-.gallery-error code {
-  display: block;
-  margin-top: .35rem;
-  word-break: break-word;
-  color: rgba(244,239,228,.65);
-}
-
+/* Lightbox conservée */
 #iam-lightbox {
   position: fixed;
   inset: 0;
@@ -134,10 +118,11 @@ body.iam-gallery-native-cursor #cursorRing {
   display: none;
   background: rgba(11,14,26,0.94);
   backdrop-filter: blur(10px);
-  cursor: default !important;
 }
 
-#iam-lightbox.is-open { display: block; }
+#iam-lightbox.is-open {
+  display: block;
+}
 
 .iam-lightbox-stage {
   position: absolute;
@@ -155,12 +140,7 @@ body.iam-gallery-native-cursor #cursorRing {
   box-shadow: 0 24px 80px rgba(0,0,0,0.45);
   user-select: none;
   transform-origin: center center;
-  transition: transform 0.08s linear;
-  cursor: zoom-in !important;
 }
-
-.iam-lightbox-img.is-zoomed { cursor: grab !important; }
-.iam-lightbox-img.is-dragging { cursor: grabbing !important; }
 
 .iam-lightbox-ui {
   position: fixed;
@@ -191,17 +171,29 @@ body.iam-gallery-native-cursor #cursorRing {
   line-height: 1;
 }
 
-.iam-lightbox-open { overflow: hidden; }
+.iam-lightbox-open {
+  overflow: hidden;
+}
 
+/* Mobile */
 @media (max-width: 700px) {
+  #gallery.gallery-grid,
   .gallery-grid {
+    display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 1.1rem;
+    gap: 1.25rem !important;
+  }
+
+  .gallery-zoom-trigger {
+    min-height: 240px !important;
   }
 
   .gallery-card img,
-  .gallery-grid img {
-    aspect-ratio: 1 / 1;
+  .gallery-grid img,
+  #gallery img {
+    height: 280px !important;
+    min-height: 240px !important;
+    aspect-ratio: auto !important;
   }
 
   .gallery-card-caption {
