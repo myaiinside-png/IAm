@@ -1,69 +1,80 @@
 (function () {
-  let zoom = 1;
-  let panX = 0;
-  let panY = 0;
-  let dragging = false;
-  let startX = 0;
-  let startY = 0;
+  let zoom = 1, panX = 0, panY = 0, dragging = false, startX = 0, startY = 0;
+  let attempts = 0;
 
   function getData() {
     if (Array.isArray(window.galleryData)) return window.galleryData;
     if (Array.isArray(window.GALLERY_DATA)) return window.GALLERY_DATA;
+    try { if (typeof galleryData !== "undefined" && Array.isArray(galleryData)) return galleryData; } catch (e) {}
+    try { if (typeof GALLERY_DATA !== "undefined" && Array.isArray(GALLERY_DATA)) return GALLERY_DATA; } catch (e) {}
     return [];
   }
 
   function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, c => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    })[c]);
+    return String(value).replace(/[&<>"']/g, function (c) {
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c];
+    });
+  }
+
+  function normalizeItem(item, index) {
+    if (typeof item === "string") {
+      return { image: item, title: "Réalisation " + (index + 1), level: "", note: "" };
+    }
+    return {
+      image: item.image || item.src || item.url || "",
+      title: item.title || item.alt || item.name || "Réalisation " + (index + 1),
+      level: item.level || item.niveau || "",
+      note: item.note || item.description || ""
+    };
   }
 
   function enableNativeCursorZone() {
     const zone = document.getElementById("realisations");
     if (!zone || zone.dataset.cursorReady === "true") return;
     zone.dataset.cursorReady = "true";
-
-    zone.addEventListener("mouseenter", function () {
-      document.body.classList.add("iam-gallery-native-cursor");
-    });
-
+    zone.addEventListener("mouseenter", function () { document.body.classList.add("iam-gallery-native-cursor"); });
     zone.addEventListener("mouseleave", function () {
-      document.body.classList.remove("iam-gallery-native-cursor");
+      if (!document.body.classList.contains("iam-lightbox-open")) {
+        document.body.classList.remove("iam-gallery-native-cursor");
+      }
     });
   }
 
   function renderGallery() {
     enableNativeCursorZone();
-
     const container = document.getElementById("gallery") || document.querySelector("[data-iam-gallery]");
     if (!container) return;
 
     const data = getData();
 
     if (!data.length) {
+      attempts += 1;
+      if (attempts < 20) {
+        container.innerHTML = '<p class="gallery-empty">Chargement des réalisations…</p>';
+        setTimeout(renderGallery, 250);
+        return;
+      }
       container.innerHTML = '<p class="gallery-empty">Aucune image configurée dans <code>gallery-data.js</code>.</p>';
       return;
     }
 
-    container.innerHTML = data.map(function (item) {
-      const src = item.image || item.src || "";
-      const title = item.title || item.alt || "Création IA'm";
-      const level = item.level || "";
-      const note = item.note || "";
+    const items = data.map(normalizeItem).filter(function (item) { return item.image; });
 
+    if (!items.length) {
+      container.innerHTML = '<p class="gallery-empty">Les données sont présentes, mais aucun chemin d’image n’a été trouvé.</p>';
+      return;
+    }
+
+    container.innerHTML = items.map(function (item) {
       return `
         <article class="gallery-card">
-          <button class="gallery-zoom-trigger" type="button" aria-label="Agrandir ${escapeHtml(title)}">
-            <img src="${src}" alt="${escapeHtml(title)}" loading="lazy" data-original-src="${src}">
+          <button class="gallery-zoom-trigger" type="button" aria-label="Agrandir ${escapeHtml(item.title)}">
+            <img src="${item.image}" alt="${escapeHtml(item.title)}" loading="lazy" data-original-src="${item.image}">
           </button>
           <div class="gallery-card-caption">
-            <strong>${escapeHtml(title)}</strong>
-            ${level ? `<span>${escapeHtml(level)}</span>` : ""}
-            ${note ? `<p>${escapeHtml(note)}</p>` : ""}
+            <strong>${escapeHtml(item.title)}</strong>
+            ${item.level ? `<span>${escapeHtml(item.level)}</span>` : ""}
+            ${item.note ? `<p>${escapeHtml(item.note)}</p>` : ""}
           </div>
         </article>
       `;
@@ -85,30 +96,15 @@
         <button class="iam-lightbox-btn" type="button" data-action="zoom-in">+</button>
         <button class="iam-lightbox-close" type="button" aria-label="Fermer">×</button>
       </div>
-      <div class="iam-lightbox-stage">
-        <img class="iam-lightbox-img" alt="">
-      </div>
+      <div class="iam-lightbox-stage"><img class="iam-lightbox-img" alt=""></div>
     `;
-
     document.body.appendChild(lightbox);
 
-    lightbox.addEventListener("click", function (event) {
-      if (event.target.id === "iam-lightbox") closeLightbox();
-    });
-
+    lightbox.addEventListener("click", function (event) { if (event.target.id === "iam-lightbox") closeLightbox(); });
     lightbox.querySelector(".iam-lightbox-close").addEventListener("click", closeLightbox);
-    lightbox.querySelector('[data-action="zoom-in"]').addEventListener("click", function () {
-      setZoom(zoom + 0.25);
-    });
-    lightbox.querySelector('[data-action="zoom-out"]').addEventListener("click", function () {
-      setZoom(zoom - 0.25);
-    });
-    lightbox.querySelector('[data-action="reset"]').addEventListener("click", function () {
-      zoom = 1;
-      panX = 0;
-      panY = 0;
-      applyTransform();
-    });
+    lightbox.querySelector('[data-action="zoom-in"]').addEventListener("click", function () { setZoom(zoom + 0.25); });
+    lightbox.querySelector('[data-action="zoom-out"]').addEventListener("click", function () { setZoom(zoom - 0.25); });
+    lightbox.querySelector('[data-action="reset"]').addEventListener("click", function () { zoom = 1; panX = 0; panY = 0; applyTransform(); });
 
     const stage = lightbox.querySelector(".iam-lightbox-stage");
     const img = lightbox.querySelector(".iam-lightbox-img");
@@ -125,6 +121,12 @@
       startY = event.clientY - panY;
       img.classList.add("is-dragging");
       event.preventDefault();
+    });
+
+    img.addEventListener("click", function (event) {
+      event.stopPropagation();
+      if (zoom === 1) setZoom(2);
+      else { zoom = 1; panX = 0; panY = 0; applyTransform(); }
     });
 
     window.addEventListener("mousemove", function (event) {
@@ -144,12 +146,7 @@
       if (event.key === "Escape") closeLightbox();
       if (event.key === "+" || event.key === "=") setZoom(zoom + 0.25);
       if (event.key === "-") setZoom(zoom - 0.25);
-      if (event.key === "0") {
-        zoom = 1;
-        panX = 0;
-        panY = 0;
-        applyTransform();
-      }
+      if (event.key === "0") { zoom = 1; panX = 0; panY = 0; applyTransform(); }
     });
 
     return lightbox;
@@ -157,10 +154,7 @@
 
   function setZoom(value) {
     zoom = Math.max(1, Math.min(4, value));
-    if (zoom === 1) {
-      panX = 0;
-      panY = 0;
-    }
+    if (zoom === 1) { panX = 0; panY = 0; }
     applyTransform();
   }
 
@@ -173,19 +167,13 @@
 
   function openLightbox(src, alt) {
     document.body.classList.add("iam-gallery-native-cursor");
-
     const lightbox = createLightbox();
     const img = lightbox.querySelector(".iam-lightbox-img");
-
-    zoom = 1;
-    panX = 0;
-    panY = 0;
-
+    zoom = 1; panX = 0; panY = 0;
     img.src = src;
     img.alt = alt || "Image de la galerie IA'm";
     img.style.transform = "translate(0, 0) scale(1)";
     img.classList.remove("is-zoomed", "is-dragging");
-
     lightbox.classList.add("is-open");
     document.body.classList.add("iam-lightbox-open");
   }
@@ -193,31 +181,21 @@
   function closeLightbox() {
     const lightbox = document.getElementById("iam-lightbox");
     if (!lightbox) return;
-
     lightbox.classList.remove("is-open");
     document.body.classList.remove("iam-lightbox-open");
-
     const zone = document.getElementById("realisations");
-    if (!zone || !zone.matches(":hover")) {
-      document.body.classList.remove("iam-gallery-native-cursor");
-    }
+    if (!zone || !zone.matches(":hover")) document.body.classList.remove("iam-gallery-native-cursor");
   }
 
   function attachImageHandlers() {
     document.querySelectorAll(".gallery-zoom-trigger img, #gallery img, [data-iam-gallery] img").forEach(function (img) {
       if (img.dataset.iamReady === "true") return;
       img.dataset.iamReady = "true";
-
       const trigger = img.closest(".gallery-zoom-trigger") || img;
-
-      trigger.addEventListener("click", function () {
-        openLightbox(img.currentSrc || img.src, img.alt);
-      });
-
+      trigger.addEventListener("click", function () { openLightbox(img.currentSrc || img.src, img.alt); });
       img.addEventListener("error", function () {
         const card = img.closest(".gallery-card");
         if (!card || card.querySelector(".gallery-error")) return;
-
         const rawSrc = img.dataset.originalSrc || img.getAttribute("src");
         const error = document.createElement("div");
         error.className = "gallery-error";
@@ -228,11 +206,8 @@
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", renderGallery);
-  } else {
-    renderGallery();
-  }
-
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderGallery);
+  else renderGallery();
   window.addEventListener("load", renderGallery);
+  window.addEventListener("pageshow", renderGallery);
 })();
