@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentions légales — IA'm</title>
+  <meta name="description" content="Mentions légales et politique de confidentialité du label IA'm — iam-inside.eu" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --text: #d8d4cc;
+      --text-muted: #787067;
+      --accent: #c8b89a;
+      --accent-dim: #7a6e5f;
+      --white: #f0ece4;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-mono: 'DM Mono', 'Courier New', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .nav-back {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .nav-back:hover {
+      color: var(--accent);
+      border-color: var(--accent-dim);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 120px 2rem 60px;
+      max-width: 780px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .hero-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    section {
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    .section-index {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--accent);
+      margin: 2rem 0 0.8rem;
+      font-style: italic;
+    }
+
+    p {
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-dim);
+      transition: border-color 0.2s;
+    }
+
+    a:hover {
+      border-color: var(--accent);
+    }
+
+    /* DATA BLOCK */
+    .data-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent-dim);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 2px;
+    }
+
+    .data-block p {
+      margin-bottom: 0.4rem;
+      font-size: 13px;
+    }
+
+    .data-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .data-key {
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    .data-value {
+      color: var(--white);
+    }
+
+    /* RIGHTS LIST */
+    .rights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 1.5rem 0;
+    }
+
+    .right-item {
+      background: var(--surface);
+      padding: 1.2rem;
+    }
+
+    .right-item strong {
+      display: block;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .right-item span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* NO-DATA BADGE */
+    .no-data {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      border-radius: 2px;
+      font-size: 12px;
+      color: var(--accent);
+      margin: 0.8rem 0;
+    }
+
+    .no-data::before {
+      content: '✦';
+      font-size: 10px;
+    }
+
+    /* CONTACT BLOCK */
+    .contact-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .contact-block p {
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-block a {
+      font-size: 1rem;
+      color: var(--white);
+      border-color: var(--accent-dim);
+    }
+
+    /* DATE BADGE */
+    .date-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      margin-top: 0.5rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      border-bottom-color: var(--border);
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .hero, .content { padding-left: 1.2rem; padding-right: 1.2rem; }
+      .rights-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://iam-inside.eu" class="nav-logo">IA<span>'m</span></a>
+  <a href="https://iam-inside.eu" class="nav-back">← Retour au site</a>
+</nav>
+
+<div class="hero">
+  <p class="hero-label">Document légal</p>
+  <h1>Mentions légales<br />&amp; <em>confidentialité</em></h1>
+  <p class="hero-meta">iam-inside.eu &nbsp;·&nbsp; INPI n° 5212301 &nbsp;·&nbsp; Classe 41</p>
+</div>
+
+<div class="content">
+
+  <!-- 01 ÉDITEUR -->
+  <section id="editeur">
+    <p class="section-index">01</p>
+    <h2>Éditeur du site</h2>
+    <div class="data-block">
+      <p><span class="data-key">Responsable de publication — </span><span class="data-value">Lionel Le Berre</span></p>
+      <p><span class="data-key">Qualité — </span><span class="data-value">Créateur indépendant, personne physique</span></p>
+      <p><span class="data-key">Adresse — </span><span class="data-value">Plogoff, Cap Sizun, Finistère (29), France</span></p>
+      <p><span class="data-key">Contact — </span><span class="data-value"><a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a></span></p>
+      <p><span class="data-key">Marque déposée — </span><span class="data-value">INPI n° 5212301, Classe 41, déposée en décembre 2025</span></p>
+      <p><span class="data-key">Licence de contenu — </span><span class="data-value">CC BY-NC 4.0</span></p>
+    </div>
+    <p>IA'm est un projet indépendant, non lucratif dans son usage premier, porté à titre personnel. Il ne constitue pas une entité juridique distincte (pas de SIRET, pas d'association déclarée à ce jour).</p>
+  </section>
+
+  <!-- 02 HÉBERGEMENT -->
+  <section id="hebergement">
+    <p class="section-index">02</p>
+    <h2>Hébergement</h2>
+    <div class="data-block">
+      <p><span class="data-key">Hébergeur principal — </span><span class="data-value">Hostinger International Ltd.</span></p>
+      <p><span class="data-key">Adresse — </span><span class="data-value">61 Lordou Vironos Street, 6023 Larnaca, Chypre</span></p>
+      <p><span class="data-key">Site — </span><span class="data-value"><a href="https://www.hostinger.fr" target="_blank" rel="noopener">hostinger.fr</a></span></p>
+    </div>
+    <div class="data-block">
+      <p><span class="data-key">Dépôt source — </span><span class="data-value">GitHub, Inc. (Microsoft)</span></p>
+      <p><span class="data-key">Adresse — </span><span class="data-value">88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA</span></p>
+      <p><span class="data-key">Politique de confidentialité — </span><span class="data-value"><a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">docs.github.com</a></span></p>
+    </div>
+  </section>
+
+  <!-- 03 DONNÉES COLLECTÉES -->
+  <section id="donnees">
+    <p class="section-index">03</p>
+    <h2>Données collectées</h2>
+
+    <h3>Formulaire de contact</h3>
+    <p>Le site dispose d'un formulaire de contact. Les données saisies (prénom, nom, email, message, profil) sont transmises directement par email à l'adresse <a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a>. Elles sont utilisées uniquement pour répondre à votre demande et ne sont pas stockées dans une base de données tiers.</p>
+    <p><strong>Durée de conservation</strong> : le temps de traiter la demande, puis suppression sur demande ou au plus tard 12 mois après le dernier échange.</p>
+
+    <h3>Générateur de badge</h3>
+    <div class="no-data">Aucune donnée personnelle collectée</div>
+    <p>Le générateur de badge fonctionne entièrement côté navigateur (JavaScript local). Aucune donnée saisie n'est transmise à un serveur. Aucun badge n'est enregistré. Aucun compte n'est créé.</p>
+
+    <h3>Page Certificats</h3>
+    <div class="no-data">Aucune donnée personnelle collectée</div>
+    <p>Les certificats sont des fichiers téléchargeables statiques. Le téléchargement ne requiert ni inscription ni transmission de données personnelles.</p>
+
+    <h3>Données techniques de navigation</h3>
+    <p>L'hébergeur Hostinger peut enregistrer automatiquement des données de journalisation standard (adresse IP, navigateur, pages visitées, horodatage) à des fins de sécurité et de maintenance. Ces données sont gérées par Hostinger selon sa propre politique de confidentialité et ne sont pas accessibles à l'éditeur du site à des fins commerciales.</p>
+
+    <h3>Cookies &amp; traceurs</h3>
+    <div class="no-data">Aucun cookie analytique ou publicitaire</div>
+    <p>Ce site n'utilise pas Google Analytics, Matomo, ni aucun outil de suivi comportemental. Aucun cookie tiers n'est déposé. Seuls des cookies techniques strictement nécessaires au fonctionnement du site peuvent être présents (session, préférences de langue).</p>
+  </section>
+
+  <!-- 04 DROITS -->
+  <section id="droits">
+    <p class="section-index">04</p>
+    <h2>Vos droits</h2>
+    <p>Conformément au Règlement général sur la protection des données (RGPD — UE 2016/679) et à la loi Informatique et Libertés, vous disposez des droits suivants sur vos données personnelles :</p>
+
+    <div class="rights-grid">
+      <div class="right-item">
+        <strong>Accès</strong>
+        <span>Obtenir une copie de vos données</span>
+      </div>
+      <div class="right-item">
+        <strong>Rectification</strong>
+        <span>Corriger des données inexactes</span>
+      </div>
+      <div class="right-item">
+        <strong>Effacement</strong>
+        <span>Demander la suppression de vos données</span>
+      </div>
+      <div class="right-item">
+        <strong>Opposition</strong>
+        <span>Vous opposer à un traitement</span>
+      </div>
+      <div class="right-item">
+        <strong>Limitation</strong>
+        <span>Limiter le traitement de vos données</span>
+      </div>
+      <div class="right-item">
+        <strong>Portabilité</strong>
+        <span>Recevoir vos données dans un format structuré</span>
+      </div>
+    </div>
+
+    <p>Pour exercer ces droits, contactez : <a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a>. Une réponse sera apportée dans un délai maximum de 30 jours.</p>
+    <p>En cas de réclamation, vous pouvez également saisir la <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a> (Commission Nationale de l'Informatique et des Libertés).</p>
+  </section>
+
+  <!-- 05 PROPRIÉTÉ -->
+  <section id="propriete">
+    <p class="section-index">05</p>
+    <h2>Propriété intellectuelle</h2>
+    <p>Le contenu du site iam-inside.eu — textes, logo, badges, chartes, documentation — est diffusé sous licence <strong>Creative Commons BY-NC 4.0</strong> (Attribution, pas d'usage commercial), sauf mention contraire.</p>
+    <p>La marque <strong>IA'm</strong> est une marque déposée à l'INPI sous le numéro <strong>5212301</strong>, classe 41, depuis décembre 2025. Toute utilisation commerciale ou reproduction de la marque sans autorisation écrite est interdite.</p>
+    <p>Le code source du projet est disponible sur <a href="https://github.com/myaiinside-png/IAm" target="_blank" rel="noopener">GitHub</a> sous les termes de la licence CC BY-NC 4.0.</p>
+  </section>
+
+  <!-- 06 LIMITES -->
+  <section id="limites">
+    <p class="section-index">06</p>
+    <h2>Responsabilité &amp; limites</h2>
+    <p>IA'm est un label déclaratif reposant sur la bonne foi du créateur. L'éditeur du site ne peut être tenu responsable d'un usage frauduleux ou inexact du label par un tiers.</p>
+    <p>L'éditeur s'efforce de maintenir les informations du site à jour mais ne garantit pas leur exhaustivité ou exactitude à tout moment. Les liens externes sont proposés à titre informatif ; l'éditeur n'est pas responsable du contenu des sites tiers.</p>
+  </section>
+
+  <!-- 07 CONTACT -->
+  <section id="contact">
+    <p class="section-index">07</p>
+    <h2>Contact &amp; signalement</h2>
+    <p>Pour toute question relative à ces mentions légales, à la protection de vos données, ou pour exercer vos droits :</p>
+    <div class="contact-block">
+      <p style="color: var(--text-muted); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem;">Responsable de traitement</p>
+      <p style="font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--white); margin-bottom: 0.5rem;">Lionel Le Berre</p>
+      <a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a>
+    </div>
+    <div class="date-badge">Dernière mise à jour : mai 2025</div>
+  </section>
+
+</div>
+
+<footer>
+  <p>© 2025 Lionel Le Berre &nbsp;·&nbsp; <a href="https://iam-inside.eu">iam-inside.eu</a> &nbsp;·&nbsp; INPI n° 5212301 &nbsp;·&nbsp; CC BY-NC 4.0</p>
+</footer>
+
+</body>
+</html>
