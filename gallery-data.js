@@ -1,4 +1,4 @@
-// Galerie IA'm — version cohérente avec les fichiers renommés
+// Galerie IA'm
 window.galleryData = [
   {
     "image": "assets/img/galerie/drh.png",

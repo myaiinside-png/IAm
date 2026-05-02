@@ -422,10 +422,127 @@
   }
 ];
 
+  let zoom = 1, panX = 0, panY = 0;
+  let dragging = false, startX = 0, startY = 0;
+
   function escapeHtml(value) {
     return String(value).replace(/[&<>"']/g, function (c) {
       return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c];
     });
+  }
+
+  function applyTransform() {
+    const img = document.querySelector("#iam-lightbox-inline img");
+    if (!img) return;
+    img.style.transform = "translate(" + panX + "px, " + panY + "px) scale(" + zoom + ")";
+    img.style.cursor = zoom > 1 ? (dragging ? "grabbing" : "grab") : "zoom-in";
+  }
+
+  function setZoom(value) {
+    zoom = Math.max(1, Math.min(5, value));
+    if (zoom === 1) { panX = 0; panY = 0; }
+    applyTransform();
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById("iam-lightbox-inline");
+    if (!lightbox) return;
+    lightbox.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  function createLightbox() {
+    let lightbox = document.getElementById("iam-lightbox-inline");
+    if (lightbox) return lightbox;
+
+    lightbox = document.createElement("div");
+    lightbox.id = "iam-lightbox-inline";
+    lightbox.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:24px;overflow:hidden;";
+
+    lightbox.innerHTML =
+      '<div style="position:absolute;top:18px;left:50%;transform:translateX(-50%);z-index:2;display:flex;gap:8px;align-items:center;background:rgba(11,14,26,.72);border:1px solid rgba(200,151,58,.35);padding:8px 10px;border-radius:999px;backdrop-filter:blur(8px);">' +
+      '<button type="button" data-zoom="out" style="background:transparent;border:1px solid rgba(244,239,228,.35);color:white;border-radius:999px;width:36px;height:36px;font-size:20px;cursor:pointer;">−</button>' +
+      '<button type="button" data-zoom="reset" style="background:transparent;border:1px solid rgba(244,239,228,.35);color:white;border-radius:999px;height:36px;padding:0 14px;font-family:monospace;font-size:12px;cursor:pointer;">100%</button>' +
+      '<button type="button" data-zoom="in" style="background:transparent;border:1px solid rgba(244,239,228,.35);color:white;border-radius:999px;width:36px;height:36px;font-size:20px;cursor:pointer;">+</button>' +
+      '</div>' +
+      '<button type="button" aria-label="Fermer" data-close="true" style="position:absolute;top:18px;right:22px;z-index:2;font-size:42px;line-height:1;background:transparent;border:0;color:white;cursor:pointer;">×</button>' +
+      '<div style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(244,239,228,.72);font-family:monospace;font-size:12px;text-align:center;background:rgba(11,14,26,.55);padding:8px 12px;border-radius:999px;">clic : zoom · molette : zoom · glisser : déplacer · Échap : fermer</div>' +
+      '<img alt="" draggable="false" style="max-width:92vw;max-height:86vh;object-fit:contain;box-shadow:0 20px 80px rgba(0,0,0,.45);transition:transform .12s ease;transform-origin:center center;user-select:none;">';
+
+    document.body.appendChild(lightbox);
+    const img = lightbox.querySelector("img");
+
+    lightbox.addEventListener("click", function(event) {
+      if (event.target === lightbox || event.target.dataset.close === "true") closeLightbox();
+    });
+
+    lightbox.querySelector('[data-zoom="in"]').addEventListener("click", function(event) {
+      event.stopPropagation(); setZoom(zoom + 0.35);
+    });
+    lightbox.querySelector('[data-zoom="out"]').addEventListener("click", function(event) {
+      event.stopPropagation(); setZoom(zoom - 0.35);
+    });
+    lightbox.querySelector('[data-zoom="reset"]').addEventListener("click", function(event) {
+      event.stopPropagation(); zoom = 1; panX = 0; panY = 0; applyTransform();
+    });
+
+    lightbox.addEventListener("wheel", function(event) {
+      event.preventDefault();
+      setZoom(zoom + (event.deltaY < 0 ? 0.25 : -0.25));
+    }, { passive:false });
+
+    img.addEventListener("click", function(event) {
+      event.stopPropagation();
+      if (zoom === 1) setZoom(2);
+      else { zoom = 1; panX = 0; panY = 0; applyTransform(); }
+    });
+
+    img.addEventListener("mousedown", function(event) {
+      if (zoom <= 1) return;
+      dragging = true;
+      startX = event.clientX - panX;
+      startY = event.clientY - panY;
+      img.style.transition = "none";
+      applyTransform();
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    window.addEventListener("mousemove", function(event) {
+      if (!dragging) return;
+      panX = event.clientX - startX;
+      panY = event.clientY - startY;
+      applyTransform();
+    });
+
+    window.addEventListener("mouseup", function() {
+      if (!dragging) return;
+      dragging = false;
+      img.style.transition = "transform .12s ease";
+      applyTransform();
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (lightbox.style.display !== "flex") return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "+" || event.key === "=") setZoom(zoom + 0.35);
+      if (event.key === "-") setZoom(zoom - 0.35);
+      if (event.key === "0") { zoom = 1; panX = 0; panY = 0; applyTransform(); }
+    });
+
+    return lightbox;
+  }
+
+  function openLightbox(src, alt) {
+    const lightbox = createLightbox();
+    const img = lightbox.querySelector("img");
+    zoom = 1; panX = 0; panY = 0;
+    img.src = src;
+    img.alt = alt || "Image de la galerie IA'm";
+    img.style.transition = "transform .12s ease";
+    lightbox.style.display = "flex";
+    document.body.style.overflow = "hidden";
+    applyTransform();
   }
 
   function renderGalleryInline() {
@@ -433,16 +550,12 @@
     if (!container) return;
 
     container.innerHTML = data.map(function(item) {
-      return `
-        <article class="gallery-card">
-          <button class="gallery-zoom-trigger" type="button" aria-label="Agrandir ${escapeHtml(item.title)}">
-            <img src="${item.image}" alt="${escapeHtml(item.title)}" loading="lazy">
-          </button>
-          <div class="gallery-card-caption">
-            <strong>${escapeHtml(item.title)}</strong>
-          </div>
-        </article>
-      `;
+      return '<article class="gallery-card">' +
+        '<button class="gallery-zoom-trigger" type="button" aria-label="Agrandir ' + escapeHtml(item.title) + '">' +
+        '<img src="' + item.image + '" alt="' + escapeHtml(item.title) + '" loading="lazy">' +
+        '</button>' +
+        '<div class="gallery-card-caption"><strong>' + escapeHtml(item.title) + '</strong></div>' +
+        '</article>';
     }).join("");
 
     document.querySelectorAll(".gallery-zoom-trigger img").forEach(function(img) {
@@ -457,28 +570,14 @@
       });
 
       img.closest(".gallery-zoom-trigger").addEventListener("click", function() {
-        let lightbox = document.getElementById("iam-lightbox-inline");
-        if (!lightbox) {
-          lightbox = document.createElement("div");
-          lightbox.id = "iam-lightbox-inline";
-          lightbox.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:24px;cursor:pointer;";
-          lightbox.innerHTML = '<button type="button" aria-label="Fermer" style="position:absolute;top:18px;right:22px;font-size:42px;line-height:1;background:transparent;border:0;color:white;cursor:pointer;">×</button><img alt="" style="max-width:92vw;max-height:88vh;object-fit:contain;box-shadow:0 20px 80px rgba(0,0,0,.45);">';
-          document.body.appendChild(lightbox);
-          lightbox.addEventListener("click", function() { lightbox.style.display = "none"; });
-        }
-        const lbImg = lightbox.querySelector("img");
-        lbImg.src = img.currentSrc || img.src;
-        lbImg.alt = img.alt || "";
-        lightbox.style.display = "flex";
+        openLightbox(img.currentSrc || img.src, img.alt);
       });
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", renderGalleryInline);
-  } else {
-    renderGalleryInline();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", renderGalleryInline);
+  else renderGalleryInline();
+
   window.addEventListener("load", renderGalleryInline);
 })();
 </script>
