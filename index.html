@@ -251,9 +251,9 @@
       <h2 class="label-heading">Lionel Le Berre</h2>
       <div class="label-body">
         <p>Lionel Le Berre est créateur indépendant, basé en Bretagne. IA'm est né d'une conviction simple : si l'IA fait partie du processus créatif, le dire est un acte de respect — envers le public, envers le travail, envers soi-même.</p>
-        <p>Le logo du label est également une co création. Ce paradoxe est intentionnel. Claude est le co-créateur documenté de ce projet.</p>
+        <p>Le logo du label est dessiné à la main, sans IA. Ce paradoxe est intentionnel. Claude est le co-créateur documenté de ce projet.</p>
         <hr style="border:none;border-top:1px solid var(--rule);margin:2rem 0;"/>
-        <p><em>Lionel Le Berre is an independent creator based in Brittany, France. IA'm grew from a simple conviction: if AI is part of the creative process, saying so is an act of respect — toward the audience, toward the work, toward oneself. Le logo du label est également une co création. This paradox is intentional. Claude is the documented co-creator of this project.</em></p>
+        <p><em>Lionel Le Berre is an independent creator based in Brittany, France. IA'm grew from a simple conviction: if AI is part of the creative process, saying so is an act of respect — toward the audience, toward the work, toward oneself. The label's logo is hand-drawn, without AI. This paradox is intentional. Claude is the documented co-creator of this project.</em></p>
       </div>
     </div>
   </div>
@@ -308,8 +308,181 @@
   </div>
 </footer>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-  <script src="gallery-data.js"></script>
-<script src="assets/js/iam-gallery.js"></script>
+
+<script id="iam-gallery-inline-hotfix">
+(function() {
+  const data = [
+  {
+    "image": "assets/img/galerie/drh.png",
+    "title": "DRH"
+  },
+  {
+    "image": "assets/img/galerie/la-commande.png",
+    "title": "La commande"
+  },
+  {
+    "image": "assets/img/galerie/histoire-iam.png",
+    "title": "Histoire d'IA'm"
+  },
+  {
+    "image": "assets/img/galerie/iam-contre-fake-news.png",
+    "title": "IA'm contre fake news"
+  },
+  {
+    "image": "assets/img/galerie/medecin.png",
+    "title": "Médecin"
+  },
+  {
+    "image": "assets/img/galerie/avocats.png",
+    "title": "Avocats"
+  },
+  {
+    "image": "assets/img/galerie/ecrivain-fraude.png",
+    "title": "Écrivain fraude"
+  },
+  {
+    "image": "assets/img/galerie/journaliste-fraude.png",
+    "title": "Journaliste fraude"
+  },
+  {
+    "image": "assets/img/galerie/journaliste.png",
+    "title": "Journaliste"
+  },
+  {
+    "image": "assets/img/galerie/chercheur.png",
+    "title": "Chercheur"
+  },
+  {
+    "image": "assets/img/galerie/marketing-sans-iam.png",
+    "title": "Marketing sans IA'm"
+  },
+  {
+    "image": "assets/img/galerie/conseiller-municipal.png",
+    "title": "Conseiller municipal"
+  },
+  {
+    "image": "assets/img/galerie/doctorante.png",
+    "title": "Doctorante"
+  },
+  {
+    "image": "assets/img/galerie/recale-memoire-sans-iam.png",
+    "title": "Recalé mémoire sans IA'm"
+  },
+  {
+    "image": "assets/img/galerie/professeur-eleves.png",
+    "title": "Professeur élèves"
+  },
+  {
+    "image": "assets/img/galerie/avocat-ong.png",
+    "title": "Avocat ONG"
+  },
+  {
+    "image": "assets/img/galerie/infirmier.png",
+    "title": "Infirmier"
+  },
+  {
+    "image": "assets/img/galerie/ghostwriter-fantome-detection-fraude-editoriale.png",
+    "title": "Le ghostwriter fantôme"
+  },
+  {
+    "image": "assets/img/galerie/iam-contre-fake-news-2.png",
+    "title": "IA'm contre fake news 2"
+  },
+  {
+    "image": "assets/img/galerie/directrice-association.png",
+    "title": "Directrice association"
+  },
+  {
+    "image": "assets/img/galerie/avocats-plagiat.png",
+    "title": "Avocats plagiat"
+  },
+  {
+    "image": "assets/img/galerie/soutenance-master.png",
+    "title": "Soutenance master"
+  },
+  {
+    "image": "assets/img/galerie/memoire.png",
+    "title": "Mémoire"
+  },
+  {
+    "image": "assets/img/galerie/motion-designer-freelance.png",
+    "title": "Motion designer freelance"
+  },
+  {
+    "image": "assets/img/galerie/le-peintre.png",
+    "title": "Le peintre"
+  },
+  {
+    "image": "assets/img/galerie/maitre-de-conference.png",
+    "title": "Maître de conférence"
+  },
+  {
+    "image": "assets/img/galerie/courrier-basique.png",
+    "title": "Courrier basique"
+  }
+];
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, function (c) {
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c];
+    });
+  }
+
+  function renderGalleryInline() {
+    const container = document.getElementById("gallery");
+    if (!container) return;
+
+    container.innerHTML = data.map(function(item) {
+      return `
+        <article class="gallery-card">
+          <button class="gallery-zoom-trigger" type="button" aria-label="Agrandir ${escapeHtml(item.title)}">
+            <img src="${item.image}" alt="${escapeHtml(item.title)}" loading="lazy">
+          </button>
+          <div class="gallery-card-caption">
+            <strong>${escapeHtml(item.title)}</strong>
+          </div>
+        </article>
+      `;
+    }).join("");
+
+    document.querySelectorAll(".gallery-zoom-trigger img").forEach(function(img) {
+      img.addEventListener("error", function() {
+        const card = img.closest(".gallery-card");
+        if (!card || card.querySelector(".gallery-error")) return;
+        const error = document.createElement("div");
+        error.className = "gallery-error";
+        error.innerHTML = "<strong>Image introuvable</strong><br><code>" + escapeHtml(img.getAttribute("src")) + "</code>";
+        card.appendChild(error);
+        img.style.display = "none";
+      });
+
+      img.closest(".gallery-zoom-trigger").addEventListener("click", function() {
+        let lightbox = document.getElementById("iam-lightbox-inline");
+        if (!lightbox) {
+          lightbox = document.createElement("div");
+          lightbox.id = "iam-lightbox-inline";
+          lightbox.style.cssText = "position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:24px;cursor:pointer;";
+          lightbox.innerHTML = '<button type="button" aria-label="Fermer" style="position:absolute;top:18px;right:22px;font-size:42px;line-height:1;background:transparent;border:0;color:white;cursor:pointer;">×</button><img alt="" style="max-width:92vw;max-height:88vh;object-fit:contain;box-shadow:0 20px 80px rgba(0,0,0,.45);">';
+          document.body.appendChild(lightbox);
+          lightbox.addEventListener("click", function() { lightbox.style.display = "none"; });
+        }
+        const lbImg = lightbox.querySelector("img");
+        lbImg.src = img.currentSrc || img.src;
+        lbImg.alt = img.alt || "";
+        lightbox.style.display = "flex";
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", renderGalleryInline);
+  } else {
+    renderGalleryInline();
+  }
+  window.addEventListener("load", renderGalleryInline);
+})();
+</script>
+
 <script src="assets/main-with-gallery.js"></script>
 </body>
 </html>
