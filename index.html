@@ -10,6 +10,35 @@ y<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/styles-with-gallery.css"/>
   <link rel="stylesheet" href="assets/css/iam-gallery.css"/>
+
+  <style id="iam-logo-size-hotfix">
+    /* Correctif : empêche le logo de navigation de prendre une taille géante. */
+    nav .nav-logo-link {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+      text-decoration: none;
+    }
+
+    nav .nav-logo-iam {
+      display: block;
+      width: auto !important;
+      height: clamp(42px, 6vw, 72px) !important;
+      max-width: 180px !important;
+      max-height: 72px !important;
+      object-fit: contain;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    @media (max-width: 720px) {
+      nav .nav-logo-iam {
+        height: 44px !important;
+        max-width: 128px !important;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -20,10 +49,13 @@ y<!DOCTYPE html>
 
 <!-- Nav -->
 <nav><!-- Nouveau Logo IA'm -->
-<img 
-     src="/assets/iam-logo-cream.png" 
-     alt="IA'm — Label éthique de transparence IA" 
-     class="logo-principal"></a>
+  <a href="index.html#home" class="nav-logo-link" aria-label="Retour à l’accueil IA’m">
+    <img
+      src="/assets/iam-logo-cream.png"
+      alt="IA'm — Label éthique de transparence IA"
+      class="nav-logo-iam"
+    >
+  </a>
   <div class="nav-links">
   <a href="index.html#label">Le label</a>
   <a href="mode-emploi.html">Mode d’emploi</a>
