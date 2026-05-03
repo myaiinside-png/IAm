@@ -7,12 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-
 <link rel="stylesheet" href="assets/style.css"/>
 <link rel="preload" href="assets/logo-dark.png" as="image"/>
 </head>
 <body>
 
+<!-- Scroll progress -->
+<div id="scroll-progress"></div>
+
+<!-- Custom cursor -->
 <div class="cursor">
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -20,23 +23,38 @@
 
 <!-- Nav -->
 <nav>
-  <a href="#" class="nav-logo"><img src="badges/IAm-logo.svg" alt="IA'm" width="38" height="38" style="height:38px;vertical-align:middle;"></a>
+  <a href="#" class="nav-logo">
+    <img src="badges/IAm-logo.svg" alt="IA'm" width="38" height="38" style="height:38px;vertical-align:middle;">
+  </a>
   <div class="nav-links">
     <a href="#label">Le Label</a>
     <a href="#charte">Charte</a>
     <a href="#badge">Badge</a>
     <a href="#contact">Contact</a>
   </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- Hero -->
+<!-- Mobile nav overlay -->
+<div class="nav-mobile" id="navMobile" role="navigation" aria-label="Menu mobile">
+  <div id="navMobileOverlay" style="position:absolute;inset:0;z-index:-1;"></div>
+  <a href="#label">Le Label</a>
+  <a href="#charte">Charte</a>
+  <a href="#badge">Badge</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ── Hero ─────────────────────────────────────────────────────────── -->
 <section class="hero" id="home">
   <div class="hero-bg-lines"></div>
+  <div class="hero-glow"></div>
 
   <div class="hero-center">
-    <img id="hero-logo" alt="Logo IA'm" style="width:280px;opacity:0;animation:fadeIn 1s 0.3s forwards;">
-    <p class="hero-eyebrow" style="text-align:center;margin-top:2rem;">Label &eacute;thique</p>
-    <p class="hero-tagline" style="text-align:center;margin:1.5rem auto 0;max-width:480px;">
+    <img id="hero-logo" alt="Logo IA'm" style="width:260px;opacity:0;animation:fadeIn 1.1s 0.4s forwards;">
+    <p class="hero-eyebrow" style="text-align:center;margin-top:2.2rem;">Label&nbsp;éthique</p>
+    <p class="hero-tagline" style="text-align:center;margin:1.8rem auto 0;max-width:480px;">
       Un label libre et volontaire pour marquer la co-création IA&#8209;humain dans les œuvres culturelles, artistiques et éducatives. Pour la transparence. Pour les créateurs.
     </p>
     <div class="hero-cta" style="justify-content:center;">
@@ -44,82 +62,92 @@
       <a href="#label" class="btn-ghost">En savoir plus →</a>
     </div>
   </div>
+
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
 </section>
 
-<!-- Marquee -->
+<!-- ── Marquee ───────────────────────────────────────────────────────── -->
 <div class="marquee-wrap">
   <div class="marquee-inner" id="marqueeInner">
     <span class="marquee-item">Transparence algorithmique</span>
     <span class="marquee-item">IA-humain</span>
-    <span class="marquee-item">Label &eacute;thique</span>
+    <span class="marquee-item">Label&nbsp;éthique</span>
     <span class="marquee-item">Culture &amp; éducation</span>
     <span class="marquee-item">Citoyenneté numérique</span>
     <span class="marquee-item">Créateurs responsables</span>
     <span class="marquee-item">IA-humain</span>
-    <span class="marquee-item">Label &eacute;thique</span>
+    <span class="marquee-item">Label&nbsp;éthique</span>
     <span class="marquee-item">Culture &amp; éducation</span>
     <span class="marquee-item">Citoyenneté numérique</span>
     <span class="marquee-item">Créateurs responsables</span>
   </div>
 </div>
 
-<!-- Présentation du label -->
+<!-- ── Le Label ──────────────────────────────────────────────────────── -->
 <section id="label">
+  <div class="section-watermark" aria-hidden="true">01</div>
   <div class="section-inner">
+    <div class="divider" style="padding-left:0;padding-right:0;margin-bottom:4rem;">
+      <div class="divider-line"></div>
+      <div class="divider-mark">01 — Le Label</div>
+      <div class="divider-line"></div>
+    </div>
     <div class="label-grid reveal">
       <div>
         <span class="label-section-tag">Le Label</span>
-        <h2 class="label-heading">
-          Un label de confiance.
-        </h2>
+        <h2 class="label-heading">Un label de confiance.</h2>
         <div class="label-body">
           <p>IA'm est un label éthique conçu pour marquer volontairement la co-création avec l'intelligence artificielle dans les œuvres culturelles, artistiques et éducatives.</p>
           <p>Il ne certifie pas une qualité technique. Il affirme une posture éthique : celle d'un créateur qui assume, revendique et nomme la part de l'IA dans son travail.</p>
           <p>Gratuit, libre, non lucratif dans son usage premier — IA'm appartient à tous ceux qui font de la transparence un acte de création.</p>
         </div>
         <div class="label-pills">
-          <span class="pill">Étudiants</span>
-          <span class="pill">Artistes</span>
-          <span class="pill">Enseignants</span>
-          <span class="pill">Chercheurs</span>
-          <span class="pill">Auteurs</span>
-          <span class="pill">Journalistes</span>
-          <span class="pill">Institutions culturelles</span>
+          <span class="pill reveal-child">Étudiants</span>
+          <span class="pill reveal-child">Artistes</span>
+          <span class="pill reveal-child">Enseignants</span>
+          <span class="pill reveal-child">Chercheurs</span>
+          <span class="pill reveal-child">Auteurs</span>
+          <span class="pill reveal-child">Journalistes</span>
+          <span class="pill reveal-child">Institutions culturelles</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Charte -->
+<!-- ── Charte ────────────────────────────────────────────────────────── -->
 <section id="charte">
+  <div class="section-watermark" aria-hidden="true">02</div>
   <div class="divider">
     <div class="divider-line"></div>
     <div class="divider-mark">02 — Charte &amp; Valeurs</div>
     <div class="divider-line"></div>
   </div>
 
-  <div class="section-inner" style="margin-top: 4rem;">
+  <div class="section-inner" style="margin-top:4.5rem;">
     <div class="charte-intro reveal">
       <span class="label-section-tag">Charte</span>
       <h2 class="charte-title">Ce que IA'm engage</h2>
       <p class="charte-sub">Apposer le label IA'm, c'est signer un pacte implicite avec son lecteur, son spectateur, son élève.</p>
     </div>
 
-    <div class="valeurs-grid reveal">
-      <div class="valeur-card">
+    <div class="valeurs-grid">
+      <div class="valeur-card reveal reveal-delay-1">
         <span class="valeur-number">01</span>
         <span class="valeur-icon">◈</span>
         <div class="valeur-name">Transparence</div>
         <p class="valeur-desc">Nommer l'IA dans la chaîne créative, sans euphémisme ni confusion. La transparence est un acte culturel avant d'être une obligation juridique.</p>
       </div>
-      <div class="valeur-card">
+      <div class="valeur-card reveal reveal-delay-2">
         <span class="valeur-number">02</span>
         <span class="valeur-icon">◇</span>
         <div class="valeur-name">Responsabilisation</div>
         <p class="valeur-desc">Assumer la co-création comme une décision d'auteur. Le label ne dilue pas la paternité de la création — il la contextualise et l'enrichit.</p>
       </div>
-      <div class="valeur-card">
+      <div class="valeur-card reveal reveal-delay-3">
         <span class="valeur-number">03</span>
         <span class="valeur-icon">◉</span>
         <div class="valeur-name">Liberté</div>
@@ -129,20 +157,21 @@
   </div>
 </section>
 
-<!-- Badge generator -->
+<!-- ── Badge generator ───────────────────────────────────────────────── -->
 <section id="badge">
+  <div class="section-watermark" aria-hidden="true">03</div>
   <div class="divider">
     <div class="divider-line"></div>
-    <div class="divider-mark">03 &mdash; G&eacute;n&eacute;rateur de badge</div>
+    <div class="divider-mark">03 — Générateur de badge</div>
     <div class="divider-line"></div>
   </div>
-  <div class="section-inner" style="margin-top:4rem;">
+  <div class="section-inner" style="margin-top:4.5rem;">
     <div class="badge-gen-layout reveal">
 
       <div class="badge-gen-left">
         <span class="label-section-tag">Votre badge</span>
-        <h2 class="label-heading">Cr&eacute;ez votre <em>signature IA&rsquo;m</em></h2>
-        <p class="badge-gen-desc">Personnalisez et t&eacute;l&eacute;chargez votre badge pour l&rsquo;apposer sur vos &oelig;uvres, publications et travaux co-cr&eacute;&eacute;s avec une IA.</p>
+        <h2 class="label-heading">Créez votre <em>signature IA&rsquo;m</em></h2>
+        <p class="badge-gen-desc">Personnalisez et téléchargez votre badge pour l'apposer sur vos œuvres, publications et travaux co-créés avec une IA.</p>
 
         <div class="gen-form">
           <div class="gen-field">
@@ -151,11 +180,11 @@
               <button class="gen-swatch swatch-trans active" data-bg="transparent" data-dark="0" onclick="pickBg(this)" title="Transparent"><span>Transp.</span></button>
               <button class="gen-swatch" data-bg="#ffffff" data-dark="0" onclick="pickBg(this)" style="background:#ffffff" title="Blanc"></button>
               <button class="gen-swatch" data-bg="#0B0E1A" data-dark="1" onclick="pickBg(this)" style="background:#0B0E1A;border-color:rgba(200,151,58,0.4)" title="Nuit"></button>
-              <button class="gen-swatch" data-bg="#0F6E56" data-dark="1" onclick="pickBg(this)" style="background:#0F6E56" title="For&ecirc;t"></button>
+              <button class="gen-swatch" data-bg="#0F6E56" data-dark="1" onclick="pickBg(this)" style="background:#0F6E56" title="Forêt"></button>
               <button class="gen-swatch" data-bg="#185FA5" data-dark="1" onclick="pickBg(this)" style="background:#185FA5" title="Marine"></button>
               <button class="gen-swatch" data-bg="#C8490B" data-dark="1" onclick="pickBg(this)" style="background:#C8490B" title="Terre"></button>
               <button class="gen-swatch" data-bg="#C8973A" data-dark="0" onclick="pickBg(this)" style="background:#C8973A" title="Or"></button>
-              <button class="gen-swatch" data-bg="#F4EFE4" data-dark="0" onclick="pickBg(this)" style="background:#F4EFE4" title="Cr&egrave;me"></button>
+              <button class="gen-swatch" data-bg="#F4EFE4" data-dark="0" onclick="pickBg(this)" style="background:#F4EFE4" title="Crème"></button>
             </div>
           </div>
           <div class="gen-field">
@@ -170,19 +199,19 @@
           <div class="gen-field">
             <label>Langue du sous-titre</label>
             <div class="gen-lang-toggle" id="lang-toggle">
-              <button class="gen-lang-btn active" data-lang="fr" onclick="pickLang(this)">Fran&ccedil;ais</button>
+              <button class="gen-lang-btn active" data-lang="fr" onclick="pickLang(this)">Français</button>
               <button class="gen-lang-btn" data-lang="en" onclick="pickLang(this)">English</button>
             </div>
           </div>
           <div class="gen-field">
-            <label>Texte personnalis&eacute;</label>
-            <input type="text" id="custom-sub" placeholder="nom, titre de l'oeuvre, date" oninput="update()"/>
-            <p class="gen-hint">ex. : Marie D. &middot; Les Yeux du Monde &middot; 2025</p>
+            <label>Texte personnalisé</label>
+            <input type="text" id="custom-sub" placeholder="nom, titre de l'œuvre, date" oninput="update()"/>
+            <p class="gen-hint">ex. : Marie D. · Les Yeux du Monde · 2025</p>
           </div>
           <div class="gen-field">
             <label>Options</label>
             <div class="gen-check-row">
-              <span>Afficher le symbole &reg;</span>
+              <span>Afficher le symbole ®</span>
               <input type="checkbox" id="opt-tm" checked onchange="update()">
             </div>
             <div class="gen-check-row">
@@ -206,22 +235,28 @@
           <span class="gen-preview-label">Transparent</span>
           <div id="preview-trans-svg"></div>
         </div>
-        <div class="download-btns" style="flex-wrap:wrap;">
-          <button class="btn-dl" onclick="downloadPNG('#ffffff')">&#8595; PNG clair</button>
-          <button class="btn-dl" onclick="downloadPNG('#0B0E1A')">&#8595; PNG sombre</button>
-          <button class="btn-dl" onclick="downloadPNG(null)">&#8595; PNG transp.</button>
-          <button class="btn-dl" id="svg-btn" onclick="copySVG()">&#8595; SVG</button>
+        <div class="download-btns">
+          <button class="btn-dl" onclick="downloadPNG('#ffffff')">↓ PNG clair</button>
+          <button class="btn-dl" onclick="downloadPNG('#0B0E1A')">↓ PNG sombre</button>
+          <button class="btn-dl" onclick="downloadPNG(null)">↓ PNG transp.</button>
+          <button class="btn-dl" id="svg-btn" onclick="copySVG()">↓ SVG</button>
         </div>
-        <p style="font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);text-align:center;">Usage libre &middot; Marque n&deg; 5212301 &middot; Classe 41</p>
+        <p style="font-family:'DM Mono',monospace;font-size:0.56rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);text-align:center;">Usage libre · Marque n° 5212301 · Classe 41</p>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- Contact -->
+<!-- ── Contact ───────────────────────────────────────────────────────── -->
 <section id="contact">
+  <div class="section-watermark" aria-hidden="true">04</div>
   <div class="section-inner">
+    <div class="divider" style="padding-left:0;padding-right:0;margin-bottom:4.5rem;">
+      <div class="divider-line"></div>
+      <div class="divider-mark">04 — Contact</div>
+      <div class="divider-line"></div>
+    </div>
     <div class="contact-layout reveal">
       <div class="contact-left">
         <span class="label-section-tag">04 — Contact</span>
@@ -234,7 +269,7 @@
           <p>Institutions scientifiques</p>
           <p>Presse &amp; médias</p>
           <br/>
-          <a href="/cdn-cgi/l/email-protection#8be6f2a5eae2a5e2e5f8e2efeecbece6eae2e7a5e8e4e6" style="color:var(--gold);font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;"><span class="__cf_email__" data-cfemail="91fce8bff0f8bff8ffe2f8f5f4d1f6fcf0f8fdbff2fefc">[email&#160;protected]</span></a>
+          <a href="mailto:my.ai.inside@gmail.com">my.ai.inside@gmail.com</a>
         </div>
       </div>
 
@@ -282,10 +317,10 @@
   </div>
 </section>
 
-<!-- Footer -->
+<!-- ── Footer ────────────────────────────────────────────────────────── -->
 <footer>
   <div class="footer-logo">
-    <img src="badges/IAm-logo.svg" alt="IA'm" width="80" height="80" loading="lazy" style="height:80px;opacity:0.85;">
+    <img src="badges/IAm-logo.svg" alt="IA'm" width="80" height="80" loading="lazy" style="height:64px;opacity:0.75;">
   </div>
   <div class="footer-text">
     Label éthique de co-création avec l'IA<br/>
