@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+y<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8"/>
@@ -11,31 +11,47 @@
   <link rel="stylesheet" href="assets/styles-with-gallery.css"/>
   <link rel="stylesheet" href="assets/css/iam-gallery.css"/>
 
-  <style id="iam-logo-size-hotfix">
-    /* Correctif : empêche le logo de navigation de prendre une taille géante. */
-    nav .nav-logo-link {
-      display: inline-flex;
-      align-items: center;
-      flex: 0 0 auto;
-      text-decoration: none;
+  <style id="iam-logo-fix">
+    /* Correctif logos IA'm : empêche le logo du menu ou du hero de prendre toute la page */
+    nav .nav-logo-fixed {
+      width: 86px !important;
+      max-width: 86px !important;
+      height: auto !important;
+      display: block !important;
+      object-fit: contain !important;
     }
 
-    nav .nav-logo-iam {
-      display: block;
-      width: auto !important;
-      height: clamp(42px, 6vw, 72px) !important;
-      max-width: 180px !important;
-      max-height: 72px !important;
-      object-fit: contain;
-      background: transparent;
-      border: 0;
-      box-shadow: none;
+    .hero-logo-propre,
+    #hero-logo {
+      width: clamp(240px, 44vw, 560px) !important;
+      max-width: 88vw !important;
+      height: auto !important;
+      display: block !important;
+      margin: 0 auto !important;
+      object-fit: contain !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      filter: drop-shadow(0 12px 32px rgba(201,169,97,0.10));
+      opacity: 0;
+      transform: scale(0.96);
+      animation: heroLogoFade 1s ease 0.2s forwards;
     }
 
-    @media (max-width: 720px) {
-      nav .nav-logo-iam {
-        height: 44px !important;
-        max-width: 128px !important;
+    @keyframes heroLogoFade {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 700px) {
+      nav .nav-logo-fixed {
+        width: 74px !important;
+        max-width: 74px !important;
+      }
+
+      .hero-logo-propre,
+      #hero-logo {
+        width: clamp(220px, 68vw, 360px) !important;
+        max-width: 86vw !important;
       }
     }
   </style>
@@ -48,12 +64,12 @@
 </div>
 
 <!-- Nav -->
-<nav><!-- Nouveau Logo IA'm -->
-  <a href="index.html#home" class="nav-logo-link" aria-label="Retour à l’accueil IA’m">
+<nav>
+  <a href="index.html" class="nav-logo-link" aria-label="Accueil IA'm">
     <img
-      src="/assets/iam-logo-cream.png"
-      alt="IA'm — Label éthique de transparence IA"
-      class="nav-logo-iam"
+      src="assets/iam-logo-cream.png"
+      alt="IA'm — Accueil"
+      class="nav-logo-fixed"
     >
   </a>
   <div class="nav-links">
@@ -79,24 +95,10 @@
     </p>
 
     <img
-      <img
-  src="assets/iam-logo-new.png"
-  alt="Logo IA'm"
-  class="hero-logo-propre"
->
+      id="hero-logo"
+      src="assets/iam-logo-cream.png"
       alt="Logo IA'm"
-      style="
-        width:min(70vw,420px);
-        height:auto;
-        opacity:0;
-        animation:fadeIn 1s 0.3s forwards;
-        display:block;
-        margin:0 auto;
-        background:transparent;
-        border:none;
-        box-shadow:none;
-        filter:none;
-      "
+      class="hero-logo-propre"
     >
 
     <div
