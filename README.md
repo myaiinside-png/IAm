@@ -22,10 +22,10 @@ Apposer IA'm est un acte libre et éclairant. Personne n'y est contraint — ni 
 *Using IA'm is a free and informed act. No one is required to do so — not by law, not by any institution. That is precisely what gives it its value.*
 
 Licence : CC BY-NC 4.0 — libre pour tout usage personnel, éducatif, artistique et associatif.
-Pour tout usage commercial ou institutionnel : [my.ai.inside@gmail.com](mailto:liolb@iam-inside.eu)
+Pour tout usage commercial ou institutionnel : (mailto:liolb@iam-inside.eu)
 
 *Licence: CC BY-NC 4.0 — free for personal, educational, artistic and non-profit use.
-For commercial or institutional use: [my.ai.inside@gmail.com](mailto:liolb@iam-inside.eu)*
+For commercial or institutional use: (mailto:liolb@iam-inside.eu)*
 
 ---
 
