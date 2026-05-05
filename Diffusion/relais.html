@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA'm — Diffuser le label</title>
+<meta name="description" content="Un mini-kit pour relayer IA'm — logo, formules de présentation, lien vers le site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1F3D;
+    --gold: #B8935A;
+    --gold-soft: #D4B98A;
+    --paper: #FBF9F4;
+    --paper-warm: #F4F1EC;
+    --border: #D5CFC2;
+    --text: #1F2A3D;
+    --muted: #6B6557;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--paper);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ----- Layout ----- */
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 32px 120px;
+  }
+
+  /* ----- Header ----- */
+  header {
+    text-align: center;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 56px;
+  }
+
+  .header-logo {
+    display: inline-block;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 28px;
+  }
+
+  .header-logo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 500;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    line-height: 1.05;
+  }
+
+  .lede {
+    font-style: italic;
+    color: var(--gold);
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .header-note {
+    margin-top: 32px;
+    font-size: 17px;
+    color: var(--muted);
+    font-style: italic;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.55;
+  }
+
+  /* ----- Section ----- */
+  section {
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-intro {
+    color: var(--muted);
+    font-size: 17px;
+    margin-bottom: 28px;
+    font-style: italic;
+    line-height: 1.55;
+  }
+
+  /* ----- Logo block ----- */
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 32px;
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+  }
+
+  .logo-preview {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-preview img {
+    width: 88px;
+    height: 88px;
+    display: block;
+  }
+
+  .logo-actions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    color: var(--navy);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .download-btn:hover {
+    background: var(--navy);
+    color: var(--paper);
+    border-color: var(--navy);
+  }
+
+  .download-btn .arrow {
+    font-size: 14px;
+    transition: transform 0.2s ease;
+  }
+
+  .download-btn:hover .arrow {
+    transform: translate(2px, -2px);
+  }
+
+  /* ----- Text blocks ----- */
+  .text-block {
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    margin-bottom: 18px;
+    position: relative;
+  }
+
+  .text-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dotted var(--border);
+  }
+
+  .text-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  .copy-btn {
+    background: none;
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    cursor: pointer;
+    padding: 4px 8px;
+    margin: -4px -8px;
+    transition: color 0.2s ease;
+  }
+
+  .copy-btn:hover {
+    color: var(--navy);
+  }
+
+  .copy-btn.copied {
+    color: var(--navy);
+  }
+
+  .text-block-content {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .text-block-content p + p {
+    margin-top: 12px;
+  }
+
+  /* ----- Link block ----- */
+  .link-block {
+    background: var(--navy);
+    color: var(--paper);
+    padding: 32px;
+    text-align: center;
+  }
+
+  .link-block .url {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    color: var(--gold-soft);
+    text-decoration: none;
+    margin-top: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+
+  .link-block .url:hover {
+    border-bottom-color: var(--gold-soft);
+  }
+
+  .link-block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold-soft);
+    opacity: 0.7;
+  }
+
+  /* ----- Footer ----- */
+  footer {
+    margin-top: 80px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  footer a {
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    color: var(--navy);
+  }
+
+  /* ----- Responsive ----- */
+  @media (max-width: 600px) {
+    .wrap { padding: 56px 20px 80px; }
+    h1 { font-size: 40px; }
+    h2 { font-size: 26px; }
+    .logo-block { flex-direction: column; align-items: stretch; gap: 20px; padding: 24px; }
+    .logo-preview { width: 100%; height: 160px; }
+    .text-block { padding: 22px 20px; }
+  }
+
+  /* ----- Toast ----- */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--navy);
+    color: var(--paper);
+    padding: 12px 24px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="header-logo">
+      <img src="iam-logo.svg" alt="IA'm">
+    </div>
+    <h1>Diffuser IA'm</h1>
+    <div class="lede">Un mini-kit pour relayer le label</div>
+    <p class="header-note">Si vous souhaitez parler d'IA'm autour de vous, voici de quoi le faire simplement&nbsp;: le logo, quelques formules prêtes à coller, et le lien vers le site. À utiliser librement, dans la forme qui vous convient.</p>
+  </header>
+
+  <!-- ============ LOGO ============ -->
+  <section>
+    <div class="section-label">01 — Logo</div>
+    <h2>Le signe</h2>
+    <p class="section-intro">Disponible en SVG (vectoriel, idéal pour le web et l'impression) et en PNG (pour un usage rapide dans un mail ou un document).</p>
+
+    <div class="logo-block">
+      <div class="logo-preview">
+        <img src="iam-logo.svg" alt="Logo IA'm">
+      </div>
+      <div class="logo-actions">
+        <a href="iam-logo.svg" download="IAm-logo.svg" class="download-btn">
+          <span>Télécharger le SVG</span>
+          <span class="arrow">↗</span>
+        </a>
+        <a href="iam-logo.png" download="IAm-logo.png" class="download-btn">
+          <span>Télécharger le PNG</span>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FORMULES ============ -->
+  <section>
+    <div class="section-label">02 — Formules de présentation</div>
+    <h2>Trois longueurs, trois usages</h2>
+    <p class="section-intro">Choisissez la formule qui s'adapte au contexte&nbsp;: une signature, un paragraphe court, ou une présentation plus complète.</p>
+
+    <!-- Une phrase -->
+    <div class="text-block">
+      <div class="text-block-header">
+        <span class="text-block-label">En une phrase</span>
+        <button class="copy-btn" data-copy="phrase-1">Copier</button>
+      </div>
+      <div class="text-block-content" id="phrase-1">
+        IA'm est un label volontaire de transparence pour la co-création humain-IA — <a href="https://iam-inside.eu" style="color: var(--gold); text-decoration: none;">iam-inside.eu</a>
+      </div>
+    </div>
+
+    <!-- Un paragraphe court -->
+    <div class="text-block">
+      <div class="text-block-header">
+        <span class="text-block-label">Un paragraphe court</span>
+        <button class="copy-btn" data-copy="phrase-2">Copier</button>
+      </div>
+      <div class="text-block-content" id="phrase-2">
+        IA'm est un label volontaire de transparence pour la co-création humain-IA. Il propose trois niveaux de déclaration — Assisté, Initié, Généré — que le créateur appose lui-même sur sa production. Gratuit, ouvert, sans inscription. <a href="https://iam-inside.eu" style="color: var(--gold); text-decoration: none;">iam-inside.eu</a>
+      </div>
+    </div>
+
+    <!-- Un paragraphe long -->
+    <div class="text-block">
+      <div class="text-block-header">
+        <span class="text-block-label">Un paragraphe long</span>
+        <button class="copy-btn" data-copy="phrase-3">Copier</button>
+      </div>
+      <div class="text-block-content" id="phrase-3">
+        <p>IA'm est un label volontaire de transparence pour la co-création humain-IA, déposé à l'INPI (classe 41) et publié sous licence Creative Commons BY-NC 4.0. Il propose trois niveaux de déclaration — Assisté, Initié, Généré — fondés sur un seul critère&nbsp;: qui porte la décision créative.</p>
+        <p>Le créateur appose lui-même le badge sur sa production. Pas de certification par un tiers, pas de détection algorithmique, pas d'inscription. Une grammaire simple, ouverte, à la disposition de toute personne ou institution qui souhaite s'en emparer.</p>
+        <p><a href="https://iam-inside.eu" style="color: var(--gold); text-decoration: none;">iam-inside.eu</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MESSAGES À TRANSMETTRE ============ -->
+  <section>
+    <div class="section-label">03 — Pour recommander à un tiers</div>
+    <h2>Deux versions, deux postures</h2>
+    <p class="section-intro">À utiliser dans un mail, un message, ou une introduction écrite. La version neutre se colle telle quelle. La version personnelle invite à reformuler en fonction de votre interlocuteur.</p>
+
+    <!-- Version neutre -->
+    <div class="text-block">
+      <div class="text-block-header">
+        <span class="text-block-label">Version neutre</span>
+        <button class="copy-btn" data-copy="msg-1">Copier</button>
+      </div>
+      <div class="text-block-content" id="msg-1">
+        IA'm est un label volontaire de transparence pour la co-création humain-IA. Il propose trois niveaux de déclaration (Assisté, Initié, Généré) que le créateur appose lui-même sur sa production. Gratuit, ouvert, sans inscription. Plus d'informations sur <a href="https://iam-inside.eu" style="color: var(--gold); text-decoration: none;">iam-inside.eu</a>.
+      </div>
+    </div>
+
+    <!-- Version engagée -->
+    <div class="text-block">
+      <div class="text-block-header">
+        <span class="text-block-label">Version personnelle</span>
+        <button class="copy-btn" data-copy="msg-2">Copier</button>
+      </div>
+      <div class="text-block-content" id="msg-2">
+        Je vous transmets IA'm, un label volontaire de transparence pour la co-création humain-IA porté par Lionel Le Berre. Trois niveaux, une déclaration libre du créateur, sans certification ni détection. Cela m'a paru cohérent avec [votre démarche / ce que vous faites / votre contexte]. À découvrir sur <a href="https://iam-inside.eu" style="color: var(--gold); text-decoration: none;">iam-inside.eu</a>.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIEN ============ -->
+  <section>
+    <div class="section-label">04 — Le lien</div>
+    <h2>Pour aller plus loin</h2>
+    <p class="section-intro">Toujours diriger vers le site officiel — pas le repo GitHub, pas une page intermédiaire.</p>
+
+    <div class="link-block">
+      <div class="link-block-label">Site officiel</div>
+      <a href="https://iam-inside.eu" class="url">iam-inside.eu</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>IA'm — Label volontaire de transparence pour la co-création humain-IA<br>
+    INPI n° 5212301 (classe 41) · CC BY-NC 4.0<br>
+    <a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a> · <a href="https://iam-inside.eu">iam-inside.eu</a></p>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast">Copié dans le presse-papier</div>
+
+<script>
+  // Copie du texte au clic, en gardant la mise en forme texte simple (URL incluses)
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-copy');
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      // Récupère le texte avec les URLs développées
+      const clone = target.cloneNode(true);
+      // Pas de transformation supplémentaire — innerText préserve les sauts de ligne logiques
+      const text = clone.innerText.trim();
+
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copié';
+        btn.classList.add('copied');
+        showToast();
+        setTimeout(() => {
+          btn.textContent = 'Copier';
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(err => {
+        console.error('Copie impossible:', err);
+        btn.textContent = 'Erreur';
+        setTimeout(() => { btn.textContent = 'Copier'; }, 2000);
+      });
+    });
+  });
+
+  // Toast
+  let toastTimeout;
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+</script>
+
+</body>
+</html>
