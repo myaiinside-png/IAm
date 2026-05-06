@@ -1,3 +1,69 @@
+y<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IA'm — Label éthique gratuit de transparence IA pour créateurs</title>
+  <meta name="description" content="IA'm est le label gratuit qui permet aux artistes, auteurs, enseignants et créateurs de déclarer de façon transparente la part d’IA dans leurs œuvres culturelles, artistiques ou éducatives. Charte éthique, générateur de badge et gouvernance ouverte."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/styles-with-gallery.css"/>
+  <link rel="stylesheet" href="assets/css/iam-gallery.css"/>
+
+  <style id="iam-logo-fix">
+    /* Correctif logos IA'm : empêche le logo du menu ou du hero de prendre toute la page */
+    nav .nav-logo-fixed {
+      width: 86px !important;
+      max-width: 86px !important;
+      height: auto !important;
+      display: block !important;
+      object-fit: contain !important;
+    }
+
+    .hero-logo-propre,
+    #hero-logo {
+      width: clamp(240px, 44vw, 560px) !important;
+      max-width: 88vw !important;
+      height: auto !important;
+      display: block !important;
+      margin: 0 auto !important;
+      object-fit: contain !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      filter: drop-shadow(0 12px 32px rgba(201,169,97,0.10));
+      opacity: 0;
+      transform: scale(0.96);
+      animation: heroLogoFade 1s ease 0.2s forwards;
+    }
+
+    @keyframes heroLogoFade {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 700px) {
+      nav .nav-logo-fixed {
+        width: 74px !important;
+        max-width: 74px !important;
+      }
+
+      .hero-logo-propre,
+      #hero-logo {
+        width: clamp(220px, 68vw, 360px) !important;
+        max-width: 86vw !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor">
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+</div>
+
+<!-- Nav -->
 <nav>
   <a href="index.html" class="nav-logo-link" aria-label="Accueil IA'm">
     <img
@@ -7,18 +73,16 @@
     >
   </a>
   <div class="nav-links">
-    <a href="index.html#label">Le label</a>
-    <a href="mode-emploi.html">Mode d'emploi</a>
-    <a href="index.html#realisations">Réalisations</a>
-    <a href="index.html#charte">Charte</a>
-    <a href="badge-v5.html">Badge</a>
-    <a href="/certificats/">Certificats</a>
-    <a href="docs/offre-pro.html">Offre pro</a>
-    <a href="index.html#apropos">À propos</a>
-    <a href="index.html#contact">Contact</a>
-    <a href="faq.html">FAQ</a>
-  </div>
-</nav>
+  <a href="index.html#label">Le label</a>
+  <a href="mode-emploi.html">Mode d’emploi</a>
+  <a href="index.html#realisations">Réalisations</a>
+  <a href="index.html#charte">Charte</a>
+  <a href="badge-v5.html">Badge</a>
+        <a href="/certificats/">Certificats</a>
+  <a href="index.html#apropos">À propos</a>
+  <a href="index.html#contact">Contact</a>
+  <a href="faq.html">FAQ</a>
+</div>
 </nav>
 
 <!-- Hero -->
@@ -34,7 +98,6 @@
   src="assets/iam-logo-cream.png"
   alt="Logo IA'm"
   class="hero-logo-propre"
-
 >
 
     <div
