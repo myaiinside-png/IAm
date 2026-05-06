@@ -248,3 +248,7 @@
     padding-top: 6.2rem;
   }
 }
+.nav-logo-fixed {
+  height: 36px;
+  width: auto;
+}
