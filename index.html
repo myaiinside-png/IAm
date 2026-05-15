@@ -431,6 +431,7 @@
       display: flex;
     }
 
+    /* Mode normal : image cadrée */
     .lightbox-content {
       max-width: 95vw;
       position: relative;
@@ -448,7 +449,42 @@
       object-fit: contain;
       border-radius: 12px;
       background: var(--bg);
-      image-rendering: -webkit-optimize-contrast;
+      cursor: zoom-in;
+      transition: opacity .2s ease;
+    }
+
+    /* Mode zoom : image à 100%, scrollable */
+    .lightbox.zoomed {
+      align-items: flex-start;
+      justify-content: flex-start;
+      overflow: auto;
+      padding: 0;
+    }
+
+    .lightbox.zoomed .lightbox-content {
+      max-width: none;
+      width: auto;
+      min-width: 100%;
+      min-height: 100vh;
+      display: block;
+      padding: 4rem 1rem 2rem;
+    }
+
+    .lightbox.zoomed .lightbox-image {
+      width: auto;
+      height: auto;
+      max-width: none;
+      max-height: none;
+      cursor: zoom-out;
+      border-radius: 0;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .lightbox.zoomed .lightbox-caption,
+    .lightbox.zoomed .lightbox-prev,
+    .lightbox.zoomed .lightbox-next {
+      display: none;
     }
 
     .lightbox-caption {
@@ -456,6 +492,25 @@
       font-size: 1.3rem;
       color: var(--bg);
       font-style: italic;
+    }
+
+    .lightbox-hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(246,241,231,.55);
+    }
+
+    .lightbox.zoomed .lightbox-hint {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(26,29,46,.85);
+      padding: .5rem 1rem;
+      border-radius: 999px;
+      z-index: 101;
     }
 
     .lightbox-close,
@@ -486,6 +541,13 @@
     .lightbox-close {
       top: -60px;
       right: 0;
+    }
+
+    .lightbox.zoomed .lightbox-close {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 101;
     }
 
     .lightbox-prev {
@@ -754,7 +816,7 @@
       <div class="wrap hero-grid">
         <div class="hero-text">
           <div class="eyebrow">Label éthique de transparence</div>
-          <h1>Pour l'humain, par l'humain, avec l'IA.</h1>
+          <h1>Par l'humain, pour l'humain, avec l'IA.</h1>
           <p>IA'm est un badge simple pour déclarer clairement la part de l'intelligence artificielle dans une œuvre, un texte, une image ou un projet. Plus de clarté, moins d'ambiguïté.</p>
           <div class="actions">
             <a class="btn btn-primary" href="badge-v5.html">Générer mon badge</a>
@@ -997,6 +1059,7 @@
       <button class="lightbox-next" id="lightboxNext" aria-label="Suivant">›</button>
       <img class="lightbox-image" id="lightboxImage" alt="">
       <div class="lightbox-caption" id="lightboxCaption"></div>
+      <div class="lightbox-hint" id="lightboxHint">Cliquez sur l'image pour zoomer</div>
     </div>
   </div>
 
@@ -1029,11 +1092,13 @@
         lbImage.alt = item.dataset.caption || '';
         lbCaption.textContent = item.dataset.caption || '';
         lightbox.classList.add('open');
+        lightbox.classList.remove('zoomed');
         document.body.style.overflow = 'hidden';
       }
 
       function closeLightbox() {
         lightbox.classList.remove('open');
+        lightbox.classList.remove('zoomed');
         document.body.style.overflow = '';
       }
 
@@ -1047,13 +1112,37 @@
         showLightbox(currentIndex);
       }
 
+      const lbHint = document.getElementById('lightboxHint');
+
+      function toggleZoom() {
+        const isZoomed = lightbox.classList.toggle('zoomed');
+        if (isZoomed) {
+          lbHint.textContent = "Cliquez à nouveau pour réduire · Échap pour fermer";
+          lightbox.scrollTop = 0;
+        } else {
+          lbHint.textContent = "Cliquez sur l'image pour zoomer";
+        }
+      }
+
+      function exitZoom() {
+        if (lightbox.classList.contains('zoomed')) {
+          lightbox.classList.remove('zoomed');
+          lbHint.textContent = "Cliquez sur l'image pour zoomer";
+        }
+      }
+
       cases.forEach((c, i) => {
         c.addEventListener('click', () => showLightbox(i));
       });
 
+      lbImage.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleZoom();
+      });
+
       lbClose.addEventListener('click', closeLightbox);
-      lbNext.addEventListener('click', nextItem);
-      lbPrev.addEventListener('click', prevItem);
+      lbNext.addEventListener('click', (e) => { e.stopPropagation(); exitZoom(); nextItem(); });
+      lbPrev.addEventListener('click', (e) => { e.stopPropagation(); exitZoom(); prevItem(); });
 
       lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
@@ -1061,9 +1150,12 @@
 
       document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') nextItem();
-        if (e.key === 'ArrowLeft') prevItem();
+        if (e.key === 'Escape') {
+          if (lightbox.classList.contains('zoomed')) exitZoom();
+          else closeLightbox();
+        }
+        if (e.key === 'ArrowRight') { exitZoom(); nextItem(); }
+        if (e.key === 'ArrowLeft') { exitZoom(); prevItem(); }
       });
     })();
   </script>
