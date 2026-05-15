@@ -1,13 +1,7 @@
 /* ==========================================================================
    IA'm — Feuille de style partagée
-   Toutes les pages du site utilisent ce fichier comme base commune.
-   Pour modifier les couleurs, polices ou la grammaire visuelle globale,
-   c'est ici qu'il faut intervenir.
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. VARIABLES GLOBALES — palette, polices, mesures
-   -------------------------------------------------------------------------- */
 :root {
   --bg: #f6f1e7;
   --panel: #fdfaf3;
@@ -21,9 +15,6 @@
   --max: 1120px;
 }
 
-/* --------------------------------------------------------------------------
-   2. RESET ET BASE
-   -------------------------------------------------------------------------- */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -41,9 +32,7 @@ img { max-width: 100%; display: block; }
   margin: 0 auto;
 }
 
-/* --------------------------------------------------------------------------
-   3. TYPOGRAPHIE
-   -------------------------------------------------------------------------- */
+/* Typographie */
 h1, h2, h3 {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
@@ -51,7 +40,10 @@ h1, h2, h3 {
   margin: 0;
   color: var(--text);
 }
-
+h1 {
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  max-width: 16ch;
+}
 .eyebrow {
   font-family: 'DM Mono', monospace;
   text-transform: uppercase;
@@ -61,9 +53,7 @@ h1, h2, h3 {
   margin-bottom: 1rem;
 }
 
-/* --------------------------------------------------------------------------
-   4. NAVIGATION (commune à toutes les pages)
-   -------------------------------------------------------------------------- */
+/* Navigation */
 .nav {
   position: sticky;
   top: 0;
@@ -72,7 +62,6 @@ h1, h2, h3 {
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
-
 .nav-inner {
   width: min(var(--max), calc(100% - 2rem));
   margin: 0 auto;
@@ -82,19 +71,13 @@ h1, h2, h3 {
   gap: 1rem;
   min-height: 76px;
 }
-
 .nav-brand {
   display: inline-flex;
   align-items: center;
   transition: opacity .2s ease;
 }
 .nav-brand:hover { opacity: 0.75; }
-.nav-brand img {
-  width: 72px;
-  height: auto;
-  display: block;
-}
-
+.nav-brand img { width: 72px; height: auto; display: block; }
 .nav-links {
   display: flex;
   gap: 1rem;
@@ -105,16 +88,13 @@ h1, h2, h3 {
 }
 .nav-links a:hover { color: var(--text); }
 
-/* --------------------------------------------------------------------------
-   5. BOUTONS
-   -------------------------------------------------------------------------- */
+/* Boutons */
 .actions {
   display: flex;
   gap: .9rem;
   flex-wrap: wrap;
   margin-top: 2rem;
 }
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -136,22 +116,45 @@ h1, h2, h3 {
   color: var(--bg);
   border-color: transparent;
 }
-.btn-primary:hover {
-  background: var(--gold);
-  color: var(--bg);
-}
+.btn-primary:hover { background: var(--gold); color: var(--bg); }
 .btn-secondary { background: transparent; }
 .btn-secondary:hover { border-color: var(--text); }
 .btn:hover { transform: translateY(-1px); }
 
-/* --------------------------------------------------------------------------
-   6. SECTIONS GÉNÉRIQUES
-   -------------------------------------------------------------------------- */
+/* Hero (accueil) */
+.hero { padding: 5rem 0 4rem; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 2rem;
+  align-items: center;
+}
+.hero-text {
+  text-align: center;
+  display: grid;
+  justify-items: center;
+}
+.hero-text h1, .hero-text p { margin-left: auto; margin-right: auto; }
+.hero p {
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 1.25rem 0 0;
+}
+.hero-card {
+  background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+  border: 1px solid var(--gold-border);
+  border-radius: 24px;
+  padding: 2rem;
+  text-align: center;
+}
+.hero-card img { width: min(320px, 100%); margin: 0 auto; }
+
+/* Sections */
 .section {
   padding: 4.5rem 0;
   border-top: 1px solid var(--line);
 }
-
 .section-head {
   display: grid;
   gap: .6rem;
@@ -163,9 +166,12 @@ h1, h2, h3 {
   max-width: 65ch;
 }
 
-/* --------------------------------------------------------------------------
-   7. CARTES GÉNÉRIQUES
-   -------------------------------------------------------------------------- */
+/* Cartes */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
 .card {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -180,14 +186,373 @@ h1, h2, h3 {
   text-transform: uppercase;
   margin-bottom: .75rem;
 }
-.card p {
-  margin: .65rem 0 0;
+.card p { margin: .65rem 0 0; color: var(--muted); }
+
+/* Encart étymologique */
+.etymology {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.75rem;
+  border-left: 2px solid var(--gold);
+  max-width: 60ch;
+}
+.etymology .label {
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: .6rem;
+}
+.etymology p {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+.etymology .iam { font-style: italic; color: var(--gold); }
+
+/* Niveaux */
+.levels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.level {
+  padding: 1.75rem 1.4rem;
+  border-radius: 20px;
+  border: 1px solid var(--gold-border);
+  background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+  display: grid;
+  gap: .6rem;
+}
+.level-tag {
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.level h3 { font-size: 2rem; }
+.level p { color: var(--muted); margin: 0; }
+.level .who {
+  margin-top: .4rem;
+  padding-top: .8rem;
+  border-top: 1px dashed var(--gold-border);
+  font-size: .9rem;
   color: var(--muted);
 }
+.level .who strong { color: var(--text); font-weight: 500; }
+.criterion {
+  margin-top: 1.5rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: 14px;
+  background: var(--gold-soft);
+  border: 1px solid var(--gold-border);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--text);
+  text-align: center;
+}
 
-/* --------------------------------------------------------------------------
-   8. FOOTER (commun à toutes les pages)
-   -------------------------------------------------------------------------- */
+/* Mode d'emploi */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.step {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 1.4rem;
+  display: grid;
+  gap: .6rem;
+}
+.step .num {
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  font-size: .72rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.step h3 { font-size: 1.5rem; }
+.step p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+/* Galerie cas d'usages */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.case {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--panel);
+  cursor: zoom-in;
+  transition: transform .25s ease, border-color .25s ease;
+}
+.case:hover { transform: translateY(-3px); border-color: var(--gold-border); }
+.case-img-wrap { overflow: hidden; aspect-ratio: 1 / 1; }
+.case img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #eee;
+  transition: transform .4s ease;
+}
+.case:hover img { transform: scale(1.05); }
+.case .cap { padding: .9rem; color: var(--muted); font-size: .95rem; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,29,46,.94);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+}
+.lightbox.open { display: flex; }
+.lightbox-content {
+  max-width: 95vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.lightbox-image {
+  width: min(85vw, 85vh);
+  height: min(85vw, 85vh);
+  max-width: 95vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 12px;
+  background: var(--bg);
+  cursor: zoom-in;
+  transition: opacity .2s ease;
+}
+.lightbox.zoomed {
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: auto;
+  padding: 0;
+}
+.lightbox.zoomed .lightbox-content {
+  max-width: none;
+  width: auto;
+  min-width: 100%;
+  min-height: 100vh;
+  display: block;
+  padding: 4rem 1rem 2rem;
+}
+.lightbox.zoomed .lightbox-image {
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
+  border-radius: 0;
+  margin: 0 auto;
+  display: block;
+}
+.lightbox.zoomed .lightbox-caption,
+.lightbox.zoomed .lightbox-prev,
+.lightbox.zoomed .lightbox-next { display: none; }
+.lightbox-caption {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: var(--bg);
+  font-style: italic;
+}
+.lightbox-hint {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(246,241,231,.55);
+}
+.lightbox.zoomed .lightbox-hint {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(26,29,46,.85);
+  padding: .5rem 1rem;
+  border-radius: 999px;
+  z-index: 101;
+}
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: rgba(246,241,231,.15);
+  border: 1px solid rgba(246,241,231,.3);
+  color: var(--bg);
+  font-size: 1.4rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover { background: rgba(246,241,231,.3); }
+.lightbox-close { top: -60px; right: 0; }
+.lightbox.zoomed .lightbox-close {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 101;
+}
+.lightbox-prev { top: 50%; left: -70px; transform: translateY(-50%); }
+.lightbox-next { top: 50%; right: -70px; transform: translateY(-50%); }
+
+/* Réalisations */
+.realisations {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+.realisation {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .25s ease, border-color .25s ease;
+}
+.realisation:hover { transform: translateY(-3px); border-color: var(--gold-border); }
+.realisation-img { aspect-ratio: 1 / 1.6; overflow: hidden; background: #111; }
+.realisation-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+.realisation:hover .realisation-img img { transform: scale(1.03); }
+.realisation-body {
+  padding: 1.25rem 1.4rem 1.4rem;
+  display: grid;
+  gap: .5rem;
+}
+.realisation-level {
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.realisation h3 { font-size: 1.4rem; line-height: 1.15; }
+.realisation-author {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.realisation-link {
+  margin-top: .5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+}
+.realisation-link::after { content: "→"; transition: transform .2s ease; }
+.realisation:hover .realisation-link::after { transform: translateX(3px); }
+.realisations-empty {
+  padding: 2rem 1.5rem;
+  border: 1px dashed var(--gold-border);
+  border-radius: 20px;
+  text-align: center;
+  color: var(--muted);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5;
+}
+.realisations-empty a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* Ressources */
+.resources {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.resource {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  transition: .25s ease;
+  min-height: 240px;
+}
+.resource:hover { border-color: var(--gold-border); transform: translateY(-2px); }
+.resource-head { display: grid; gap: .6rem; }
+.resource .kind {
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.resource h3 { font-size: 1.75rem; }
+.resource p { margin: 0; color: var(--muted); font-size: .95rem; }
+.resource-link {
+  font-family: 'DM Mono', monospace;
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+.resource-link::after { content: "→"; transition: transform .2s ease; }
+.resource:hover .resource-link::after { transform: translateX(3px); }
+
+/* CTA-band */
+.cta-band { padding: 4.5rem 0 5.5rem; }
+.cta-box {
+  border-radius: 28px;
+  background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+  border: 1px solid var(--gold-border);
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+}
+.cta-box p { margin: 0; color: var(--muted); }
+
+/* Footer */
 .footer {
   border-top: 1px solid var(--line);
   padding: 2rem 0 3rem;
@@ -202,9 +567,7 @@ h1, h2, h3 {
   flex-wrap: wrap;
 }
 
-/* --------------------------------------------------------------------------
-   9. PAGE DE CONTENU (utilisée par textes.html, bd.html, et pages d'article)
-   -------------------------------------------------------------------------- */
+/* Page de contenu (textes, bd, articles) */
 .page-header {
   padding: 4rem 0 3rem;
   text-align: center;
@@ -221,25 +584,14 @@ h1, h2, h3 {
   font-size: 1.05rem;
 }
 
-/* Contenu d'article — pour les pages Textes, BD, etc. */
 .article {
   max-width: 70ch;
   margin: 0 auto;
   padding: 2rem 0 4rem;
 }
-.article h2 {
-  font-size: 2rem;
-  margin: 2.5rem 0 1rem;
-}
-.article h3 {
-  font-size: 1.4rem;
-  margin: 2rem 0 .8rem;
-}
-.article p {
-  margin: 0 0 1.2rem;
-  color: var(--text);
-  font-size: 1.05rem;
-}
+.article h2 { font-size: 2rem; margin: 2.5rem 0 1rem; }
+.article h3 { font-size: 1.4rem; margin: 2rem 0 .8rem; }
+.article p { margin: 0 0 1.2rem; color: var(--text); font-size: 1.05rem; }
 .article a {
   color: var(--gold);
   text-decoration: underline;
@@ -250,14 +602,12 @@ h1, h2, h3 {
   margin: 1.5rem 0;
   padding: 1.2rem 1.5rem;
   border-left: 2px solid var(--gold);
-  background: transparent;
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-size: 1.2rem;
   color: var(--text);
 }
 
-/* Liste d'articles — pour la page textes.html quand il y aura plusieurs entrées */
 .article-list {
   display: grid;
   gap: 1rem;
@@ -271,10 +621,7 @@ h1, h2, h3 {
   transition: .25s ease;
   display: block;
 }
-.article-card:hover {
-  border-color: var(--gold-border);
-  transform: translateY(-2px);
-}
+.article-card:hover { border-color: var(--gold-border); transform: translateY(-2px); }
 .article-card .date {
   font-family: 'DM Mono', monospace;
   color: var(--gold);
@@ -283,17 +630,9 @@ h1, h2, h3 {
   text-transform: uppercase;
   margin-bottom: .5rem;
 }
-.article-card h3 {
-  font-size: 1.5rem;
-  margin: 0 0 .5rem;
-}
-.article-card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: .95rem;
-}
+.article-card h3 { font-size: 1.5rem; margin: 0 0 .5rem; }
+.article-card p { margin: 0; color: var(--muted); font-size: .95rem; }
 
-/* Placeholder pour pages en préparation */
 .placeholder {
   text-align: center;
   max-width: 60ch;
@@ -312,14 +651,125 @@ h1, h2, h3 {
   line-height: 1.4;
   color: var(--text);
 }
-.placeholder .actions {
+.placeholder .actions { justify-content: center; margin-top: 2.5rem; }
+
+/* FAQ */
+.faq-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.faq-item {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: border-color .25s ease;
+}
+.faq-item:hover { border-color: var(--gold-border); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: color .2s ease;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  flex-shrink: 0;
+  transition: transform .3s ease;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 2.5rem;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary .en {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .12em;
+  color: var(--muted);
+  font-weight: 400;
+  margin-top: .35rem;
+  text-transform: uppercase;
+}
+.faq-content {
+  padding: 0 1.6rem 1.4rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
+  display: grid;
+  gap: .8rem;
+}
+.faq-content .lang-fr { color: var(--text); }
+.faq-content .lang-en {
+  color: var(--muted);
+  font-style: italic;
+  padding-top: .6rem;
+  border-top: 1px dashed var(--line);
+  font-size: .92rem;
+}
+.faq-content .lang-en::before {
+  content: "EN · ";
+  font-family: 'DM Mono', monospace;
+  font-style: normal;
+  font-size: .68rem;
+  letter-spacing: .15em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.faq-content a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
-/* --------------------------------------------------------------------------
-   10. RESPONSIVE (commun à toutes les pages)
-   -------------------------------------------------------------------------- */
+.contact-block {
+  margin-top: 2.5rem;
+  padding: 2rem;
+  border-radius: 20px;
+  background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+  border: 1px solid var(--gold-border);
+  text-align: center;
+}
+.contact-block .eyebrow { margin-bottom: .75rem; }
+.contact-block h2 { font-size: 1.75rem; margin-bottom: .5rem; }
+.contact-block a.email {
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: .95rem;
+  letter-spacing: .05em;
+  margin-top: .5rem;
+  display: inline-block;
+}
+.contact-block a.email:hover { text-decoration: underline; }
+
+/* Responsive */
 @media (max-width: 980px) {
+  .hero-grid, .cards, .gallery, .levels, .steps, .resources, .realisations {
+    grid-template-columns: 1fr;
+  }
   .nav-links { font-size: .85rem; }
+}
+@media (max-width: 980px) and (min-width: 600px) {
+  .steps, .gallery, .realisations { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
+  .lightbox-close { top: 10px; right: 10px; }
 }
