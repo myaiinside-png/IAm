@@ -60,10 +60,25 @@
     }
 
     /* Logo : on inverse pour qu'il apparaisse sombre sur fond clair */
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--text);
+      transition: transform .2s ease;
+    }
+
+    .nav-brand:hover {
+      transform: scale(1.05);
+    }
+
     .nav-brand img {
-      width: 72px;
+      width: 46px;
       height: auto;
-      filter: invert(1) brightness(0.15);
+      display: block;
     }
 
     .nav-links {
@@ -409,12 +424,12 @@
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(26,29,46,.92);
+      background: rgba(26,29,46,.94);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 100;
-      padding: 2rem;
+      padding: 1rem;
     }
 
     .lightbox.open {
@@ -422,8 +437,7 @@
     }
 
     .lightbox-content {
-      max-width: 90vw;
-      max-height: 85vh;
+      max-width: 95vw;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -432,11 +446,16 @@
     }
 
     .lightbox-image {
-      max-width: 90vw;
-      max-height: 75vh;
+      width: auto;
+      height: auto;
+      max-width: 95vw;
+      max-height: 88vh;
+      min-width: min(600px, 90vw);
+      min-height: min(600px, 70vh);
       object-fit: contain;
       border-radius: 12px;
       background: var(--bg);
+      image-rendering: -webkit-optimize-contrast;
     }
 
     .lightbox-caption {

@@ -62,10 +62,25 @@
       min-height: 76px;
     }
 
+    .nav-brand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--text);
+      transition: transform .2s ease;
+    }
+
+    .nav-brand:hover {
+      transform: scale(1.05);
+    }
+
     .nav-brand img {
-      width: 72px;
+      width: 46px;
       height: auto;
-      filter: invert(1) brightness(0.15);
+      display: block;
     }
 
     .nav-links {
