@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA'm — Le badge de transparence pour créer avec l'IA</title>
+  <meta name="description" content="IA'm est le badge gratuit de transparence pour celles et ceux qui créent avec l'intelligence artificielle. Simple, clair et ouvert." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    :root {
+      --bg: #f6f1e7;
+      --panel: #fdfaf3;
+      --text: #1a1d2e;
+      --muted: rgba(26,29,46,.66);
+      --gold: #a67821;
+      --gold-soft: rgba(166,120,33,.10);
+      --gold-border: rgba(166,120,33,.28);
+      --line: rgba(26,29,46,.10);
+      --line-strong: rgba(26,29,46,.16);
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(246,241,231,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 76px;
+    }
+
+    .nav-brand img {
+      width: 72px;
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      padding: 5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-text {
+      text-align: center;
+      display: grid;
+      justify-items: center;
+    }
+
+    .hero-text h1 {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-text p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--gold);
+      font-size: .72rem;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      line-height: 1.05;
+      margin: 0;
+      color: var(--text);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      max-width: 16ch;
+    }
+
+    .hero p {
+      max-width: 60ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 1.25rem 0 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: .9rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: .9rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      transition: .2s ease;
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: transparent;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .btn-secondary {
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero-card {
+      background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+      border: 1px solid var(--gold-border);
+      border-radius: 24px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .hero-card img {
+      width: min(320px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero-card p {
+      margin: 1rem 0 0;
+      color: var(--text);
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+    }
+
+    .section {
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      gap: .6rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 65ch;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.4rem;
+    }
+
+    .card .num {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold);
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: .75rem;
+    }
+
+    .card p {
+      margin: .65rem 0 0;
+      color: var(--muted);
+    }
+
+    /* Section niveaux */
+    .levels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .level {
+      position: relative;
+      padding: 1.75rem 1.4rem;
+      border-radius: 20px;
+      border: 1px solid var(--gold-border);
+      background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+      display: grid;
+      gap: .6rem;
+    }
+
+    .level-tag {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold);
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .level h3 {
+      font-size: 2rem;
+    }
+
+    .level p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .level .who {
+      margin-top: .4rem;
+      padding-top: .8rem;
+      border-top: 1px dashed var(--gold-border);
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .level .who strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .criterion {
+      margin-top: 1.5rem;
+      padding: 1.1rem 1.3rem;
+      border-radius: 14px;
+      background: var(--gold-soft);
+      border: 1px solid var(--gold-border);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--text);
+      text-align: center;
+    }
+
+    /* Encart étymologique */
+    .etymology {
+      margin-top: 2.5rem;
+      padding: 1.5rem 1.75rem;
+      border-left: 2px solid var(--gold);
+      background: transparent;
+      max-width: 60ch;
+    }
+
+    .etymology .label {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold);
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+    }
+
+    .etymology p {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .etymology .iam {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* Mode d'emploi */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .step {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.4rem;
+      display: grid;
+      gap: .6rem;
+    }
+
+    .step .num {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold);
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .step h3 {
+      font-size: 1.5rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .case {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--panel);
+    }
+
+    .case img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .case .cap {
+      padding: .9rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* Section ressources */
+    .resources {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .resource {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      transition: .25s ease;
+      min-height: 240px;
+    }
+
+    .resource:hover {
+      border-color: var(--gold-border);
+      transform: translateY(-2px);
+    }
+
+    .resource-head {
+      display: grid;
+      gap: .6rem;
+    }
+
+    .resource .kind {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold);
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .resource h3 {
+      font-size: 1.75rem;
+    }
+
+    .resource p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .resource-link {
+      font-family: 'DM Mono', monospace;
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .resource-link::after {
+      content: "→";
+      transition: transform .2s ease;
+    }
+
+    .resource:hover .resource-link::after {
+      transform: translateX(3px);
+    }
+
+    .cta-band {
+      padding: 4.5rem 0 5.5rem;
+    }
+
+    .cta-box {
+      border-radius: 28px;
+      background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+      border: 1px solid var(--gold-border);
+      padding: 2rem;
+      display: grid;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .cards, .gallery, .levels, .steps, .resources {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 980px) and (min-width: 600px) {
+      .steps, .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#home" aria-label="Accueil IA'm">
+        <img src="assets/iam-logo-cream.png" alt="IA'm">
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#label">Le label</a>
+        <a href="#niveaux">Les niveaux</a>
+        <a href="#usage">Mode d'emploi</a>
+        <a href="#cases">Cas d'usages</a>
+        <a href="#ressources">Ressources</a>
+        <a href="#contact">Contact</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <div class="eyebrow">Label éthique de transparence</div>
+          <h1>Par l'humain, pour l'humain, avec l'IA.</h1>
+          <p>IA'm est un badge simple pour déclarer clairement la part de l'intelligence artificielle dans une œuvre, un texte, une image ou un projet. Plus de clarté, moins d'ambiguïté.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="generateur.html">Générer mon badge</a>
+            <a class="btn btn-secondary" href="#usage">Comment ça marche</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img src="assets/iam-logo-cream.png" alt="Logo IA'm">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="label">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Le label</div>
+          <h2>À quoi sert IA'm ?</h2>
+          <p>IA'm est un repère visuel et éthique. Il ne juge pas la qualité d'une œuvre, il signale simplement que l'IA a participé au processus créatif.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>Clarté</h3>
+            <p>Le public comprend immédiatement qu'il y a eu co-création ou assistance IA.</p>
+          </article>
+          <article class="card">
+            <div class="num">02</div>
+            <h3>Transparence</h3>
+            <p>Le créateur assume son usage de l'IA sans cacher le processus.</p>
+          </article>
+          <article class="card">
+            <div class="num">03</div>
+            <h3>Usage libre</h3>
+            <p>Le badge reste simple à utiliser dans des contextes culturels, éducatifs ou professionnels.</p>
+          </article>
+        </div>
+
+        <aside class="etymology">
+          <div class="label">À propos du nom</div>
+          <p>IA'm se lit <span class="iam">I am</span> — « je suis ». Parce que derrière chaque création signée IA'm, il y a un humain qui crée pour un autre humain. L'IA assiste ou initie, mais la destination reste humaine.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="niveaux">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Les trois niveaux</div>
+          <h2>Trois degrés de co-création.</h2>
+          <p>IA'm distingue trois niveaux selon un critère unique : <em>qui porte la décision créative ?</em> Le badge n'apparaît que lorsque l'IA intervient — sinon, aucune mention n'est nécessaire.</p>
+        </div>
+
+        <div class="levels">
+          <article class="level">
+            <span class="level-tag">Niveau 01</span>
+            <h3>Assisté</h3>
+            <p>L'IA appuie, corrige, suggère. Elle reste un outil au service d'une intention humaine clairement formulée.</p>
+            <div class="who"><strong>Décision créative :</strong> humaine.</div>
+          </article>
+          <article class="level">
+            <span class="level-tag">Niveau 02</span>
+            <h3>Initié</h3>
+            <p>L'IA propose, l'humain choisit, oriente, retravaille. La création naît d'un véritable dialogue entre les deux.</p>
+            <div class="who"><strong>Décision créative :</strong> partagée.</div>
+          </article>
+          <article class="level">
+            <span class="level-tag">Niveau 03</span>
+            <h3>Généré</h3>
+            <p>L'IA produit l'essentiel à partir d'une consigne. L'humain cadre, sélectionne, mais n'intervient pas dans le détail.</p>
+            <div class="who"><strong>Décision créative :</strong> portée par l'IA.</div>
+          </article>
+        </div>
+
+        <div class="criterion">
+          Un seul critère, trois réponses possibles : qui porte la décision créative ?
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="usage">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Mode d'emploi</div>
+          <h2>Quatre étapes, sans complication.</h2>
+          <p>Le principe est volontairement direct pour éviter les frictions d'usage.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="num">Étape 01</div>
+            <h3>Choisir le niveau</h3>
+            <p>Tu identifies qui porte la décision créative : toi, le dialogue avec l'IA, ou l'IA elle-même.</p>
+          </article>
+          <article class="step">
+            <div class="num">Étape 02</div>
+            <h3>Générer le badge</h3>
+            <p>Tu crées le badge correspondant et tu le conserves pour cette œuvre, cette page ou cette série.</p>
+          </article>
+          <article class="step">
+            <div class="num">Étape 03</div>
+            <h3>Afficher le badge</h3>
+            <p>Tu le poses près de l'œuvre, dans les crédits ou sur la page de présentation.</p>
+          </article>
+          <article class="step">
+            <div class="num">Étape 04</div>
+            <h3>Préciser si besoin</h3>
+            <p>Tu peux ajouter un court texte pour expliciter le rôle de l'IA dans le processus.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cases">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Cas d'usages proposés</div>
+          <h2>Des exemples concrets.</h2>
+          <p>Une sélection courte pour aider à se projeter, sans surcharger la lecture.</p>
+        </div>
+
+        <div class="gallery" id="gallery">
+          <article class="case">
+            <img src="assets/img/galerie/journaliste.png" alt="Cas d'usage journaliste">
+            <div class="cap">Journaliste</div>
+          </article>
+          <article class="case">
+            <img src="assets/img/galerie/enseignant-eleves.png" alt="Cas d'usage enseignant">
+            <div class="cap">Enseignant</div>
+          </article>
+          <article class="case">
+            <img src="assets/img/galerie/chercheur.png" alt="Cas d'usage chercheur">
+            <div class="cap">Chercheur</div>
+          </article>
+          <article class="case">
+            <img src="assets/img/galerie/motion-designer-freelance.png" alt="Cas d'usage designer">
+            <div class="cap">Créatif indépendant</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ressources">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Ressources</div>
+          <h2>Lire, comprendre, prolonger.</h2>
+          <p>IA'm n'est pas qu'un badge : c'est une réflexion en cours sur la place de l'IA dans la création. Textes, récits, documents — autant de portes d'entrée selon les sensibilités.</p>
+        </div>
+
+        <div class="resources">
+          <a class="resource" href="textes.html">
+            <div class="resource-head">
+              <div class="kind">Textes</div>
+              <h3>Écrits & réflexions</h3>
+              <p>Notes, analyses et prises de position sur la transparence, la co-création, et les enjeux de l'attribution à l'ère de l'IA générative.</p>
+            </div>
+            <span class="resource-link">Consulter les textes</span>
+          </a>
+
+          <a class="resource" href="bd.html">
+            <div class="resource-head">
+              <div class="kind">Récit graphique</div>
+              <h3>La bande dessinée</h3>
+              <p>Un récit illustré qui met en scène les usages et les malentendus de la création assistée par IA. Pédagogique, ironique, accessible.</p>
+            </div>
+            <span class="resource-link">Découvrir la BD</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="cta-band">
+          <div class="cta-box">
+            <div>
+              <div class="eyebrow">Contact</div>
+              <h2>Rejoindre ou utiliser IA'm</h2>
+              <p>Pour une question, un partenariat, une amélioration ou un usage du badge, le plus simple est de passer par le contact ou le générateur.</p>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="generateur.html">Créer un badge</a>
+              <a class="btn btn-secondary" href="mailto:liolb@iam-inside.eu">Contacter le projet</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        IA'm — Label éthique de co-création avec l'IA
+      </div>
+      <div>
+        Marque déposée n° 5212301 · INPI · CC BY-NC 4.0
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
