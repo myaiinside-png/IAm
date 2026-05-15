@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Textes & écrits — IA'm</title>
+  <meta name="description" content="Écrits et réflexions autour du label IA'm." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f1e7;
+      --panel: #fdfaf3;
+      --text: #1a1d2e;
+      --muted: rgba(26,29,46,.66);
+      --gold: #a67821;
+      --gold-soft: rgba(166,120,33,.10);
+      --gold-border: rgba(166,120,33,.28);
+      --line: rgba(26,29,46,.10);
+      --line-strong: rgba(26,29,46,.16);
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(246,241,231,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 76px;
+    }
+
+    .nav-brand img {
+      width: 72px;
+      height: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 4rem 0;
+    }
+
+    .placeholder {
+      text-align: center;
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--gold);
+      font-size: .72rem;
+      margin-bottom: 1.25rem;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      line-height: 1.05;
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      margin: 0 0 1.5rem;
+      color: var(--text);
+    }
+
+    .placeholder p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 .8rem;
+    }
+
+    .quote {
+      margin: 2.5rem auto 0;
+      padding: 1.5rem 1.75rem;
+      max-width: 50ch;
+      border-left: 2px solid var(--gold);
+      text-align: left;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .actions {
+      display: flex;
+      gap: .9rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: .9rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      transition: .2s ease;
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: transparent;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    .btn-secondary {
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html" aria-label="Accueil IA'm">
+        <img src="assets/iam-logo-cream.png" alt="IA'm">
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html#label">Le label</a>
+        <a href="index.html#niveaux">Les niveaux</a>
+        <a href="index.html#usage">Mode d'emploi</a>
+        <a href="index.html#cases">Cas d'usages</a>
+        <a href="index.html#ressources">Ressources</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap placeholder">
+      <div class="eyebrow">Textes &amp; écrits</div>
+      <h1>Bientôt en lecture.</h1>
+      <p>Notes, analyses, prises de position. Cette section accueillera bientôt les écrits qui prolongent la réflexion IA'm — transparence, co-création, attribution.</p>
+      <p>L'écriture prend le temps qu'il faut.</p>
+
+      <blockquote class="quote">
+        Un label n'a de sens que s'il est défendu par les mots. Cette page leur sera dédiée.
+      </blockquote>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="index.html">Retour à l'accueil</a>
+        <a class="btn btn-secondary" href="mailto:liolb@iam-inside.eu">Être prévenu·e</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        IA'm — Label éthique de co-création avec l'IA
+      </div>
+      <div>
+        Marque déposée n° 5212301 · INPI · CC BY-NC 4.0
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
