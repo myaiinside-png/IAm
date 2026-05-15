@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/styles.css" />
   <style>
     :root {
       --bg: #f6f1e7;
@@ -60,9 +59,11 @@
       min-height: 76px;
     }
 
+    /* Logo : on inverse pour qu'il apparaisse sombre sur fond clair */
     .nav-brand img {
       width: 72px;
       height: auto;
+      filter: invert(1) brightness(0.15);
     }
 
     .nav-links {
@@ -153,6 +154,7 @@
       letter-spacing: .12em;
       text-transform: uppercase;
       color: var(--text);
+      cursor: pointer;
     }
 
     .btn-primary {
@@ -187,14 +189,6 @@
     .hero-card img {
       width: min(320px, 100%);
       margin: 0 auto;
-    }
-
-    .hero-card p {
-      margin: 1rem 0 0;
-      color: var(--text);
-      font-style: italic;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
     }
 
     .section {
@@ -239,6 +233,37 @@
     .card p {
       margin: .65rem 0 0;
       color: var(--muted);
+    }
+
+    /* Encart étymologique */
+    .etymology {
+      margin-top: 2.5rem;
+      padding: 1.5rem 1.75rem;
+      border-left: 2px solid var(--gold);
+      background: transparent;
+      max-width: 60ch;
+    }
+
+    .etymology .label {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold);
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+    }
+
+    .etymology p {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      line-height: 1.4;
+      color: var(--text);
+    }
+
+    .etymology .iam {
+      font-style: italic;
+      color: var(--gold);
     }
 
     /* Section niveaux */
@@ -302,37 +327,6 @@
       text-align: center;
     }
 
-    /* Encart étymologique */
-    .etymology {
-      margin-top: 2.5rem;
-      padding: 1.5rem 1.75rem;
-      border-left: 2px solid var(--gold);
-      background: transparent;
-      max-width: 60ch;
-    }
-
-    .etymology .label {
-      font-family: 'DM Mono', monospace;
-      color: var(--gold);
-      font-size: .68rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      margin-bottom: .6rem;
-    }
-
-    .etymology p {
-      margin: 0;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
-      line-height: 1.4;
-      color: var(--text);
-    }
-
-    .etymology .iam {
-      font-style: italic;
-      color: var(--gold);
-    }
-
     /* Mode d'emploi */
     .steps {
       display: grid;
@@ -367,6 +361,7 @@
       font-size: .95rem;
     }
 
+    /* Galerie cas d'usages */
     .gallery {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -378,19 +373,234 @@
       border-radius: 18px;
       overflow: hidden;
       background: var(--panel);
+      cursor: zoom-in;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .case:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-border);
+    }
+
+    .case-img-wrap {
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
     }
 
     .case img {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 100%;
       object-fit: cover;
       background: #eee;
+      transition: transform .4s ease;
+    }
+
+    .case:hover img {
+      transform: scale(1.05);
     }
 
     .case .cap {
       padding: .9rem;
       color: var(--muted);
       font-size: .95rem;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,29,46,.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 2rem;
+    }
+
+    .lightbox.open {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 90vw;
+      max-height: 85vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lightbox-image {
+      max-width: 90vw;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 12px;
+      background: var(--bg);
+    }
+
+    .lightbox-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--bg);
+      font-style: italic;
+    }
+
+    .lightbox-close,
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      background: rgba(246,241,231,.15);
+      border: 1px solid rgba(246,241,231,.3);
+      color: var(--bg);
+      font-size: 1.4rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s ease;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      background: rgba(246,241,231,.3);
+    }
+
+    .lightbox-close {
+      top: -60px;
+      right: 0;
+    }
+
+    .lightbox-prev {
+      top: 50%;
+      left: -70px;
+      transform: translateY(-50%);
+    }
+
+    .lightbox-next {
+      top: 50%;
+      right: -70px;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 768px) {
+      .lightbox-prev { left: 10px; }
+      .lightbox-next { right: 10px; }
+      .lightbox-close { top: 10px; right: 10px; }
+    }
+
+    /* Section Réalisations */
+    .realisations {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .realisation {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .realisation:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-border);
+    }
+
+    .realisation-img {
+      aspect-ratio: 1 / 1.6;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .realisation-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .realisation:hover .realisation-img img {
+      transform: scale(1.03);
+    }
+
+    .realisation-body {
+      padding: 1.25rem 1.4rem 1.4rem;
+      display: grid;
+      gap: .5rem;
+    }
+
+    .realisation-level {
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .realisation h3 {
+      font-size: 1.4rem;
+      line-height: 1.15;
+    }
+
+    .realisation-author {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .realisation-link {
+      margin-top: .5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+    }
+
+    .realisation-link::after {
+      content: "→";
+      transition: transform .2s ease;
+    }
+
+    .realisation:hover .realisation-link::after {
+      transform: translateX(3px);
+    }
+
+    .realisations-empty {
+      padding: 2rem 1.5rem;
+      border: 1px dashed var(--gold-border);
+      border-radius: 20px;
+      text-align: center;
+      color: var(--muted);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.5;
+    }
+
+    .realisations-empty a {
+      color: var(--gold);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
     }
 
     /* Section ressources */
@@ -496,13 +706,13 @@
     }
 
     @media (max-width: 980px) {
-      .hero-grid, .cards, .gallery, .levels, .steps, .resources {
+      .hero-grid, .cards, .gallery, .levels, .steps, .resources, .realisations {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 980px) and (min-width: 600px) {
-      .steps, .gallery {
+      .steps, .gallery, .realisations {
         grid-template-columns: repeat(2, 1fr);
       }
     }
@@ -512,13 +722,14 @@
   <header class="nav">
     <div class="nav-inner">
       <a class="nav-brand" href="#home" aria-label="Accueil IA'm">
-        <img src="assets/iam-logo-cream.png" alt="IA'm">
+        <img src="assets/iam-logo-badge.png" alt="IA'm">
       </a>
       <nav class="nav-links" aria-label="Navigation principale">
         <a href="#label">Le label</a>
         <a href="#niveaux">Les niveaux</a>
         <a href="#usage">Mode d'emploi</a>
         <a href="#cases">Cas d'usages</a>
+        <a href="#realisations">Réalisations</a>
         <a href="#ressources">Ressources</a>
         <a href="#contact">Contact</a>
         <a href="faq.html">FAQ</a>
@@ -650,27 +861,70 @@
       <div class="wrap">
         <div class="section-head">
           <div class="eyebrow">Cas d'usages proposés</div>
-          <h2>Des exemples concrets.</h2>
-          <p>Une sélection courte pour aider à se projeter, sans surcharger la lecture.</p>
+          <h2>À qui ça s'adresse.</h2>
+          <p>Une sélection courte pour aider à se projeter. Clique sur une image pour l'agrandir et naviguer entre les cas.</p>
         </div>
 
         <div class="gallery" id="gallery">
-          <article class="case">
-            <img src="assets/img/galerie/journaliste.png" alt="Cas d'usage journaliste">
+          <article class="case" data-img="assets/img/galerie/journaliste.png" data-caption="Journaliste">
+            <div class="case-img-wrap"><img src="assets/img/galerie/journaliste.png" alt="Cas d'usage journaliste"></div>
             <div class="cap">Journaliste</div>
           </article>
-          <article class="case">
-            <img src="assets/img/galerie/enseignant-eleves.png" alt="Cas d'usage enseignant">
+          <article class="case" data-img="assets/img/galerie/professeur-eleves.png" data-caption="Enseignant">
+            <div class="case-img-wrap"><img src="assets/img/galerie/professeur-eleves.png" alt="Cas d'usage enseignant"></div>
             <div class="cap">Enseignant</div>
           </article>
-          <article class="case">
-            <img src="assets/img/galerie/chercheur.png" alt="Cas d'usage chercheur">
+          <article class="case" data-img="assets/img/galerie/chercheur.png" data-caption="Chercheur">
+            <div class="case-img-wrap"><img src="assets/img/galerie/chercheur.png" alt="Cas d'usage chercheur"></div>
             <div class="cap">Chercheur</div>
           </article>
-          <article class="case">
-            <img src="assets/img/galerie/motion-designer-freelance.png" alt="Cas d'usage designer">
+          <article class="case" data-img="assets/img/galerie/motion-designer-freelance.png" data-caption="Créatif indépendant">
+            <div class="case-img-wrap"><img src="assets/img/galerie/motion-designer-freelance.png" alt="Cas d'usage designer"></div>
             <div class="cap">Créatif indépendant</div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="realisations">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Réalisations</div>
+          <h2>Ils utilisent IA'm.</h2>
+          <p>Des œuvres concrètes signées avec le label, par des créateurs qui assument leur dialogue avec l'IA.</p>
+        </div>
+
+        <div class="realisations">
+          <a class="realisation" href="https://www.artmajeur.com/yo00/fr/oeuvres-d-art/19958962/strelitzias-cubistes-ia-m-n-1" target="_blank" rel="noopener">
+            <div class="realisation-img">
+              <img src="assets/img/realisations/strelitzias-cubistes.png" alt="Strelitzias cubistes — IA'm n°1">
+            </div>
+            <div class="realisation-body">
+              <span class="realisation-level">IA'm · Initié</span>
+              <h3>Strelitzias cubistes — IA'm n°1</h3>
+              <span class="realisation-author">yo00 dit Onelli</span>
+              <span class="realisation-link">Voir sur Artmajeur</span>
+            </div>
+          </a>
+
+          <a class="realisation" href="https://www.artmajeur.com/yo00/fr/oeuvres-d-art/20004295/ia-m-n-2" target="_blank" rel="noopener">
+            <div class="realisation-img">
+              <img src="assets/img/realisations/iam-n2.png" alt="IA'm n°2">
+            </div>
+            <div class="realisation-body">
+              <span class="realisation-level">IA'm · Initié</span>
+              <h3>IA'm n°2</h3>
+              <span class="realisation-author">yo00 dit Onelli</span>
+              <span class="realisation-link">Voir sur Artmajeur</span>
+            </div>
+          </a>
+
+          <div class="realisations-empty">
+            <div>
+              « Votre œuvre ici ? »<br>
+              <a href="mailto:liolb@iam-inside.eu">Nous contacter</a> pour figurer parmi les premières réalisations signées IA'm.
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -724,6 +978,16 @@
     </section>
   </main>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image agrandie">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">×</button>
+      <button class="lightbox-prev" id="lightboxPrev" aria-label="Précédent">‹</button>
+      <button class="lightbox-next" id="lightboxNext" aria-label="Suivant">›</button>
+      <img class="lightbox-image" id="lightboxImage" alt="">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="wrap footer-inner">
       <div>
@@ -734,5 +998,62 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      const cases = Array.from(document.querySelectorAll('.case'));
+      const lightbox = document.getElementById('lightbox');
+      const lbImage = document.getElementById('lightboxImage');
+      const lbCaption = document.getElementById('lightboxCaption');
+      const lbClose = document.getElementById('lightboxClose');
+      const lbPrev = document.getElementById('lightboxPrev');
+      const lbNext = document.getElementById('lightboxNext');
+      let currentIndex = 0;
+
+      function showLightbox(index) {
+        currentIndex = index;
+        const item = cases[index];
+        lbImage.src = item.dataset.img;
+        lbImage.alt = item.dataset.caption || '';
+        lbCaption.textContent = item.dataset.caption || '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function nextItem() {
+        currentIndex = (currentIndex + 1) % cases.length;
+        showLightbox(currentIndex);
+      }
+
+      function prevItem() {
+        currentIndex = (currentIndex - 1 + cases.length) % cases.length;
+        showLightbox(currentIndex);
+      }
+
+      cases.forEach((c, i) => {
+        c.addEventListener('click', () => showLightbox(i));
+      });
+
+      lbClose.addEventListener('click', closeLightbox);
+      lbNext.addEventListener('click', nextItem);
+      lbPrev.addEventListener('click', prevItem);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextItem();
+        if (e.key === 'ArrowLeft') prevItem();
+      });
+    })();
+  </script>
 </body>
 </html>

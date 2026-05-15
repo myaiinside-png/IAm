@@ -3,71 +3,385 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IA'm — Label éthique gratuit de transparence IA pour créateurs</title>
-  <meta name="description" content="IA'm est le label gratuit qui permet aux artistes, auteurs, enseignants et créateurs de déclarer de façon transparente la part d’IA dans leurs œuvres culturelles, artistiques ou éducatives. Charte éthique, générateur de badge et gouvernance ouverte."/>
+  <title>IA'm — Questions fréquentes</title>
+  <meta name="description" content="Les réponses essentielles sur l'usage du label IA'm, son statut et ses limites."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/styles-with-gallery.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f6f1e7;
+      --panel: #fdfaf3;
+      --text: #1a1d2e;
+      --muted: rgba(26,29,46,.66);
+      --gold: #a67821;
+      --gold-soft: rgba(166,120,33,.10);
+      --gold-border: rgba(166,120,33,.28);
+      --line: rgba(26,29,46,.10);
+      --line-strong: rgba(26,29,46,.16);
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(246,241,231,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 76px;
+    }
+
+    .nav-brand img {
+      width: 72px;
+      height: auto;
+      filter: invert(1) brightness(0.15);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--text);
+    }
+
+    .eyebrow {
+      font-family: 'DM Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--gold);
+      font-size: .72rem;
+      margin-bottom: 1rem;
+    }
+
+    .page-header {
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      max-width: 18ch;
+      margin: 0 auto 1.25rem;
+    }
+
+    .page-header p {
+      max-width: 60ch;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .faq-section {
+      padding: 2rem 0 4rem;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .faq-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: border-color .25s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--gold-border);
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: color .2s ease;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-item summary::after {
+      content: "+";
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: transform .3s ease;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-item summary .en {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: .35rem;
+      text-transform: uppercase;
+    }
+
+    .faq-content {
+      padding: 0 1.6rem 1.4rem;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+      display: grid;
+      gap: .8rem;
+    }
+
+    .faq-content .lang-fr {
+      color: var(--text);
+    }
+
+    .faq-content .lang-en {
+      color: var(--muted);
+      font-style: italic;
+      padding-top: .6rem;
+      border-top: 1px dashed var(--line);
+      font-size: .92rem;
+    }
+
+    .faq-content .lang-en::before {
+      content: "EN · ";
+      font-family: 'DM Mono', monospace;
+      font-style: normal;
+      font-size: .68rem;
+      letter-spacing: .15em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .faq-content a {
+      color: var(--gold);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .contact-block {
+      margin-top: 2.5rem;
+      padding: 2rem;
+      border-radius: 20px;
+      background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+      border: 1px solid var(--gold-border);
+      text-align: center;
+    }
+
+    .contact-block .eyebrow {
+      margin-bottom: .75rem;
+    }
+
+    .contact-block h2 {
+      font-size: 1.75rem;
+      margin-bottom: .5rem;
+    }
+
+    .contact-block a.email {
+      color: var(--gold);
+      font-family: 'DM Mono', monospace;
+      font-size: .95rem;
+      letter-spacing: .05em;
+      margin-top: .5rem;
+      display: inline-block;
+    }
+
+    .contact-block a.email:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem 0 3rem;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  </style>
 </head>
 <body>
-<div class="cursor">
-  <div class="cursor-dot" id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
-</div>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html" aria-label="Accueil IA'm">
+        <img src="assets/iam-logo-badge.png" alt="IA'm">
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html#label">Le label</a>
+        <a href="index.html#niveaux">Les niveaux</a>
+        <a href="index.html#usage">Mode d'emploi</a>
+        <a href="index.html#cases">Cas d'usages</a>
+        <a href="index.html#realisations">Réalisations</a>
+        <a href="index.html#ressources">Ressources</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </div>
+  </header>
 
-<!-- Nav -->
-<nav>
-  <a href="#" class="nav-logo"><img src="assets/img/logo-iam.svg" alt="IA'm" style="height:38px;vertical-align:middle;"></a>
-  <div class="nav-links">
-  <a href="index.html#label">Le label</a>
-  <a href="mode-emploi.html">Mode d’emploi</a>
-  <a href="index.html#realisations">Réalisations</a>
-  <a href="index.html#charte">Charte</a>
-  <a href="badge-v5.html">Badge</a>
-        <a href="/certificats/">Certificats</a>
-  <a href="index.html#apropos">À propos</a>
-  <a href="index.html#contact">Contact</a>
-  <a href="faq.html">FAQ</a>
-</div>
-</nav>
-
-
-<main class="page-main">
-  <section id="faq" class="content-section faq-page">
-    <div class="section-inner">
-      <div class="section-header reveal">
-        <span class="label-section-tag">FAQ</span>
-        <h1 class="label-heading">Questions fréquentes</h1>
-        <p class="section-intro">Les réponses essentielles sur l'usage du label IA'm, son statut et ses limites.</p>
+  <main>
+    <section class="page-header">
+      <div class="wrap">
+        <div class="eyebrow">FAQ</div>
+        <h1>Questions fréquentes</h1>
+        <p>Les réponses essentielles sur l'usage du label IA'm, son statut et ses limites.</p>
       </div>
-      <div class="faq-list reveal">
-        <article class="faq-item"><h2>IA'm est-il gratuit ? <span>· Is IA'm free?</span></h2><p>Oui, totalement. Le label, le badge et la charte sont libres d'utilisation sous licence CC BY-NC 4.0. · Yes, entirely. The label, badge and charter are free to use under CC BY-NC 4.0.</p></article>
-        <article class="faq-item"><h2>Qui peut utiliser IA'm ? <span>· Who can use IA'm?</span></h2><p>Tout créateur — artiste, enseignant, journaliste, développeur — qui intègre l'IA dans son processus et souhaite le dire clairement.</p></article>
-        <article class="faq-item"><h2>Faut-il demander une autorisation ? <span>· Do I need permission?</span></h2><p>Non. Il suffit de respecter la charte et d'apposer le badge honnêtement.</p></article>
-        <article class="faq-item"><h2>IA'm garantit-il la qualité ? <span>· Does IA'm guarantee quality?</span></h2><p>Non, et c'est voulu. IA'm ne juge pas, il nomme. La qualité reste l'affaire du créateur.</p></article>
-        <article class="faq-item"><h2>Le label a-t-il une valeur légale ? <span>· Legal standing?</span></h2><p>IA'm est une marque déposée à l'INPI (n°5212301, classe 41). Son usage est encadré par la charte et la licence CC BY-NC 4.0.</p></article>
-        <article class="faq-item"><h2>Contact</h2><p><a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a></p></article>
+    </section>
+
+    <section class="faq-section">
+      <div class="wrap">
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary>
+              <span>
+                IA'm est-il gratuit ?
+                <span class="en">Is IA'm free?</span>
+              </span>
+            </summary>
+            <div class="faq-content">
+              <div class="lang-fr">Oui, totalement. Le label, le badge et la charte sont libres d'utilisation sous licence CC BY-NC 4.0.</div>
+              <div class="lang-en">Yes, entirely. The label, badge and charter are free to use under CC BY-NC 4.0.</div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>
+                Qui peut utiliser IA'm ?
+                <span class="en">Who can use IA'm?</span>
+              </span>
+            </summary>
+            <div class="faq-content">
+              <div class="lang-fr">Tout créateur — artiste, enseignant, journaliste, développeur — qui intègre l'IA dans son processus et souhaite le dire clairement.</div>
+              <div class="lang-en">Any creator — artist, teacher, journalist, developer — who integrates AI into their process and wishes to declare it clearly.</div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>
+                Faut-il demander une autorisation ?
+                <span class="en">Do I need permission?</span>
+              </span>
+            </summary>
+            <div class="faq-content">
+              <div class="lang-fr">Non. Il suffit de respecter la charte et d'apposer le badge honnêtement.</div>
+              <div class="lang-en">No. Simply respect the charter and apply the badge honestly.</div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>
+                IA'm garantit-il la qualité ?
+                <span class="en">Does IA'm guarantee quality?</span>
+              </span>
+            </summary>
+            <div class="faq-content">
+              <div class="lang-fr">Non, et c'est voulu. IA'm ne juge pas, il nomme. La qualité reste l'affaire du créateur.</div>
+              <div class="lang-en">No, and that's intentional. IA'm doesn't judge, it names. Quality remains the creator's responsibility.</div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary>
+              <span>
+                Le label a-t-il une valeur légale ?
+                <span class="en">Legal standing?</span>
+              </span>
+            </summary>
+            <div class="faq-content">
+              <div class="lang-fr">IA'm est une marque déposée à l'INPI (n°5212301, classe 41). Son usage est encadré par la charte et la licence CC BY-NC 4.0.</div>
+              <div class="lang-en">IA'm is a trademark registered with the French INPI (n°5212301, class 41). Its use is governed by the charter and CC BY-NC 4.0 license.</div>
+            </div>
+          </details>
+
+        </div>
+
+        <div class="contact-block">
+          <div class="eyebrow">Contact</div>
+          <h2>Une autre question ?</h2>
+          <p>N'hésitez pas à écrire au projet pour toute précision ou suggestion.</p>
+          <a class="email" href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        IA'm — Label éthique de co-création avec l'IA
+      </div>
+      <div>
+        Marque déposée n° 5212301 · INPI · CC BY-NC 4.0
       </div>
     </div>
-  </section>
-</main>
-
-<!-- Footer -->
-<footer>
-  <div class="footer-logo">
-    <img src="assets/img/logo-iam.svg" alt="IA'm" style="height:80px;opacity:0.85;">
-  </div>
-  <div class="footer-text">
-    Label éthique de co-création avec l'IA<br/>
-    Marque déposée n° 5212301 · INPI · Classe 41
-  </div>
-  <div class="footer-mark">
-    © 2025 L LB<br/>
-  </div>
-</footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-  <script src="assets/js/main.js"></script>
+  </footer>
 </body>
 </html>

@@ -68,6 +68,7 @@ img { max-width: 100%; display: block; }
 .nav-brand img {
   width: 72px;
   height: auto;
+  filter: invert(1) brightness(0.15);
 }
 
 .nav-links {
@@ -703,6 +704,7 @@ img { max-width: 100%; display: block; }
       <a href="index.html#niveaux">Les niveaux</a>
       <a href="index.html#usage">Mode d'emploi</a>
       <a href="index.html#cases">Cas d'usages</a>
+      <a href="index.html#realisations">Réalisations</a>
       <a href="index.html#ressources">Ressources</a>
       <a href="index.html#contact">Contact</a>
       <a href="faq.html">FAQ</a>
@@ -727,7 +729,7 @@ img { max-width: 100%; display: block; }
         Assumez votre <em>niveau</em> de co-création
       </h2>
       <p class="badge-gen-desc" data-i18n="desc">
-        IA'm propose un acte d'honnêteté de l'auteur au receveur, pour créer un lien de confiance là où règne la défiance. Trois postures, un seul critère : <em>qui assume la forme finale</em> ?
+        IA'm propose un acte d'honnêteté de l'auteur au receveur, pour créer un lien de confiance là où règne la défiance. Trois postures, un seul critère : <em>qui tranche la forme finale</em> ?
       </p>
 
       <div class="gen-form">
@@ -738,7 +740,7 @@ img { max-width: 100%; display: block; }
           <div class="level-cards" id="level-cards" role="radiogroup" aria-label="Niveau de co-création">
             <button type="button" class="level-card active" data-level="assisted" role="radio" aria-checked="true" onclick="selectLevel('assisted')">
               <span class="level-card-name"><span class="num">01</span><span data-i18n="card-assisted-name">Assisté</span></span>
-              <span class="level-card-desc" data-i18n="card-assisted-desc">IA en assistance : l'humain assume chaque choix formel.</span>
+              <span class="level-card-desc" data-i18n="card-assisted-desc">IA en assistance : l'humain tranche chaque choix formel.</span>
             </button>
             <button type="button" class="level-card" data-level="initiated" role="radio" aria-checked="false" onclick="selectLevel('initiated')">
               <span class="level-card-name"><span class="num">02</span><span data-i18n="card-initiated-name">Initié</span></span>
@@ -756,7 +758,7 @@ img { max-width: 100%; display: block; }
           </button>
           <div class="help-panel" id="help-panel">
             <h4 data-i18n="h-assisted">IA'm · Assisté</h4>
-            <p data-i18n="p-assisted">L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain assume chaque décision formelle. L'IA est outil, l'humain auteur.</p>
+            <p data-i18n="p-assisted">L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain tranche chaque décision formelle. L'IA est outil, l'humain auteur.</p>
 
             <h4 data-i18n="h-initiated">IA'm · Initié</h4>
             <p data-i18n="p-initiated">Co-auctorialité assumée. Certaines décisions formelles émergent de la proposition IA mais sont validées, retravaillées ou recadrées par l'humain.</p>
@@ -764,7 +766,7 @@ img { max-width: 100%; display: block; }
             <h4 data-i18n="h-generated">IA'm · Généré</h4>
             <p data-i18n="p-generated">L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.</p>
 
-            <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui assume la forme finale.</p>
+            <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui tranche la forme finale.</p>
           </div>
         </div>
 
@@ -874,7 +876,7 @@ img { max-width: 100%; display: block; }
 const I18N = {
   fr: {
     "heading": "Assumez votre <em>niveau</em> de co-création",
-    "desc": "IA'm propose un acte d'honnêteté de l'auteur au receveur, pour créer un lien de confiance là où règne la défiance. Trois postures, un seul critère : <em>qui assume la forme finale</em> ?",
+    "desc": "IA'm propose un acte d'honnêteté de l'auteur au receveur, pour créer un lien de confiance là où règne la défiance. Trois postures, un seul critère : <em>qui tranche la forme finale</em> ?",
     "lbl-author": "Nom de l'auteur·e",
     "lbl-title": "Titre de l'œuvre",
     "lbl-type": "Type de création",
@@ -892,7 +894,7 @@ const I18N = {
     "lvl-initiated": "Initiated — co-décision",
     "lvl-generated": "Generated — IA prescrite, humain prescripteur",
     "card-assisted-name": "Assisté",
-    "card-assisted-desc": "IA en assistance : l'humain assume chaque choix formel.",
+    "card-assisted-desc": "IA en assistance : l'humain tranche chaque choix formel.",
     "card-initiated-name": "Initié",
     "card-initiated-desc": "Co-auctorialité assumée, propositions IA validées par l'humain.",
     "card-generated-name": "Généré",
@@ -900,12 +902,12 @@ const I18N = {
     "secondary-label": "Informations complémentaires (optionnel)",
     "help-toggle": "Comment choisir mon niveau ?",
     "h-assisted": "IA'm · Assisté",
-    "p-assisted": "L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain assume chaque décision formelle. L'IA est outil, l'humain auteur.",
+    "p-assisted": "L'IA assiste : correction, recherche, variantes, suggestions ponctuelles. L'humain tranche chaque décision formelle. L'IA est outil, l'humain auteur.",
     "h-initiated": "IA'm · Initié",
     "p-initiated": "Co-auctorialité assumée. Certaines décisions formelles émergent de la proposition IA mais sont validées, retravaillées ou recadrées par l'humain.",
     "h-generated": "IA'm · Généré",
     "p-generated": "L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.",
-    "crit": "Critère de bascule entre niveaux : qui assume la forme finale.",
+    "crit": "Critère de bascule entre niveaux : qui tranche la forme finale.",
     "dl-svg": "↓ SVG",
     "dl-png": "↓ PNG",
     "embed-title": "Code embed HTML",
