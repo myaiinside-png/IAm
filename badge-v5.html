@@ -3,382 +3,559 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IA'm · Générateur de badge v5</title>
-<meta name="description" content="Générateur de badge IA'm v5 — 3 niveaux de co-création humain/IA. Label de transparence éthique.">
+<title>IA'm · Générateur de badge</title>
+<meta name="description" content="Générateur de badge IA'm — 3 niveaux de co-création humain/IA. Label de transparence éthique.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-<style>.site-nav {
+<style>
+:root {
+  --bg: #f6f1e7;
+  --panel: #fdfaf3;
+  --ink: #1a1d2e;
+  --text: #1a1d2e;
+  --cream: #fdfaf5;
+  --muted: rgba(26,29,46,.66);
+  --mid: rgba(26,29,46,.55);
+  --gold: #a67821;
+  --gold-soft: rgba(166,120,33,.10);
+  --gold-border: rgba(166,120,33,.28);
+  --line: rgba(26,29,46,.10);
+  --line-strong: rgba(26,29,46,.16);
+  --rule: rgba(26,29,46,.10);
+  --max: 1200px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Navigation harmonisée avec index.html */
+.site-nav {
   position: sticky;
   top: 0;
   z-index: 50;
+  background: rgba(246,241,231,.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  width: min(var(--max), calc(100% - 2rem));
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background: rgba(11,14,26,0.95);
-  border-bottom: 1px solid rgba(200,151,58,0.2);
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 76px;
 }
 
-.logo {
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--cream);
-  font-size: 1.4rem;
-  text-decoration: none;
-}
-
-.logo span {
-  color: var(--gold);
-  font-style: italic;
+.nav-brand img {
+  width: 72px;
+  height: auto;
 }
 
 .nav-links {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+  justify-content: flex-end;
+  font-size: .95rem;
+  color: var(--muted);
 }
 
-.nav-links a {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  color: var(--mid);
-}
+.nav-links a:hover { color: var(--text); }
 
-.nav-links a:hover {
-  color: var(--gold);
-}
-:root {
-  --ink: #0B0E1A;
-  --cream: #F4EFE4;
-  --gold: #C8973A;
-  --mid: rgba(244,239,228,0.55);
-  --rule: rgba(244,239,228,0.15);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  background: var(--ink);
-  color: var(--cream);
-  font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
-  padding: 2rem;
-}
-@keyframes rotateSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Header */
+/* Page header */
 .page-head {
-  max-width: 1200px; margin: 0 auto 3rem; padding-bottom: 2rem;
-  border-bottom: 1px solid var(--rule);
-  display: flex; justify-content: space-between; align-items: baseline;
-  flex-wrap: wrap; gap: 1rem;
+  max-width: var(--max);
+  margin: 3rem auto 3rem;
+  padding: 0 1rem 2rem;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
+
 .page-head h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-weight: 400; font-size: 1.8rem; letter-spacing: 0.02em;
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: 0.01em;
+  color: var(--text);
+  line-height: 1.1;
 }
-.page-head h1 .apo { color: var(--gold); font-style: italic; }
-.page-head h1 .ver {
-  font-family: 'DM Mono', monospace; font-size: 0.7rem;
-  color: var(--gold); letter-spacing: 0.2em; margin-left: 0.5rem;
-}
-.lang-toggle {
-  display: flex; gap: 0; border: 1px solid var(--rule);
-}
-.lang-toggle button {
-  background: transparent; border: none; color: var(--mid);
-  font-family: 'DM Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 0.15em; padding: 0.5rem 0.9rem;
-  cursor: pointer; transition: all 0.3s;
-}
-.lang-toggle button.active { background: var(--gold); color: var(--ink); }
 
-/* Badge generator — repris du CSS v4, adapté */
-#badge { padding: 2rem 0; max-width: 1200px; margin: 0 auto; }
+.page-head h1 .apo {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.page-head h1 .ver {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-left: 0.5rem;
+  text-transform: uppercase;
+}
+
+.lang-toggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lang-toggle button {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  padding: 0.6rem 1.1rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.lang-toggle button:hover {
+  color: var(--text);
+}
+
+.lang-toggle button.active {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* Badge generator layout */
+#badge {
+  padding: 1rem 1rem 2rem;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
 .badge-gen-layout {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
 }
+
 @media (max-width: 900px) {
-  .badge-gen-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .badge-gen-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
 }
+
 .label-heading {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2.2rem; font-weight: 400; line-height: 1.2;
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.15;
   margin-bottom: 1.5rem;
+  color: var(--text);
 }
-.label-heading em { color: var(--gold); font-style: italic; }
+
+.label-heading em {
+  color: var(--gold);
+  font-style: italic;
+}
+
 .badge-gen-desc {
-  font-size: 0.95rem; line-height: 1.75; color: rgba(244,239,228,0.6);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--muted);
   margin-bottom: 2.5rem;
 }
-.gen-form { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.badge-gen-desc em {
+  color: var(--text);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.gen-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
 .gen-field label {
-  display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem;
-  letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
   margin-bottom: 0.6rem;
 }
-.gen-field input, .gen-field select, .gen-field textarea {
-  width: 100%; background: transparent;
-  border: 1px solid rgba(200,151,58,0.25);
-  color: var(--cream); font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem; padding: 0.85rem 1rem;
-  outline: none; transition: border-color 0.3s;
+
+.gen-field input,
+.gen-field select,
+.gen-field textarea {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.25s, background 0.25s;
   -webkit-appearance: none;
 }
-.gen-field input:focus, .gen-field select:focus, .gen-field textarea:focus {
-  border-color: var(--gold);
-}
-.gen-field select option { background: var(--ink); }
 
-/* Level cards — sélecteur principal v5 */
+.gen-field input:focus,
+.gen-field select:focus,
+.gen-field textarea:focus {
+  border-color: var(--gold);
+  background: #fff;
+}
+
+.gen-field select option {
+  background: var(--panel);
+  color: var(--text);
+}
+
+/* Level cards */
 .level-block {
   margin-bottom: 2rem;
 }
+
 .level-block-label {
-  display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem;
-  letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
   margin-bottom: 1rem;
 }
+
 .level-cards {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.7rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.7rem;
 }
+
 .level-card {
-  background: transparent;
-  border: 1px solid rgba(200,151,58,0.2);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
   padding: 1rem 1.1rem;
   cursor: pointer;
   text-align: left;
   font-family: inherit;
-  color: var(--cream);
+  color: var(--text);
   transition: all 0.25s;
-  display: flex; flex-direction: column; gap: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
+
 .level-card:hover {
-  border-color: var(--gold);
-  background: rgba(200,151,58,0.04);
+  border-color: var(--gold-border);
+  background: var(--gold-soft);
 }
+
 .level-card.active {
   border-color: var(--gold);
-  background: rgba(200,151,58,0.1);
+  background: var(--gold-soft);
   box-shadow: inset 0 0 0 1px var(--gold);
 }
+
 .level-card-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2rem; font-weight: 700; line-height: 1;
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text);
+}
+
+.level-card.active .level-card-name {
   color: var(--gold);
 }
+
 .level-card-name .num {
   font-family: 'DM Mono', monospace;
-  font-size: 0.6rem; font-weight: 400;
-  letter-spacing: 0.15em; color: rgba(200,151,58,0.6);
-  margin-right: 0.5rem; vertical-align: middle;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
+
 .level-card-desc {
-  font-size: 0.78rem; line-height: 1.45;
-  color: rgba(244,239,228,0.6);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--muted);
 }
+
 .level-card.active .level-card-desc {
-  color: rgba(244,239,228,0.85);
+  color: var(--text);
 }
+
 @media (max-width: 600px) {
   .level-cards { grid-template-columns: 1fr; }
 }
 
-/* Secondary fields section */
+/* Secondary fields divider */
 .secondary-fields-label {
-  display: block; font-family: 'DM Mono', monospace; font-size: 0.62rem;
-  letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid);
-  margin: 2rem 0 1rem; padding-top: 1.5rem;
-  border-top: 1px solid var(--rule);
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2rem 0 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
 }
 
 /* Help toggle */
 .help-toggle {
-  background: none; border: none; color: var(--gold);
-  font-family: 'DM Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  cursor: pointer; padding: 0.3rem 0 0.5rem; text-align: left;
-  display: flex; align-items: center; gap: 0.4rem;
+  background: none;
+  border: none;
+  color: var(--gold);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.5rem 0 0.5rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
 }
-.help-toggle:hover { opacity: 0.8; }
+
+.help-toggle:hover { opacity: 0.7; }
+
 .help-panel {
-  display: none; border-left: 2px solid var(--gold);
-  padding: 1rem 1.2rem; margin-top: 0.6rem;
-  background: rgba(200,151,58,0.04);
-  font-size: 0.85rem; line-height: 1.7;
+  display: none;
+  border-left: 2px solid var(--gold);
+  padding: 1.2rem 1.4rem;
+  margin-top: 0.6rem;
+  background: var(--gold-soft);
+  border-radius: 0 10px 10px 0;
+  font-size: 0.92rem;
+  line-height: 1.7;
 }
+
 .help-panel.open { display: block; }
+
 .help-panel h4 {
-  font-family: 'DM Mono', monospace; font-size: 0.7rem;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--gold); margin: 1rem 0 0.4rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 1.1rem 0 0.4rem;
 }
+
 .help-panel h4:first-child { margin-top: 0; }
-.help-panel p { color: rgba(244,239,228,0.75); margin-bottom: 0.4rem; }
+
+.help-panel p {
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
 .help-panel .crit {
-  margin-top: 1rem; padding-top: 1rem;
-  border-top: 1px solid var(--rule);
-  font-style: italic; color: var(--mid);
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gold-border);
+  font-style: italic;
+  color: var(--muted);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
 }
 
-.btn-generate {
-  background: transparent; border: 1.5px solid var(--gold);
-  color: var(--gold); font-family: 'DM Mono', monospace; font-size: 0.7rem;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  padding: 1rem 2rem; cursor: pointer; transition: all 0.3s;
-  margin-top: 0.5rem; text-align: left;
-}
-.btn-generate:hover { background: var(--gold); color: var(--ink); }
-
+/* Right column — preview & exports */
 .badge-preview-area {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 2rem; position: sticky; top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  position: sticky;
+  top: 6rem;
 }
+
 .badge-frame {
-  width: 280px; height: 280px; position: relative;
-  display: flex; align-items: center; justify-content: center;
+  width: 320px;
+  height: 320px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .badge-generated {
-  width: 240px; height: 240px;
+  width: 260px;
+  height: 260px;
   border: 1.5px solid var(--gold);
   border-radius: 50%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  background: transparent;
-  position: relative; transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream);
+  position: relative;
+  transition: all 0.5s;
   padding: 1rem;
 }
+
 .badge-generated-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3.2rem; font-weight: 700; line-height: 1;
-  color: var(--cream);
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
 }
-.badge-generated-title .apo { color: var(--gold); font-style: italic; }
+
+.badge-generated-title .apo {
+  color: var(--gold);
+  font-style: italic;
+}
+
 .badge-logo-img {
-  width: 130px; height: 130px;
+  width: 140px;
+  height: 140px;
   object-fit: contain;
   display: block;
-  /* Logo noir-sur-blanc inversé pour apparaître clair sur fond sombre */
-  filter: invert(1) brightness(1.05);
   margin-bottom: 0.1rem;
 }
+
 .badge-generated-level {
-  font-family: 'DM Mono', monospace; font-size: 0.62rem;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--gold); margin-top: 0.5rem; text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.5rem;
+  text-align: center;
   font-weight: 500;
 }
+
 .badge-generated-sub {
-  font-family: 'DM Mono', monospace; font-size: 0.48rem;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(200,151,58,0.75); margin-top: 0.3rem; text-align: center;
-  max-width: 150px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(166,120,33,0.85);
+  margin-top: 0.3rem;
+  text-align: center;
+  max-width: 160px;
 }
+
 .badge-generated-author {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: 0.7rem; color: rgba(244,239,228,0.5); margin-top: 0.4rem;
-  text-align: center; max-width: 160px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+  text-align: center;
+  max-width: 180px;
 }
+
 #badge-ring-svg {
-  position: absolute; inset: -20px;
-  width: calc(100% + 40px); height: calc(100% + 40px);
+  position: absolute;
+  inset: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
   transform-origin: 50% 50%;
   animation: rotateSlow 25s linear infinite;
 }
+
+/* Download buttons */
 .download-btns {
-  display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
+
 .btn-dl {
-  font-family: 'DM Mono', monospace; font-size: 0.6rem;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 0.7rem 1.2rem; border: 1px solid var(--rule);
-  color: var(--mid); background: transparent; cursor: pointer;
-  transition: all 0.3s;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.2rem;
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s;
+  border-radius: 999px;
 }
-.btn-dl:hover { border-color: var(--gold); color: var(--gold); }
 
-/* Embed section */
-.embed-section {
-  width: 100%; margin-top: 1rem;
+.btn-dl:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-soft);
 }
-.embed-section h3 {
-  font-family: 'DM Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.8rem;
-}
-.embed-tabs {
-  display: flex; gap: 0; margin-bottom: 0.6rem;
-}
-.embed-tab {
-  background: transparent; border: 1px solid var(--rule);
-  color: var(--mid); font-family: 'DM Mono', monospace;
-  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 0.5rem 0.9rem; cursor: pointer; transition: all 0.3s;
-}
-.embed-tab.active { background: var(--gold); color: var(--ink); border-color: var(--gold); }
-.embed-code {
-  width: 100%; background: rgba(0,0,0,0.3);
-  border: 1px solid var(--rule); color: var(--cream);
-  font-family: 'DM Mono', monospace; font-size: 0.72rem;
-  padding: 0.9rem 1rem; min-height: 70px;
-  resize: vertical; line-height: 1.5;
-}
-.btn-copy {
-  margin-top: 0.5rem;
-  font-family: 'DM Mono', monospace; font-size: 0.6rem;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 0.5rem 1rem; border: 1px solid var(--rule);
-  color: var(--mid); background: transparent; cursor: pointer;
-  transition: all 0.3s;
-}
-.btn-copy:hover { border-color: var(--gold); color: var(--gold); }
 
-/* Footer */
-.page-foot {
-  max-width: 1200px; margin: 4rem auto 0; padding-top: 2rem;
-  border-top: 1px solid var(--rule);
-  font-family: 'DM Mono', monospace; font-size: 0.65rem;
-  letter-spacing: 0.1em; color: var(--mid);
-  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-}
-.page-foot a { color: var(--gold); text-decoration: none; }
-.page-foot a:hover { text-decoration: underline; }
-
-/* QR IA'm — robuste + exports */
+/* QR section */
 .qr-section {
   width: 100%;
   max-width: 420px;
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 1px solid rgba(200,151,58,0.22);
-  background: rgba(200,151,58,0.035);
+  margin-top: 0.5rem;
+  padding: 1.2rem;
+  border: 1px solid var(--gold-border);
+  background: var(--gold-soft);
+  border-radius: 16px;
   text-align: center;
 }
+
 .qr-section h3 {
   font-family: 'DM Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 0.8rem;
 }
+
 .qr-box {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   margin: 0 auto 0.8rem;
   display: grid;
   place-items: center;
-  background: #FDFAF5;
-  padding: 8px;
+  background: var(--cream);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
 }
+
 #qrImage {
-  width: 124px;
-  height: 124px;
+  width: 128px;
+  height: 128px;
   display: block;
 }
+
 .qr-actions {
   display: flex;
   justify-content: center;
@@ -386,40 +563,155 @@ body {
   flex-wrap: wrap;
   margin: 0.8rem 0;
 }
+
 .qr-link {
   display: block;
-  color: rgba(244,239,228,0.65);
-  font-size: 0.78rem;
+  color: var(--muted);
+  font-size: 0.85rem;
   line-height: 1.5;
   word-break: break-word;
 }
-.qr-link a { color: var(--gold); text-decoration: none; }
+
+.qr-link a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
 .qr-link a:hover { text-decoration: underline; }
+
 .qr-note {
   margin-top: 0.7rem;
-  color: rgba(244,239,228,0.5);
-  font-size: 0.78rem;
+  color: var(--muted);
+  font-size: 0.82rem;
   line-height: 1.5;
 }
+
+/* Embed section */
+.embed-section {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.embed-section h3 {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+
+.embed-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0.6rem;
+}
+
+.embed-tab {
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.embed-tab:first-child { border-radius: 8px 0 0 8px; }
+.embed-tab:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+
+.embed-tab:hover { color: var(--text); }
+
+.embed-tab.active {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.embed-code {
+  width: 100%;
+  background: var(--panel);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.78rem;
+  padding: 0.9rem 1rem;
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.5;
+  border-radius: 10px;
+}
+
+.btn-copy {
+  margin-top: 0.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.25s;
+  border-radius: 999px;
+}
+
+.btn-copy:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-soft);
+}
+
+/* Footer */
+.page-foot {
+  max-width: var(--max);
+  margin: 4rem auto 0;
+  padding: 2rem 1rem 3rem;
+  border-top: 1px solid var(--line);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-foot a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.page-foot a:hover { color: var(--gold); }
 
 </style>
 </head>
 <body>
-<nav class="site-nav">
-  <a href="index.html" class="logo">IA<span>'</span>m</a>
-  <div class="nav-links">
-    <a href="./index.html#label">Le label</a>
-    <a href="./mode-emploi.html">Mode d’emploi</a>
-    <a href="./index.html#galerie">Réalisations</a>
-    <a href="./index.html#charte">Charte</a>
-    <a href="./badge-v5.html">Badge</a>
-        <a href="/certificats/">Certificats</a>
-    <a href="./index.html#apropos">À propos</a>
-    <a href="./index.html#contact">Contact</a>
-    <a href="./faq.html">FAQ</a>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html" aria-label="Accueil IA'm">
+      <img src="assets/iam-logo-badge.png" alt="IA'm">
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="index.html#label">Le label</a>
+      <a href="index.html#niveaux">Les niveaux</a>
+      <a href="index.html#usage">Mode d'emploi</a>
+      <a href="index.html#cases">Cas d'usages</a>
+      <a href="index.html#ressources">Ressources</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="faq.html">FAQ</a>
+    </nav>
   </div>
-</nav><header class="page-head">
-  <h1>IA<span class="apo">'</span>m <span class="ver">· Générateur v5</span></h1>
+</header>
+
+<header class="page-head">
+  <h1>Générateur de badge <span class="ver">· v5</span></h1>
   <div class="lang-toggle" role="group" aria-label="Langue">
     <button type="button" id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
     <button type="button" id="btn-en" onclick="setLang('en')">EN</button>
@@ -440,7 +732,7 @@ body {
 
       <div class="gen-form">
 
-        <!-- Sélecteur principal : niveau en 4 cartes -->
+        <!-- Sélecteur principal : niveau en 3 cartes -->
         <div class="level-block">
           <span class="level-block-label" data-i18n="lbl-level">Niveau de co-création</span>
           <div class="level-cards" id="level-cards" role="radiogroup" aria-label="Niveau de co-création">
@@ -516,7 +808,7 @@ body {
           <defs>
             <path id="bp-v5" d="M 140,140 m -118,0 a 118,118 0 1,1 236,0 a 118,118 0 1,1 -236,0"/>
           </defs>
-          <text font-family="DM Mono, monospace" font-size="9" fill="rgba(200,151,58,0.4)" letter-spacing="4">
+          <text font-family="DM Mono, monospace" font-size="9" fill="rgba(166,120,33,0.55)" letter-spacing="4">
             <textPath href="#bp-v5" id="ring-text-path">IA'm · CO-CRÉATION · TRANSPARENCE · LABEL · </textPath>
           </text>
         </svg>
@@ -548,7 +840,7 @@ body {
         <span class="qr-link">
           <a id="qrLink" href="badge.html" target="_blank" rel="noopener">Ouvrir la page de déclaration</a>
         </span>
-        <p class="qr-note">Le QR code renvoie vers une page lisible avec le niveau, le titre et l’auteur.</p>
+        <p class="qr-note">Le QR code renvoie vers une page lisible avec le niveau, le titre et l'auteur.</p>
       </div>
 
       <div class="embed-section">
@@ -568,9 +860,7 @@ body {
 <footer class="page-foot">
   <span>IA'm · INPI 5212301 · CC BY-NC 4.0</span>
   <span>
-    <a href="index.html" data-i18n="back">← Retour</a>
-    &nbsp;·&nbsp;
-    <a href="badge-v4.html" data-i18n="v4">Version 4 (sans niveaux)</a>
+    <a href="index.html" data-i18n="back">← Retour à l'accueil</a>
   </span>
 </footer>
 
@@ -578,8 +868,7 @@ body {
 /* =========================================================
    IA'm Badge Generator v5
    - 3 niveaux : Assisted / Initiated / Generated
-   - Bilingue FR/EN : priorité document.documentElement.lang,
-     fallback navigator.language, override par toggle manuel
+   - Bilingue FR/EN
    ========================================================= */
 
 const I18N = {
@@ -622,8 +911,7 @@ const I18N = {
     "embed-title": "Code embed HTML",
     "copy": "Copier",
     "copied": "Copié ✓",
-    "back": "← Retour",
-    "v4": "Version 4 (sans niveaux)",
+    "back": "← Retour à l'accueil",
     "lvl-label": { "assisted": "Assisté", "initiated": "Initié", "generated": "Généré" }
   },
   en: {
@@ -665,8 +953,7 @@ const I18N = {
     "embed-title": "HTML embed code",
     "copy": "Copy",
     "copied": "Copied ✓",
-    "back": "← Back",
-    "v4": "Version 4 (without levels)",
+    "back": "← Back to home",
     "lvl-label": { "assisted": "Assisted", "initiated": "Initiated", "generated": "Generated" }
   }
 };
@@ -706,11 +993,9 @@ function applyI18n() {
     if (dict[key] !== undefined) el.textContent = dict[key];
   });
 
-  // Placeholders
   document.getElementById('gen-name').placeholder = dict['ph-author'];
   document.getElementById('gen-title').placeholder = dict['ph-title'];
 
-  // Première option des types
   const typeSelect = document.getElementById('gen-type');
   if (typeSelect.options[0]) typeSelect.options[0].textContent = dict['t-choose'];
 }
@@ -734,8 +1019,7 @@ function selectLevel(level) {
   updateBadge();
 }
 
-
-/* ---------- QR declaration URL — robuste ---------- */
+/* ---------- QR declaration URL ---------- */
 function getDeclarationURL() {
   const level = document.getElementById('gen-level')?.value || 'assisted';
   const name = document.getElementById('gen-name')?.value.trim() || '';
@@ -780,7 +1064,6 @@ function loadImageSafe(src) {
     img.src = src;
   });
 }
-
 
 /* ---------- Badge preview ---------- */
 function updateBadge() {
@@ -850,6 +1133,7 @@ async function loadLogoBase64() {
     'iam-logo-badge.png',
     './iam-logo-badge.png',
     '/iam-logo-badge.png',
+    'assets/iam-logo-badge.png',
     'assets/img/iam-logo-badge.png',
     'assets/img/logo-iam.svg'
   ];
@@ -881,8 +1165,8 @@ async function loadLogoBase64() {
 function buildFallbackLogoSVG(cx, y) {
   return `
   <g aria-label="IA'm logo fallback">
-    <text x="${cx}" y="${y}" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="118" font-weight="700" fill="#0B0E1A">IA<tspan fill="#C8973A" font-style="italic">'</tspan>m</text>
-    <text x="${cx}" y="${y + 36}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="7" fill="#0B0E1A" fill-opacity="0.55">TRANSPARENCE IA</text>
+    <text x="${cx}" y="${y}" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="118" font-weight="700" fill="#1A1D2E">IA<tspan fill="#A67821" font-style="italic">'</tspan>m</text>
+    <text x="${cx}" y="${y + 36}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="7" fill="#1A1D2E" fill-opacity="0.55">TRANSPARENCE IA</text>
   </g>`;
 }
 
@@ -920,11 +1204,11 @@ async function buildSVG() {
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${s}" height="${s}" viewBox="0 0 ${s} ${s}">
   <!-- SVG volontairement transparent. Le PNG ajoute un fond crème à l'export. -->
   ${logoMarkup}
-  <line x1="${cx - filetW - filetLength}" y1="${y - filetOffset}" x2="${cx - filetW}" y2="${y - filetOffset}" stroke="#0B0E1A" stroke-width="1"/>
-  <line x1="${cx + filetW}" y1="${y - filetOffset}" x2="${cx + filetW + filetLength}" y2="${y - filetOffset}" stroke="#0B0E1A" stroke-width="1"/>
-  <text x="${cx}" y="${y}" text-anchor="middle" font-family="DM Mono, monospace" font-size="${fontSize}" letter-spacing="${letterSpacing}" fill="#0B0E1A" font-weight="500">${escapeXml(levelLabel)}</text>
-  ${subtitle ? `<text x="${cx}" y="${s - 50}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" fill="#0B0E1A" fill-opacity="0.55">${escapeXml(subtitle.toUpperCase())}</text>` : ''}
-  ${author ? `<text x="${cx}" y="${s - 28}" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="12" fill="#0B0E1A" fill-opacity="0.55">${escapeXml(author)}</text>` : ''}
+  <line x1="${cx - filetW - filetLength}" y1="${y - filetOffset}" x2="${cx - filetW}" y2="${y - filetOffset}" stroke="#1A1D2E" stroke-width="1"/>
+  <line x1="${cx + filetW}" y1="${y - filetOffset}" x2="${cx + filetW + filetLength}" y2="${y - filetOffset}" stroke="#1A1D2E" stroke-width="1"/>
+  <text x="${cx}" y="${y}" text-anchor="middle" font-family="DM Mono, monospace" font-size="${fontSize}" letter-spacing="${letterSpacing}" fill="#1A1D2E" font-weight="500">${escapeXml(levelLabel)}</text>
+  ${subtitle ? `<text x="${cx}" y="${s - 50}" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" fill="#1A1D2E" fill-opacity="0.55">${escapeXml(subtitle.toUpperCase())}</text>` : ''}
+  ${author ? `<text x="${cx}" y="${s - 28}" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-size="12" fill="#1A1D2E" fill-opacity="0.55">${escapeXml(author)}</text>` : ''}
 </svg>`;
 }
 
@@ -970,7 +1254,6 @@ async function downloadPNG() {
   img.src = url;
 }
 
-
 async function downloadPNGWithQR() {
   const svg = await buildSVG();
   const blob = new Blob([svg], { type: 'image/svg+xml' });
@@ -990,14 +1273,14 @@ async function downloadPNGWithQR() {
       ctx.drawImage(badgeImg, 0, 0, 960, 960);
       URL.revokeObjectURL(svgUrl);
 
-      ctx.fillStyle = '#0B0E1A';
+      ctx.fillStyle = '#1A1D2E';
       ctx.fillRect(960, 0, 240, 960);
 
-      ctx.strokeStyle = '#C8973A';
+      ctx.strokeStyle = '#A67821';
       ctx.lineWidth = 2;
       ctx.strokeRect(990, 80, 180, 800);
 
-      ctx.fillStyle = '#C8973A';
+      ctx.fillStyle = '#A67821';
       ctx.font = '16px DM Mono, monospace';
       ctx.textAlign = 'center';
       ctx.fillText("QR IA'm", 1080, 135);
@@ -1007,15 +1290,15 @@ async function downloadPNGWithQR() {
       ctx.fillRect(1010, 170, 140, 140);
       ctx.drawImage(qrImg, 1020, 180, 120, 120);
 
-      ctx.fillStyle = 'rgba(244,239,228,0.78)';
+      ctx.fillStyle = 'rgba(253,250,245,0.85)';
       ctx.font = '13px DM Mono, monospace';
       ctx.fillText('DÉCLARATION', 1080, 350);
 
-      ctx.fillStyle = 'rgba(244,239,228,0.55)';
+      ctx.fillStyle = 'rgba(253,250,245,0.65)';
       ctx.font = '11px DM Sans, sans-serif';
-      wrapCanvasText(ctx, 'Scannez pour lire le niveau, le titre et l’auteur déclarés.', 1080, 385, 160, 18);
+      wrapCanvasText(ctx, 'Scannez pour lire le niveau, le titre et l\u2019auteur déclarés.', 1080, 385, 160, 18);
 
-      ctx.fillStyle = '#C8973A';
+      ctx.fillStyle = '#A67821';
       ctx.font = '11px DM Mono, monospace';
       wrapCanvasText(ctx, 'iam-inside.eu', 1080, 760, 160, 18);
 
@@ -1054,11 +1337,8 @@ function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
   ctx.fillText(line.trim(), x, y);
 }
 
-
-
 /* ---------- Bootstrap ---------- */
 (function init() {
-  // Paramètres d'URL (utile pour le mode iframe)
   const u = new URL(window.location.href);
   const pLang = u.searchParams.get('lang');
   const pLevel = u.searchParams.get('level');
