@@ -1,0 +1,325 @@
+/* ==========================================================================
+   IA'm — Feuille de style partagée
+   Toutes les pages du site utilisent ce fichier comme base commune.
+   Pour modifier les couleurs, polices ou la grammaire visuelle globale,
+   c'est ici qu'il faut intervenir.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES GLOBALES — palette, polices, mesures
+   -------------------------------------------------------------------------- */
+:root {
+  --bg: #f6f1e7;
+  --panel: #fdfaf3;
+  --text: #1a1d2e;
+  --muted: rgba(26,29,46,.66);
+  --gold: #a67821;
+  --gold-soft: rgba(166,120,33,.10);
+  --gold-border: rgba(166,120,33,.28);
+  --line: rgba(26,29,46,.10);
+  --line-strong: rgba(26,29,46,.16);
+  --max: 1120px;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET ET BASE
+   -------------------------------------------------------------------------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.6;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.wrap {
+  width: min(var(--max), calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAPHIE
+   -------------------------------------------------------------------------- */
+h1, h2, h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--text);
+}
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--gold);
+  font-size: .72rem;
+  margin-bottom: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   4. NAVIGATION (commune à toutes les pages)
+   -------------------------------------------------------------------------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(246,241,231,.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+  width: min(var(--max), calc(100% - 2rem));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 76px;
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  transition: opacity .2s ease;
+}
+.nav-brand:hover { opacity: 0.75; }
+.nav-brand img {
+  width: 72px;
+  height: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  font-size: .95rem;
+  color: var(--muted);
+}
+.nav-links a:hover { color: var(--text); }
+
+/* --------------------------------------------------------------------------
+   5. BOUTONS
+   -------------------------------------------------------------------------- */
+.actions {
+  display: flex;
+  gap: .9rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: .9rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  transition: .2s ease;
+  font-family: 'DM Mono', monospace;
+  font-size: .78rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text);
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  border-color: transparent;
+}
+.btn-primary:hover {
+  background: var(--gold);
+  color: var(--bg);
+}
+.btn-secondary { background: transparent; }
+.btn-secondary:hover { border-color: var(--text); }
+.btn:hover { transform: translateY(-1px); }
+
+/* --------------------------------------------------------------------------
+   6. SECTIONS GÉNÉRIQUES
+   -------------------------------------------------------------------------- */
+.section {
+  padding: 4.5rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.section-head {
+  display: grid;
+  gap: .6rem;
+  margin-bottom: 1.75rem;
+}
+.section-head p {
+  margin: 0;
+  color: var(--muted);
+  max-width: 65ch;
+}
+
+/* --------------------------------------------------------------------------
+   7. CARTES GÉNÉRIQUES
+   -------------------------------------------------------------------------- */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 1.4rem;
+}
+.card .num {
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  font-size: .72rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: .75rem;
+}
+.card p {
+  margin: .65rem 0 0;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   8. FOOTER (commun à toutes les pages)
+   -------------------------------------------------------------------------- */
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 2rem 0 3rem;
+  color: var(--muted);
+  font-size: .95rem;
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   9. PAGE DE CONTENU (utilisée par textes.html, bd.html, et pages d'article)
+   -------------------------------------------------------------------------- */
+.page-header {
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+.page-header h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  max-width: 22ch;
+  margin: 0 auto 1.25rem;
+}
+.page-header p {
+  max-width: 60ch;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* Contenu d'article — pour les pages Textes, BD, etc. */
+.article {
+  max-width: 70ch;
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+.article h2 {
+  font-size: 2rem;
+  margin: 2.5rem 0 1rem;
+}
+.article h3 {
+  font-size: 1.4rem;
+  margin: 2rem 0 .8rem;
+}
+.article p {
+  margin: 0 0 1.2rem;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+.article a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.article blockquote {
+  margin: 1.5rem 0;
+  padding: 1.2rem 1.5rem;
+  border-left: 2px solid var(--gold);
+  background: transparent;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+/* Liste d'articles — pour la page textes.html quand il y aura plusieurs entrées */
+.article-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.article-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem;
+  transition: .25s ease;
+  display: block;
+}
+.article-card:hover {
+  border-color: var(--gold-border);
+  transform: translateY(-2px);
+}
+.article-card .date {
+  font-family: 'DM Mono', monospace;
+  color: var(--gold);
+  font-size: .68rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.article-card h3 {
+  font-size: 1.5rem;
+  margin: 0 0 .5rem;
+}
+.article-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* Placeholder pour pages en préparation */
+.placeholder {
+  text-align: center;
+  max-width: 60ch;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+.placeholder .quote {
+  margin: 2.5rem auto 0;
+  padding: 1.5rem 1.75rem;
+  max-width: 50ch;
+  border-left: 2px solid var(--gold);
+  text-align: left;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+.placeholder .actions {
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. RESPONSIVE (commun à toutes les pages)
+   -------------------------------------------------------------------------- */
+@media (max-width: 980px) {
+  .nav-links { font-size: .85rem; }
+}
