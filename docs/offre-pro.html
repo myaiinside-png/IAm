@@ -1,540 +1,512 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IA'm — Offre professionnelle</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0d1b2a;
-    --navy-mid: #162234;
-    --navy-light: #1e3048;
-    --gold: #c9a84c;
-    --gold-light: #e2c97e;
-    --gold-pale: #f5edd8;
-    --white: #f8f5ef;
-    --muted: #7a8ea8;
-    --border: rgba(201,168,76,0.18);
-  }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IA'm — Offre professionnelle</title>
+  <meta name="description" content="L'offre licence pour les organisations qui souhaitent intégrer IA'm à leur identité visuelle, sans en altérer la forme."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
+  <style>
+    /* ==========================================================================
+       Styles spécifiques à la page offre pro
+       (s'appuient sur les variables globales définies dans styles.css)
+       ========================================================================== */
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* --- Préambule --- */
+    .preambule {
+      max-width: 65ch;
+      margin: 0 auto;
+    }
+    .preambule p {
+      margin: 0 0 1rem;
+      color: var(--text);
+      font-size: 1.05rem;
+    }
+    .preambule p:last-child { margin-bottom: 0; }
+    .preambule strong { color: var(--gold); font-weight: 500; }
 
-  body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 18px;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-  }
+    /* --- Carte d'offre --- */
+    .offer-card {
+      max-width: 720px;
+      margin: 1.5rem auto 0;
+      background: linear-gradient(180deg, var(--gold-soft), var(--panel));
+      border: 1px solid var(--gold-border);
+      border-radius: 28px;
+      padding: 2.5rem 2.25rem;
+    }
+    .offer-card-head {
+      text-align: center;
+      padding-bottom: 1.75rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .offer-card-head .eyebrow { margin-bottom: 0.6rem; }
+    .offer-card-head h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      font-weight: 500;
+      line-height: 1.1;
+      margin: 0 0 0.4rem;
+      color: var(--text);
+    }
+    .offer-card-head h3 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .offer-card-head .subtitle {
+      font-style: italic;
+      color: var(--muted);
+      max-width: 50ch;
+      margin: 0.5rem auto 0;
+      font-size: 1rem;
+    }
+    .price-display {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .price-currency {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--muted);
+    }
+    .price-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.6rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .price-cadence {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .offer-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.75rem;
+    }
+    .offer-features li {
+      padding: 0.75rem 0 0.75rem 1.6rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      color: var(--text);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+    .offer-features li:last-child { border-bottom: none; }
+    .offer-features li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+    .offer-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-  .mono {
-    font-family: 'DM Mono', monospace;
-    font-weight: 300;
-    letter-spacing: 0.04em;
-  }
+    /* --- Mentions discrètes (grands comptes, éducation/ONG) --- */
+    .mentions {
+      max-width: 720px;
+      margin: 2rem auto 0;
+      display: grid;
+      gap: 0.7rem;
+    }
+    .mention {
+      padding: 1rem 1.25rem;
+      border-left: 2px solid var(--line-strong);
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-style: italic;
+      line-height: 1.55;
+    }
+    .mention strong {
+      color: var(--text);
+      font-weight: 500;
+      font-style: normal;
+    }
+    .mention a {
+      color: var(--gold);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
 
-  header {
-    padding: 3rem 2rem 2rem;
-    max-width: 860px;
-    margin: 0 auto;
-    border-bottom: 1px solid var(--border);
-  }
+    /* --- Démonstration badges --- */
+    .badges-demo {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 720px) {
+      .badges-demo { grid-template-columns: 1fr 1fr; }
+    }
+    .badge-demo {
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.4rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      transition: transform .25s ease;
+    }
+    .badge-demo:hover { transform: translateY(-2px); }
+    .badge-demo .badge-logo {
+      width: auto;
+      height: 72px;
+      display: block;
+    }
+    .badge-demo .by-line {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .badge-demo.is-paper { background: var(--panel); }
+    .badge-demo.is-paper .by-line { color: var(--text); opacity: 0.7; }
+    .badge-demo.is-dark { background: var(--text); border-color: var(--text); }
+    .badge-demo.is-dark .by-line { color: var(--gold); }
+    .badge-demo.is-forest { background: #2d4a3e; border-color: #2d4a3e; }
+    .badge-demo.is-forest .by-line { color: rgba(255,255,255,0.78); }
+    .badges-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      margin: 1rem 0 0;
+    }
 
-  .breadcrumb {
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
+    /* --- Règle d'or --- */
+    .regle-or {
+      max-width: 65ch;
+      margin: 1.75rem auto 0;
+      padding: 1.5rem 1.75rem;
+      border-left: 2px solid var(--gold);
+    }
+    .regle-or .label {
+      font-family: 'DM Mono', monospace;
+      color: var(--gold);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .regle-or p {
+      margin: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      line-height: 1.45;
+      color: var(--text);
+      font-style: italic;
+    }
+    .regle-or strong {
+      color: var(--text);
+      font-weight: 500;
+      font-style: normal;
+    }
 
-  .breadcrumb a {
-    color: var(--muted);
-    text-decoration: none;
-  }
-
-  .breadcrumb a:hover { color: var(--gold); }
-
-  h1 {
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
-    font-weight: 300;
-    color: var(--gold-light);
-    line-height: 1.15;
-    margin-bottom: 1rem;
-  }
-
-  h1 em {
-    font-style: italic;
-    color: var(--white);
-  }
-
-  .intro {
-    font-size: 1.15rem;
-    color: rgba(248,245,239,0.72);
-    max-width: 620px;
-    font-style: italic;
-    margin-top: 1rem;
-  }
-
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 3rem 2rem 5rem;
-  }
-
-  .preambule {
-    margin-bottom: 3.5rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .preambule p {
-    color: rgba(248,245,239,0.82);
-    margin-bottom: 1rem;
-  }
-
-  .preambule strong {
-    color: var(--gold-light);
-    font-weight: 400;
-  }
-
-  /* Grille tarifs */
-  .grille {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
-  @media (max-width: 640px) {
-    .grille { grid-template-columns: 1fr; }
-  }
-
-  .carte {
-    border: 1px solid var(--border);
-    padding: 2rem 1.8rem 2rem;
-    position: relative;
-    background: var(--navy-mid);
-    transition: border-color 0.3s;
-  }
-
-  .carte:hover {
-    border-color: rgba(201,168,76,0.45);
-  }
-
-  .carte.featured {
-    border-color: rgba(201,168,76,0.5);
-    background: var(--navy-light);
-  }
-
-  .carte.featured::before {
-    content: 'Recommandé';
-    position: absolute;
-    top: -1px;
-    right: 1.5rem;
-    background: var(--gold);
-    color: var(--navy);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.7rem;
-  }
-
-  .carte-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
-  }
-
-  .carte-prix {
-    font-size: 2.6rem;
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-
-  .carte-prix sup {
-    font-size: 1rem;
-    vertical-align: super;
-    color: var(--muted);
-    margin-right: 0.1rem;
-  }
-
-  .carte-cadence {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    margin-bottom: 1.8rem;
-    letter-spacing: 0.06em;
-  }
-
-  .carte-sep {
-    height: 1px;
-    background: var(--border);
-    margin-bottom: 1.6rem;
-  }
-
-  .carte ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .carte ul li {
-    font-size: 0.95rem;
-    color: rgba(248,245,239,0.8);
-    padding: 0.45rem 0;
-    padding-left: 1.2rem;
-    position: relative;
-    border-bottom: 1px solid rgba(201,168,76,0.07);
-    line-height: 1.4;
-  }
-
-  .carte ul li:last-child { border-bottom: none; }
-
-  .carte ul li::before {
-    content: '—';
-    position: absolute;
-    left: 0;
-    color: var(--gold);
-    font-size: 0.8rem;
-  }
-
-  /* Carte devis */
-  .carte-devis {
-    grid-column: 1 / -1;
-    border: 1px solid var(--border);
-    padding: 2rem 1.8rem;
-    background: var(--navy-mid);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-    transition: border-color 0.3s;
-  }
-
-  .carte-devis:hover { border-color: rgba(201,168,76,0.45); }
-
-  .devis-left .carte-label { margin-bottom: 0.5rem; }
-
-  .devis-titre {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: var(--white);
-    margin-bottom: 0.4rem;
-  }
-
-  .devis-desc {
-    font-size: 0.92rem;
-    color: rgba(248,245,239,0.65);
-    font-style: italic;
-  }
-
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 2rem;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: all 0.25s;
-    white-space: nowrap;
-  }
-
-  .btn:hover {
-    background: var(--gold);
-    color: var(--navy);
-  }
-
-  /* Ce que ça signifie */
-  .signifie {
-    margin: 3rem 0;
-    padding: 2.5rem 2rem;
-    border-left: 2px solid var(--gold);
-    background: rgba(201,168,76,0.04);
-  }
-
-  .signifie h2 {
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: var(--gold-light);
-    margin-bottom: 1.2rem;
-    letter-spacing: 0.02em;
-  }
-
-  .signifie p {
-    color: rgba(248,245,239,0.78);
-    font-style: italic;
-    margin-bottom: 0.8rem;
-    font-size: 1rem;
-  }
-
-  /* FAQ courte */
-  .faq {
-    margin-top: 3.5rem;
-    border-top: 1px solid var(--border);
-    padding-top: 2.5rem;
-  }
-
-  .faq h2 {
-    font-size: 1.3rem;
-    font-weight: 300;
-    color: var(--gold-light);
-    margin-bottom: 2rem;
-  }
-
-  .faq-item {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .faq-item:last-child { border-bottom: none; }
-
-  .faq-q {
-    font-size: 1rem;
-    color: var(--white);
-    margin-bottom: 0.6rem;
-    font-style: italic;
-  }
-
-  .faq-a {
-    font-size: 0.95rem;
-    color: rgba(248,245,239,0.72);
-    line-height: 1.65;
-  }
-
-  /* PDF download */
-  .pdf-block {
-    margin-top: 3rem;
-    padding: 1.8rem 2rem;
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    background: var(--navy-mid);
-  }
-
-  .pdf-icon {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 0.4rem 0.6rem;
-    text-transform: uppercase;
-    flex-shrink: 0;
-  }
-
-  .pdf-text {
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .pdf-text p {
-    font-size: 0.9rem;
-    color: rgba(248,245,239,0.7);
-  }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem;
-    max-width: 860px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .footer-brand {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
-
-  .footer-legal {
-    font-size: 0.78rem;
-    color: var(--muted);
-    font-style: italic;
-  }
-</style>
+    /* --- Charte d'engagement --- */
+    .charte-list {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      counter-reset: charte-counter;
+    }
+    .charte-item {
+      counter-increment: charte-counter;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.4rem 1.6rem 1.4rem 4.5rem;
+      position: relative;
+      transition: border-color .25s ease;
+    }
+    .charte-item:hover { border-color: var(--gold-border); }
+    .charte-item::before {
+      content: counter(charte-counter, decimal-leading-zero);
+      position: absolute;
+      left: 1.6rem;
+      top: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+    .charte-item h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin: 0 0 0.35rem;
+      color: var(--text);
+    }
+    .charte-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.55;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="breadcrumb">
-    <a href="https://iam-inside.eu">IA'm</a> &nbsp;/&nbsp; Offre professionnelle
-  </div>
-  <h1>IA'm <em>Professionnel</em></h1>
-  <p class="intro">
-    Pour les structures qui souhaitent s'associer nominalement au label — et pas seulement télécharger un badge.
-  </p>
-</header>
-
-<main>
-
-  <div class="preambule">
-    <p>
-      Le label IA'm est <strong>gratuit et libre pour tous les créateurs</strong>, artistes, étudiants, indépendants.
-      Cette offre s'adresse aux organisations qui souhaitent aller plus loin :
-      intégrer IA'm dans leur charte éditoriale, être reconnues comme partenaires,
-      et bénéficier d'un accompagnement dans leur démarche de transparence.
-    </p>
-    <p>
-      Ce que vous achetez n'est pas un logo.<br>
-      C'est <strong>une posture publique de confiance</strong> — avec les outils pour la tenir.
-    </p>
-  </div>
-
-  <!-- Grille tarifaire -->
-  <div class="grille">
-
-    <!-- Essentiel -->
-    <div class="carte">
-      <div class="carte-label">Essentiel</div>
-      <div class="carte-prix"><sup>€</sup>690</div>
-      <div class="carte-cadence">/ an — HT</div>
-      <div class="carte-sep"></div>
-      <ul>
-        <li>Kit vectoriel SVG haute qualité (tous niveaux)</li>
-        <li>Licence nommée — supports éditoriaux, institutionnels et de communication</li>
-        <li>Guide d'intégration éditoriale (FR/EN)</li>
-        <li>Accès aux mises à jour du label</li>
-        <li>Usage illimité dans vos productions internes</li>
-      </ul>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html" aria-label="Accueil IA'm">
+        <img src="iam-logo-badge.png" alt="IA'm">
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html#label">Le label</a>
+        <a href="index.html#niveaux">Les niveaux</a>
+        <a href="index.html#usage">Mode d'emploi</a>
+        <a href="index.html#cases">Cas d'usages</a>
+        <a href="index.html#realisations">Réalisations</a>
+        <a href="index.html#ressources">Ressources</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- Institutionnel -->
-    <div class="carte featured">
-      <div class="carte-label">Institutionnel</div>
-      <div class="carte-prix"><sup>€</sup>1 290</div>
-      <div class="carte-cadence">/ an — HT</div>
-      <div class="carte-sep"></div>
-      <ul>
-        <li>Tout le niveau Essentiel</li>
-        <li>Badge co-brandé — 2 variantes couleurs incluses</li>
-        <li>Mention partenaire avec lien sur iam-inside.eu</li>
-        <li>Accompagnement email (intégration, questions)</li>
-        <li>Accès prioritaire aux évolutions du label</li>
-        <li>Attestation de partenariat signée</li>
-      </ul>
-    </div>
+  <main>
 
-    <!-- Grand compte -->
-    <div class="carte-devis">
-      <div class="devis-left">
-        <div class="carte-label">Grand compte &amp; sur mesure</div>
-        <div class="devis-titre">Sur devis — à partir de 5 000 €</div>
-        <div class="devis-desc">
-          Collectivités, médias, groupes de presse — licence multi-entités, déploiement groupe entier.
-          Atelier de sensibilisation inclus (présentiel ou visioconférence). Accompagnement étendu.
+    <!-- ====================================================
+         EN-TÊTE DE PAGE
+         ==================================================== -->
+    <section class="page-header">
+      <div class="wrap">
+        <div class="eyebrow">Offre professionnelle</div>
+        <h1>IA'm pour les organisations</h1>
+        <p>Pour les structures qui souhaitent intégrer le label à leur identité visuelle — sans en altérer la forme.</p>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         01 — LE PRINCIPE
+         ==================================================== -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">01 — Le principe</div>
+          <h2>Gratuit pour les créateurs, encadré pour les organisations.</h2>
+        </div>
+        <div class="preambule">
+          <p>Le label IA'm est <strong>gratuit et libre pour tous les créateurs</strong> — artistes, étudiants, auteurs, indépendants. Le badge généré sur le site est utilisable tel quel, sans contrepartie.</p>
+          <p>Cette offre s'adresse aux <strong>plateformes, éditeurs, médias et institutions</strong> qui souhaitent contextualiser le label dans leur propre identité : couleur de fond, mention nominative <em>« IA'm by [votre nom] »</em>, intégration dans leur charte graphique.</p>
+          <p>Ce que vous achetez n'est pas un logo. C'est <strong>le droit d'associer votre nom au nôtre</strong> — sous des règles claires, partagées.</p>
         </div>
       </div>
-      <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Demande grand compte" class="btn">Prendre contact</a>
-    </div>
+    </section>
 
-  </div>
+    <!-- ====================================================
+         02 — LA LICENCE
+         ==================================================== -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">02 — La licence</div>
+          <h2>Une seule offre.</h2>
+          <p>Pas de paliers artificiels : il n'y a qu'une seule chose à acheter, le droit de contextualiser le label dans votre identité.</p>
+        </div>
 
-  </div>
+        <article class="offer-card">
+          <header class="offer-card-head">
+            <div class="eyebrow">Licence organisation</div>
+            <h3>IA'm <em>by</em> votre structure</h3>
+            <p class="subtitle">Conçue pour s'intégrer à votre identité visuelle sans déformer le label.</p>
+            <div class="price-display">
+              <span class="price-currency">€</span>
+              <span class="price-number">1&nbsp;190</span>
+              <span class="price-cadence">/ an — HT</span>
+            </div>
+          </header>
 
-  <!-- Mention éducation / ONG -->
-  <div style="margin-top: 1rem; padding: 1rem 1.5rem; border-left: 2px solid var(--border); font-size: 0.9rem; color: var(--muted); font-style: italic;">
-    Écoles, universités, associations et ONG — nous contacter pour des conditions adaptées :
-    <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Tarif éducation/ONG" style="color: var(--gold); text-decoration: none;">liolb@iam-inside.eu</a>
-  </div>
+          <ul class="offer-features">
+            <li>Kit vectoriel SVG du logo IA'm (forme officielle, intouchable)</li>
+            <li>Droit de contextualisation : couleur de fond, mention <em>« IA'm by [votre nom] »</em>, intégration dans votre charte</li>
+            <li>Guide d'usage : ce qui est ouvert, ce qui ne l'est pas (FR/EN)</li>
+            <li>Mention en tant que signataire sur iam-inside.eu, avec lien vers votre site</li>
+            <li>Charte d'engagement co-signée — votre déclaration publique de transparence</li>
+            <li>Contact email direct pour les questions d'intégration</li>
+            <li>Accès aux évolutions du label et des outils</li>
+          </ul>
 
-  <!-- Ce que ça signifie -->
-  <div class="signifie">
-    <h2>Ce que signifie être partenaire IA'm</h2>
-    <p>
-      Un partenaire IA'm s'engage à déclarer honnêtement le niveau de co-création dans ses productions —
-      pas comme obligation réglementaire, mais comme posture éditoriale choisie.
-    </p>
-    <p>
-      Le label ne certifie pas une qualité. Il certifie une honnêteté.
-      C'est une différence qui compte, notamment dans les secteurs où la confiance du public est un actif.
-    </p>
-    <p>
-      En vous associant à IA'm, vous prenez position dans un débat qui ne fait que commencer —
-      celui de la place de l'humain dans la création augmentée.
-    </p>
-    <p>
-      Devenir partenaire, c'est aussi soutenir l'indépendance du label
-      et garantir son évolution technique face aux nouveaux modèles d'IA.
-    </p>
-  </div>
+          <div class="offer-actions">
+            <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Souscription licence organisation" class="btn btn-primary">Souscrire</a>
+            <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Question préalable" class="btn btn-secondary">Poser une question</a>
+          </div>
+        </article>
 
-  <!-- FAQ -->
-  <div class="faq">
-    <h2>Questions fréquentes</h2>
-
-    <div class="faq-item">
-      <div class="faq-q">Le badge gratuit n'est-il pas suffisant pour un usage professionnel ?</div>
-      <div class="faq-a">
-        Si. Le badge PNG généré sur le site est libre d'usage, y compris pour les professionnels.
-        La licence pro s'adresse aux structures qui souhaitent une association formelle au label —
-        un kit vectoriel propre, une reconnaissance nominale, et un interlocuteur.
+        <div class="mentions">
+          <div class="mention">
+            <strong>Groupes, multi-entités, collectivités —</strong>
+            licence groupe et accompagnement sur devis :
+            <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Demande grand compte">liolb@iam-inside.eu</a>
+          </div>
+          <div class="mention">
+            <strong>Écoles, universités, ONG —</strong>
+            conditions adaptées à votre statut, nous contacter :
+            <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Tarif éducation/ONG">liolb@iam-inside.eu</a>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="faq-item">
-      <div class="faq-q">La licence couvre-t-elle l'ensemble de nos collaborateurs ?</div>
-      <div class="faq-a">
-        Oui. La licence est attribuée à la structure, pas à un utilisateur individuel.
-        Elle couvre l'ensemble des productions de l'organisation signataire.
+    <!-- ====================================================
+         03 — LA CONTEXTUALISATION
+         ==================================================== -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">03 — La contextualisation</div>
+          <h2>Votre nom, vos couleurs, autour du logo.</h2>
+          <p>Le logo IA'm reste tel quel. Votre identité visuelle vient autour. Trois exemples fictifs pour donner une idée du principe.</p>
+        </div>
+
+        <div class="badges-demo">
+          <div class="badge-demo is-paper">
+            <img class="badge-logo" src="iam-logo-noir.png" alt="IA'm">
+            <div class="by-line">by Galerie Levy</div>
+          </div>
+          <div class="badge-demo is-dark">
+            <img class="badge-logo" src="iam-logo-or.png" alt="IA'm">
+            <div class="by-line">by Éditions Solstice</div>
+          </div>
+          <div class="badge-demo is-forest">
+            <img class="badge-logo" src="iam-logo-or.png" alt="IA'm">
+            <div class="by-line">by Lumen Studio</div>
+          </div>
+        </div>
+        <p class="badges-note">Exemples illustratifs — les marques citées sont fictives.</p>
+
+        <div class="regle-or">
+          <div class="label">La règle d'or</div>
+          <p>
+            Le logo IA'm — <strong>sa forme, sa typographie, ses proportions, ses symboles</strong> — reste intouchable.
+            Seul ce qui l'entoure peut être adapté à votre identité.
+            C'est ce qui garantit qu'il reste reconnaissable, et qu'il continue de vouloir dire quelque chose.
+          </p>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="faq-item">
-      <div class="faq-q">Comment se passe le renouvellement ?</div>
-      <div class="faq-a">
-        La licence est annuelle à renouvellement automatique.
-        Un avis est envoyé 30 jours avant l'échéance. La résiliation est possible
-        à tout moment par simple email — sans délai ni justification.
+    <!-- ====================================================
+         04 — LES ENGAGEMENTS
+         ==================================================== -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">04 — Vos engagements</div>
+          <h2>La charte, en cinq points.</h2>
+          <p>Souscrire à la licence, c'est co-signer cinq engagements publics. Sans eux, le label n'aurait pas de sens.</p>
+        </div>
+
+        <ol class="charte-list">
+          <li class="charte-item">
+            <h3>Déclarer honnêtement le niveau de co-création</h3>
+            <p>Pour chaque production signée IA'm, indiquer s'il s'agit d'un travail <em>Assisté</em>, <em>Initié</em> ou <em>Généré</em>, selon qui porte la décision créative.</p>
+          </li>
+          <li class="charte-item">
+            <h3>Respecter le logo dans sa forme</h3>
+            <p>Ne modifier ni la typographie, ni les proportions, ni les symboles du logo IA'm. Seule la mise en contexte (couleur de fond, mention « by [nom] ») est ouverte.</p>
+          </li>
+          <li class="charte-item">
+            <h3>Ne pas utiliser IA'm comme caution générique</h3>
+            <p>Le label s'attache à des œuvres ou productions précises, pas à une posture de communication globale.</p>
+          </li>
+          <li class="charte-item">
+            <h3>Tenir à jour la déclaration</h3>
+            <p>Signaler tout changement substantiel dans les pratiques de l'organisation ou dans la nature des productions signées.</p>
+          </li>
+          <li class="charte-item">
+            <h3>Accepter le retrait</h3>
+            <p>En cas de manquement constaté aux principes du label, le droit d'usage peut être retiré sans contrepartie.</p>
+          </li>
+        </ol>
       </div>
-    </div>
+    </section>
 
-    <div class="faq-item">
-      <div class="faq-q">Puis-je adapter le badge à notre charte graphique ?</div>
-      <div class="faq-a">
-        Niveau Institutionnel et au-dessus : oui, dans le cadre défini par le guide d'intégration.
-        Le badge co-brandé reste reconnaissable comme IA'm — c'est la condition de sa valeur.
+    <!-- ====================================================
+         05 — FAQ
+         ==================================================== -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">05 — Questions fréquentes</div>
+          <h2>Ce qu'on nous demande en général.</h2>
+        </div>
+
+        <div class="faq-list">
+
+          <details class="faq-item">
+            <summary><span>Pourquoi une seule offre ?</span></summary>
+            <div class="faq-content">
+              <div class="lang-fr">Parce qu'il n'y a qu'une seule chose à acheter : le droit de contextualiser le label dans votre identité. Multiplier les paliers reviendrait à vendre une « montée en gamme » qui n'a pas de sens ici — la posture est la même, qu'on soit galerie indépendante ou groupe de presse. Pour les cas qui appellent vraiment un traitement spécifique (multi-entités, atelier de sensibilisation), nous traitons en devis.</div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>Le badge gratuit n'est-il pas suffisant pour un usage professionnel ?</span></summary>
+            <div class="faq-content">
+              <div class="lang-fr">Si vous êtes un créateur indépendant, oui — le badge généré sur le site reste libre d'usage. La licence pro s'adresse aux structures qui veulent <em>nominalement</em> s'associer au label : leur nom à côté du nôtre, leur identité visuelle autour du logo, leur mention sur iam-inside.eu. Ce n'est pas le même geste.</div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>Que pouvons-nous adapter exactement ?</span></summary>
+            <div class="faq-content">
+              <div class="lang-fr">La couleur de fond du badge, la mention « IA'm by [votre nom] », l'intégration du logo dans vos supports (site, éditions, communication). Ce qui ne peut pas être modifié : la forme du logo lui-même, sa typographie, ses proportions, ses symboles. Le guide d'usage détaille les marges de manœuvre.</div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>La licence couvre-t-elle l'ensemble de nos collaborateurs ?</span></summary>
+            <div class="faq-content">
+              <div class="lang-fr">Oui. La licence est attribuée à la structure signataire, pas à un utilisateur individuel. Elle couvre l'ensemble des productions de l'organisation, dans le respect de la charte.</div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><span>Comment se passe le renouvellement ?</span></summary>
+            <div class="faq-content">
+              <div class="lang-fr">La licence est annuelle, à renouvellement automatique. Un avis est envoyé 30 jours avant l'échéance. La résiliation est possible à tout moment par simple email — sans délai ni justification.</div>
+            </div>
+          </details>
+
+        </div>
+
+        <div class="contact-block">
+          <div class="eyebrow">Contact</div>
+          <h2>Une question préalable ?</h2>
+          <p>Avant de souscrire, vous pouvez nous écrire pour toute précision sur les conditions ou l'intégration.</p>
+          <a class="email" href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a>
+        </div>
       </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>IA'm — Label éthique de co-création avec l'IA</div>
+      <div>Marque déposée n° 5212301 · INPI · CC BY-NC 4.0</div>
     </div>
-
-  </div>
-
-  <!-- Bloc PDF -->
-  <div class="pdf-block">
-    <div class="pdf-icon">PDF</div>
-    <div class="pdf-text">
-      <p>Document de présentation complet — niveaux, conditions, processus de signature.</p>
-      <p>Disponible sur demande à <a href="mailto:liolb@iam-inside.eu" style="color:var(--gold);text-decoration:none;">liolb@iam-inside.eu</a></p>
-    </div>
-    <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Demande dossier pro" class="btn">Demander le dossier</a>
-  </div>
-
-</main>
-
-<footer>
-  <div class="footer-brand mono">IA'm — iam-inside.eu</div>
-  <div class="footer-legal">INPI n° 5212301 — CC BY-NC 4.0 — liolb@iam-inside.eu</div>
-</footer>
+  </footer>
 
 </body>
 </html>
