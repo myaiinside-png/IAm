@@ -261,6 +261,102 @@
       font-size: 0.96rem;
       line-height: 1.55;
     }
+
+    /* --- FAQ bilingue : question EN en italique discrète --- */
+    .faq-item summary span em {
+      display: block;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--muted);
+      font-size: 0.88em;
+      margin-top: 0.15rem;
+    }
+    /* Séparation visuelle entre paragraphes FR et EN dans les réponses */
+    .faq-content .lang-en {
+      margin-top: 0.7rem;
+      padding-top: 0.7rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* --- Formulaire de souscription --- */
+    .subscribe-form {
+      max-width: 640px;
+      margin: 1.5rem auto 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 2rem 2rem 1.75rem;
+    }
+    .subscribe-form .form-intro {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+      line-height: 1.55;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.2rem;
+    }
+    .form-field { display: flex; flex-direction: column; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .form-field label .optional {
+      text-transform: none;
+      letter-spacing: 0;
+      font-style: italic;
+      opacity: 0.7;
+      font-size: 0.72rem;
+    }
+    .form-field input,
+    .form-field textarea {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.98rem;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.75rem 0.9rem;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px var(--gold-soft);
+    }
+    .form-field textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .form-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    .form-footnote {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-style: italic;
+      margin: 1rem 0 0;
+    }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .subscribe-form { padding: 1.5rem 1.25rem 1.25rem; }
+    }
   </style>
 </head>
 <body>
@@ -347,7 +443,7 @@
           </ul>
 
           <div class="offer-actions">
-            <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Souscription licence organisation" class="btn btn-primary">Souscrire</a>
+            <a href="#souscription" class="btn btn-primary">Souscrire</a>
             <a href="mailto:liolb@iam-inside.eu?subject=IA'm — Question préalable" class="btn btn-secondary">Poser une question</a>
           </div>
         </article>
@@ -454,42 +550,106 @@
         <div class="faq-list">
 
           <details class="faq-item">
-            <summary><span>Pourquoi une seule offre ?</span></summary>
+            <summary><span>Pourquoi une seule offre ? <em>Why a single offer?</em></span></summary>
             <div class="faq-content">
               <div class="lang-fr">Parce qu'il n'y a qu'une seule chose à acheter : le droit de contextualiser le label dans votre identité. Multiplier les paliers reviendrait à vendre une « montée en gamme » qui n'a pas de sens ici — la posture est la même, qu'on soit galerie indépendante ou groupe de presse. Pour les cas qui appellent vraiment un traitement spécifique (multi-entités, atelier de sensibilisation), nous traitons en devis.</div>
+              <div class="lang-en">Because there is only one thing to buy: the right to contextualise the label within your identity. Adding tiers would mean selling an "upgrade" that doesn't make sense here — the posture is the same, whether you're an independent gallery or a press group. Cases that genuinely call for specific treatment (multi-entity, awareness workshops) are handled by quote.</div>
             </div>
           </details>
 
           <details class="faq-item">
-            <summary><span>Le badge gratuit n'est-il pas suffisant pour un usage professionnel ?</span></summary>
+            <summary><span>Le badge gratuit n'est-il pas suffisant pour un usage professionnel ? <em>Isn't the free badge enough for professional use?</em></span></summary>
             <div class="faq-content">
               <div class="lang-fr">Si vous êtes un créateur indépendant, oui — le badge généré sur le site reste libre d'usage. La licence pro s'adresse aux structures qui veulent <em>nominalement</em> s'associer au label : leur nom à côté du nôtre, leur identité visuelle autour du logo, leur mention sur iam-inside.eu. Ce n'est pas le même geste.</div>
+              <div class="lang-en">If you are an independent creator, yes — the badge generated on the site remains free to use. The pro licence is for organisations that wish to <em>nominally</em> associate themselves with the label: their name next to ours, their visual identity around the logo, their listing on iam-inside.eu. That's a different gesture.</div>
             </div>
           </details>
 
           <details class="faq-item">
-            <summary><span>Que pouvons-nous adapter exactement ?</span></summary>
+            <summary><span>Que pouvons-nous adapter exactement ? <em>What exactly can we adapt?</em></span></summary>
             <div class="faq-content">
               <div class="lang-fr">La couleur de fond du badge, la mention « IA'm by [votre nom] », l'intégration du logo dans vos supports (site, éditions, communication). Ce qui ne peut pas être modifié : la forme du logo lui-même, sa typographie, ses proportions, ses symboles. Le guide d'usage détaille les marges de manœuvre.</div>
+              <div class="lang-en">The background colour of the badge, the "IA'm by [your name]" mention, the integration of the logo into your materials (website, print, communications). What cannot be modified: the shape of the logo itself, its typography, its proportions, its symbols. The usage guide details the available leeway.</div>
             </div>
           </details>
 
           <details class="faq-item">
-            <summary><span>La licence couvre-t-elle l'ensemble de nos collaborateurs ?</span></summary>
+            <summary><span>La licence couvre-t-elle l'ensemble de nos collaborateurs ? <em>Does the licence cover all our staff?</em></span></summary>
             <div class="faq-content">
               <div class="lang-fr">Oui. La licence est attribuée à la structure signataire, pas à un utilisateur individuel. Elle couvre l'ensemble des productions de l'organisation, dans le respect de la charte.</div>
+              <div class="lang-en">Yes. The licence is granted to the signing organisation, not to an individual user. It covers all productions of the organisation, in accordance with the charter.</div>
             </div>
           </details>
 
           <details class="faq-item">
-            <summary><span>Comment se passe le renouvellement ?</span></summary>
+            <summary><span>Comment se passe le renouvellement ? <em>How does renewal work?</em></span></summary>
             <div class="faq-content">
               <div class="lang-fr">La licence est annuelle, à renouvellement automatique. Un avis est envoyé 30 jours avant l'échéance. La résiliation est possible à tout moment par simple email — sans délai ni justification.</div>
+              <div class="lang-en">The licence is annual and auto-renews. A notice is sent 30 days before expiry. Cancellation is possible at any time by simple email — no notice period, no justification required.</div>
             </div>
           </details>
 
         </div>
 
+      </div>
+    </section>
+
+    <!-- ====================================================
+         06 — SOUSCRIPTION
+         ==================================================== -->
+    <section class="section" id="souscription">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">06 — Souscription</div>
+          <h2>Demander la licence.</h2>
+          <p>Remplissez ce formulaire — nous revenons vers vous sous 48&nbsp;h ouvrées avec le contrat et les modalités de règlement.</p>
+        </div>
+
+        <form class="subscribe-form" id="iam-subscribe" novalidate>
+          <p class="form-intro">Tous les champs marqués sont nécessaires pour établir le contrat. Les autres aident à mieux préparer notre échange.</p>
+          <div class="form-grid">
+            <div class="form-field full">
+              <label for="org-name">Nom de l'organisation</label>
+              <input type="text" id="org-name" name="org-name" required autocomplete="organization"/>
+            </div>
+            <div class="form-field">
+              <label for="contact-name">Contact</label>
+              <input type="text" id="contact-name" name="contact-name" required autocomplete="name"/>
+            </div>
+            <div class="form-field">
+              <label for="contact-role">Fonction <span class="optional">(facultatif)</span></label>
+              <input type="text" id="contact-role" name="contact-role" autocomplete="organization-title"/>
+            </div>
+            <div class="form-field">
+              <label for="contact-email">Email</label>
+              <input type="email" id="contact-email" name="contact-email" required autocomplete="email"/>
+            </div>
+            <div class="form-field">
+              <label for="contact-phone">Téléphone <span class="optional">(facultatif)</span></label>
+              <input type="tel" id="contact-phone" name="contact-phone" autocomplete="tel"/>
+            </div>
+            <div class="form-field full">
+              <label for="org-id">Identifiant légal — SIRET, RCS, n° d'enregistrement</label>
+              <input type="text" id="org-id" name="org-id" required/>
+            </div>
+            <div class="form-field full">
+              <label for="message">Contexte d'usage <span class="optional">(facultatif)</span></label>
+              <textarea id="message" name="message" placeholder="Ex. : type de productions concernées, public, intégration prévue…"></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+          </div>
+          <p class="form-footnote">À la validation, votre client mail s'ouvre avec un message pré-rempli adressé à liolb@iam-inside.eu.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         07 — CONTACT
+         ==================================================== -->
+    <section class="section">
+      <div class="wrap">
         <div class="contact-block">
           <div class="eyebrow">Contact</div>
           <h2>Une question préalable ?</h2>
@@ -507,6 +667,60 @@
       <div>Marque déposée n° 5212301 · INPI · CC BY-NC 4.0</div>
     </div>
   </footer>
+
+  <script>
+    // Composition d'un mailto enrichi depuis le formulaire de souscription.
+    // Aucun backend requis : ouvre simplement le client mail de l'utilisateur
+    // avec sujet + corps pré-remplis.
+    (function () {
+      var form = document.getElementById('iam-subscribe');
+      if (!form) return;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Validation native du navigateur
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        var data = new FormData(form);
+        var get = function (k) { return (data.get(k) || '').toString().trim(); };
+
+        var subject = "IA'm — Souscription licence : " + get('org-name');
+
+        var lines = [
+          "Demande de souscription à la licence IA'm",
+          "",
+          "— Organisation : " + get('org-name'),
+          "— Identifiant légal : " + get('org-id'),
+          "",
+          "— Contact : " + get('contact-name'),
+          "— Fonction : " + (get('contact-role') || "—"),
+          "— Email : " + get('contact-email'),
+          "— Téléphone : " + (get('contact-phone') || "—"),
+          ""
+        ];
+
+        var msg = get('message');
+        if (msg) {
+          lines.push("— Contexte d'usage :");
+          lines.push(msg);
+          lines.push("");
+        }
+
+        lines.push("Envoyé depuis iam-inside.eu/offre-pro.html");
+
+        var body = lines.join("\n");
+        var href = "mailto:liolb@iam-inside.eu"
+          + "?subject=" + encodeURIComponent(subject)
+          + "&body=" + encodeURIComponent(body);
+
+        window.location.href = href;
+      });
+    })();
+  </script>
 
 </body>
 </html>
