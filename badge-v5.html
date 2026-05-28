@@ -760,6 +760,10 @@ img { max-width: 100%; display: block; }
               <span class="level-card-name"><span class="num">03</span><span data-i18n="card-generated-name">Généré</span></span>
               <span class="level-card-desc" data-i18n="card-generated-desc">IA décide la forme, l'humain est prescripteur.</span>
             </button>
+            <button type="button" class="level-card level-card--human" data-level="human" role="radio" aria-checked="false" onclick="selectLevel('human')" style="border-style:dashed;grid-column:1/-1;">
+              <span class="level-card-name"><span class="num" style="color:#c0322c;" aria-hidden="true">⦰</span><span data-i18n="card-human-name">Sans IA</span></span>
+              <span class="level-card-desc" data-i18n="card-human-desc">Aucune IA. Œuvre entièrement humaine — le logo barré.</span>
+            </button>
           </div>
 
           <button type="button" class="help-toggle" onclick="toggleHelp()">
@@ -825,7 +829,7 @@ img { max-width: 100%; display: block; }
           </text>
         </svg>
         <div class="badge-generated" id="badgePreview">
-          <img src="iam-logo-badge.png" alt="IA'm" class="badge-logo-img">
+          <img src="iam-logo-badge.png" alt="IA'm" class="badge-logo-img" id="badge-logo-img">
           <div class="badge-generated-level" id="badge-level-display">· Assisté</div>
           <div class="badge-generated-sub" id="badge-type-display"></div>
           <div class="badge-generated-author" id="badge-author-display"></div>
@@ -834,7 +838,8 @@ img { max-width: 100%; display: block; }
 
       <div class="download-btns">
         <button class="btn-dl" onclick="downloadSVG()" data-i18n="dl-svg">↓ SVG</button>
-        <button class="btn-dl" onclick="downloadPNG()" data-i18n="dl-png">↓ PNG</button>
+        <button class="btn-dl" onclick="downloadPNG()" data-i18n="dl-png">↓ PNG (crème)</button>
+        <button class="btn-dl" onclick="downloadPNGTransparent()" data-i18n="dl-png-transp">↓ PNG (transparent)</button>
         <button class="btn-dl" onclick="downloadPNGWithQR()">↓ PNG + QR</button>
       </div>
 
@@ -909,6 +914,8 @@ const I18N = {
     "card-initiated-desc": "Co-auctorialité assumée, propositions IA validées par l'humain.",
     "card-generated-name": "Généré",
     "card-generated-desc": "IA décide la forme, l'humain est prescripteur.",
+    "card-human-name": "Sans IA",
+    "card-human-desc": "Aucune IA. Œuvre entièrement humaine — le logo barré.",
     "secondary-label": "Informations complémentaires (optionnel)",
     "help-toggle": "Comment choisir mon niveau ?",
     "h-assisted": "IA'm · Assisté",
@@ -919,12 +926,13 @@ const I18N = {
     "p-generated": "L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.",
     "crit": "Critère de bascule entre niveaux : qui tranche la forme finale.",
     "dl-svg": "↓ SVG",
-    "dl-png": "↓ PNG",
+    "dl-png": "↓ PNG (crème)",
+    "dl-png-transp": "↓ PNG (transparent)",
     "embed-title": "Code embed HTML",
     "copy": "Copier",
     "copied": "Copié ✓",
     "back": "← Retour à l'accueil",
-    "lvl-label": { "assisted": "Assisté", "initiated": "Initié", "generated": "Généré" }
+    "lvl-label": { "assisted": "Assisté", "initiated": "Initié", "generated": "Généré", "human": "Sans IA" }
   },
   en: {
     "heading": "Own your <em>level</em> of co-creation",
@@ -951,6 +959,8 @@ const I18N = {
     "card-initiated-desc": "Shared authorship, AI proposals validated by the human.",
     "card-generated-name": "Generated",
     "card-generated-desc": "AI decides the form, the human is prescriber.",
+    "card-human-name": "Without AI",
+    "card-human-desc": "No AI. Fully human work — the struck-through mark.",
     "secondary-label": "Additional information (optional)",
     "help-toggle": "How do I choose my level?",
     "h-assisted": "IA'm · Assisted",
@@ -961,12 +971,13 @@ const I18N = {
     "p-generated": "AI decides most of the final form. The human provides intention (prompt, brief, framing) but accepts the output with little or no formal intervention. The human is prescriber more than formal author.",
     "crit": "Switching criterion between levels: who decides the final form.",
     "dl-svg": "↓ SVG",
-    "dl-png": "↓ PNG",
+    "dl-png": "↓ PNG (cream)",
+    "dl-png-transp": "↓ PNG (transparent)",
     "embed-title": "HTML embed code",
     "copy": "Copy",
     "copied": "Copied ✓",
     "back": "← Back to home",
-    "lvl-label": { "assisted": "Assisted", "initiated": "Initiated", "generated": "Generated" }
+    "lvl-label": { "assisted": "Assisted", "initiated": "Initiated", "generated": "Generated", "human": "Without AI" }
   }
 };
 
@@ -1087,6 +1098,9 @@ function updateBadge() {
 
   document.getElementById('badge-level-display').textContent = '· ' + dict['lvl-label'][level];
 
+  const logoImg = document.getElementById('badge-logo-img');
+  if (logoImg) logoImg.src = (level === 'human') ? 'iam-logo-barre.png' : 'iam-logo-badge.png';
+
   let subParts = [];
   if (type) subParts.push(type);
   if (title) subParts.push(title);
@@ -1114,8 +1128,12 @@ function updateEmbed() {
   if (!box) return;
 
   if (embedMode === 'img') {
+    const imgSrc = (level === 'human')
+      ? `${base}/iam-logo-barre.png`
+      : `${base}/badges/iam-${level}-${currentLang}-240.svg`;
+    const imgAlt = (level === 'human') ? "IA'm — sans IA" : `IA'm ${level}`;
     box.value = `<a href="${declarationURL}" target="_blank" rel="noopener">
-  <img src="${base}/badges/iam-${level}-${currentLang}-240.svg" alt="IA'm ${level}" width="240" height="240">
+  <img src="${imgSrc}" alt="${imgAlt}" width="240" height="240">
 </a>`;
   } else {
     box.value = `<iframe src="${declarationURL}"
@@ -1137,6 +1155,32 @@ function copyEmbed() {
 
 /* ---------- Downloads ---------- */
 let logoBase64Cache = null;
+let barreBase64Cache = null;
+
+async function fetchAsDataUrl(path) {
+  const response = await fetch(path, { cache: 'no-store' });
+  if (!response.ok) return null;
+  const blob = await response.blob();
+  if (!blob || blob.size === 0) return null;
+  return await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function loadBarreBase64() {
+  if (barreBase64Cache) return barreBase64Cache;
+  const candidates = ['iam-logo-barre.png', './iam-logo-barre.png', '/iam-logo-barre.png'];
+  for (const path of candidates) {
+    try {
+      const dataUrl = await fetchAsDataUrl(path);
+      if (dataUrl) { barreBase64Cache = dataUrl; return barreBase64Cache; }
+    } catch (e) { console.warn('Barré non chargé depuis', path, e); }
+  }
+  return null;
+}
 
 async function loadLogoBase64() {
   if (logoBase64Cache) return logoBase64Cache;
@@ -1192,7 +1236,7 @@ async function buildSVG() {
   const subtitle = [type, title].filter(Boolean).join(' · ');
   const author = name ? '— ' + name : '';
 
-  const logoData = await loadLogoBase64();
+  const logoData = (level === 'human') ? await loadBarreBase64() : await loadLogoBase64();
   const logoHref = logoData || '';
 
   const s = 480;
@@ -1259,6 +1303,31 @@ async function downloadPNG() {
       const a = document.createElement('a');
       a.href = purl;
       a.download = `iam-badge-${level}.png`;
+      a.click();
+      URL.revokeObjectURL(purl);
+    }, 'image/png');
+  };
+  img.src = url;
+}
+
+async function downloadPNGTransparent() {
+  const svg = await buildSVG();
+  const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const img = new Image();
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 960; canvas.height = 960;
+    const ctx = canvas.getContext('2d');
+    // Pas de fond : canvas transparent par défaut.
+    ctx.drawImage(img, 0, 0, 960, 960);
+    URL.revokeObjectURL(url);
+    canvas.toBlob(b => {
+      const purl = URL.createObjectURL(b);
+      const level = document.getElementById('gen-level').value || 'assisted';
+      const a = document.createElement('a');
+      a.href = purl;
+      a.download = `iam-badge-${level}-transparent.png`;
       a.click();
       URL.revokeObjectURL(purl);
     }, 'image/png');
@@ -1362,7 +1431,7 @@ function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
   document.getElementById('btn-fr').classList.toggle('active', currentLang === 'fr');
   document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
 
-  if (pLevel && ['assisted','initiated','generated'].includes(pLevel)) {
+  if (pLevel && ['assisted','initiated','generated','human'].includes(pLevel)) {
     selectLevel(pLevel);
   } else {
     selectLevel('assisted');
