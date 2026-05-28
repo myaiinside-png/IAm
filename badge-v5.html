@@ -332,6 +332,73 @@ img { max-width: 100%; display: block; }
   .level-cards { grid-template-columns: 1fr; }
 }
 
+/* Cartouche signe barré — distinct des 3 niveaux */
+.barre-cartouche {
+  margin-top: 1rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: 14px;
+  padding: 0.9rem 1.1rem;
+  cursor: pointer;
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  color: var(--text);
+  transition: all 0.25s;
+}
+
+.barre-cartouche:hover {
+  border-color: var(--gold-border);
+  background: var(--gold-soft);
+}
+
+.barre-cartouche.active {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  box-shadow: inset 0 0 0 1px var(--gold);
+}
+
+.barre-cartouche-mark {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.4rem;
+  color: #c0322c;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.barre-cartouche-text .bc-name {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.barre-cartouche.active .bc-name { color: var(--gold); }
+
+.barre-cartouche-text .bc-desc {
+  display: block;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
+
+/* Note discrète : droit au silence */
+.silence-note {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--muted);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+
 /* Secondary fields divider */
 .secondary-fields-label {
   display: block;
@@ -762,6 +829,15 @@ img { max-width: 100%; display: block; }
             </button>
           </div>
 
+          <!-- Cartouche distinct : signe barré (aucune IA) — pas un niveau de co-création -->
+          <button type="button" class="barre-cartouche" data-level="human" onclick="selectLevel('human')" aria-pressed="false">
+            <span class="barre-cartouche-mark" aria-hidden="true">⦰</span>
+            <span class="barre-cartouche-text">
+              <span class="bc-name" data-i18n="bc-name">Sans IA</span>
+              <span class="bc-desc" data-i18n="bc-desc">Œuvre entièrement humaine. Le signe barré : une affirmation offerte, jamais un brevet de pureté.</span>
+            </span>
+          </button>
+
           <button type="button" class="help-toggle" onclick="toggleHelp()">
             <span id="help-arrow">▸</span>
             <span data-i18n="help-toggle">Comment choisir mon niveau ?</span>
@@ -778,6 +854,8 @@ img { max-width: 100%; display: block; }
 
             <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui tranche la forme finale.</p>
           </div>
+
+          <p class="silence-note" data-i18n="silence">Et si aucune IA n'est intervenue, vous n'avez rien à apposer : ne rien dire reste un droit. Le signe barré n'est qu'une possibilité, pour qui souhaite l'affirmer.</p>
         </div>
 
         <!-- Champs secondaires -->
@@ -910,6 +988,9 @@ const I18N = {
     "card-initiated-desc": "Co-auctorialité assumée, propositions IA validées par l'humain.",
     "card-generated-name": "Généré",
     "card-generated-desc": "IA décide la forme, l'humain est prescripteur.",
+    "bc-name": "Sans IA",
+    "bc-desc": "Œuvre entièrement humaine. Le signe barré : une affirmation offerte, jamais un brevet de pureté.",
+    "silence": "Et si aucune IA n'est intervenue, vous n'avez rien à apposer : ne rien dire reste un droit. Le signe barré n'est qu'une possibilité, pour qui souhaite l'affirmer.",
     "secondary-label": "Informations complémentaires (optionnel)",
     "help-toggle": "Comment choisir mon niveau ?",
     "h-assisted": "IA'm · Assisté",
@@ -926,7 +1007,7 @@ const I18N = {
     "copy": "Copier",
     "copied": "Copié ✓",
     "back": "← Retour à l'accueil",
-    "lvl-label": { "assisted": "Assisté", "initiated": "Initié", "generated": "Généré" }
+    "lvl-label": { "assisted": "Assisté", "initiated": "Initié", "generated": "Généré", "human": "Sans IA" }
   },
   en: {
     "heading": "Own your <em>level</em> of co-creation",
@@ -953,6 +1034,9 @@ const I18N = {
     "card-initiated-desc": "Shared authorship, AI proposals validated by the human.",
     "card-generated-name": "Generated",
     "card-generated-desc": "AI decides the form, the human is prescriber.",
+    "bc-name": "Without AI",
+    "bc-desc": "Fully human work. The struck-through mark: an affirmation offered, never a badge of purity.",
+    "silence": "And if no AI was involved, you have nothing to add: saying nothing remains a right. The struck-through mark is only an option, for those who wish to affirm it.",
     "secondary-label": "Additional information (optional)",
     "help-toggle": "How do I choose my level?",
     "h-assisted": "IA'm · Assisted",
@@ -969,7 +1053,7 @@ const I18N = {
     "copy": "Copy",
     "copied": "Copied ✓",
     "back": "← Back to home",
-    "lvl-label": { "assisted": "Assisted", "initiated": "Initiated", "generated": "Generated" }
+    "lvl-label": { "assisted": "Assisted", "initiated": "Initiated", "generated": "Generated", "human": "Without AI" }
   }
 };
 
@@ -1031,6 +1115,12 @@ function selectLevel(level) {
     card.classList.toggle('active', isActive);
     card.setAttribute('aria-checked', isActive ? 'true' : 'false');
   });
+  const barre = document.querySelector('.barre-cartouche');
+  if (barre) {
+    const isHuman = (level === 'human');
+    barre.classList.toggle('active', isHuman);
+    barre.setAttribute('aria-pressed', isHuman ? 'true' : 'false');
+  }
   updateBadge();
 }
 
@@ -1091,7 +1181,7 @@ function updateBadge() {
   document.getElementById('badge-level-display').textContent = '· ' + dict['lvl-label'][level];
 
   const logoImg = document.getElementById('badge-logo-img');
-  if (logoImg) logoImg.src = 'iam-logo-badge.png';
+  if (logoImg) logoImg.src = (level === 'human') ? 'iam-logo-barre.png' : 'iam-logo-badge.png';
 
   let subParts = [];
   if (type) subParts.push(type);
@@ -1120,8 +1210,10 @@ function updateEmbed() {
   if (!box) return;
 
   if (embedMode === 'img') {
-    const imgSrc = `${base}/badges/iam-${level}-${currentLang}-240.svg`;
-    const imgAlt = `IA'm ${level}`;
+    const imgSrc = (level === 'human')
+      ? `${base}/iam-logo-barre.png`
+      : `${base}/badges/iam-${level}-${currentLang}-240.svg`;
+    const imgAlt = (level === 'human') ? "IA'm — sans IA" : `IA'm ${level}`;
     box.value = `<a href="${declarationURL}" target="_blank" rel="noopener">
   <img src="${imgSrc}" alt="${imgAlt}" width="240" height="240">
 </a>`;
@@ -1145,6 +1237,7 @@ function copyEmbed() {
 
 /* ---------- Downloads ---------- */
 let logoBase64Cache = null;
+let barreBase64Cache = null;
 
 async function fetchAsDataUrl(path) {
   const response = await fetch(path, { cache: 'no-store' });
@@ -1157,6 +1250,18 @@ async function fetchAsDataUrl(path) {
     reader.onerror = reject;
     reader.readAsDataURL(blob);
   });
+}
+
+async function loadBarreBase64() {
+  if (barreBase64Cache) return barreBase64Cache;
+  const candidates = ['iam-logo-barre.png', './iam-logo-barre.png', '/iam-logo-barre.png'];
+  for (const path of candidates) {
+    try {
+      const dataUrl = await fetchAsDataUrl(path);
+      if (dataUrl) { barreBase64Cache = dataUrl; return barreBase64Cache; }
+    } catch (e) { console.warn('Barré non chargé depuis', path, e); }
+  }
+  return null;
 }
 
 async function loadLogoBase64() {
@@ -1213,7 +1318,7 @@ async function buildSVG() {
   const subtitle = [type, title].filter(Boolean).join(' · ');
   const author = name ? '— ' + name : '';
 
-  const logoData = await loadLogoBase64();
+  const logoData = (level === 'human') ? await loadBarreBase64() : await loadLogoBase64();
   const logoHref = logoData || '';
 
   const s = 480;
@@ -1408,7 +1513,7 @@ function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
   document.getElementById('btn-fr').classList.toggle('active', currentLang === 'fr');
   document.getElementById('btn-en').classList.toggle('active', currentLang === 'en');
 
-  if (pLevel && ['assisted','initiated','generated'].includes(pLevel)) {
+  if (pLevel && ['assisted','initiated','generated','human'].includes(pLevel)) {
     selectLevel(pLevel);
   } else {
     selectLevel('assisted');
