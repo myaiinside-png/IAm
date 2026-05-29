@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IA'm — Cas d'usages</title>
+  <meta name="description" content="À qui s'adresse le label IA'm : journalistes, enseignants, chercheurs, créatifs. Une galerie de cas d'usages."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/styles.css"/>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="index.html" aria-label="Accueil IA'm">
+        <img src="iam-logo-badge.png" alt="IA'm">
+      </a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="index.html#label">Le label</a>
+        <a href="index.html#niveaux">Les niveaux</a>
+        <a href="index.html#usage">Mode d'emploi</a>
+        <a href="cas-usages.html" aria-current="page">Cas d'usages</a>
+        <a href="realisations.html">Réalisations</a>
+        <a href="index.html#ressources">Ressources</a>
+        <a href="offre-pro.html">Offre pro</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="page-header">
+      <div class="wrap">
+        <div class="eyebrow">Cas d'usages</div>
+        <h1>À qui ça s'adresse.</h1>
+        <p>Une galerie pour aider à se projeter. Cliquez sur une image pour l'agrandir, puis cliquez à nouveau pour zoomer sur les détails.</p>
+      </div>
+    </section>
+
+    <!-- ====================================================
+         GALERIE CAS D'USAGES
+         Pour ajouter un cas : duplique un bloc <article class="case">
+         data-img et src doivent pointer le MÊME fichier.
+         ==================================================== -->
+    <section>
+      <div class="wrap">
+        <div class="gallery" id="gallery">
+
+          <article class="case" data-img="assets/img/galerie/journaliste.png" data-caption="Journaliste">
+            <div class="case-img-wrap"><img src="assets/img/galerie/journaliste.png" alt="Cas d'usage journaliste"></div>
+            <div class="cap">Journaliste</div>
+          </article>
+
+          <article class="case" data-img="assets/img/galerie/professeur-eleves.png" data-caption="Enseignant">
+            <div class="case-img-wrap"><img src="assets/img/galerie/professeur-eleves.png" alt="Cas d'usage enseignant"></div>
+            <div class="cap">Enseignant</div>
+          </article>
+
+          <article class="case" data-img="assets/img/galerie/chercheur.png" data-caption="Chercheur">
+            <div class="case-img-wrap"><img src="assets/img/galerie/chercheur.png" alt="Cas d'usage chercheur"></div>
+            <div class="cap">Chercheur</div>
+          </article>
+
+          <article class="case" data-img="assets/img/galerie/motion-designer-freelance.png" data-caption="Créatif indépendant">
+            <div class="case-img-wrap"><img src="assets/img/galerie/motion-designer-freelance.png" alt="Cas d'usage designer"></div>
+            <div class="cap">Créatif indépendant</div>
+          </article>
+
+        </div>
+
+        <div class="contact-block">
+          <div class="eyebrow">Contact</div>
+          <h2>Un cas d'usage à proposer ?</h2>
+          <p>Si IA'm trouve sa place dans votre métier, écrivez-nous : la galerie s'enrichit au fil des contributions.</p>
+          <a class="email" href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Lightbox (générée par JS) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image agrandie">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">×</button>
+      <button class="lightbox-prev" id="lightboxPrev" aria-label="Précédent">‹</button>
+      <button class="lightbox-next" id="lightboxNext" aria-label="Suivant">›</button>
+      <img class="lightbox-image" id="lightboxImage" alt="">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+      <div class="lightbox-hint" id="lightboxHint">Cliquez sur l'image pour zoomer</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>IA'm — Label éthique de co-création avec l'IA</div>
+      <div>Marque déposée n° 5212301 · INPI · CC BY-NC 4.0</div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const cases = Array.from(document.querySelectorAll('.case'));
+      const lightbox = document.getElementById('lightbox');
+      const lbImage = document.getElementById('lightboxImage');
+      const lbCaption = document.getElementById('lightboxCaption');
+      const lbClose = document.getElementById('lightboxClose');
+      const lbPrev = document.getElementById('lightboxPrev');
+      const lbNext = document.getElementById('lightboxNext');
+      const lbHint = document.getElementById('lightboxHint');
+      let currentIndex = 0;
+
+      function showLightbox(index) {
+        currentIndex = index;
+        const item = cases[index];
+        lbImage.src = item.dataset.img;
+        lbImage.alt = item.dataset.caption || '';
+        lbCaption.textContent = item.dataset.caption || '';
+        lightbox.classList.add('open');
+        lightbox.classList.remove('zoomed');
+        lbHint.textContent = "Cliquez sur l'image pour zoomer";
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.classList.remove('zoomed');
+        document.body.style.overflow = '';
+      }
+
+      function toggleZoom() {
+        const isZoomed = lightbox.classList.toggle('zoomed');
+        if (isZoomed) {
+          lbHint.textContent = "Cliquez à nouveau pour réduire · Échap pour fermer";
+          lightbox.scrollTop = 0;
+        } else {
+          lbHint.textContent = "Cliquez sur l'image pour zoomer";
+        }
+      }
+
+      function exitZoom() {
+        if (lightbox.classList.contains('zoomed')) {
+          lightbox.classList.remove('zoomed');
+          lbHint.textContent = "Cliquez sur l'image pour zoomer";
+        }
+      }
+
+      function nextItem() {
+        currentIndex = (currentIndex + 1) % cases.length;
+        showLightbox(currentIndex);
+      }
+      function prevItem() {
+        currentIndex = (currentIndex - 1 + cases.length) % cases.length;
+        showLightbox(currentIndex);
+      }
+
+      cases.forEach((c, i) => {
+        c.addEventListener('click', () => showLightbox(i));
+      });
+      lbImage.addEventListener('click', (e) => { e.stopPropagation(); toggleZoom(); });
+      lbClose.addEventListener('click', closeLightbox);
+      lbNext.addEventListener('click', (e) => { e.stopPropagation(); exitZoom(); nextItem(); });
+      lbPrev.addEventListener('click', (e) => { e.stopPropagation(); exitZoom(); prevItem(); });
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') {
+          if (lightbox.classList.contains('zoomed')) exitZoom();
+          else closeLightbox();
+        }
+        if (e.key === 'ArrowRight') { exitZoom(); nextItem(); }
+        if (e.key === 'ArrowLeft') { exitZoom(); prevItem(); }
+      });
+    })();
+  </script>
+</body>
+</html>
