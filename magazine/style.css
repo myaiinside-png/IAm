@@ -94,3 +94,8 @@ footer .disc{margin-top:30px;font-size:.78rem;font-style:italic;color:var(--ink-
   footer .meta{text-align:left;}
   .band{padding:64px 0;}
 }
+
+/* logo image (haut & bas de page) */
+.logo-link{display:inline-block;line-height:0;}
+.logo-mark{height:46px;width:auto;display:block;}
+.footer-logo{height:66px;margin-bottom:6px;}
