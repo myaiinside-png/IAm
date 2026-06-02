@@ -3,12 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IA'm Magazine · Numéro spécial — Le graphiste</title>
-<meta name="description" content="Numéro spécial — Le Graphiste. IA'm Magazine, revue fictionnelle d'un futur proche.">
+<title>IA'm Magazine — Les bâtisseurs de la confiance</title>
+<meta name="description" content="IA'm Magazine : une revue fictionnelle d'un futur proche, où des institutions choisissent d'afficher la démarche derrière leurs œuvres.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/magazine/style.css">
+<style>
+  /* styles du titre inclus ici pour être autonomes */
+  .hero-lockup{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin:16px 0 28px;}
+  .hero-logo{height:152px;width:auto;display:block;}
+  .hero-mag{font-family:'Playfair Display',serif;font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(1.5rem,3.6vw,2.5rem);line-height:1;color:#1a1714;}
+  @media(max-width:820px){.hero-logo{height:118px;}}
+</style>
 </head>
 <body>
 
@@ -20,20 +27,95 @@
 </header>
 
 <main>
-  <div class="wrap"><a class="backlink" href="/magazine"><span>&#8592;</span>&nbsp; IA&#8217;m Magazine</a></div>
-
   <section class="hero">
     <div class="wrap">
-      <div class="grid">
-        <div>
-          <span class="eyebrow reveal d1">Numéro spécial · [DATE]</span>
-          <h1 class="reveal d2">Le Graphiste</h1>
-          <p class="lede reveal d3">[CHAPÔ À ÉCRIRE — phrase d’accroche du Graphiste]</p>
-          <p class="fineprint reveal d4">Les lieux et les personnages représentés sont fictifs, mais inspirés d&#8217;un futur proche.</p>
-        </div>
-        <div class="cover-shot reveal d3">
-          <span class="tag">Numéro spécial</span>
-          <img src="cover.jpg" alt="Couverture — Numéro spécial, Le Graphiste">
+      <span class="eyebrow reveal d1">Revue fictionnelle · Futur proche</span>
+      <h1 class="hero-lockup reveal d2">
+        <img class="hero-logo" src="/magazine/logo-iam.png" alt="IA'm">
+        <span class="hero-mag">Magazine</span>
+      </h1>
+      <p class="lede reveal d3" style="max-width:52ch;">Une revue qui met en scène un futur proche : des institutions — un musée, demain une école, un théâtre — qui ont choisi d’<strong>afficher la démarche</strong> derrière leurs œuvres.</p>
+      <p class="fineprint reveal d4">Chaque numéro est une fiction. Les lieux et les personnages n’existent pas encore. La transparence, elle, existe déjà.</p>
+    </div>
+  </section>
+
+  <section class="collection">
+    <div class="wrap">
+      <span class="eyebrow">La collection</span>
+      <div class="cards">
+
+        <!-- ====== UN NUMÉRO = UN BLOC <a class="card"> — pour en ajouter un, copie un bloc et change le dossier, l'image et le titre ====== -->
+        <a class="card" href="/magazine/numero-01">
+          <img src="/magazine/numero-01/cover.jpg" alt="IA'm Magazine — Numéro 01, L'École d'Art">
+          <span class="num">Numéro 01</span>
+          <span class="ttl">L’École d’Art</span>
+        </a>
+
+        <a class="card" href="/magazine/numero-02">
+          <img src="/magazine/numero-02/cover.jpg" alt="IA'm Magazine — Numéro 02, Le Musée">
+          <span class="num">Numéro 02</span>
+          <span class="ttl">Le Musée</span>
+        </a>
+
+        <a class="card" href="/magazine/numero-03">
+          <img src="/magazine/numero-03/cover.jpg" alt="IA'm Magazine — Numéro 03, Le Galeriste">
+          <span class="num">Numéro 03</span>
+          <span class="ttl">Le Galeriste</span>
+        </a>
+
+        <a class="card" href="/magazine/numero-04">
+          <img src="/magazine/numero-04/cover.jpg" alt="IA'm Magazine — Numéro 04, La Maison de Vente">
+          <span class="num">Numéro 04</span>
+          <span class="ttl">La Maison de Vente</span>
+        </a>
+        <a class="card" href="/magazine/numero-special">
+          <img src="/magazine/numero-special/cover.jpg" alt="IA'm Magazine — Numéro spécial, Le Graphiste">
+          <span class="num">Numéro spécial</span>
+          <span class="ttl">Le Graphiste</span>
+        </a>
+
+        <a class="card" href="/magazine/numero-05">
+          <img src="/magazine/numero-05/cover.jpg" alt="IA'm Magazine — Numéro 05, Le Journal">
+          <span class="num">Numéro 05</span>
+          <span class="ttl">Le Journal</span>
+        </a>
+
+        <a class="card" href="/magazine/numero-06">
+          <img src="/magazine/numero-06/cover.jpg" alt="IA'm Magazine — Numéro 06, Le Collectionneur">
+          <span class="num">Numéro 06</span>
+          <span class="ttl">Le Collectionneur</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="maxim">
+    <div class="wrap">
+      <div class="rule"></div>
+      <p>Un créateur, ça s’autorise.<br>Une création, ça s’assume.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <img class="logo-mark footer-logo" src="/magazine/logo-iam.png" alt="IA'm">
+        <p class="disc">Les lieux et les personnages représentés sont fictifs,<br>mais inspirés d’un futur proche.</p>
+      </div>
+      <div class="meta">
+        Label de transparence pour les créations assistées par IA<br>
+        Licence <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a> · INPI n°5212301 (classe 41)<br>
+        <a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a> · <a href="https://iam-inside.eu">iam-inside.eu</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
         </div>
       </div>
     </div>
