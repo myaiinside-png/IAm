@@ -4,11 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bande dessinée — IA'm</title>
-  <meta name="description" content="Récit graphique autour du label IA'm." />
+  <meta name="description" content="Récit graphique autour du label IA'm : comment l'idée est venue, et comment le monde y réagit." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
+  <style>
+    .bd-intro { color: var(--muted); max-width: 60ch; }
+    .bd-gallery {
+      display: flex; flex-direction: column; align-items: center;
+      gap: clamp(1.5rem, 4vw, 3rem); margin-top: 2.5rem;
+    }
+    .bd-planche { width: 100%; max-width: 900px; margin: 0; }
+    .bd-planche img {
+      width: 100%; height: auto; border-radius: 10px;
+      border: 1px solid var(--line-strong); background: var(--panel);
+      box-shadow: 0 12px 34px rgba(26,29,46,.10);
+    }
+    .bd-end { text-align: center; margin: 3.5rem 0 1rem; }
+  </style>
 </head>
 <script data-goatcounter="https://iam.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
@@ -39,25 +53,56 @@
     <section class="page-header">
       <div class="wrap">
         <div class="eyebrow">Récit graphique</div>
-        <h1>Une histoire en préparation.</h1>
-        <p>Une bande dessinée prend forme. Un récit où l'IA croise les métiers, les certitudes, et la question simple de la transparence.</p>
+        <h1>L'histoire, en planches.</h1>
+        <p class="bd-intro">Comment l'idée est venue, un soir, devant un bouton — et comment le monde y réagit, de l'incompréhension à l'acceptation. À lire dans l'ordre, de haut en bas.</p>
       </div>
     </section>
 
     <section>
       <div class="wrap">
-
-        <div class="placeholder">
-          <p style="color: var(--muted)">Les premières planches arrivent bientôt.</p>
-          <blockquote class="quote">
-            Certaines idées passent mieux par l'image que par la démonstration. Cette page leur sera réservée.
-          </blockquote>
-          <div class="actions">
-            <a class="btn btn-primary" href="index.html">Retour à l'accueil</a>
-            <a class="btn btn-secondary" href="mailto:liolb@iam-inside.eu">Être prévenu·e</a>
-          </div>
+        <div class="bd-gallery">
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-01-le-declic.png" alt="IA’m — planche 01 : Le déclic — un soir, devant un bouton" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-02-le-doute.png" alt="IA’m — planche 02 : Le doute — ratures, café, recherche INPI" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-03-la-formule.png" alt="IA’m — planche 03 : La formule — Assisté, Initié, Généré" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-04-les-premiers-refus.png" alt="IA’m — planche 04 : Les premiers refus" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-05-la-decision.png" alt="IA’m — planche 05 : La décision — ce logo doit exister" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-06-la-perseverance.png" alt="IA’m — planche 06 : La persévérance — six refus polis" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-07-temoins-incomprehension.png" alt="IA’m — planche 07 : Témoins — l'incompréhension" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-08-temoins-sceptiques.png" alt="IA’m — planche 08 : Témoins — les sceptiques" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-09-temoins-decalees.png" alt="IA’m — planche 09 : Témoins — saynètes décalées" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-10-interviews-temoins.png" alt="IA’m — planche 10 : Témoins — les interviews" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-11-temoins-acceptation.png" alt="IA’m — planche 11 : Témoins — l'acceptation" loading="lazy" decoding="async" />
+        </figure>
+        <figure class="bd-planche">
+          <img src="assets/img/bd/iam-bd-12-le-manifeste.png" alt="IA’m — planche 12 : Le manifeste" loading="lazy" decoding="async" />
+        </figure>
         </div>
 
+        <div class="bd-end actions">
+          <a class="btn btn-primary" href="index.html">Retour à l'accueil</a>
+          <a class="btn btn-secondary" href="mailto:liolb@iam-inside.eu">Écrire à IA'm</a>
+        </div>
       </div>
     </section>
 
