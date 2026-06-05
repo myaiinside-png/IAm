@@ -1,8 +1,6 @@
 [
-  {
-    "image": "assets/galerie/cas-usages/exemple-cas.jpg",
-    "titre": "Exemple de cas d'usage",
-    "description": "Remplace cette fiche par tes cas existants, ou ajoute-les via l'outil admin.html.",
-    "niveau": "Assisté"
-  }
+  { "image": "assets/img/galerie/journaliste.png", "titre": "Journaliste" },
+  { "image": "assets/img/galerie/professeur-eleves.png", "titre": "Enseignant" },
+  { "image": "assets/img/galerie/chercheur.png", "titre": "Chercheur" },
+  { "image": "assets/img/galerie/motion-designer-freelance.png", "titre": "Créatif indépendant" }
 ]

@@ -1,10 +1,16 @@
 [
   {
-    "image": "assets/galerie/realisations/exemple-creation.jpg",
-    "titre": "Exemple de création",
-    "auteur": "yo00 dit Onelli",
-    "annee": "2026",
+    "image": "assets/img/realisations/strelitzias-cubistes.png",
+    "titre": "Strelitzias cubistes — IA'm n°1",
     "niveau": "Initié",
-    "description": "Remplace cette fiche par tes créations existantes, ou ajoute-les via l'outil admin.html."
+    "auteur": "yo00 dit Onelli",
+    "lien": "https://www.artmajeur.com/yo00/fr/oeuvres-d-art/19958962/strelitzias-cubistes-ia-m-n-1"
+  },
+  {
+    "image": "assets/img/realisations/iam-n2.png",
+    "titre": "IA'm n°2",
+    "niveau": "Initié",
+    "auteur": "yo00 dit Onelli",
+    "lien": "https://www.artmajeur.com/yo00/fr/oeuvres-d-art/20004295/ia-m-n-2"
   }
 ]
