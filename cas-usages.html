@@ -45,34 +45,13 @@
 
     <!-- ====================================================
          GALERIE CAS D'USAGES
-         Pour ajouter un cas : duplique un bloc <article class="case">
-         data-img et src doivent pointer le MÊME fichier.
+         Les cartes sont chargées automatiquement depuis
+         data/cas-usages.json. Pour ajouter un cas, utilise
+         l'outil admin.html — ne pas éditer ce bloc à la main.
          ==================================================== -->
     <section>
       <div class="wrap">
-        <div class="gallery" id="gallery">
-
-          <article class="case" data-img="assets/img/galerie/journaliste.png" data-caption="Journaliste">
-            <div class="case-img-wrap"><img src="assets/img/galerie/journaliste.png" alt="Cas d'usage journaliste"></div>
-            <div class="cap">Journaliste</div>
-          </article>
-
-          <article class="case" data-img="assets/img/galerie/professeur-eleves.png" data-caption="Enseignant">
-            <div class="case-img-wrap"><img src="assets/img/galerie/professeur-eleves.png" alt="Cas d'usage enseignant"></div>
-            <div class="cap">Enseignant</div>
-          </article>
-
-          <article class="case" data-img="assets/img/galerie/chercheur.png" data-caption="Chercheur">
-            <div class="case-img-wrap"><img src="assets/img/galerie/chercheur.png" alt="Cas d'usage chercheur"></div>
-            <div class="cap">Chercheur</div>
-          </article>
-
-          <article class="case" data-img="assets/img/galerie/motion-designer-freelance.png" data-caption="Créatif indépendant">
-            <div class="case-img-wrap"><img src="assets/img/galerie/motion-designer-freelance.png" alt="Cas d'usage designer"></div>
-            <div class="cap">Créatif indépendant</div>
-          </article>
-
-        </div>
+        <div class="gallery" id="gallery"></div>
 
         <div class="contact-block">
           <div class="eyebrow">Contact</div>
@@ -105,15 +84,19 @@
 
   <script>
     (function() {
-      const cases = Array.from(document.querySelectorAll('.case'));
-      const lightbox = document.getElementById('lightbox');
-      const lbImage = document.getElementById('lightboxImage');
+      const gallery   = document.getElementById('gallery');
+      const lightbox  = document.getElementById('lightbox');
+      const lbImage   = document.getElementById('lightboxImage');
       const lbCaption = document.getElementById('lightboxCaption');
-      const lbClose = document.getElementById('lightboxClose');
-      const lbPrev = document.getElementById('lightboxPrev');
-      const lbNext = document.getElementById('lightboxNext');
-      const lbHint = document.getElementById('lightboxHint');
+      const lbClose   = document.getElementById('lightboxClose');
+      const lbPrev    = document.getElementById('lightboxPrev');
+      const lbNext    = document.getElementById('lightboxNext');
+      const lbHint    = document.getElementById('lightboxHint');
+      let cases = [];
       let currentIndex = 0;
+
+      function escAttr(s){ return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+      function escHtml(s){ return String(s||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
 
       function showLightbox(index) {
         currentIndex = index;
@@ -126,42 +109,26 @@
         lbHint.textContent = "Cliquez sur l'image pour zoomer";
         document.body.style.overflow = 'hidden';
       }
-
       function closeLightbox() {
         lightbox.classList.remove('open');
         lightbox.classList.remove('zoomed');
         document.body.style.overflow = '';
       }
-
       function toggleZoom() {
         const isZoomed = lightbox.classList.toggle('zoomed');
-        if (isZoomed) {
-          lbHint.textContent = "Cliquez à nouveau pour réduire · Échap pour fermer";
-          lightbox.scrollTop = 0;
-        } else {
-          lbHint.textContent = "Cliquez sur l'image pour zoomer";
-        }
+        if (isZoomed) { lbHint.textContent = "Cliquez à nouveau pour réduire · Échap pour fermer"; lightbox.scrollTop = 0; }
+        else { lbHint.textContent = "Cliquez sur l'image pour zoomer"; }
       }
-
       function exitZoom() {
         if (lightbox.classList.contains('zoomed')) {
           lightbox.classList.remove('zoomed');
           lbHint.textContent = "Cliquez sur l'image pour zoomer";
         }
       }
+      function nextItem() { if(!cases.length) return; currentIndex = (currentIndex + 1) % cases.length; showLightbox(currentIndex); }
+      function prevItem() { if(!cases.length) return; currentIndex = (currentIndex - 1 + cases.length) % cases.length; showLightbox(currentIndex); }
 
-      function nextItem() {
-        currentIndex = (currentIndex + 1) % cases.length;
-        showLightbox(currentIndex);
-      }
-      function prevItem() {
-        currentIndex = (currentIndex - 1 + cases.length) % cases.length;
-        showLightbox(currentIndex);
-      }
-
-      cases.forEach((c, i) => {
-        c.addEventListener('click', () => showLightbox(i));
-      });
+      // Contrôles lightbox (liés une seule fois)
       lbImage.addEventListener('click', (e) => { e.stopPropagation(); toggleZoom(); });
       lbClose.addEventListener('click', closeLightbox);
       lbNext.addEventListener('click', (e) => { e.stopPropagation(); exitZoom(); nextItem(); });
@@ -169,13 +136,31 @@
       lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
       document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('open')) return;
-        if (e.key === 'Escape') {
-          if (lightbox.classList.contains('zoomed')) exitZoom();
-          else closeLightbox();
-        }
+        if (e.key === 'Escape') { lightbox.classList.contains('zoomed') ? exitZoom() : closeLightbox(); }
         if (e.key === 'ArrowRight') { exitZoom(); nextItem(); }
-        if (e.key === 'ArrowLeft') { exitZoom(); prevItem(); }
+        if (e.key === 'ArrowLeft')  { exitZoom(); prevItem(); }
       });
+
+      function buildCards(items) {
+        gallery.innerHTML = '';
+        (items || []).forEach(it => {
+          const art = document.createElement('article');
+          art.className = 'case';
+          art.dataset.img = it.image;
+          art.dataset.caption = it.titre || '';
+          art.innerHTML =
+            '<div class="case-img-wrap"><img src="' + escAttr(it.image) + '" alt="' + escAttr(it.titre) + '"></div>' +
+            '<div class="cap">' + escHtml(it.titre) + '</div>';
+          gallery.appendChild(art);
+        });
+        cases = Array.from(document.querySelectorAll('.case'));
+        cases.forEach((c, i) => c.addEventListener('click', () => showLightbox(i)));
+      }
+
+      fetch('data/cas-usages.json', { cache: 'no-cache' })
+        .then(r => r.json())
+        .then(buildCards)
+        .catch(() => { gallery.innerHTML = '<p style="opacity:.6">Galerie momentanément indisponible.</p>'; });
     })();
   </script>
 </body>

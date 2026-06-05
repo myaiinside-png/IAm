@@ -19,7 +19,7 @@
       <a class="nav-brand" href="index.html" aria-label="Accueil IA'm">
         <img src="iam-logo-badge.png" alt="IA'm">
       </a>
-      <<nav class="nav-links" aria-label="Navigation principale">
+      <nav class="nav-links" aria-label="Navigation principale">
         <a href="index.html#label">Le label</a>
         <a href="index.html#niveaux">Les niveaux</a>
         <a href="index.html#signe">Lire le signe</a>
@@ -45,46 +45,13 @@
 
     <!-- ====================================================
          GALERIE RÉALISATIONS
-         Pour ajouter une œuvre : duplique un bloc <a class="realisation">
-         et place-le AVANT le bloc realisations-empty.
-         Niveau possible : Assisté · Initié · Généré · Sans IA
+         Les œuvres sont chargées automatiquement depuis
+         data/realisations.json. Pour ajouter une œuvre,
+         utilise l'outil admin.html — ne pas éditer à la main.
          ==================================================== -->
     <section>
       <div class="wrap">
-        <div class="realisations">
-
-          <a class="realisation" href="https://www.artmajeur.com/yo00/fr/oeuvres-d-art/19958962/strelitzias-cubistes-ia-m-n-1" target="_blank" rel="noopener">
-            <div class="realisation-img">
-              <img src="assets/img/realisations/strelitzias-cubistes.png" alt="Strelitzias cubistes — IA'm n°1">
-            </div>
-            <div class="realisation-body">
-              <span class="realisation-level">IA'm · Initié</span>
-              <h3>Strelitzias cubistes — IA'm n°1</h3>
-              <span class="realisation-author">yo00 dit Onelli</span>
-              <span class="realisation-link">Voir sur Artmajeur</span>
-            </div>
-          </a>
-
-          <a class="realisation" href="https://www.artmajeur.com/yo00/fr/oeuvres-d-art/20004295/ia-m-n-2" target="_blank" rel="noopener">
-            <div class="realisation-img">
-              <img src="assets/img/realisations/iam-n2.png" alt="IA'm n°2">
-            </div>
-            <div class="realisation-body">
-              <span class="realisation-level">IA'm · Initié</span>
-              <h3>IA'm n°2</h3>
-              <span class="realisation-author">yo00 dit Onelli</span>
-              <span class="realisation-link">Voir sur Artmajeur</span>
-            </div>
-          </a>
-
-          <div class="realisations-empty">
-            <div>
-              « Votre œuvre ici ? »<br>
-              <a href="mailto:liolb@iam-inside.eu">Nous contacter</a> pour figurer parmi les premières réalisations signées IA'm.
-            </div>
-          </div>
-
-        </div>
+        <div class="realisations" id="realisations"></div>
       </div>
     </section>
   </main>
@@ -95,5 +62,43 @@
       <div>Marque déposée n° 5212301 · INPI · CC BY-NC 4.0</div>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      const wrap = document.getElementById('realisations');
+
+      function escAttr(s){ return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+      function escHtml(s){ return String(s||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+      const emptyBlock =
+        '<div class="realisations-empty"><div>' +
+        '« Votre œuvre ici ? »<br>' +
+        '<a href="mailto:liolb@iam-inside.eu">Nous contacter</a> pour figurer parmi les premières réalisations signées IA\u0027m.' +
+        '</div></div>';
+
+      function buildCard(it) {
+        const level = it.niveau ? 'IA\u0027m · ' + escHtml(it.niveau) : '';
+        const linkTxt = it.lienTexte || 'Voir sur Artmajeur';
+        return (
+          '<a class="realisation" href="' + escAttr(it.lien || '#') + '" target="_blank" rel="noopener">' +
+            '<div class="realisation-img"><img src="' + escAttr(it.image) + '" alt="' + escAttr(it.titre) + '"></div>' +
+            '<div class="realisation-body">' +
+              (level ? '<span class="realisation-level">' + level + '</span>' : '') +
+              '<h3>' + escHtml(it.titre) + '</h3>' +
+              (it.auteur ? '<span class="realisation-author">' + escHtml(it.auteur) + '</span>' : '') +
+              '<span class="realisation-link">' + escHtml(linkTxt) + '</span>' +
+            '</div>' +
+          '</a>'
+        );
+      }
+
+      fetch('data/realisations.json', { cache: 'no-cache' })
+        .then(r => r.json())
+        .then(items => {
+          wrap.innerHTML = (items || []).map(buildCard).join('') + emptyBlock;
+        })
+        .catch(() => { wrap.innerHTML = emptyBlock; });
+    })();
+  </script>
 </body>
 </html>
