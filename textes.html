@@ -14,9 +14,6 @@
         async src="//gc.zgo.at/count.js"></script>
 <body>
 
-  <!-- ====================================================
-       NAVIGATION (identique sur toutes les pages)
-       ==================================================== -->
   <header class="nav">
     <div class="nav-inner">
       <a class="nav-brand" href="index.html" aria-label="Accueil IA'm">
@@ -38,26 +35,27 @@
 
   <main>
 
-    <!-- ====================================================
-         EN-TÊTE DE PAGE
-         ==================================================== -->
     <section class="page-header">
       <div class="wrap">
         <div class="eyebrow">Textes & écrits</div>
-        <h1>Bientôt en lecture.</h1>
-        <p>Notes, analyses, prises de position. Cette section accueillera bientôt les écrits qui prolongent la réflexion IA'm — transparence, co-création, attribution.</p>
+        <h1>Notes & prises de position.</h1>
+        <p>Notes, analyses, prises de position. Les écrits qui prolongent la réflexion IA'm — transparence, co-création, attribution.</p>
       </div>
     </section>
 
     <!-- ====================================================
-         CONTENU — placeholder actuel
-         Pour passer en mode "liste d'articles", remplace ce bloc
-         par le bloc <div class="article-list"> en commentaire ci-dessous.
+         CONTENU
+         La liste est chargée automatiquement depuis data/textes.json.
+         Tant qu'il n'y a aucun texte, l'état "à venir" s'affiche.
+         Pour ajouter un texte : utilise l'outil admin.html — il crée
+         la page textes/<slug>.html ET l'ajoute à la liste.
          ==================================================== -->
     <section>
       <div class="wrap">
 
-        <div class="placeholder">
+        <div class="article-list" id="textes-list" style="display:none"></div>
+
+        <div class="placeholder" id="textes-empty">
           <p style="color: var(--muted)">L'écriture prend le temps qu'il faut.</p>
           <blockquote class="quote">
             Un label n'a de sens que s'il est défendu par les mots. Cette page leur sera dédiée.
@@ -67,33 +65,6 @@
             <a class="btn btn-secondary" href="mailto:liolb@iam-inside.eu">Être prévenu·e</a>
           </div>
         </div>
-
-        <!-- ============================================================
-             COMMENT AJOUTER DES ARTICLES (quand tu seras prêt)
-             ============================================================
-             1. Supprime le bloc <div class="placeholder"> ci-dessus
-             2. Décommente le bloc ci-dessous
-             3. Pour chaque nouvel article : duplique un bloc <a class="article-card">
-                et modifie la date, le titre, le résumé et le href
-             ============================================================
-
-        <div class="article-list">
-
-          <a class="article-card" href="textes/transparence-et-attribution.html">
-            <div class="date">15 mai 2026</div>
-            <h3>Transparence et attribution à l'ère générative</h3>
-            <p>Pourquoi nommer la part de l'IA n'est ni un aveu ni une garantie de qualité — mais un acte d'honnêteté.</p>
-          </a>
-
-          <a class="article-card" href="textes/qui-tranche-la-forme.html">
-            <div class="date">10 mai 2026</div>
-            <h3>Qui tranche la forme finale ?</h3>
-            <p>Le critère unique des trois niveaux IA'm, et pourquoi il évite les classifications par pourcentage.</p>
-          </a>
-
-        </div>
-
-             ============================================================ -->
 
       </div>
     </section>
@@ -106,5 +77,31 @@
       <div>Marque déposée n° 5212301 · INPI · CC BY-NC 4.0</div>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      const list  = document.getElementById('textes-list');
+      const empty = document.getElementById('textes-empty');
+
+      function escAttr(s){ return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+      function escHtml(s){ return String(s||'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+      fetch('data/textes.json', { cache: 'no-cache' })
+        .then(r => r.json())
+        .then(items => {
+          if (!Array.isArray(items) || items.length === 0) return;
+          list.innerHTML = items.map(it =>
+            '<a class="article-card" href="textes/' + escAttr(it.slug) + '.html">' +
+              (it.date ? '<div class="date">' + escHtml(it.date) + '</div>' : '') +
+              '<h3>' + escHtml(it.titre) + '</h3>' +
+              (it.resume ? '<p>' + escHtml(it.resume) + '</p>' : '') +
+            '</a>'
+          ).join('');
+          list.style.display = '';
+          empty.style.display = 'none';
+        })
+        .catch(() => { /* on garde l'état "à venir" */ });
+    })();
+  </script>
 </body>
 </html>
