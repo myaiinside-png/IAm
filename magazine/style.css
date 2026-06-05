@@ -30,7 +30,7 @@ header.bar{border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;
 .fineprint{margin-top:26px;font-size:.84rem;font-style:italic;color:var(--ink-soft2);max-width:40ch;border-left:2px solid var(--gold);padding-left:14px;}
 .cover-shot{position:relative;}
 .cover-shot img{width:100%;height:auto;display:block;box-shadow:0 30px 60px -28px rgba(26,23,20,.55),0 4px 14px -6px rgba(26,23,20,.3);}
-.cover-shot .tag{position:absolute;left:-14px;top:26px;background:var(--ink);color:var(--paper);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;padding:8px 14px;}
+.cover-shot .tag{display:none;position:absolute;left:-14px;top:26px;background:var(--ink);color:var(--paper);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;padding:8px 14px;}
 
 /* back link (pages numéro) */
 .backlink{display:inline-block;margin:30px 0 -20px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft2);text-decoration:none;}
