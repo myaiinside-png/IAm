@@ -1,1 +1,8 @@
-
+[
+  {
+    "image": "assets/galerie/cas-usages/exemple-cas.jpg",
+    "titre": "Exemple de cas d'usage",
+    "description": "Remplace cette fiche par tes cas existants, ou ajoute-les via l'outil admin.html.",
+    "niveau": "Assisté"
+  }
+]

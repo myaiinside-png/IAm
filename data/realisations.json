@@ -1,0 +1,10 @@
+[
+  {
+    "image": "assets/galerie/realisations/exemple-creation.jpg",
+    "titre": "Exemple de création",
+    "auteur": "yo00 dit Onelli",
+    "annee": "2026",
+    "niveau": "Initié",
+    "description": "Remplace cette fiche par tes créations existantes, ou ajoute-les via l'outil admin.html."
+  }
+]
