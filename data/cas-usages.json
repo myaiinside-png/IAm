@@ -1,6 +1,22 @@
 [
-  { "image": "assets/img/galerie/journaliste.png", "titre": "Journaliste" },
-  { "image": "assets/img/galerie/professeur-eleves.png", "titre": "Enseignant" },
-  { "image": "assets/img/galerie/chercheur.png", "titre": "Chercheur" },
-  { "image": "assets/img/galerie/motion-designer-freelance.png", "titre": "Créatif indépendant" }
+  {
+    "image": "assets/img/galerie/journaliste.png",
+    "titre": "Journaliste"
+  },
+  {
+    "image": "assets/img/galerie/professeur-eleves.png",
+    "titre": "Enseignant"
+  },
+  {
+    "image": "assets/img/galerie/chercheur.png",
+    "titre": "Chercheur"
+  },
+  {
+    "image": "assets/img/galerie/motion-designer-freelance.png",
+    "titre": "Créatif indépendant"
+  },
+  {
+    "image": "assets/img/galerie/directeur-marketing-20260605-112051.jpg",
+    "titre": "Directeur_marketing"
+  }
 ]
