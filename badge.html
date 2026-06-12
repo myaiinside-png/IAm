@@ -46,8 +46,8 @@
   const params = new URLSearchParams(window.location.search);
   const rawLevel = (params.get("level") || "").toLowerCase();
   const levels = {
-    assisted:{fr:"Assisté",note:"L’IA intervient comme assistance. L’humain tranche la forme finale."},
-    assiste:{fr:"Assisté",note:"L’IA intervient comme assistance. L’humain tranche la forme finale."},
+    assisted:{fr:"Assisté",note:"L’IA intervient comme assistance. L’humain arrête la forme finale."},
+    assiste:{fr:"Assisté",note:"L’IA intervient comme assistance. L’humain arrête la forme finale."},
     initiated:{fr:"Initié",note:"La création résulte d’un dialogue humain–IA. L’humain valide et recadre."},
     initie:{fr:"Initié",note:"La création résulte d’un dialogue humain–IA. L’humain valide et recadre."},
     generated:{fr:"Généré",note:"L’IA porte majoritairement la forme finale. L’humain formule l’intention."},
