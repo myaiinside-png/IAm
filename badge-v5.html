@@ -334,7 +334,8 @@ img { max-width: 100%; display: block; }
 
 /* Cartouche signe barré — distinct des 3 niveaux */
 .barre-cartouche {
-  margin-top: 1rem;
+  position: relative;
+  margin-top: 1.4rem;
   border: 1px dashed var(--line-strong);
   border-radius: 14px;
   padding: 0.9rem 1.1rem;
@@ -349,6 +350,20 @@ img { max-width: 100%; display: block; }
   color: var(--text);
   transition: all 0.25s;
 }
+
+.barre-cartouche::before {
+  content: "signe de seuil";
+  position: absolute;
+  top: -0.62em;
+  left: 1rem;
+  background: var(--bg);
+  padding: 0 0.55em;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+html[lang="en"] .barre-cartouche::before { content: "threshold sign"; }
 
 .barre-cartouche:hover {
   border-color: var(--gold-border);
@@ -806,7 +821,7 @@ img { max-width: 100%; display: block; }
         Assumez votre <em>niveau</em> de co-création
       </h2>
       <p class="badge-gen-desc" data-i18n="desc">
-        IA'm propose un acte d'honnêteté.  Dire ce qu'on a fait, à qui regarde. Rien à prouver — quelque chose à offrir. Trois postures de co-création, un signe de seuil : <em>qui porte la décision créative ?</em> ?
+        Dire ce qu'on a fait, à qui regarde. Rien à prouver — quelque chose à offrir. Trois postures de co-création, un signe de seuil. Un seul critère : <em>qui porte la décision créative</em> ?
       </p>
 
       <div class="gen-form">
@@ -852,7 +867,7 @@ img { max-width: 100%; display: block; }
             <h4 data-i18n="h-generated">IA'm · Généré</h4>
             <p data-i18n="p-generated">L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.</p>
 
-            <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui arrête la forme finale.</p>
+            <p class="crit" data-i18n="crit">Critère de bascule entre niveaux : qui porte la décision créative — autrement dit, qui arrête la forme finale.</p>
           </div>
 
           <p class="silence-note" data-i18n="silence">Et si aucune IA n'est intervenue, vous n'avez rien à apposer : ne rien dire reste un droit. Le signe barré n'est qu'une possibilité, pour qui souhaite l'affirmer.</p>
@@ -965,7 +980,7 @@ img { max-width: 100%; display: block; }
 const I18N = {
   fr: {
     "heading": "Assumez votre <em>niveau</em> de co-création",
-    "desc": "IA'm propose un acte d'honnêteté de l'auteur au receveur, pour créer un lien de confiance là où règne la défiance. Trois postures, un seul critère : <em>qui tranche la forme finale</em> ?",
+    "desc": "Dire ce qu'on a fait, à qui regarde. Rien à prouver — quelque chose à offrir. Trois postures de co-création, un signe de seuil. Un seul critère : <em>qui porte la décision créative</em> ?",
     "lbl-author": "Nom de l'auteur·e",
     "lbl-title": "Titre de l'œuvre",
     "lbl-type": "Type de création",
@@ -999,7 +1014,7 @@ const I18N = {
     "p-initiated": "Co-auctorialité assumée. Certaines décisions formelles émergent de la proposition IA mais sont validées, retravaillées ou recadrées par l'humain.",
     "h-generated": "IA'm · Généré",
     "p-generated": "L'IA décide majoritairement de la forme finale. L'humain fournit l'intention (prompt, consigne, cadre) mais accepte le rendu avec peu ou pas d'intervention formelle. L'humain est prescripteur plus qu'auteur formel.",
-    "crit": "Critère de bascule entre niveaux : qui tranche la forme finale.",
+    "crit": "Critère de bascule entre niveaux : qui porte la décision créative — autrement dit, qui arrête la forme finale.",
     "dl-svg": "↓ SVG",
     "dl-png": "↓ PNG (crème)",
     "dl-png-transp": "↓ PNG (transparent)",
@@ -1011,7 +1026,7 @@ const I18N = {
   },
   en: {
     "heading": "Own your <em>level</em> of co-creation",
-    "desc": "IA'm offers an act of honesty from the author to the receiver, to build trust where suspicion prevails. Three stances, one criterion: <em>who decides the final form</em>?",
+    "desc": "Say what you did, to whoever's looking. Nothing to prove — something to offer. Three stances of co-creation, one threshold sign. A single criterion: <em>who carries the creative decision</em>?",
     "lbl-author": "Author's name",
     "lbl-title": "Work title",
     "lbl-type": "Type of creation",
@@ -1029,23 +1044,23 @@ const I18N = {
     "lvl-initiated": "Initiated — shared decision",
     "lvl-generated": "Generated — AI-led, human prescriber",
     "card-assisted-name": "Assisted",
-    "card-assisted-desc": "AI assists — the human decides every formal choice.",
+    "card-assisted-desc": "AI assists — the human settles every formal choice.",
     "card-initiated-name": "Initiated",
     "card-initiated-desc": "Shared authorship, AI proposals validated by the human.",
     "card-generated-name": "Generated",
     "card-generated-desc": "AI decides the form, the human is prescriber.",
     "bc-name": "Without AI",
-    "bc-desc": "Fully human work. The struck-through mark: an affirmation offered, never a badge of purity.",
+    "bc-desc": "Fully human work. The struck-through mark: an affirmation offered, never a claim of superiority.",
     "silence": "And if no AI was involved, you have nothing to add: saying nothing remains a right. The struck-through mark is only an option, for those who wish to affirm it.",
     "secondary-label": "Additional information (optional)",
     "help-toggle": "How do I choose my level?",
     "h-assisted": "IA'm · Assisted",
-    "p-assisted": "AI assists: correction, research, variants, occasional suggestions. The human decides every formal choice. AI is a tool, the human is the author.",
+    "p-assisted": "AI assists: correction, research, variants, occasional suggestions. The human settles every formal choice. AI is a tool, the human is the author.",
     "h-initiated": "IA'm · Initiated",
     "p-initiated": "Shared authorship. Some formal decisions emerge from AI proposals but are validated, reworked or reframed by the human.",
     "h-generated": "IA'm · Generated",
     "p-generated": "AI decides most of the final form. The human provides intention (prompt, brief, framing) but accepts the output with little or no formal intervention. The human is prescriber more than formal author.",
-    "crit": "Switching criterion between levels: who decides the final form.",
+    "crit": "Switching criterion between levels: who carries the creative decision — in other words, who settles the final form.",
     "dl-svg": "↓ SVG",
     "dl-png": "↓ PNG (cream)",
     "dl-png-transp": "↓ PNG (transparent)",
