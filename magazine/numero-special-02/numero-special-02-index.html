@@ -1,0 +1,298 @@
+---
+meta-description: Numéro Spécial 02 — De Beaumarchais à demain, l'héritage en numérique. IA'm Magazine, revue fictionnelle d'un futur proche.
+meta-viewport: width=device-width, initial-scale=1.0
+title: IA'm Magazine · Numéro Spécial 02 — De Beaumarchais à demain
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA'm Magazine · Numéro Spécial 02 — De Beaumarchais à demain</title>
+<meta name="description" content="Numéro Spécial 02 — De Beaumarchais à demain, l'héritage en numérique. IA'm Magazine, revue fictionnelle d'un futur proche.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --encre: #1a1d2e;
+    --noir: #14151f;
+    --blanc: #f6f1e7;
+    --or: #c8922a;
+    --or-pale: #e3c98f;
+    --gris: #a8a298;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--noir);
+    color: var(--blanc);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    border-bottom: 1px solid rgba(200,146,42,0.15);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--blanc);
+  }
+
+  .nav-logo .circle {
+    width: 32px; height: 32px;
+    border: 1px solid var(--or);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.7rem;
+    color: var(--or);
+  }
+
+  .nav-logo span {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--gris);
+  }
+
+  .nav-back {
+    color: var(--gris);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-back:hover { color: var(--or); }
+
+  .hero {
+    padding-top: 3rem;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-cover {
+    width: 100%;
+    max-width: 680px;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    margin: 2rem auto;
+  }
+
+  .hero-cover img { width: 100%; display: block; }
+
+  .bandeau {
+    background: var(--encre);
+    border-top: 1px solid rgba(200,146,42,0.15);
+    border-bottom: 1px solid rgba(200,146,42,0.15);
+    padding: 2.5rem 2.5rem;
+    text-align: center;
+  }
+
+  .bandeau-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 0.6rem;
+  }
+
+  .bandeau-titre {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--blanc);
+    margin-bottom: 0.3rem;
+  }
+
+  .bandeau-sous {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--or-pale);
+    margin-bottom: 1.2rem;
+  }
+
+  .bandeau-desc {
+    font-size: 0.92rem;
+    color: var(--gris);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .spreads {
+    padding: 4rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .spread-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .spread-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--or);
+  }
+
+  .spread-img {
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    display: block;
+  }
+
+  .spread-caption {
+    font-size: 0.92rem;
+    color: var(--gris);
+    max-width: 640px;
+    font-style: italic;
+  }
+
+  blockquote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--or-pale);
+    border-left: 2px solid var(--or);
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .signature {
+    font-size: 0.85rem;
+    color: var(--gris);
+    margin-top: 0.5rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    border-top: 1px solid rgba(200,146,42,0.15);
+  }
+
+  footer .baseline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--or-pale);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  footer img.logo-foot {
+    width: 48px;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+  }
+
+  footer .fictif {
+    font-size: 0.75rem;
+    color: var(--gris);
+    max-width: 420px;
+    margin: 0 auto 1.5rem;
+  }
+
+  footer .legal {
+    font-size: 0.7rem;
+    color: var(--gris);
+    line-height: 1.8;
+  }
+
+  footer a { color: var(--or); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    nav { padding: 0.8rem 1.2rem; }
+    .spreads { padding: 2rem 1rem; gap: 3rem; }
+    .bandeau { padding: 1.5rem 1.2rem; }
+    .bandeau-titre { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://iam-inside.eu" class="nav-logo">
+    <div class="circle">IA'm</div>
+    <span>Magazine</span>
+  </a>
+  <a href="https://iam-inside.eu/magazine" class="nav-back">← Tous les numéros</a>
+</nav>
+
+<section class="hero">
+  <div style="max-width:680px;width:100%;padding:0 1rem;">
+    <div class="hero-cover">
+      <img src="cover.jpg" alt="IA'm Magazine, Numéro Spécial 02 — De Beaumarchais à demain, l'héritage en numérique">
+    </div>
+  </div>
+</section>
+
+<div class="bandeau">
+  <p class="bandeau-label">Numéro Spécial 02 · IA'm Magazine</p>
+  <h1 class="bandeau-titre">De Beaumarchais à demain,</h1>
+  <p class="bandeau-sous">l'héritage en numérique</p>
+  <p class="bandeau-desc">
+    Nul besoin d'un grand soir. IA'm ne s'est pas imposé par décret. Il s'est installé comme s'installent les évidences&nbsp;: doucement, puis d'un coup, partout à la fois. Ce numéro spécial revient sur ce que nous devions à Beaumarchais, à Hugo, à la République — et sur ce que la France a su nommer là où l'Europe cherchait encore ses mots.
+  </p>
+</div>
+
+<div class="spreads">
+
+  <div class="spread-block">
+    <p class="spread-label">Page 2 · Histoire &amp; héritage</p>
+    <img class="spread-img" src="spread-p2.jpg" alt="L'Auteur, une tradition française — de Beaumarchais à Marianne">
+    <p class="spread-caption">De Beaumarchais à Marianne, une même conviction traverse trois siècles&nbsp;: nommer ce que l'on fait, c'est déjà le défendre.</p>
+    <p>1791. Beaumarchais arrache à l'Assemblée constituante la reconnaissance du droit d'auteur — l'idée, neuve alors, qu'une œuvre appartient d'abord à celui qui l'a portée. 1838, la Société des auteurs prolonge ce geste en institution. 1993, lors des négociations du GATT, la voix de la France impose au monde l'exception culturelle&nbsp;: la création n'est pas une marchandise comme une autre, et ne peut être soldée au nom du seul libre-échange.</p>
+    <p>Trois moments, une seule ligne de conduite. Quand la technique change la donne — l'imprimerie, le disque, la diffusion de masse — la France a toujours choisi de nommer la place de l'auteur plutôt que de la laisser se dissoudre dans l'outil. IA'm ne fait rien d'autre. Il ne juge pas l'usage de l'intelligence artificielle&nbsp;: il demande seulement qu'on dise qui, de la main ou de la machine, a porté la décision créative. Une question vieille de plus de deux siècles, posée à un outil qui ne l'est pas.</p>
+    <blockquote>« Ce que nous devions à Beaumarchais, nous le devons aujourd'hui à quiconque crée avec une machine&nbsp;: le droit d'être nommé. »</blockquote>
+    <p class="signature">— Voix d'État, intervention devant le Parlement européen</p>
+  </div>
+
+  <div class="spread-block">
+    <p class="spread-label">Page 3 · Évidence</p>
+    <img class="spread-img" src="spread-p3.jpg" alt="Cinq voix racontent l'adoption d'IA'm — étudiante, RH, enseignante, artiste, bibliothécaire">
+    <p class="spread-caption">On l'attendait. Il est désormais évident.</p>
+
+    <p><strong>La lycéenne.</strong> « On ne nous a jamais demandé de cacher qu'on utilisait une calculatrice. Pourquoi on l'aurait fait pour l'IA ? »</p>
+
+    <p><strong>La responsable RH.</strong> « Avant, on devinait. Maintenant, le candidat le dit lui-même, sur son book. Ça change tout, pour lui comme pour nous. »</p>
+
+    <p><strong>Le professeur de lettres.</strong> « Ils n'attendaient pas qu'on leur interdise l'IA. Ils attendaient juste qu'on leur propose l'outil pour en parler honnêtement. »</p>
+
+    <p><strong>L'artiste plasticienne.</strong> « Je n'ai rien changé à ma manière de créer. J'ai juste arrêté de m'excuser pour ce que je faisais déjà. »</p>
+
+    <p><strong>La bibliothécaire.</strong> « Les lecteurs nous demandaient si le livre avait été écrit "par une IA". Maintenant, on n'a plus besoin de deviner&nbsp;: c'est écrit en toutes lettres, sur la couverture. »</p>
+  </div>
+
+</div>
+
+<footer>
+  <p class="baseline">Un créateur, ça s'autorise.<br>Une création, ça s'assume.</p>
+  <p class="fictif">Les lieux et les personnages représentés sont fictifs, mais inspirés d'un futur proche.</p>
+  <p class="legal">
+    Label de transparence pour les créations assistées par IA<br>
+    Licence <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.fr">CC BY-NC 4.0</a> · INPI n°5212301 (classe 41)<br>
+    <a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a> · <a href="https://iam-inside.eu">iam-inside.eu</a>
+  </p>
+</footer>
+
+</body>
+</html>
