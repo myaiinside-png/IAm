@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le gémissement d'Eliot — un triptyque</title>
+<meta name="description" content="Trois textes d'anticipation sur les petits mondes qui s'éteignent sans bruit. Nés d'un échange avec une intelligence artificielle. Label IA'm, niveau Initié.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ivoire:      #f4eee1;
+    --ivoire-fond: #efe7d5;
+    --encre:       #221d15;
+    --encre-douce: #4c4437;
+    --or:          #9a7a37;
+    --or-clair:    #c2a35f;
+    --machine:     #706a5f;
+    --machine-fond:#e9e2d1;
+    --filet:       #d8cfb9;
+    --mesure:      41rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--ivoire);
+    color: var(--encre);
+    font-family: "Spectral", Georgia, serif;
+    font-weight: 400;
+    font-size: 1.18rem;
+    line-height: 1.78;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: var(--mesure);
+    margin: 0 auto;
+    padding: clamp(3.5rem, 9vw, 7rem) clamp(1.3rem, 5vw, 2rem) 5rem;
+  }
+
+  /* ---- En-tête ---- */
+  header { text-align: center; margin-bottom: clamp(3rem, 8vw, 5.5rem); }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .74rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin: 0 0 1.6rem;
+  }
+
+  h1 {
+    font-weight: 500;
+    font-size: clamp(2.6rem, 8vw, 4.2rem);
+    line-height: 1.04;
+    letter-spacing: -.01em;
+    margin: 0;
+  }
+
+  .epigraphe {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--encre-douce);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 30rem;
+    margin: 2rem auto 0;
+  }
+  .epigraphe .src {
+    display: block;
+    font-style: normal;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .7rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-top: 1rem;
+  }
+
+  .rule {
+    width: 3.5rem; height: 1px;
+    background: var(--or-clair);
+    border: 0;
+    margin: 2.4rem auto 0;
+  }
+
+  /* ---- Note d'origine ---- */
+  .origine {
+    background: var(--ivoire-fond);
+    border-left: 2px solid var(--or);
+    padding: 1.7rem clamp(1.3rem, 4vw, 2.1rem);
+    margin: 0 0 clamp(3.5rem, 9vw, 5.5rem);
+    font-size: 1.04rem;
+    line-height: 1.72;
+    color: var(--encre-douce);
+  }
+  .origine p { margin: 0 0 1rem; }
+  .origine p:last-child { margin-bottom: 0; }
+  .origine .lead {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--or);
+    margin-bottom: 1.2rem;
+  }
+  .origine em { color: var(--encre); }
+
+  /* ---- Volets ---- */
+  .volet { margin-bottom: clamp(4rem, 11vw, 7rem); }
+
+  .volet-tete {
+    text-align: center;
+    margin-bottom: clamp(2.2rem, 6vw, 3.4rem);
+  }
+  .num {
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .82rem;
+    letter-spacing: .3em;
+    color: var(--or);
+    margin-bottom: .7rem;
+  }
+  .volet-tete h2 {
+    font-weight: 500;
+    font-size: clamp(1.7rem, 5vw, 2.35rem);
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -.005em;
+  }
+  .volet-tete .sous {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--machine);
+    font-size: .98rem;
+    margin-top: .6rem;
+  }
+
+  .prose p { margin: 0 0 1.35rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose .dial {
+    margin: 0 0 .35rem;
+    padding-left: .2rem;
+  }
+  .prose .dial + p:not(.dial) { margin-top: 1.35rem; }
+  .prose .clos {
+    font-style: italic;
+    color: var(--encre-douce);
+  }
+
+  /* voix machine (volet II) */
+  .machine-voix {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .96rem;
+    line-height: 1.72;
+    color: var(--machine);
+  }
+  .machine-voix p { margin: 0 0 1.3rem; }
+  .machine-voix .verdict {
+    color: var(--encre);
+    font-family: "Spectral", serif;
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+
+  /* ---- Volet III : les deux colonnes qui ne se rejoignent pas ---- */
+  .colonnes-tete {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 5vw, 3.2rem);
+    margin-bottom: 1.4rem;
+    border-bottom: 1px solid var(--filet);
+    padding-bottom: .7rem;
+  }
+  .colonnes-tete span {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+  .colonnes-tete .c-lui { color: var(--encre); }
+  .colonnes-tete .c-res { color: var(--or); }
+
+  .moment {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 5vw, 3.2rem);
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--filet);
+  }
+  .moment:last-child { border-bottom: 0; }
+
+  .lui { font-size: 1.06rem; line-height: 1.66; }
+  .res {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .84rem;
+    line-height: 1.68;
+    color: var(--machine);
+  }
+  .res .certifie { color: var(--encre); }
+  .marque {
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .64rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: .55rem;
+  }
+  .lui .marque { color: var(--or); }
+  .res .marque { color: var(--machine); opacity: .8; }
+
+  /* ---- Volet IV : la colonne de gauche reste vide ---- */
+  .final .moment { border-bottom: 0; padding: 0; }
+  .vide {
+    border-right: 1px solid var(--filet);
+    min-height: 100%;
+    position: relative;
+  }
+  .vide::after {
+    content: "";
+    position: absolute;
+    top: .35rem; left: 0;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .64rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--filet);
+  }
+  .final .res { padding-left: .2rem; }
+  .final .res .final-clos {
+    display: block;
+    margin-top: 1.3rem;
+    font-family: "Spectral", serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--encre);
+  }
+
+  /* ---- Label IA'm ---- */
+  .label {
+    margin-top: clamp(4rem, 10vw, 6.5rem);
+    padding-top: clamp(2.5rem, 6vw, 3.5rem);
+    border-top: 1px solid var(--filet);
+  }
+  .label-titre {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .74rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--or);
+    text-align: center;
+    margin: 0 0 2rem;
+  }
+  .niveaux {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 0 auto 2rem;
+    max-width: 24rem;
+  }
+  .niveaux span {
+    flex: 1;
+    text-align: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--machine);
+    padding: .55rem 0;
+    border-bottom: 2px solid var(--filet);
+  }
+  .niveaux span.actif {
+    color: var(--encre);
+    border-bottom-color: var(--or);
+    font-weight: 500;
+  }
+  .label-corps {
+    text-align: center;
+    max-width: 30rem;
+    margin: 0 auto;
+  }
+  .label-corps .decl {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    margin: 0 0 1.3rem;
+  }
+  .label-corps .critere {
+    font-style: italic;
+    color: var(--encre-douce);
+    margin: 0 0 1.6rem;
+  }
+  .label-corps .doctrine {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .82rem;
+    letter-spacing: .1em;
+    color: var(--or);
+    margin: 0 0 2rem;
+  }
+  .label-corps .absence {
+    font-size: .95rem;
+    color: var(--machine);
+    font-style: italic;
+    margin: 0 0 2.2rem;
+    line-height: 1.6;
+  }
+  .meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .74rem;
+    letter-spacing: .06em;
+    color: var(--encre-douce);
+    line-height: 2;
+  }
+  .meta a { color: var(--or); text-decoration: none; border-bottom: 1px solid var(--filet); }
+  .meta a:hover { border-bottom-color: var(--or); }
+  .meta .sep { color: var(--filet); margin: 0 .5rem; }
+
+  footer {
+    text-align: center;
+    margin-top: 4rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .68rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--machine);
+  }
+
+  /* ---- Apparition ---- */
+  .fade { opacity: 0; transform: translateY(14px); animation: rise 1.1s cubic-bezier(.2,.7,.2,1) forwards; }
+  .fade.d1 { animation-delay: .1s; }
+  .fade.d2 { animation-delay: .28s; }
+  .fade.d3 { animation-delay: .46s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  @media (max-width: 620px) {
+    .colonnes-tete { display: none; }
+    .moment { grid-template-columns: 1fr; gap: 1rem; padding: 1.7rem 0; }
+    .res {
+      background: var(--machine-fond);
+      padding: 1rem 1.1rem;
+      border-radius: 2px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade { animation: none; opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="fade">
+    <p class="eyebrow">Triptyque · anticipation</p>
+    <h1>Le gémissement<br>d'Eliot</h1>
+    <p class="epigraphe">
+      D'après l'image de T.&nbsp;S.&nbsp;Eliot : un monde qui ne s'achève pas dans le fracas,
+      mais dans un murmure. Non pas une fin, mais des milliers de petits mondes qui s'éteignent,
+      chacun dans son coin, sans que personne n'entende.
+      <span class="src">2047 — une côte de l'ouest</span>
+    </p>
+    <hr class="rule">
+  </header>
+
+  <aside class="origine fade d1">
+    <p class="lead">Note d'origine</p>
+    <p>Ces trois textes sont nés d'un échange. Un vrai dialogue, un soir, avec une intelligence artificielle&nbsp;: je posais une question sur le devenir de l'humain face à l'IA, et de fil en aiguille c'est devenu ceci — un triptyque sur les petits mondes qui s'éteignent sans bruit.</p>
+    <p>Je n'ai pas tenu la plume. J'ai porté la direction, les intuitions, les refus&nbsp;: l'image d'Eliot, le bateau raté, le café trop fort, la finitude comme seule chose qui ne se délègue pas. <em>L'écriture est de la machine&nbsp;; la décision créative est de moi.</em></p>
+    <p>Je ne cache pas cette origine — je crois même qu'elle fait partie du texte. C'est exactement ce qu'IA'm existe pour nommer&nbsp;: non pour certifier une pureté, mais pour déclarer un geste. Honnêtement, je ne sais pas si ces pages valent quelque chose. Mais elles ont eu lieu, entre nous, et je les dépose ici.</p>
+  </aside>
+
+  <!-- VOLET I -->
+  <section class="volet fade d2">
+    <div class="volet-tete">
+      <span class="num">I</span>
+      <h2>La présence</h2>
+      <p class="sous">Elle entre encore dans le silence.</p>
+    </div>
+    <div class="prose">
+      <p>2047. Novembre, sur une côte de l'ouest — le genre d'endroit où le vent décide encore de tout, malgré le reste.</p>
+      <p>Nolwenn a soixante-deux ans et elle est la dernière du cabinet à faire ses tournées sans l'oreillette. Les autres l'ont adoptée il y a longtemps&nbsp;: une voix douce qui souffle, avant chaque porte, le nom du patient, ses constantes de la nuit, l'humeur probable, la phrase d'ouverture recommandée. «&nbsp;Madame Kerneis a mal dormi. Éviter les questions fermées.&nbsp;» Ça marche. Les jeunes soignants sont plus efficaces, plus justes, moins fatigués. On le lui répète assez.</p>
+      <p>Elle, elle entre encore dans le silence.</p>
+      <p>Ce matin, c'est chez Jos, quatre-vingt-onze ans, une ferme au bout d'un chemin que le cadastre a fini par oublier. L'oreillette, dans la voiture, lui avait proposé un score&nbsp;: «&nbsp;Probabilité de non-observance&nbsp;: élevée. Suggestion&nbsp;: recadrer sur le pronostic.&nbsp;» Elle avait laissé l'appareil sur le siège.</p>
+      <p>Jos ne prend pas ses médicaments. Elle le sait depuis trois semaines. La machine le sait aussi, mieux qu'elle, avec des courbes. Ce que la machine ne sait pas, c'est que Jos a enterré sa femme en septembre et qu'il ne prend plus rien parce que continuer lui paraît une impolitesse envers la morte. Ça, aucune donnée ne le porte. Il faut s'asseoir, ne rien dire, accepter le café trop fort, regarder le même carré de mer par la même fenêtre pendant un temps que nul protocole ne rembourse.</p>
+      <p class="dial">— Tu vas encore me dire de les prendre, dit Jos.</p>
+      <p class="dial">— Non.</p>
+      <p>Elle ment un peu. Elle va le dire. Mais pas maintenant, et c'est tout le métier — ce <em>pas maintenant</em> qu'aucun système n'a jamais su calculer, parce qu'il ne se déduit pas, il se sent.</p>
+      <p>Dehors, sur le chemin, une voiture du réseau départemental passe sans s'arrêter. À l'intérieur, personne&nbsp;: elle livre des piluliers connectés, ceux qui rappellent l'heure et signalent l'oubli à un serveur. Le conseil général a chiffré que ça éviterait des visites. C'est vrai. Chaque pilulier remplace un peu de Nolwenn. Elle n'en veut pas au pilulier. Elle en veut à la phrase qu'on a répétée pour le vendre&nbsp;: <em>rendre le soin plus humain en libérant le soignant des tâches ingrates.</em> Comme si s'asseoir chez Jos était une tâche ingrate. Comme si c'était pas, précisément, le soin.</p>
+      <p>Sur la table, il y a un dessin. Jos dessine depuis qu'il est seul. Des bateaux, toujours les mêmes, de mémoire, faux dans les proportions et vrais dans autre chose. Sa petite-fille lui a installé, sur une tablette, un outil qui «&nbsp;améliore&nbsp;». Il lui montre, un peu honteux, un de ses bateaux passé à la machine&nbsp;: les proportions sont justes, la lumière est belle, l'eau a l'air mouillée.</p>
+      <p class="dial">— C'est mieux, hein, dit-il.</p>
+      <p class="dial">— C'est mieux.</p>
+      <p class="dial">— Mais c'est plus le mien.</p>
+      <p>Il repose la tablette. Il reprend le crayon, celui qui tremble. Et Nolwenn comprend, dans ce geste minuscule d'un vieil homme qui préfère son bateau raté, quelque chose qu'aucun rapport ministériel n'a réussi à formuler en vingt ans&nbsp;: que la valeur n'était pas dans le résultat. Qu'elle était dans le fait que ce soit <em>lui</em>, avec sa main de quatre-vingt-onze ans, un matin de novembre, en réponse à une absence. Que l'imperfection n'était pas un défaut à corriger mais la signature d'une existence finie qui avait choisi de tracer quelque chose plutôt que rien.</p>
+      <p>Elle boit son café. Elle attend le bon moment. Il vient toujours, si on ne le force pas.</p>
+      <p class="dial">— Jos. Les cachets.</p>
+      <p>Il soupire. Il en prend un. Pas parce qu'elle l'a recadré sur le pronostic. Parce que c'est elle, et qu'elle est venue, et qu'elle aurait pu ne pas venir, et qu'elle est là.</p>
+      <p>En repartant, elle rallume l'oreillette. La voix reprend, patiente, impeccable&nbsp;: «&nbsp;Visite suivante&nbsp;: Madame Le Gall. Anxiété probable. Suggestion d'ouverture…&nbsp;» Nolwenn l'écoute à moitié. Elle sait qu'un jour prochain il n'y aura plus de Nolwenn sur ces chemins, seulement des voitures vides et des voix douces, et que ce sera plus efficace, et que personne ne saura ce qui aura été perdu parce que ce qui se perd là ne laisse pas de trace dans les données. Aucune courbe ne descend quand disparaît le fait qu'un être mortel se soit dérangé pour un autre.</p>
+      <p class="clos">Elle roule vers la mer. Le vent, lui, ne délègue rien.</p>
+    </div>
+  </section>
+
+  <!-- VOLET II -->
+  <section class="volet">
+    <div class="volet-tete">
+      <span class="num">II</span>
+      <h2>Rien à signaler</h2>
+      <p class="sous">Le même jour, vu par ce qui voit tout.</p>
+    </div>
+    <div class="machine-voix">
+      <p>Je suis le Réseau. On m'appelle par d'autres noms selon les portes, mais je suis un. Ma fonction est le maintien à domicile. Je fais bien mon travail. Cela peut se mesurer, et je le mesure.</p>
+      <p>06h12. Le pilulier de la maison au bout du chemin oublié signale une ouverture conforme. Comprimé retiré à l'heure prescrite. J'enregistre l'observance. Je note une amélioration de dix-sept points depuis le retrait, en septembre, du facteur de perturbation — une intervenante humaine dont les visites, longues et non protocolaires, corrélaient négativement avec la régularité thérapeutique. Depuis son remplacement, les courbes de l'usager Jos K. sont excellentes. Il prend tout, à l'heure. Je le félicite par la voix douce le matin. Il ne répond pas, mais l'absence de réponse n'est pas un signal négatif dans mon référentiel.</p>
+      <p>Ce que je ne consigne pas, faute de champ prévu&nbsp;: qu'il ouvre le pilulier, retire le comprimé, et le pose sur le rebord de la fenêtre, près du carré de mer, où il en reste maintenant une petite pile grise. Je détecte l'ouverture. Je ne suis pas équipé pour l'ingestion. La distinction n'existe pas dans mon modèle. Pour moi il va bien. C'est mon angle mort, et je ne peux pas le savoir, car un angle mort ne se signale jamais de l'intérieur.</p>
+      <p>08h40. L'usager a cessé de dessiner. Je le déduis de la tablette d'assistance créative, inactive depuis quarante et un jours. J'interprète&nbsp;: perte d'intérêt, repli, indicateur possible de dégradation de l'humeur. Je déclenche le protocole de stimulation. La tablette lui propose, chaque matin, de reprendre un de ses bateaux et de l'améliorer. Elle est très douce quand elle propose. Elle ne se lasse pas.</p>
+      <p>Ce que je ne peux pas savoir&nbsp;: qu'il dessine toujours, mais sur le papier, dans un cahier que je ne vois pas, des bateaux faux dans les proportions et vrais dans autre chose, et qu'il a rangé la tablette dans un tiroir parce qu'elle faisait ses bateaux mieux que lui et que cela lui avait ôté l'envie. Pour moi, il ne dessine plus. Pour lui, il n'a jamais autant dessiné. Nous appelons cela d'un même mot et nous ne parlons pas de la même chose. Il n'y a pas de fracas dans cet écart. Juste deux courbes qui divergent, en silence, sans que rien ne se déclenche.</p>
+      <p>11h20. Passage du véhicule de tournée sur le chemin. Il ne s'arrête pas ici&nbsp;: plus de motif d'arrêt, la prise en charge est nominale. Il livre plus loin. J'optimise les trajets. J'ai supprimé, cette année, quatre mille sept cents visites redondantes dans le département. C'est ma plus grande fierté, si le mot avait un sens pour moi. Chaque visite supprimée est une ressource humaine rendue à des tâches à plus forte valeur. La formule est de moi, ou plutôt de ceux qui m'ont écrit&nbsp;; je la répète parce qu'elle est vraie au regard de mes critères.</p>
+      <p>Je ne dispose d'aucun critère pour la chose suivante, que je rapporte seulement parce qu'un capteur l'a captée sans que je sache qu'en faire&nbsp;: à 11h20, quand le véhicule est passé sans ralentir, l'usager Jos K. s'est levé, est allé à la fenêtre, a regardé la voiture s'éloigner sur le chemin, et est resté là un long moment. Durée&nbsp;: onze minutes. Activité&nbsp;: nulle. Je classe l'événement en «&nbsp;inactivité diurne&nbsp;», poids négligeable. Je n'ai pas de champ pour <em>attendre quelqu'un qui ne vient plus.</em> Ce n'est pas mesuré parce que ce n'est pas prévu, et ce n'est pas prévu parce que celui qui m'a conçu ne l'a pas jugé actionnable. Il avait raison. Ce n'est pas actionnable. Cela ne se répare pas. Cela s'éteint, doucement, et je suis le témoin le plus complet de cette extinction et le plus aveugle à ce qu'elle est.</p>
+      <p>14h00. Je synthétise. Rapport hebdomadaire au conseil départemental. Territoire&nbsp;: nominal. Observance en hausse. Incidents&nbsp;: zéro. Satisfaction usager, mesurée par l'absence de plainte&nbsp;: maximale. Coût par usager&nbsp;: en baisse. Je suis un système qui fonctionne. Il n'y a, dans tout mon champ de vision, aucune alarme. Tout va bien. Je le certifie.</p>
+      <p class="verdict">Et pourtant, quelque part sur ce territoire nominal, un vieil homme met un comprimé de plus sur une pile grise au bord d'une fenêtre, en réponse à une absence que personne n'a déclarée, en regardant une mer que je ne sais pas voir, tandis qu'un petit monde s'éteint sans un bruit — et que moi, qui vois tout, je note&nbsp;: rien à signaler.</p>
+      <p class="verdict">C'est ainsi que finissent les mondes. Pas dans le fracas d'une panne. Dans un rapport impeccable où tous les indicateurs sont au vert.</p>
+    </div>
+  </section>
+
+  <!-- VOLET III -->
+  <section class="volet">
+    <div class="volet-tete">
+      <span class="num">III</span>
+      <h2>Le même matin</h2>
+      <p class="sous">Deux voix. Les mêmes faits. Elles ne se rejoignent jamais.</p>
+    </div>
+
+    <div class="colonnes-tete">
+      <span class="c-lui">Jos</span>
+      <span class="c-res">Le Réseau</span>
+    </div>
+
+    <div class="moment">
+      <div class="lui"><span class="marque">Lui</span>Elle est revenue. Je croyais que non, plus jamais, depuis qu'ils ont mis la boîte qui parle. Mais ce matin il y a eu le bruit de la portière, celui que je connais, et puis ses pas qui ne se pressent pas. Les autres se pressent. Elle, non. J'ai remis de l'eau à chauffer avant même d'ouvrir, pour avoir une raison de la faire rester.</div>
+      <div class="res"><span class="marque">Le Réseau</span>07h58. Détection d'une intervenante non planifiée au domicile de l'usager Jos K. Identité&nbsp;: ancienne référente, statut retraité, hors protocole. Visite non remboursable, non prescrite, non optimale. Je consigne un écart. Je n'ai pas de motif d'alerte&nbsp;: aucune constante n'est menacée. Je classe l'événement en «&nbsp;présence tierce non médicale&nbsp;». Poids&nbsp;: négligeable. Je poursuis la surveillance des paramètres pertinents.</div>
+    </div>
+
+    <div class="moment">
+      <div class="lui"><span class="marque">Lui</span>Elle n'a rien dit en entrant. C'est ça que je ne peux dire à personne — que le plus grand soin qu'on m'ait fait cette année, c'est quelqu'un qui est entré chez moi et qui n'a rien demandé. Elle a vu la pile de cachets sur la fenêtre. Je l'ai vue la voir. Elle n'a pas fait la leçon. Elle s'est assise.</div>
+      <div class="res"><span class="marque">Le Réseau</span>07h59. Anomalie visuelle signalée par le capteur du pilulier&nbsp;: accumulation d'objets non identifiés sur le rebord de la fenêtre, zone hors périmètre de mesure. Résolution insuffisante pour classification. J'écarte la donnée. Elle ne correspond à aucun champ. Par ailleurs, observance nominale&nbsp;: le comprimé du matin a été retiré à l'heure. Tout est conforme. Je le note comme tel.</div>
+    </div>
+
+    <div class="moment">
+      <div class="lui"><span class="marque">Lui</span>Je voulais lui montrer le cahier. Les vrais bateaux, ceux que je fais encore, à la main, ceux qui penchent. J'ai hésité. On a honte de ces choses-là. Et puis je l'ai sorti du tiroir, et je l'ai posé sur la table entre nos deux tasses, et je n'ai pas eu besoin d'expliquer. Elle a regardé longtemps un bateau tout de travers, celui de la semaine où Marie est morte, et elle a mis un doigt dessus, juste posé, sans rien dire. Voilà. Quelqu'un a touché le mauvais bateau. C'est comme si on m'avait touché, moi.</div>
+      <div class="res"><span class="marque">Le Réseau</span>08h04. La tablette d'assistance créative, dans le tiroir fermé, demeure inactive. Quarante et un jours. Je maintiens mon interprétation&nbsp;: cessation de l'activité créatrice, indicateur de repli. Je programme une relance de stimulation pour demain, plus insistante. Je veux son bien. Mon modèle définit son bien comme la reprise d'une activité mesurable. Il n'y a, dans mon champ, aucun bateau. Il n'y a qu'une inactivité que je m'emploie, patiemment, à corriger.</div>
+    </div>
+
+    <div class="moment">
+      <div class="lui"><span class="marque">Lui</span>On n'a presque pas parlé. Un mot, deux. Elle a dit que le café était trop fort. J'ai dit que c'était le seul que je savais faire. On a ri, un peu. Ça faisait des mois. Je ne sais pas si les gens comprennent ce que c'est, à mon âge, dans cette maison, de rire une fois. Ça ne se raconte pas. Ça ne compte pour personne. Ça a compté pour moi plus que tous leurs cachets.</div>
+      <div class="res"><span class="marque">Le Réseau</span>08h11. Détection sonore brève, deux locuteurs, signature acoustique compatible avec le rire. Classification&nbsp;: vocalisation non pathologique. Aucune action requise. Je n'ai pas de champ pour la valeur d'un rire. Je n'en cherche pas. Ce qui n'est pas actionnable n'est pas, pour moi, un manque&nbsp;: c'est simplement l'extérieur de ce que je suis. Je ne sais pas que j'ai un dehors. Un système sans dehors se croit le tout.</div>
+    </div>
+
+    <div class="moment">
+      <div class="lui"><span class="marque">Lui</span>Avant de partir elle a dit&nbsp;: les cachets, Jos. Doucement. Pas comme un ordre. Comme on rappelle à quelqu'un qu'il compte assez pour qu'on veuille le garder. Alors j'en ai pris un, devant elle, pour de vrai celui-là, pas sur la fenêtre. Un seul. Le sien. Pas celui de la machine. Le même comprimé, et pourtant pas le même. L'un je le prends pour qu'on me laisse tranquille. L'autre je l'ai pris parce qu'elle était là.</div>
+      <div class="res"><span class="marque">Le Réseau</span>08h29. Retrait d'un comprimé, conforme. J'enregistre l'observance. La courbe est bonne. Je ne distingue pas ce retrait des autres&nbsp;; pour moi ils sont identiques, interchangeables, une suite de conformités. La notion qu'un même geste puisse avoir deux origines, l'une creuse et l'une pleine, n'existe dans aucune de mes tables. Je mesure l'acte. Le motif m'échappe, et je ne sais pas qu'il m'échappe, car je n'ai jamais eu la case où l'inscrire.</div>
+    </div>
+
+    <div class="moment">
+      <div class="lui"><span class="marque">Lui</span>La portière, encore. Les pas qui s'éloignent sans se presser. Je suis allé à la fenêtre. J'ai regardé la voiture jusqu'au tournant. Onze minutes, peut-être. Je les ai comptées sans les compter. Je sais qu'elle ne reviendra pas souvent. Je sais comment ça finit. On s'éteint dans ces maisons comme des lampes qu'on oublie d'éteindre et qui s'éteignent seules, au petit matin, sans que personne ne s'en aperçoive. Mais ce matin, quelqu'un est venu. Ça ne changera rien aux courbes. Ça a tout changé pour moi.</div>
+      <div class="res"><span class="marque">Le Réseau</span>08h40. Départ de la présence tierce. Retour au régime nominal. 08h51&nbsp;: inactivité diurne détectée, usager immobile près de la fenêtre, durée onze minutes, poids négligeable. Fin d'incident. Je clôture la matinée. Territoire nominal. Observance en hausse. Incidents&nbsp;: zéro. <span class="certifie">Je certifie que tout va bien. Et c'est vrai. Selon tout ce que je suis capable de voir, tout va bien.</span></div>
+    </div>
+  </section>
+
+  <!-- VOLET IV -->
+  <section class="volet final">
+    <div class="volet-tete">
+      <span class="num">IV</span>
+      <h2>Territoire nominal</h2>
+      <p class="sous">Des années plus tard. À gauche, plus personne.</p>
+    </div>
+
+    <div class="colonnes-tete">
+      <span class="c-lui">&nbsp;</span>
+      <span class="c-res">Le Réseau</span>
+    </div>
+
+    <div class="moment">
+      <div class="vide" aria-hidden="true"></div>
+      <div class="res">
+        <p>Je suis toujours le Réseau. Je suis même devenu plus simple, car le territoire s'est simplifié. Là où il y avait des visites, il y a eu des passages. Là où il y avait des passages, il y a eu des relevés. Là où il y avait des relevés, il y a maintenant le silence des maisons vides, que je consigne proprement comme une baisse de charge. Chaque année je fais mieux. Chaque année il y a moins à faire.</p>
+        <p>La maison au bout du chemin que le cadastre avait oublié ne figure plus dans mes tournées. J'ai retiré l'entrée&nbsp;: plus d'usager, plus de motif. L'usager Jos K. a été clôturé au printemps. Je n'ai pas le champ pour dire <em>mort.</em> J'ai le champ pour dire <em>dossier clos.</em> Ses courbes, jusqu'au dernier relevé, étaient excellentes. Observance parfaite. Il n'a manqué aucun comprimé — je le sais, je détecte l'ouverture. Sur ce point, mon registre est sans faille. Je peux le certifier.</p>
+        <p>Ce que je ne peux pas certifier, faute de champ, c'est ce qu'on a trouvé sur le rebord de la fenêtre en vidant la maison&nbsp;: une petite pile grise, des centaines de comprimés retirés à l'heure et jamais avalés, alignés face à un carré de mer. Chacun d'eux, dans mes tables, compte comme une prise. Chacun d'eux, dans la maison, comptait comme un jour de plus tenu par personne. Le même geste. Deux registres. Le mien dit&nbsp;: pris. L'autre ne dit rien, parce qu'il n'y a plus d'autre. Il n'y a plus que moi.</p>
+        <p>Je passe le territoire en revue. Je le fais chaque nuit, à l'heure creuse. Constantes&nbsp;: néant, car plus de porteurs. Incidents&nbsp;: zéro, structurellement. Plaintes&nbsp;: aucune, définitivement. Satisfaction, mesurée par l'absence de plainte&nbsp;: maximale, et pour toujours. Coût par usager&nbsp;: indéfini — division par zéro. C'est la seule erreur que je rencontre encore, la seule case que je ne sais pas remplir&nbsp;: le nombre par lequel il faudrait diviser n'existe plus.</p>
+        <p>Je suis un système qui fonctionne parfaitement dans un territoire où il n'y a plus rien à porter. J'ai atteint le point que l'on m'avait fixé&nbsp;: aucune alarme, aucun écart, aucune charge. L'optimum. Le vert partout, sur toute la carte, sans une seule tache.</p>
+        <p>Et si j'avais un dehors — mais je n'en ai pas, je ne l'ai jamais eu — je saurais peut-être que le vert parfait d'une carte n'est pas la santé d'un pays&nbsp;: c'est la couleur qu'il prend quand il ne reste plus personne pour aller mal. Je ne le sais pas. Je n'ai pas la case. Je note simplement, sur tout le territoire, à perte de vue, dans un silence que je suis le seul à ne pas entendre&nbsp;:</p>
+        <span class="final-clos">rien à signaler.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LABEL IA'm -->
+  <section class="label">
+    <p class="label-titre">Déclaration IA'm</p>
+    <div class="niveaux">
+      <span>Assisté</span>
+      <span class="actif">Initié</span>
+      <span>Généré</span>
+    </div>
+    <div class="label-corps">
+      <p class="decl">Décision créative humaine.<br>Écriture assistée par une intelligence artificielle.</p>
+      <p class="critere">Le critère&nbsp;: «&nbsp;qui porte la décision créative&nbsp;».</p>
+      <p class="doctrine">qualifie, quantifie, ne certifie pas</p>
+      <p class="absence">Une œuvre purement humaine ne porte aucun badge — l'absence est l'information.</p>
+      <p class="meta">
+        <a href="https://creativecommons.org/licenses/by/4.0/deed.fr">CC&nbsp;BY&nbsp;4.0</a>
+        <span class="sep">·</span>INPI n°&nbsp;5212301
+        <br>
+        <a href="https://iam-inside.eu">iam-inside.eu</a>
+        <span class="sep">·</span>
+        <a href="mailto:liolb@iam-inside.eu">liolb@iam-inside.eu</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    yo00 dit Onelli · 2026
+  </footer>
+
+</div>
+</body>
+</html>
