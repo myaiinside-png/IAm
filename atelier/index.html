@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IA'm — l'atelier : habille ton badge</title>
+<meta name="description" content="Compose ton badge IA'm à partir du logo original : style, niveau, couleur, format, signature. Puis télécharge-le.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@400;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#100F0D;--nuit-2:#1A1815;--carte:#201E1A;--brume:#C7C4BA;--clair:#F5F1E8;
+  --feu-a:#FF3D5A;--feu-b:#FF9F1C;--feu-c:#7A2FF0;--feu-d:#12E5C8;--trait:#33302A;
+  --gros:"Archivo Black",Impact,sans-serif;--sans:"Archivo",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;--main:"Caveat",cursive;--serif:"Fraunces",Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--nuit);color:var(--clair);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;background:radial-gradient(90% 60% at 85% -5%,rgba(122,47,240,.22),transparent 60%),radial-gradient(80% 60% at 0% 100%,rgba(255,61,90,.16),transparent 60%)}
+a{color:var(--feu-d)}
+:focus-visible{outline:3px solid var(--feu-d);outline-offset:2px}
+.zone{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,44px);position:relative;z-index:2}
+.tete{border-bottom:1px solid var(--trait)}
+.tete .zone{display:flex;align-items:center;gap:18px;min-height:62px}
+.tete .retour{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-decoration:none;color:var(--brume);margin-right:auto}
+.tete .retour:hover{color:var(--clair)}
+.tete .marque{display:inline-flex;align-items:center;height:34px;color:var(--clair)}
+.tete .marque svg{height:100%;width:auto;fill:currentColor}
+.intro{padding:clamp(34px,6vw,64px) 0 clamp(20px,3vw,34px)}
+.intro .oeil{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--feu-b)}
+.intro h1{font-family:var(--gros);text-transform:uppercase;font-size:clamp(2.1rem,6vw,4rem);line-height:.96;margin:14px 0 0;letter-spacing:-.02em}
+.intro h1.main-tout{font-family:var(--main);text-transform:none;font-weight:700;font-size:clamp(2.8rem,8vw,5rem);color:var(--clair);line-height:.9}
+.intro h1 .main{font-family:var(--main);text-transform:none;color:var(--feu-b);font-weight:700;font-size:1.25em;display:inline-block}
+.intro p{max-width:56ch;margin-top:18px;color:var(--brume)}
+.intro p b{color:var(--clair);font-weight:600}
+.atelier{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,52px);padding-bottom:clamp(50px,8vw,90px);align-items:start}
+.scene{position:sticky;top:20px}
+.cadre-scene{background:repeating-conic-gradient(var(--nuit-2) 0% 25%,#181713 0% 50%) 50%/28px 28px;border:1px solid var(--trait);border-radius:8px;padding:clamp(24px,4vw,44px);display:flex;align-items:center;justify-content:center;min-height:300px}
+#badge-hote{width:100%;max-width:460px}
+#badge-hote svg{width:100%;height:auto;display:block;border-radius:4px}
+.sous-scene{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.btn-dl{flex:1;min-width:150px;cursor:pointer;font-family:var(--gros);text-transform:uppercase;font-size:13px;letter-spacing:.04em;background:var(--clair);color:var(--nuit);border:2px solid var(--clair);padding:14px 16px;border-radius:4px;transition:transform .15s,background .15s}
+.btn-dl:hover{transform:translateY(-2px)}
+.btn-dl.creux{background:transparent;color:var(--clair)}
+.btn-dl.creux:hover{background:rgba(255,255,255,.08)}
+.avert{margin-top:12px;font-family:var(--mono);font-size:11px;color:rgba(199,196,186,.7);line-height:1.5}
+.reglages{display:flex;flex-direction:column;gap:26px}
+.champ > .lbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--brume);display:block;margin-bottom:12px}
+.styles{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.styles button{cursor:pointer;background:var(--carte);border:2px solid var(--trait);border-radius:6px;padding:0 0 8px;color:var(--clair);font-family:var(--sans);font-size:12px;transition:border-color .15s,transform .15s;overflow:hidden}
+.styles button:hover{transform:translateY(-2px)}
+.styles button[aria-pressed="true"]{border-color:var(--feu-d)}
+.styles button .vig{display:block;width:100%;height:52px;margin-bottom:7px}
+.styles button .vig svg{width:100%;height:100%;display:block}
+.segments{display:flex;gap:8px;flex-wrap:wrap}
+.segments button{flex:1;min-width:92px;cursor:pointer;background:var(--carte);border:2px solid var(--trait);border-radius:6px;padding:11px 8px;color:var(--brume);font-family:var(--sans);transition:border-color .15s,background .15s}
+.segments button .n{font-family:var(--gros);font-size:14px;text-transform:uppercase;display:block;color:var(--clair)}
+.segments button .q{font-size:11px;display:block;margin-top:3px}
+.segments button[aria-pressed="true"]{border-color:var(--feu-d);background:rgba(18,229,200,.08)}
+.mini{display:flex;gap:8px;flex-wrap:wrap}
+.mini button{cursor:pointer;background:var(--carte);border:2px solid var(--trait);border-radius:6px;padding:10px 14px;color:var(--brume);font-family:var(--mono);font-size:12px;transition:border-color .15s,color .15s}
+.mini button[aria-pressed="true"]{border-color:var(--feu-d);color:var(--clair)}
+.teintes{display:flex;gap:10px;flex-wrap:wrap}
+.teintes button{width:38px;height:38px;border-radius:50%;cursor:pointer;border:2px solid var(--trait);transition:transform .15s}
+.teintes button:hover{transform:scale(1.1)}
+.teintes button[aria-pressed="true"]{border-color:var(--clair);box-shadow:0 0 0 2px var(--nuit),0 0 0 4px var(--clair)}
+.img-zone{margin-top:12px;display:none}
+.img-zone.actif{display:block}
+.img-charger{display:inline-flex;align-items:center;gap:10px;cursor:pointer;background:var(--carte);border:2px dashed var(--trait);border-radius:6px;padding:12px 16px;color:var(--brume);font-family:var(--mono);font-size:12.5px;transition:border-color .15s,color .15s}
+.img-charger:hover{border-color:var(--feu-d);color:var(--clair)}
+.img-charger input{position:absolute;width:1px;height:1px;opacity:0}
+.img-etat{font-family:var(--mono);font-size:11px;color:rgba(199,196,186,.7);margin-top:8px}
+.img-etat button{background:none;border:0;color:var(--feu-a);cursor:pointer;font-family:var(--mono);font-size:11px;text-decoration:underline;padding:0}
+.voile-reg{margin-top:14px;display:none}
+.voile-reg.actif{display:block}
+.voile-reg label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--brume);display:flex;justify-content:space-between;margin-bottom:8px}
+.voile-reg input[type=range]{width:100%;accent-color:var(--feu-d);cursor:pointer}
+.signe input{width:100%;background:var(--carte);border:2px solid var(--trait);border-radius:6px;padding:13px 15px;color:var(--clair);font-family:var(--sans);font-size:15px}
+.signe input::placeholder{color:rgba(199,196,186,.5)}
+.signe input:focus{border-color:var(--feu-d);outline:none}
+.signe .aide{font-family:var(--mono);font-size:11px;color:rgba(199,196,186,.65);margin-top:8px}
+.noyau{border-top:1px solid var(--trait);margin-top:4px;padding-top:22px}
+.noyau .titre{font-family:var(--main);font-weight:700;font-size:1.4rem;color:var(--feu-b)}
+.noyau p{font-size:14px;color:var(--brume);margin-top:6px;max-width:46ch}
+.noyau code{font-family:var(--mono);font-size:12.5px;color:var(--clair);background:var(--carte);padding:1px 6px;border-radius:3px}
+.galerie-sec{border-top:1px solid var(--trait);padding:clamp(48px,7vw,80px) 0}
+.oeil-g{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--feu-b)}
+.titre-g{font-family:var(--main);font-weight:700;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--clair);line-height:.9;margin:12px 0 0}
+.intro-g{max-width:52ch;margin-top:14px;color:var(--brume)}
+.galerie{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:36px}
+.ex{position:relative;cursor:pointer;background:var(--carte);border:2px solid var(--trait);border-radius:8px;padding:12px;transition:border-color .15s,transform .15s;text-align:left;font-family:inherit}
+.ex:hover,.ex:focus-visible{border-color:var(--feu-d);transform:translateY(-3px);outline:none}
+.ex .toile{border-radius:5px;overflow:hidden;background:#0E0D16;aspect-ratio:44/21;display:flex;align-items:center;justify-content:center}
+.ex.carre .toile{aspect-ratio:1}
+.ex .toile svg{width:100%;height:100%;display:block}
+.ex .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:8px}
+.ex .meta .nom{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brume)}
+.ex .meta .go{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--feu-d);opacity:0;transition:opacity .15s}
+.ex:hover .meta .go,.ex:focus-visible .meta .go{opacity:1}
+.pied{border-top:1px solid var(--trait);padding:34px 0 46px;font-size:13px;color:var(--brume)}
+.pied .zone{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media (max-width:860px){.atelier{grid-template-columns:1fr}.scene{position:static}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="tete"><div class="zone">
+  <a class="retour" href="/entree/">← retour</a>
+  <a class="marque" href="/entree/" aria-label="IA'm"><svg viewBox="0 0 1254 1246"><g transform="translate(0.000000,1246.000000) scale(0.100000,-0.100000)"
+ ><path d="M6110 12054 c-416 -22 -825 -79 -1176 -164 -1451 -350 -2663 -1148
+-3543 -2329 -591 -794 -978 -1754 -1100 -2731 -238 -1909 566 -3816 2139
+-5071 925 -738 2027 -1202 3160 -1329 738 -82 1389 -38 2120 145 613 153 1269
+449 1850 833 180 120 408 287 494 363 159 141 110 375 -88 420 -70 15 -144 -6
+-217 -62 -558 -428 -970 -669 -1514 -884 -472 -187 -967 -305 -1500 -357 -171
+-17 -787 -17 -960 0 -1364 133 -2597 724 -3550 1703 -794 815 -1311 1839
+-1464 2896 -39 264 -45 366 -45 678 0 341 12 497 65 820 134 814 482 1618 997
+2304 933 1241 2241 2023 3747 2240 657 95 1353 68 1980 -75 421 -96 774 -220
+1160 -408 573 -279 1037 -605 1484 -1041 416 -407 731 -814 1023 -1325 153
+-267 338 -705 436 -1030 324 -1069 305 -2156 -48 -2868 -96 -194 -176 -309
+-300 -433 -131 -132 -216 -179 -334 -187 -64 -4 -81 -1 -129 21 -141 64 -224
+232 -258 521 -19 168 -6 581 35 1046 19 223 41 470 47 550 17 198 18 510 1
+582 -15 66 -68 158 -136 234 -81 93 -120 71 -225 -124 -124 -233 -231 -490
+-342 -820 -37 -112 -70 -206 -72 -208 -2 -2 -7 41 -11 97 -17 269 -71 503
+-157 684 -116 247 -237 237 -396 -33 -60 -102 -154 -309 -198 -437 -16 -44
+-31 -84 -35 -88 -4 -4 -5 36 -3 90 l5 98 -69 135 c-60 119 -71 135 -93 135
+-24 0 -25 -3 -32 -75 -3 -41 -11 -158 -17 -260 -12 -206 -43 -493 -97 -918
+-20 -157 -33 -298 -30 -316 7 -38 67 -134 113 -183 32 -34 72 -43 91 -20 6 6
+27 89 47 182 94 432 158 659 256 910 134 342 318 665 379 665 19 0 32 -46 46
+-163 12 -96 14 -226 12 -607 -3 -553 -9 -511 89 -648 59 -83 78 -102 103 -102
+34 0 50 42 86 236 58 313 118 525 225 795 62 158 175 396 234 494 l36 60 -6
+-135 c-3 -74 -12 -211 -20 -305 -76 -876 -87 -1170 -54 -1455 48 -422 239
+-799 467 -923 145 -79 299 -75 478 13 305 149 641 568 807 1006 194 508 254
+1198 166 1906 -183 1487 -950 2883 -2119 3856 -950 791 -2103 1271 -3310 1377
+-162 15 -603 26 -730 19z"/><path d="M6663 9543 c-7 -2 -35 -51 -62 -107 -59 -122 -122 -196 -228 -268
+-41 -27 -77 -58 -82 -69 -4 -11 -3 -52 3 -90 18 -135 1 -205 -283 -1189 -95
+-327 -229 -791 -298 -1030 -122 -424 -299 -1035 -443 -1530 -39 -135 -101
+-346 -137 -470 -161 -555 -206 -690 -278 -828 -87 -164 -166 -243 -320 -317
+-50 -24 -98 -52 -107 -62 -40 -44 -29 -122 21 -147 21 -11 159 -13 723 -12
+l698 1 27 27 c21 21 28 38 28 68 0 69 -28 86 -222 137 -194 50 -281 87 -340
+145 -62 61 -77 114 -70 252 8 160 37 281 227 946 43 151 102 358 130 460 28
+102 58 209 66 238 l15 52 761 -2 761 -3 13 -40 c44 -139 436 -1534 448 -1597
+20 -97 20 -180 1 -245 -30 -102 -144 -172 -364 -223 -119 -27 -149 -43 -167
+-86 -17 -42 -10 -74 23 -106 l25 -23 816 -1 c507 -1 829 2 850 8 35 11 62 50
+62 92 0 50 -46 82 -183 130 -197 68 -304 143 -393 277 -88 133 -121 234 -419
+1274 -472 1647 -547 1908 -695 2420 -224 775 -552 1888 -562 1908 -9 17 -22
+20 -45 10z m-90 -1373 c37 -129 139 -494 227 -810 89 -316 208 -742 266 -946
+57 -204 104 -374 104 -378 0 -3 -306 -6 -681 -6 -541 0 -680 3 -676 13 2 6 64
+221 136 477 397 1401 545 1910 552 1898 3 -7 36 -119 72 -248z"/><path d="M2537 9431 c-30 -9 -57 -46 -57 -78 0 -72 18 -84 200 -138 159 -47
+235 -83 303 -145 66 -60 109 -139 133 -245 18 -77 19 -177 19 -2385 0 -2575 6
+-2373 -70 -2527 -66 -135 -179 -210 -415 -277 -142 -41 -170 -61 -170 -125 0
+-27 7 -44 26 -62 l26 -24 846 -1 c900 -1 886 -2 912 45 17 32 11 78 -12 106
+-17 19 -51 34 -123 55 -148 42 -208 67 -275 112 -102 68 -159 156 -197 303
+-17 66 -18 192 -18 2395 0 2174 1 2329 17 2393 26 98 68 175 130 233 64 61
+143 100 303 149 151 47 173 59 191 100 17 41 3 89 -30 107 -15 9 -247 12 -874
+12 -468 1 -858 -1 -865 -3z"/><path d="M8367 9278 c-2 -7 2 -49 9 -93 24 -142 28 -365 10 -505 -36 -272
+-139 -576 -266 -781 -16 -27 -30 -54 -30 -59 0 -18 194 -300 206 -300 15 0 54
+60 119 184 144 274 224 623 211 926 -8 221 -47 372 -127 506 -64 106 -118 156
+-132 122z"/></g></svg></a>
+</div></header>
+<main>
+<section class="intro"><div class="zone">
+  <p class="oeil">L'atelier</p>
+  <h1 class="main-tout">Habille ton badge.</h1>
+  <p>Crée ton propre badge à partir du logo original. Tu composes, tu le charges, et voilà.</p>
+</div></section>
+<section class="zone atelier">
+  <div class="scene">
+    <div class="cadre-scene"><div id="badge-hote" role="img" aria-label="Aperçu de ton badge IA'm"></div></div>
+    <div class="sous-scene">
+      <button class="btn-dl" id="dl-png" type="button">Télécharger PNG</button>
+      <button class="btn-dl creux" id="dl-svg" type="button">Télécharger SVG</button>
+    </div>
+    <p class="avert">Le PNG est prêt à poser partout. Le SVG reste net à toute taille et contient ton logo en vectoriel.</p>
+  </div>
+  <div class="reglages">
+    <div class="champ"><span class="lbl">1 · Le style</span><div class="styles" id="styles" role="group" aria-label="Style du badge"></div></div>
+    <div class="champ"><span class="lbl">2 · Le niveau</span>
+      <div class="segments" id="niveaux" role="group" aria-label="Niveau déclaré">
+        <button type="button" data-niv="0" aria-pressed="true"><span class="n">Assisté</span><span class="q">l'humain décide</span></button>
+        <button type="button" data-niv="1" aria-pressed="false"><span class="n">Initié</span><span class="q">décision partagée</span></button>
+        <button type="button" data-niv="2" aria-pressed="false"><span class="n">Généré</span><span class="q">l'IA porte</span></button>
+      </div>
+    </div>
+    <div class="champ"><span class="lbl">3 · La couleur</span><div class="teintes" id="teintes" role="group" aria-label="Couleur d'accent"></div></div>
+    <div class="champ"><span class="lbl">4 · Le format</span>
+      <div class="mini" id="formats" role="group" aria-label="Format du badge">
+        <button type="button" data-fmt="banniere" aria-pressed="true">Bannière</button>
+        <button type="button" data-fmt="carre" aria-pressed="false">Carré</button>
+        <button type="button" data-fmt="vignette" aria-pressed="false">Vignette</button>
+      </div>
+    </div>
+    <div class="champ"><span class="lbl">5 · Le fond</span>
+      <div class="mini" id="fonds" role="group" aria-label="Fond du badge">
+        <button type="button" data-fond="style" aria-pressed="true">Du style</button>
+        <button type="button" data-fond="clair" aria-pressed="false">Clair</button>
+        <button type="button" data-fond="sombre" aria-pressed="false">Sombre</button>
+        <button type="button" data-fond="transparent" aria-pressed="false">Transparent</button>
+        <button type="button" data-fond="image" aria-pressed="false">Ton image</button>
+      </div>
+      <div class="img-zone" id="img-zone">
+        <label class="img-charger">
+          <span>＋ charger une image</span>
+          <input type="file" id="img-input" accept="image/*">
+        </label>
+        <p class="img-etat" id="img-etat">Aucune image — reste dans ton navigateur, rien n'est envoyé.</p>
+        <div class="voile-reg" id="voile-reg">
+          <label for="voile-input"><span>Voile de lisibilité</span><span id="voile-val">55 %</span></label>
+          <input type="range" id="voile-input" min="0" max="90" value="55">
+        </div>
+      </div>
+    </div>
+    <div class="champ signe"><span class="lbl">6 · Ta signature <span style="opacity:.6">(facultatif)</span></span>
+      <input id="auteur" type="text" maxlength="32" placeholder="ton nom, ton pseudo…" autocomplete="off">
+      <p class="aide">S'inscrit en petit sur le badge, en manuscrit. Laisse vide si tu préfères.</p>
+    </div>
+    <div class="noyau">
+      <p class="titre">Ce qui ne changera jamais</p>
+      <p style="font-family:var(--main);font-weight:700;font-size:1.35rem;color:var(--clair);margin-top:16px">C'est ton badge, tu es libre de le déclarer. Rien ne t'y oblige.</p>
+    </div>
+  </div>
+</section>
+
+<section class="galerie-sec" id="galerie">
+  <div class="zone">
+    <p class="oeil-g">La galerie</p>
+    <h2 class="titre-g">Un logo, mille et un choix.</h2>
+    <p class="intro-g">Douze façons d'habiller le même badge. Clique sur celui qui te parle — il se charge dans l'atelier, tu n'as plus qu'à le faire tien.</p>
+    <div class="galerie" id="galerie-grille"></div>
+  </div>
+</section>
+</main>
+<footer class="pied"><div class="zone">
+  <span>IA'm — <a href="https://iam-inside.eu">iam-inside.eu</a> · déclaratif, jamais certifié</span>
+  <span>INPI n° 5212301 · CC BY 4.0</span>
+</div></footer>
+
+<script>
+var LOGO={vbw:1254,vbh:1246,inner:"<g transform=\"translate(0.000000,1246.000000) scale(0.100000,-0.100000)\"\n ><path d=\"M6110 12054 c-416 -22 -825 -79 -1176 -164 -1451 -350 -2663 -1148\n-3543 -2329 -591 -794 -978 -1754 -1100 -2731 -238 -1909 566 -3816 2139\n-5071 925 -738 2027 -1202 3160 -1329 738 -82 1389 -38 2120 145 613 153 1269\n449 1850 833 180 120 408 287 494 363 159 141 110 375 -88 420 -70 15 -144 -6\n-217 -62 -558 -428 -970 -669 -1514 -884 -472 -187 -967 -305 -1500 -357 -171\n-17 -787 -17 -960 0 -1364 133 -2597 724 -3550 1703 -794 815 -1311 1839\n-1464 2896 -39 264 -45 366 -45 678 0 341 12 497 65 820 134 814 482 1618 997\n2304 933 1241 2241 2023 3747 2240 657 95 1353 68 1980 -75 421 -96 774 -220\n1160 -408 573 -279 1037 -605 1484 -1041 416 -407 731 -814 1023 -1325 153\n-267 338 -705 436 -1030 324 -1069 305 -2156 -48 -2868 -96 -194 -176 -309\n-300 -433 -131 -132 -216 -179 -334 -187 -64 -4 -81 -1 -129 21 -141 64 -224\n232 -258 521 -19 168 -6 581 35 1046 19 223 41 470 47 550 17 198 18 510 1\n582 -15 66 -68 158 -136 234 -81 93 -120 71 -225 -124 -124 -233 -231 -490\n-342 -820 -37 -112 -70 -206 -72 -208 -2 -2 -7 41 -11 97 -17 269 -71 503\n-157 684 -116 247 -237 237 -396 -33 -60 -102 -154 -309 -198 -437 -16 -44\n-31 -84 -35 -88 -4 -4 -5 36 -3 90 l5 98 -69 135 c-60 119 -71 135 -93 135\n-24 0 -25 -3 -32 -75 -3 -41 -11 -158 -17 -260 -12 -206 -43 -493 -97 -918\n-20 -157 -33 -298 -30 -316 7 -38 67 -134 113 -183 32 -34 72 -43 91 -20 6 6\n27 89 47 182 94 432 158 659 256 910 134 342 318 665 379 665 19 0 32 -46 46\n-163 12 -96 14 -226 12 -607 -3 -553 -9 -511 89 -648 59 -83 78 -102 103 -102\n34 0 50 42 86 236 58 313 118 525 225 795 62 158 175 396 234 494 l36 60 -6\n-135 c-3 -74 -12 -211 -20 -305 -76 -876 -87 -1170 -54 -1455 48 -422 239\n-799 467 -923 145 -79 299 -75 478 13 305 149 641 568 807 1006 194 508 254\n1198 166 1906 -183 1487 -950 2883 -2119 3856 -950 791 -2103 1271 -3310 1377\n-162 15 -603 26 -730 19z\"/><path d=\"M6663 9543 c-7 -2 -35 -51 -62 -107 -59 -122 -122 -196 -228 -268\n-41 -27 -77 -58 -82 -69 -4 -11 -3 -52 3 -90 18 -135 1 -205 -283 -1189 -95\n-327 -229 -791 -298 -1030 -122 -424 -299 -1035 -443 -1530 -39 -135 -101\n-346 -137 -470 -161 -555 -206 -690 -278 -828 -87 -164 -166 -243 -320 -317\n-50 -24 -98 -52 -107 -62 -40 -44 -29 -122 21 -147 21 -11 159 -13 723 -12\nl698 1 27 27 c21 21 28 38 28 68 0 69 -28 86 -222 137 -194 50 -281 87 -340\n145 -62 61 -77 114 -70 252 8 160 37 281 227 946 43 151 102 358 130 460 28\n102 58 209 66 238 l15 52 761 -2 761 -3 13 -40 c44 -139 436 -1534 448 -1597\n20 -97 20 -180 1 -245 -30 -102 -144 -172 -364 -223 -119 -27 -149 -43 -167\n-86 -17 -42 -10 -74 23 -106 l25 -23 816 -1 c507 -1 829 2 850 8 35 11 62 50\n62 92 0 50 -46 82 -183 130 -197 68 -304 143 -393 277 -88 133 -121 234 -419\n1274 -472 1647 -547 1908 -695 2420 -224 775 -552 1888 -562 1908 -9 17 -22\n20 -45 10z m-90 -1373 c37 -129 139 -494 227 -810 89 -316 208 -742 266 -946\n57 -204 104 -374 104 -378 0 -3 -306 -6 -681 -6 -541 0 -680 3 -676 13 2 6 64\n221 136 477 397 1401 545 1910 552 1898 3 -7 36 -119 72 -248z\"/><path d=\"M2537 9431 c-30 -9 -57 -46 -57 -78 0 -72 18 -84 200 -138 159 -47\n235 -83 303 -145 66 -60 109 -139 133 -245 18 -77 19 -177 19 -2385 0 -2575 6\n-2373 -70 -2527 -66 -135 -179 -210 -415 -277 -142 -41 -170 -61 -170 -125 0\n-27 7 -44 26 -62 l26 -24 846 -1 c900 -1 886 -2 912 45 17 32 11 78 -12 106\n-17 19 -51 34 -123 55 -148 42 -208 67 -275 112 -102 68 -159 156 -197 303\n-17 66 -18 192 -18 2395 0 2174 1 2329 17 2393 26 98 68 175 130 233 64 61\n143 100 303 149 151 47 173 59 191 100 17 41 3 89 -30 107 -15 9 -247 12 -874\n12 -468 1 -858 -1 -865 -3z\"/><path d=\"M8367 9278 c-2 -7 2 -49 9 -93 24 -142 28 -365 10 -505 -36 -272\n-139 -576 -266 -781 -16 -27 -30 -54 -30 -59 0 -18 194 -300 206 -300 15 0 54\n60 119 184 144 274 224 623 211 926 -8 221 -47 372 -127 506 -64 106 -118 156\n-132 122z\"/></g>"};
+(function(){
+  var NIVEAUX=[{nom:"Assisté",dec:"humaine"},{nom:"Initié",dec:"partagée"},{nom:"Généré",dec:"portée par l'IA"}];
+  var TEINTES=[{id:"feu",c:"#FF3D5A"},{id:"ambre",c:"#FF9F1C"},{id:"violet",c:"#7A2FF0"},{id:"cyan",c:"#12E5C8"},{id:"vert",c:"#3BC85B"},{id:"encre",c:"#F5F1E8"}];
+  var FORMATS={banniere:{w:440,h:210},carre:{w:320,h:320},vignette:{w:240,h:240}};
+
+  function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+  function logoG(x,y,h,color){var sc=h/LOGO.vbh;return '<g transform="translate('+x+','+y+') scale('+sc+')" fill="'+color+'">'+LOGO.inner+'</g>'}
+  function logoW(h){return LOGO.vbw*(h/LOGO.vbh)}
+
+  // fond selon le réglage ; "style" => la fonction de style décide (renvoie null ici)
+  function fondRect(W,H){
+    if(etat.fond==='clair') return '<rect width="'+W+'" height="'+H+'" fill="#F3EFE6"/>';
+    if(etat.fond==='sombre') return '<rect width="'+W+'" height="'+H+'" fill="#0E0D16"/>';
+    if(etat.fond==='transparent') return '';
+    if(etat.fond==='image'){
+      if(!etat.image) return '<rect width="'+W+'" height="'+H+'" fill="#0E0D16"/>';
+      var op=etat.voile/100;
+      // image en couverture + voile sombre dosable pour garder le badge lisible
+      return '<image href="'+etat.image+'" x="0" y="0" width="'+W+'" height="'+H+'" preserveAspectRatio="xMidYMid slice"/>'+
+             '<rect width="'+W+'" height="'+H+'" fill="#0B0A12" opacity="'+op.toFixed(2)+'"/>';
+    }
+    return null; // du style
+  }
+  // couleur de texte lisible selon le fond courant (pour styles à fond override)
+  function encreSur(){
+    if(etat.fond==='clair') return '#14120E';
+    if(etat.fond==='sombre'||etat.fond==='transparent') return '#F5F1E8';
+    if(etat.fond==='image') return '#F5F1E8'; // texte clair sur voile sombre
+    return null;
+  }
+
+  function svgWrap(W,H,inner){return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'">'+inner+'</svg>'}
+
+  // ---- styles ----
+  // chaque style reçoit {W,H,c,NIV,auteur} et compose logo + texte.
+  // Pour rester lisibles en carré/vignette, on adapte le placement selon le ratio.
+  function pose(o,corpsFn){
+    var large = o.W/o.H > 1.3;
+    return corpsFn(o, large);
+  }
+
+  function txtNiveau(o,x,y,size,fill,rot){
+    var r=rot?' transform="rotate('+rot+' '+x+' '+y+')"':'';
+    return '<text x="'+x+'" y="'+(y+4)+'" font-family="Caveat,cursive" font-weight="700" font-size="'+(size*1.5)+'" fill="'+fill+'"'+r+'>'+o.NIV+'</text>';
+  }
+  function txtMention(x,y,fill,op){return ''}
+  function txtAuteur(o,x,y,fill){return o.auteur?'<text x="'+x+'" y="'+y+'" font-family="Caveat,cursive" font-size="19" fill="'+fill+'">'+esc(o.auteur)+'</text>':''}
+
+  function styleGen(o, deco){
+    // deco = {bg, logoColor, niveauColor, mentionColor, auteurColor}
+    var W=o.W,H=o.H, large=W/H>1.3;
+    var fo=fondRect(W,H);
+    var bg = fo!==null ? fo : deco.bg;
+    var enc = encreSur();
+    var logoColor = deco.logoOverride ? deco.logoColor : (enc!==null?enc:deco.logoColor);
+    var nivColor = enc!==null && !deco.keepNiv ? o.c : deco.niveauColor;
+    var mentCol = enc!==null?enc:deco.mentionColor;
+    var autCol = enc!==null?enc:deco.auteurColor;
+    // fond image : voile sombre => on force logo clair, niveau en couleur d'accent, textes clairs
+    if(etat.fond==='image'){ logoColor='#F5F1E8'; nivColor=o.c; mentCol='#F5F1E8'; autCol=o.c; }
+
+    if(large){
+      var lh=Math.min(H-70,132), x=26, y=(H-lh)/2-6, lw=logoW(lh), tx=x+lw+24;
+      return svgWrap(W,H, bg + deco.extra(x+lw/2,H/2,lw) +
+        logoG(x,y,lh,logoColor) +
+        txtNiveau(o,tx,H/2-6,28,nivColor,deco.nivRot) +
+        txtMention(tx, H/2+18, mentCol) +
+        txtAuteur(o,x,H-18,autCol));
+    } else {
+      // vertical : logo en haut centré, texte dessous
+      var lh2=Math.min(H*0.44,150), x2=(W-logoW(lh2))/2, y2=H*0.13;
+      var cxx=W/2;
+      return svgWrap(W,H, bg + deco.extra(cxx,H*0.33,logoW(lh2)) +
+        logoG(x2,y2,lh2,logoColor) +
+        '<text x="'+cxx+'" y="'+(H*0.73)+'" text-anchor="middle" font-family="Caveat,cursive" font-weight="700" font-size="'+(W*0.16)+'" fill="'+nivColor+'">'+o.NIV+'</text>' +
+        '' +
+        (o.auteur?'<text x="'+cxx+'" y="'+(H*0.93)+'" text-anchor="middle" font-family="Caveat,cursive" font-size="17" fill="'+autCol+'">'+esc(o.auteur)+'</text>':''));
+    }
+  }
+  var noExtra=function(){return ''};
+
+  var STYLES={
+    sobre:{nom:"Sobre",deco:function(o){return {bg:'<rect width="'+o.W+'" height="'+o.H+'" fill="#F3EFE6"/><rect x="8" y="8" width="'+(o.W-16)+'" height="'+(o.H-16)+'" fill="none" stroke="#14120E" stroke-width="2"/>',logoColor:'#14120E',niveauColor:o.c,mentionColor:'#6b675e',auteurColor:'#6b675e',extra:noExtra}}},
+    neon:{nom:"Néon",deco:function(o){return {bg:'<rect width="'+o.W+'" height="'+o.H+'" fill="#0E0D16"/>',logoColor:o.c,logoOverride:true,niveauColor:o.c,keepNiv:true,mentionColor:o.c,auteurColor:o.c,extra:noExtra}}},
+    dechire:{nom:"Déchiré",deco:function(o){var W=o.W,H=o.H;var band='<rect width="'+W+'" height="'+H+'" fill="#1A1714"/><path d="M0,'+(H*0.22)+' L'+(W*0.1)+','+(H*0.2)+' L'+(W*0.2)+','+(H*0.25)+' L'+(W*0.34)+','+(H*0.21)+' L'+(W*0.5)+','+(H*0.26)+' L'+(W*0.66)+','+(H*0.21)+' L'+(W*0.8)+','+(H*0.25)+' L'+(W*0.92)+','+(H*0.21)+' L'+W+','+(H*0.25)+' L'+W+','+(H*0.75)+' L'+(W*0.9)+','+(H*0.79)+' L'+(W*0.75)+','+(H*0.75)+' L'+(W*0.6)+','+(H*0.79)+' L'+(W*0.46)+','+(H*0.75)+' L'+(W*0.3)+','+(H*0.79)+' L'+(W*0.16)+','+(H*0.75)+' L'+(W*0.06)+','+(H*0.79)+' L0,'+(H*0.75)+' Z" fill="#EDE6D6"/>';return {bg:band,logoColor:'#14120E',logoOverride:true,niveauColor:'#14120E',keepNiv:false,mentionColor:'#EDE6D6',auteurColor:'#EDE6D6',extra:noExtra}}},
+    tag:{nom:"Tag",deco:function(o){var W=o.W,H=o.H;var dots='';for(var i=0;i<44;i++){dots+='<circle cx="'+(10+(i%11)*(W/11))+'" cy="'+(12+Math.floor(i/11)*(H/4))+'" r="2.2"/>'}return {bg:'<rect width="'+W+'" height="'+H+'" fill="#101826"/><g opacity=".18" fill="#fff">'+dots+'</g>',logoColor:o.c,logoOverride:true,niveauColor:'#EDE6D6',keepNiv:true,mentionColor:'#EDE6D6',auteurColor:o.c,extra:noExtra}}},
+    chrome:{nom:"Chrome",deco:function(o){var id='c'+Math.random().toString(36).slice(2,7);return {bg:'<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f7f9"/><stop offset=".5" stop-color="#9aa3ab"/><stop offset=".52" stop-color="#5a6169"/><stop offset="1" stop-color="#e6ebee"/></linearGradient></defs><rect width="'+o.W+'" height="'+o.H+'" fill="#15161A"/>',logoColor:'url(#'+id+')',logoOverride:true,niveauColor:'#e6ebee',keepNiv:true,mentionColor:'#9AA3AB',auteurColor:'#9AA3AB',extra:noExtra}}},
+    explosif:{nom:"Explosif",deco:function(o){
+      var W=o.W,H=o.H,c2='#FF3D5A';
+      function extra(cx,cy,lw){
+        var s='<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="'+(lw*0.6).toFixed(1)+'" fill="#1c1726"/>';
+        var seed=7;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}
+        for(var k=0;k<20;k++){var ang=k*(6.2832/20)+0.05*rnd();var r1=lw*0.5+rnd()*6;var r2=r1+18+rnd()*24;
+          var x1=cx+r1*Math.cos(ang),y1=cy+r1*Math.sin(ang),x2=cx+r2*Math.cos(ang),y2=cy+r2*Math.sin(ang);
+          s+='<line x1="'+x1.toFixed(1)+'" y1="'+y1.toFixed(1)+'" x2="'+x2.toFixed(1)+'" y2="'+y2.toFixed(1)+'" stroke="'+(k%2?o.c:c2)+'" stroke-width="'+(3+Math.floor(rnd()*2))+'" stroke-linecap="round"/>';}
+        for(var j=0;j<12;j++){var a2=rnd()*6.2832,rr=lw*0.6+6+rnd()*44;s+='<circle cx="'+(cx+rr*Math.cos(a2)).toFixed(1)+'" cy="'+(cy+rr*Math.sin(a2)).toFixed(1)+'" r="'+(1.5+rnd()*2.5).toFixed(1)+'" fill="'+(j%3?o.c:'#12E5C8')+'"/>';}
+        return s;
+      }
+      return {bg:'<rect width="'+W+'" height="'+H+'" fill="#131018"/>',logoColor:'#F5F1E8',logoOverride:true,niveauColor:o.c,keepNiv:true,nivRot:-4,mentionColor:'#F5F1E8',auteurColor:o.c,extra:extra};
+    }}
+  };
+  var ORDRE=["sobre","neon","dechire","tag","chrome","explosif"];
+  var etat={style:"explosif",niv:1,teinte:"#FF9F1C",auteur:"",fmt:"banniere",fond:"style",image:null,voile:55};
+
+  function opts(){var f=FORMATS[etat.fmt];return {W:f.w,H:f.h,NIV:NIVEAUX[etat.niv].nom,c:etat.teinte,auteur:etat.auteur.trim()}}
+  function svgActuel(){var o=opts();return styleGen(o, STYLES[etat.style].deco(o))}
+  function rendre(){var h=document.getElementById('badge-hote');h.innerHTML=svgActuel();h.setAttribute('aria-label','Badge IA\u2019m '+NIVEAUX[etat.niv].nom+', style '+STYLES[etat.style].nom)}
+
+  var wrapS=document.getElementById('styles');
+  ORDRE.forEach(function(k){var b=document.createElement('button');b.type='button';b.dataset.style=k;b.setAttribute('aria-pressed',k===etat.style?'true':'false');b.innerHTML='<span class="vig" id="vig-'+k+'"></span>'+STYLES[k].nom;b.addEventListener('click',function(){etat.style=k;maj()});wrapS.appendChild(b)});
+  var wrapT=document.getElementById('teintes');
+  TEINTES.forEach(function(t){var b=document.createElement('button');b.type='button';b.style.background=t.c;b.dataset.c=t.c;b.setAttribute('aria-pressed',t.c===etat.teinte?'true':'false');b.setAttribute('aria-label','Couleur '+t.id);b.addEventListener('click',function(){etat.teinte=t.c;maj()});wrapT.appendChild(b)});
+  document.querySelectorAll('#niveaux button').forEach(function(b){b.addEventListener('click',function(){etat.niv=+b.dataset.niv;maj()})});
+  document.querySelectorAll('#formats button').forEach(function(b){b.addEventListener('click',function(){etat.fmt=b.dataset.fmt;maj()})});
+  document.querySelectorAll('#fonds button').forEach(function(b){b.addEventListener('click',function(){etat.fond=b.dataset.fond;majImgZone();maj()})});
+  document.getElementById('auteur').addEventListener('input',function(){etat.auteur=this.value;rendre()});
+
+  // --- import d'image en fond ---
+  function majImgZone(){
+    var z=document.getElementById('img-zone');
+    z.classList.toggle('actif', etat.fond==='image');
+    document.getElementById('voile-reg').classList.toggle('actif', etat.fond==='image' && !!etat.image);
+  }
+  function chargerImage(file){
+    if(!file||!/^image\//.test(file.type)){return}
+    var fr=new FileReader();
+    fr.onload=function(){
+      var im=new Image();
+      im.onload=function(){
+        // redimensionner : plus grand côté <= 900px, ré-encodage compact
+        var max=900, w=im.width, h=im.height, r=Math.min(1, max/Math.max(w,h));
+        var cw=Math.round(w*r), ch=Math.round(h*r);
+        var c=document.createElement('canvas');c.width=cw;c.height=ch;
+        c.getContext('2d').drawImage(im,0,0,cw,ch);
+        // JPEG si pas de transparence probable, sinon PNG. On tente JPEG (plus léger).
+        etat.image=c.toDataURL('image/jpeg',0.82);
+        document.getElementById('img-etat').innerHTML='Image chargée ('+cw+'×'+ch+'). <button type="button" id="img-retirer">retirer</button>';
+        document.getElementById('img-retirer').addEventListener('click',retirerImage);
+        majImgZone();maj();
+      };
+      im.src=fr.result;
+    };
+    fr.readAsDataURL(file);
+  }
+  function retirerImage(){etat.image=null;document.getElementById('img-input').value='';document.getElementById('img-etat').textContent='Aucune image — reste dans ton navigateur, rien n\u2019est envoyé.';majImgZone();maj()}
+  document.getElementById('img-input').addEventListener('change',function(){if(this.files&&this.files[0])chargerImage(this.files[0])});
+  document.getElementById('voile-input').addEventListener('input',function(){etat.voile=+this.value;document.getElementById('voile-val').textContent=this.value+' %';rendre()});
+
+  function vignettes(){ORDRE.forEach(function(k){var o={W:440,H:210,NIV:NIVEAUX[etat.niv].nom,c:etat.teinte,auteur:""};
+    // vignette : on force le fond du style (pas les overrides), en gardant format bannière
+    var save=etat.fond;etat.fond='style';
+    document.getElementById('vig-'+k).innerHTML=styleGen(o,STYLES[k].deco(o));
+    etat.fond=save;
+  })}
+  function presse(sel,attr,val){document.querySelectorAll(sel).forEach(function(b){b.setAttribute('aria-pressed',b.dataset[attr]===val?'true':'false')})}
+  function maj(){
+    document.querySelectorAll('#styles button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.style===etat.style?'true':'false')});
+    document.querySelectorAll('#teintes button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.c===etat.teinte?'true':'false')});
+    document.querySelectorAll('#niveaux button').forEach(function(b){b.setAttribute('aria-pressed',(+b.dataset.niv===etat.niv)?'true':'false')});
+    presse('#formats button','fmt',etat.fmt);
+    presse('#fonds button','fond',etat.fond);
+    vignettes();rendre();
+  }
+  function nomFichier(ext){var n=NIVEAUX[etat.niv].nom.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');return 'iam-'+etat.style+'-'+n+'-'+etat.fmt+'.'+ext}
+  document.getElementById('dl-svg').addEventListener('click',function(){var b=new Blob([svgActuel()],{type:'image/svg+xml'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=nomFichier('svg');a.click();URL.revokeObjectURL(u)});
+  document.getElementById('dl-png').addEventListener('click',function(){var o=opts();var svg=svgActuel(),img=new Image(),u=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));img.onload=function(){var s=3,c=document.createElement('canvas');c.width=o.W*s;c.height=o.H*s;var ctx=c.getContext('2d');ctx.scale(s,s);ctx.drawImage(img,0,0,o.W,o.H);URL.revokeObjectURL(u);
+    try{
+      c.toBlob(function(bl){if(!bl){throw new Error('blob null')}var u2=URL.createObjectURL(bl),a=document.createElement('a');a.href=u2;a.download=nomFichier('png');a.click();URL.revokeObjectURL(u2)},'image/png');
+    }catch(e){alert('Le PNG n\u2019a pas pu être généré avec cette image de fond. Le téléchargement SVG fonctionne, lui.');}
+  };img.onerror=function(){URL.revokeObjectURL(u);alert('Rendu PNG impossible ici — le SVG fonctionne.')};img.src=u});
+
+  // ---- galerie d'exemples ----
+  var EXEMPLES=[
+    {style:"explosif",niv:1,teinte:"#FF9F1C",fmt:"banniere",nom:"Explosif · ambre"},
+    {style:"neon",niv:2,teinte:"#12E5C8",fmt:"banniere",nom:"Néon · cyan"},
+    {style:"tag",niv:0,teinte:"#FF3D5A",fmt:"banniere",nom:"Tag · feu"},
+    {style:"dechire",niv:1,teinte:"#3BC85B",fmt:"banniere",nom:"Déchiré · vert"},
+    {style:"chrome",niv:2,teinte:"#7A2FF0",fmt:"banniere",nom:"Chrome · violet"},
+    {style:"sobre",niv:0,teinte:"#E23A1E",fmt:"banniere",nom:"Sobre · rouge"},
+    {style:"neon",niv:0,teinte:"#FF9F1C",fmt:"carre",nom:"Néon · carré"},
+    {style:"explosif",niv:2,teinte:"#FF3D5A",fmt:"carre",nom:"Explosif · carré"},
+    {style:"tag",niv:1,teinte:"#12E5C8",fmt:"carre",nom:"Tag · carré"},
+    {style:"chrome",niv:1,teinte:"#3BC85B",fmt:"banniere",nom:"Chrome · vert"},
+    {style:"sobre",niv:2,teinte:"#7A2FF0",fmt:"banniere",nom:"Sobre · violet"},
+    {style:"dechire",niv:0,teinte:"#FF9F1C",fmt:"carre",nom:"Déchiré · carré"}
+  ];
+  function svgExemple(ex){
+    var f=FORMATS[ex.fmt];
+    var o={W:f.w,H:f.h,NIV:NIVEAUX[ex.niv].nom,c:ex.teinte,auteur:""};
+    // sauvegarder/forcer un fond neutre "du style" pour la vignette
+    var save=etat.fond; etat.fond='style';
+    var svg=styleGen(o, STYLES[ex.style].deco(o));
+    etat.fond=save;
+    return svg;
+  }
+  var grille=document.getElementById('galerie-grille');
+  if(grille){
+    EXEMPLES.forEach(function(ex){
+      var b=document.createElement('button');
+      b.type='button';
+      b.className='ex'+(ex.fmt==='carre'?' carre':'');
+      b.setAttribute('aria-label','Charger l\u2019exemple '+ex.nom+' dans l\u2019atelier');
+      b.innerHTML='<span class="toile">'+svgExemple(ex)+'</span>'+
+        '<span class="meta"><span class="nom">'+ex.nom+'</span><span class="go">Partir de là →</span></span>';
+      b.addEventListener('click',function(){
+        etat.style=ex.style; etat.niv=ex.niv; etat.teinte=ex.teinte; etat.fmt=ex.fmt;
+        etat.fond='style'; etat.image=null;
+        // remettre le sélecteur de fond sur "du style"
+        presse('#fonds button','fond','style'); majImgZone();
+        maj();
+        document.getElementById('badge-hote').scrollIntoView({behavior:'smooth',block:'center'});
+      });
+      grille.appendChild(b);
+    });
+  }
+
+  maj();
+})();
+</script>
+</body>
+</html>
