@@ -21,7 +21,7 @@ body{margin:0;background:var(--nuit);color:var(--clair);font-family:var(--titre)
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:3px solid #fff;outline-offset:-6px}
 .portail{position:relative;min-height:100dvh;display:flex}
-.moitie{position:relative;flex:1;min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(28px,5vw,64px);overflow:hidden}
+.moitie{position:relative;flex:1;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:clamp(28px,5vw,64px);padding-top:clamp(240px,34vh,360px);overflow:hidden}
 .moitie .fond{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;transition:transform .7s ease}
 .moitie:hover .fond{transform:scale(1.05)}
 
@@ -33,7 +33,7 @@ a{color:inherit;text-decoration:none}
 .moitie .voile{position:absolute;inset:0;z-index:1}
 .gauche .voile{background:linear-gradient(180deg,rgba(12,14,18,.5) 0%,rgba(12,14,18,.2) 42%,rgba(10,12,16,.92) 100%)}
 .droite .voile{background:linear-gradient(180deg,rgba(20,6,14,.35) 0%,rgba(20,6,14,.08) 40%,rgba(14,4,10,.9) 100%)}
-.moitie .contenu{position:relative;z-index:2;max-width:34ch}
+.moitie .contenu{position:relative;z-index:2;max-width:34ch;text-align:center;display:flex;flex-direction:column;align-items:center}
 .moitie .oeil{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
 .gauche .oeil{color:var(--acier)}
 .droite .oeil{color:var(--feu-b)}
@@ -63,11 +63,10 @@ a{color:inherit;text-decoration:none}
 .centre .inpi{margin-top:9px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(243,239,230,.85);text-shadow:0 2px 14px rgba(0,0,0,.9)}
 @media (max-width:760px){
   .portail{flex-direction:column}
-  .moitie{min-height:54dvh;justify-content:flex-end}
+  .moitie{min-height:54dvh;justify-content:center;padding-top:clamp(150px,20vh,200px)}
   .portail:hover .moitie:not(:hover){filter:none}
   .seam{display:none}
-  .centre{top:auto;bottom:calc(54dvh - 46px);width:min(86vw,340px)}
-  .gauche{padding-top:clamp(130px,32vh,220px)}
+  .centre{top:20px;bottom:auto;width:min(86vw,340px)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.moitie:hover .fond{transform:none}}
 </style>
@@ -92,7 +91,7 @@ a{color:inherit;text-decoration:none}
     <div class="voile"></div>
     <div class="contenu">
       <p class="oeil">Entrée libre</p>
-      <h2>J'assume</h2>
+      <h2>J'assume,<br>et je suis comme ça.</h2>
       <p>Compose ton badge à partir du logo, choisis ton style, emporte-le.</p>
       <span class="porte-fleche">Composer <span class="rond">→</span></span>
     </div>
