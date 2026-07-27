@@ -70,6 +70,14 @@ a{color:inherit;text-decoration:none}
   .centre{top:20px;bottom:auto;width:min(86vw,340px)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}.moitie:hover .fond{transform:none}}
+  @media (max-height:520px){
+  .moitie{padding-top:clamp(90px,16vh,150px)}
+  .centre{top:clamp(14px,4vh,40px);width:min(70vw,360px)}
+  .medaille{padding:14px 20px 12px}
+  .medaille .logo{width:clamp(80px,10vw,110px)}
+  .centre .phrase{font-size:11px;margin-top:10px}
+  .centre .inpi{font-size:9px;margin-top:5px}
+}
 </style>
 </head>
 <body>
