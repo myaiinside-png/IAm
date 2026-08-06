@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>IA'm — entrez</title>
-<meta name="description" content="IA'm, label déclaratif de co-création humain–IA. Deux entrées : institutionnelle ou libre.">
+<title>IA'm — le label qui déclare la part de l'IA dans une création</title>
+<meta name="description" content="IA'm, label déclaratif de co-création humain–IA. Il qualifie et quantifie, il ne certifie pas. Trois niveaux : Assisté, Initié, Généré.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500&family=Archivo+Black&family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Archivo+Black&family=Caveat:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --nuit:#0C0B0A;--brume:#CFCcC3;--clair:#F3EFE6;
@@ -19,88 +19,70 @@
 html,body{height:100%}
 body{margin:0;background:var(--nuit);color:var(--clair);font-family:var(--titre);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-:focus-visible{outline:3px solid #fff;outline-offset:-6px}
-.portail{position:relative;min-height:100dvh;display:flex}
-.moitie{position:relative;flex:1;min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:clamp(28px,5vw,64px);padding-top:clamp(240px,34vh,360px);overflow:hidden}
-.moitie .fond{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;transition:transform .7s ease}
-.moitie:hover .fond{transform:scale(1.05)}
-.moitie .voile{position:absolute;inset:0;z-index:1}
-.gauche .voile{background:linear-gradient(180deg,rgba(12,14,18,.5) 0%,rgba(12,14,18,.2) 42%,rgba(10,12,16,.92) 100%)}
-.droite .voile{background:linear-gradient(180deg,rgba(20,6,14,.35) 0%,rgba(20,6,14,.08) 40%,rgba(14,4,10,.9) 100%)}
-.moitie .contenu{position:relative;z-index:2;max-width:34ch;text-align:center;display:flex;flex-direction:column;align-items:center}
-.moitie .oeil{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
-.gauche .oeil{color:var(--acier)}
-.droite .oeil{color:var(--feu-b)}
-.moitie h2{margin:14px 0 10px;line-height:1;font-weight:500}
-.gauche h2{font-size:clamp(1.7rem,3.4vw,2.6rem);color:var(--clair)}
-.droite h2{font-family:var(--main);font-weight:700;text-transform:none;font-size:clamp(2.6rem,5.5vw,4.2rem);line-height:.92;color:#fff;letter-spacing:0;text-shadow:2px 3px 0 rgba(0,0,0,.4)}
-.moitie p{font-size:15px;line-height:1.5;font-family:var(--mono)}
-.gauche p{color:var(--clair)}
-.droite p{color:#FCEAD6}
-.porte-fleche{display:inline-flex;align-items:center;gap:12px;margin-top:26px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:#fff}
-.porte-fleche .rond{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:2px solid currentColor;transition:transform .35s,background .35s,color .35s;font-size:16px}
-.moitie:hover .porte-fleche .rond{transform:translateX(6px)}
-.gauche:hover .porte-fleche .rond{background:#fff;color:#12181C}
-.droite:hover .porte-fleche .rond{background:#fff;color:var(--feu-c)}
-.moitie .voile{transition:opacity .4s}
-.portail:hover .moitie .voile{opacity:.72}
-.portail:hover .moitie:hover .voile{opacity:1}
-.portail:hover .moitie:not(:hover){filter:saturate(.7) brightness(.82)}
-.moitie{transition:filter .4s}
-.seam{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.16);z-index:4;transform:translateX(-1px)}
-.centre{position:absolute;z-index:5;top:clamp(52px,13vh,120px);left:50%;transform:translateX(-50%);width:min(90vw,440px);text-align:center;pointer-events:none}
-.medaille{display:inline-flex;flex-direction:column;align-items:center;padding:22px 30px 20px;border-radius:6px;background:#F3EFE6;border:1px solid rgba(0,0,0,.12);box-shadow:0 30px 90px -30px rgba(0,0,0,.9)}
-.medaille .logo{width:clamp(150px,22vw,190px);color:var(--nuit);line-height:0}
+:focus-visible{outline:3px solid #fff;outline-offset:3px}
+
+/* ---- structure ---- */
+.page{min-height:100dvh;display:flex;flex-direction:column}
+
+/* ===== 1. HERO : comprendre d'abord ===== */
+.hero{flex:0 0 auto;text-align:center;padding:clamp(26px,4.4vh,52px) 22px clamp(20px,3vh,36px);display:flex;flex-direction:column;align-items:center;gap:clamp(12px,1.8vh,20px)}
+.medaille{display:inline-flex;padding:16px 22px;border-radius:6px;background:var(--clair);border:1px solid rgba(0,0,0,.12);box-shadow:0 22px 64px -28px rgba(0,0,0,.9)}
+.medaille .logo{width:clamp(92px,13vw,124px);color:var(--nuit);line-height:0}
 .medaille .logo svg{width:100%;height:auto;display:block}
 .medaille .logo #logo-noyau{fill:#14120E}
-.centre .phrase{margin-top:16px;font-family:var(--mono);font-size:13px;line-height:1.5;color:var(--clair);letter-spacing:.02em;text-shadow:0 2px 14px rgba(0,0,0,.9)}
-.centre .inpi{margin-top:9px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(243,239,230,.85);text-shadow:0 2px 14px rgba(0,0,0,.9)}
+
+.hero h1{margin:0;font-weight:500;line-height:1.14;font-size:clamp(1.5rem,3.6vw,2.5rem);max-width:20ch;letter-spacing:-.01em}
+.hero h1 .fort{color:#fff}
+.slogan{margin:0;font-family:var(--main);font-weight:600;line-height:1.05;font-size:clamp(1.35rem,3.4vw,2.1rem);color:var(--feu-b);max-width:22ch}
+
+.niveaux{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:2px}
+.niveaux .paliers{display:inline-flex;align-items:center;gap:clamp(10px,2vw,20px);font-family:var(--mono);font-size:clamp(12px,1.5vw,14px);letter-spacing:.16em;text-transform:uppercase;color:var(--clair)}
+.niveaux .paliers b{font-weight:500}
+.niveaux .paliers .sep{color:var(--acier)}
+.niveaux .note{font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:rgba(243,239,230,.62)}
+
+/* ===== 2. PORTES : choisir ensuite ===== */
+.portes{flex:1 1 auto;display:flex;min-height:clamp(300px,46dvh,540px)}
+.porte{position:relative;flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;padding:clamp(26px,4vw,56px) clamp(22px,4vw,48px) clamp(30px,5vh,58px);overflow:hidden;isolation:isolate}
+.porte .fond{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center;transition:transform .7s ease}
+.porte:hover .fond{transform:scale(1.05)}
+.porte .voile{position:absolute;inset:0;z-index:-1;transition:opacity .4s}
+.gauche .voile{background:linear-gradient(180deg,rgba(12,14,18,.42) 0%,rgba(12,14,18,.2) 40%,rgba(10,12,16,.9) 100%)}
+.droite .voile{background:linear-gradient(180deg,rgba(20,6,14,.3) 0%,rgba(20,6,14,.08) 38%,rgba(14,4,10,.9) 100%)}
+.portes:hover .porte .voile{opacity:.8}
+.portes:hover .porte:hover .voile{opacity:1}
+.porte .contenu{position:relative;max-width:30ch;display:flex;flex-direction:column;align-items:center}
+.porte .oeil{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.gauche .oeil{color:var(--acier)}
+.droite .oeil{color:var(--feu-b)}
+.porte h2{margin:0 0 8px;line-height:1;font-weight:500}
+.gauche h2{font-size:clamp(1.6rem,3vw,2.3rem);color:var(--clair)}
+.droite h2{font-family:var(--main);font-weight:700;font-size:clamp(2.2rem,4.4vw,3.4rem);color:#fff;text-shadow:2px 3px 0 rgba(0,0,0,.4)}
+.porte .sous{font-family:var(--mono);font-size:13px;line-height:1.5;color:#F1E9DE;margin:0}
+.porte-fleche{display:inline-flex;align-items:center;gap:12px;margin-top:22px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:#fff}
+.porte-fleche .rond{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:2px solid currentColor;transition:transform .35s,background .35s,color .35s;font-size:16px}
+.porte:hover .porte-fleche .rond{transform:translateX(6px)}
+.gauche:hover .porte-fleche .rond{background:#fff;color:#12181C}
+.droite:hover .porte-fleche .rond{background:#fff;color:var(--feu-c)}
+.seam{position:absolute;top:0;bottom:0;left:50%;width:2px;background:rgba(255,255,255,.16);z-index:1;transform:translateX(-1px);pointer-events:none}
+
+/* ===== pied ===== */
+.pied{flex:0 0 auto;text-align:center;padding:10px 16px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(243,239,230,.5)}
+
 @media (max-width:760px){
-  .portail{flex-direction:column}
-  .moitie{min-height:54dvh;justify-content:center;padding-top:clamp(28px,6vh,48px)}
-  .gauche{padding-top:clamp(320px,42vh,360px)}
-  .portail:hover .moitie:not(:hover){filter:none}
+  .portes{flex-direction:column;min-height:0}
+  .porte{min-height:34dvh;justify-content:center}
   .seam{display:none}
-  .centre{top:20px;bottom:auto;width:min(86vw,340px)}
+  .hero{padding-top:clamp(22px,4vh,34px)}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}.moitie:hover .fond{transform:none}}
-  @media (max-height:520px){
-  .moitie{padding-top:clamp(90px,16vh,150px)}
-  .centre{top:clamp(14px,4vh,40px);width:min(70vw,360px)}
-  .medaille{padding:14px 20px 12px}
-  .medaille .logo{width:clamp(80px,10vw,110px)}
-  .centre .phrase{font-size:11px;margin-top:10px}
-  .centre .inpi{font-size:9px;margin-top:5px}
-}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.porte:hover .fond{transform:none}}
 </style>
 </head>
 <body>
-<div class="portail">
-  <span class="seam" aria-hidden="true"></span>
+<div class="page">
 
-  <a class="moitie gauche" href="/institutionnel.html" aria-label="Entrée institutionnelle : le site IA'm ">
-    <div class="fond" style="background-image:url('portail-gauche.jpg')"></div>
-    <div class="voile"></div>
-    <div class="contenu">
-      <p class="oeil">Entrée institutionnelle</p>
-      <h2>Le label, en clair.</h2>
-      <p>La doctrine, les niveaux, le cadre légal, la licence. Le site tel qu'il est.</p>
-      <span class="porte-fleche">Entrez <span class="rond">→</span></span>
-    </div>
-  </a>
-
-  <a class="moitie droite" href="/atelier/" aria-label="Entrée libre : personnalise et télécharge ton badge">
-    <div class="fond" style="background-image:url('portail-droite.jpg')"></div>
-    <div class="voile"></div>
-    <div class="contenu">
-      <p class="oeil">Entrée libre</p>
-      <h2>Je crée,<br>j'assume.</h2>
-      <p>Compose ton badge à partir du logo, choisis ton style, emporte-le.</p>
-      <span class="porte-fleche">Composez <span class="rond">→</span></span>
-    </div>
-  </a>
-
-  <div class="centre">
+  <!-- 1. COMPRENDRE -->
+  <header class="hero">
     <div class="medaille" aria-label="Logo IA'm du jour"><span class="logo"><svg viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet"><g id="doodle-jour"></g><g id="logo-noyau" transform="translate(65,65) scale(0.1204)" fill="currentColor"><g transform="translate(0.000000,1246.000000) scale(0.100000,-0.100000)"
  ><path d="M6110 12054 c-416 -22 -825 -79 -1176 -164 -1451 -350 -2663 -1148
 -3543 -2329 -591 -794 -978 -1754 -1100 -2731 -238 -1909 566 -3816 2139
@@ -151,10 +133,46 @@ l698 1 27 27 c21 21 28 38 28 68 0 69 -28 86 -222 137 -194 50 -281 87 -340
 -139 -576 -266 -781 -16 -27 -30 -54 -30 -59 0 -18 194 -300 206 -300 15 0 54
 60 119 184 144 274 224 623 211 926 -8 221 -47 372 -127 506 -64 106 -118 156
 -132 122z"/></g></g></svg></span></div>
-    <p class="phrase">Un label qui déclare la part de l'IA<br>dans une création. Choisis ton entrée.</p>
-    <p class="inpi">Marque déposée </p>
-  </div>
+
+    <h1>Un label qui déclare la part de l'IA dans une <span class="fort">création</span>.</h1>
+    <p class="slogan">Dire l'IA sera nécessaire.<br>Dire l'humain est votre choix.</p>
+
+    <div class="niveaux">
+      <span class="paliers"><b>Assisté</b><span class="sep">·</span><b>Initié</b><span class="sep">·</span><b>Généré</b></span>
+      <span class="note">selon qui porte la décision créative — IA'm qualifie et quantifie, il ne certifie pas.</span>
+    </div>
+  </header>
+
+  <!-- 2. CHOISIR -->
+  <nav class="portes" aria-label="Deux entrées">
+    <span class="seam" aria-hidden="true"></span>
+
+    <a class="porte gauche" href="/institutionnel.html" aria-label="Comprendre : le label, en clair">
+      <div class="fond" style="background-image:url('portail-gauche.jpg')"></div>
+      <div class="voile"></div>
+      <div class="contenu">
+        <p class="oeil">Comprendre</p>
+        <h2>Le label, en clair</h2>
+        <p class="sous">Doctrine, niveaux, cadre légal, licence.</p>
+        <span class="porte-fleche">Découvrir <span class="rond">→</span></span>
+      </div>
+    </a>
+
+    <a class="porte droite" href="/atelier/" aria-label="Créer : composer et emporter mon badge">
+      <div class="fond" style="background-image:url('portail-droite.jpg')"></div>
+      <div class="voile"></div>
+      <div class="contenu">
+        <p class="oeil">Créer</p>
+        <h2>Mon badge</h2>
+        <p class="sous">Compose-le à partir du logo, choisis ton style, emporte-le.</p>
+        <span class="porte-fleche">À l'atelier <span class="rond">→</span></span>
+      </div>
+    </a>
+  </nav>
+
+  <footer class="pied">Marque déposée · INPI n°5212301</footer>
 </div>
+
 <script>
 (function(){
   var cible=document.getElementById('doodle-jour');
@@ -190,7 +208,6 @@ l698 1 27 27 c21 21 28 38 28 68 0 69 -28 86 -222 137 -194 50 -281 87 -340
   }
   cible.innerHTML=svg;
 
-  // apparition douce si le mouvement est autorisé
   if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     cible.style.opacity='0';cible.style.transition='opacity 1.1s ease';
     requestAnimationFrame(function(){requestAnimationFrame(function(){cible.style.opacity='1';});});
