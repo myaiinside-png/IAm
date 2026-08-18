@@ -210,7 +210,7 @@
         fx.beginPath(); fx.moveTo(p.x,p.y); fx.lineTo(nx,ny); fx.stroke();
       }
       if (inMask((p.x+nx)/2,(p.y+ny)/2)){
-        gx.strokeStyle = 'rgba('+p.gc+',0.26)';
+        gx.strokeStyle = 'rgba('+p.gc+',0.42)';
         gx.beginPath(); gx.moveTo(p.x,p.y); gx.lineTo(nx,ny); gx.stroke();
       }
       p.x = nx; p.y = ny; p.life -= 1;
