@@ -159,7 +159,7 @@
     return p;
   }
   function init(){
-    var count = Math.round(Math.min((W*H)/7500, 300));
+    var count = Math.round(Math.min((W*H)/3500, 600));
     if (W < 620) count = Math.round(count*0.6);
     particles = [];
     for (var i=0;i<count;i++) particles.push(spawn());
